@@ -1,7 +1,7 @@
 # Project Name
 Word Search
-> Outline a brief description of your project.
-> Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
+[//]: <> (Outline a brief description of your project.)
+[//]: <> (Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->)
 
 ## Table of Contents
 * [The Team](#TheTeam)
