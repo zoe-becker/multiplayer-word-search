@@ -9,9 +9,6 @@ pipelines:
   custom:
     deploy-to-webserver:
       - step:
-          script:
-          - echo "lovely build step would be here"
-      - step:
           name: 'Deployment to Production'
           deployment: production
           script:
