@@ -32,10 +32,12 @@ pipelines:
         deployment: production
         trigger: 'manual'
         script:
+          - mkdir ../wordsearch
+          - mv * ../wordsearch
+          - mv ../wordsearch .
           - pipe: atlassian/sftp-deploy:0.7.0
             variables:
               USER: 'j1jjujqhggs6'
               SERVER: 'verygoodbadthing.com'
               REMOTE_PATH: '/home/j1jjujqhggs6/public_html'
-              EXTRA_ARGS: '-r'
           
