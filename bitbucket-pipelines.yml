@@ -37,4 +37,5 @@ pipelines:
               USER: 'j1jjujqhggs6'
               SERVER: 'verygoodbadthing.com'
               REMOTE_PATH: '/home/j1jjujqhggs6/public_html'
+              EXTRA_ARGS: '-r'
           
