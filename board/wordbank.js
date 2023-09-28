@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
             const wordBankList = document.getElementById("wordBankList");
 
             data.words.forEach(word => {
-                let listItem = document.createElement("ul"); //  create a new list item
+                let listItem = document.createElement("li"); //  create a new list item
                 listItem.textContent = word;                // set contnet of the list item to the current word
                 wordBankList.appendChild(listItem);         //  append the list item to the word banklist element
             })
