@@ -24,11 +24,3 @@
     font-size: x-large;       
 }
 
-.word-bank li {
-    position: absolute;
-    margin-bottom: 5px; 
-    text-align: center;
-    font-size: larger;   
-    font-weight: bold;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
-}
