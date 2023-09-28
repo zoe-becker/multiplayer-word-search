@@ -16,4 +16,24 @@
  *                           set the content of the list item to the current word.
  *                           append the list item to the wordBankList element
  * 
+ * 
+ * Add error handling later
  */
+
+// checks when page is loaded
+document.addEventListener('DOMContentLoaded', function(event) {
+    //When data is fetched successfully:
+    // parse the fetched data into json format
+    fetch('puzzle.json')
+        .then(response => response.json())
+        .then(data=>{
+            // get the html element with ID "wordBankList" and store it as wordBankList
+            const wordBankList = document.getElementById("wordBankList");
+
+            data.words.forEach(word => {
+                let listItem = document.createElement("ul"); //  create a new list item
+                listItem.textContent = word;                // set contnet of the list item to the current word
+                wordBankList.appendChild(listItem);         //  append the list item to the word banklist element
+            })
+        })
+})
