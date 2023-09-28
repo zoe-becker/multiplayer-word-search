@@ -18,13 +18,9 @@
 .word-bank ul {
     list-style-type: none;  
     padding: 10%;             
-    margin: 0;             
+    margin: 0;      
+    text-align: center;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size: x-large;       
 }
 
-.word-bank li {
-    margin-bottom: 5px; 
-    text-align: center;
-    font-size: larger;   
-    font-weight: bold;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
-}
