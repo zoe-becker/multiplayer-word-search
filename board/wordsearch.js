@@ -1,13 +1,27 @@
 /*
-    create empty grid via 2d array 
+When the document is loaded:
+    fetch puzzle.json:
+    when the data is received:
+    convert data to a json object
+    when conversion is done:
+        get html element with id "grid" and store it in a variable "wordGrid"
 
-    let there be 13 rows
-    let there be 13 columns
+        For each "row" in data.puzzle:
+            create a new tbale row and store it in tRow
 
-    create and array with rows var
+            for each cell in row:
+                create a new table cell and store is in a variable tableCell
+                set the inner text of table Cell to the value of cell
+                append tablecell to table row
 
-    for every row do:
-        for every column do:
-            array column row = 0
+            append tableRow to wordGrid
 
 */
+document.addEventListener('DOMContentLoaded', function(event) {
+    fetch('puzzle.json')
+        .then(response => response.json())
+        .then(data => {
+            const grid = document.getElementById("grid"); // changed "wordGrid" to "grid"
+            // add logic here to add data to grid
+        })
+});
