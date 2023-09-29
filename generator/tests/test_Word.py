@@ -20,12 +20,12 @@ def test_position_xy():
     w = Word("test")
     w.start_row = 1
     w.start_column = 1
-    assert w.position_xy == Position(2, 2)
+    assert w.position_xy == "(2, 2)"
 
 
 def test_empty_position_xy():
     w = Word("test")
-    assert w.position_xy == Position(None, None)
+    assert not w.position_xy
 
 
 def test_position_setter():
@@ -54,9 +54,9 @@ def test_str():
 
 def test_empty_key_string():
     w = Word("test")
-    assert w.key_string(((0, 0), (10, 10))) == ""
+    assert w.key_string(((0, 0), (10, 10))) is None
 
 
 def test_offset_empty_position_xy():
     w = Word("test")
-    assert w.offset_position_xy(((0, 0), (10, 10))) == Position(None, None)
+    assert w.offset_position_xy(((0, 0), (10, 10))) is None

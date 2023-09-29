@@ -1,4 +1,5 @@
 import math
+from typing import List, Optional, Tuple
 
 from ..config import ACTIVE
 from ..utils import in_bounds, round_half_up
@@ -11,7 +12,7 @@ class Polygon(Mask):
 
     def __init__(
         self,
-        points: list[tuple[int, int]] | None = None,
+        points: Optional[List[Tuple[int, int]]] = None,
         method: int = 1,
         static: bool = True,
     ) -> None:
@@ -23,7 +24,7 @@ class Polygon(Mask):
         returning to the origin point (eg. `.points[0]`).
 
         Args:
-            points (list[tuple[int, int]] | None, optional): Polygon
+            points (Optional[List[Tuple[int, int]]], optional): Polygon
                 coordinate points. Defaults to None.
             method (int, optional): How Mask is applied to the puzzle
                 (1=Standard (Intersection), 2=Additive, 3=Subtractive). Defaults to 1.
@@ -40,7 +41,7 @@ class Polygon(Mask):
         super().__init__(points=points, method=method, static=static)
 
     @property
-    def split_points(self) -> tuple[list[tuple[int, int]], list[tuple[int, int]]]:
+    def split_points(self) -> Tuple[List[Tuple[int, int]], List[Tuple[int, int]]]:
         """Polygon points path split in half for better drawing
         performance with Bresenham's line algorithm."""
         left_offset = (
@@ -83,7 +84,7 @@ class Polygon(Mask):
         self._fill_shape()
 
     def _connect_points(
-        self, p1: tuple[int, int], p2: tuple[int, int], c: str = ACTIVE
+        self, p1: Tuple[int, int], p2: Tuple[int, int], c: str = ACTIVE
     ) -> None:
         """Connect two points within a grid using Bresenham's line algorithm.
         The line will be drawn using the single character string `c`."""
@@ -159,7 +160,7 @@ class Rectangle(Polygon):
         self,
         width: int,
         height: int,
-        origin: tuple[int, int] | None = None,
+        origin: Optional[Tuple[int, int]] = None,
         method: int = 1,
         static: bool = True,
     ) -> None:
@@ -170,7 +171,7 @@ class Rectangle(Polygon):
         Args:
             width (int): Rectangle width.
             height (int): Rectangle height.
-            origin (tuple[int, int], optional): Top-left origin point from
+            origin (Tuple[int, int], optional): Top-left origin point from
                 which polygon be drawn. Defaults to puzzle top-left at (0, 0).
             method (int, optional): How Mask is applied to the puzzle
                 (1=Standard (Intersection), 2=Additive, 3=Subtractive). Defaults to 1.
@@ -193,8 +194,8 @@ class RegularPolygon(Polygon):
     def __init__(
         self,
         vertices: int = 3,
-        radius: int | None = None,
-        center: tuple[int, int] | None = None,
+        radius: Optional[int] = None,
+        center: Optional[Tuple[int, int]] = None,
         angle: float = 0.0,
         method: int = 1,
         static: bool = False,
@@ -205,10 +206,10 @@ class RegularPolygon(Polygon):
         Args:
             vertices (int, optional): Vertices (sides) of polygon (>=3).
                 Defaults to 3.
-            radius (int | None, optional): Distance from center point to vertices.
+            radius (Optional[int], optional): Distance from center point to vertices.
                 Defaults to half of the `puzzle_width` provided to the
                 `.generate()` method.
-            center (tuple[int, int] | None, optional): Center origin point
+            center (Optional[Tuple[int, int]], optional): Center origin point
                 from which the polygon will be calculated. Defaults to puzzle center.
             angle (float, optional): Rotation angle in degrees polygon.
                 Defaults to 0.0.
@@ -254,7 +255,7 @@ class RegularPolygon(Polygon):
     def calculate_vertices(
         vertices: int,
         radius: int,
-        center: tuple[int, int],
+        center: Tuple[int, int],
         angle: float,
     ):
         points = []
@@ -273,7 +274,7 @@ class RegularPolygon(Polygon):
         return points
 
     @staticmethod
-    def cos_sin_from_degrees(degrees: float) -> tuple[float, float]:
+    def cos_sin_from_degrees(degrees: float) -> Tuple[float, float]:
         """Return a (cosine, sin) pair for a given angle(in degrees).
         Corrects for proper 90 degree angles."""
         degrees = degrees % 360.0
@@ -290,9 +291,9 @@ class Star(Polygon):
     def __init__(
         self,
         outer_vertices: int = 5,
-        outer_radius: int | None = None,
-        inner_radius: int | None = None,
-        center: tuple[int, int] | None = None,
+        outer_radius: Optional[int] = None,
+        inner_radius: Optional[int] = None,
+        center: Optional[Tuple[int, int]] = None,
         angle: float = 0.0,
         method: int = 1,
         static: bool = False,
@@ -302,11 +303,11 @@ class Star(Polygon):
         Args:
             outer_vertices (int, optional): Number of outer vertices (>=3).
             Defaults to 5.
-            outer_radius (int | None, optional): Distance from center point
+            outer_radius (Optional[int], optional): Distance from center point
             to outer vertices. Defaults to None.
-            inner_radius (int | None, optional): Distance from center point
+            inner_radius (Optional[int], optional): Distance from center point
             to inner vertices. Defaults to None.
-            center (tuple[int, int] | None, optional): Center origin point
+            center (Optional[Tuple[int, int]], optional): Center origin point
             from which the polygon will be calculated. Defaults to puzzle center.
             angle (float, optional): Rotation angle in degrees polygon.
             Defaults to 0.0.
@@ -350,7 +351,7 @@ class Star(Polygon):
         outer_vertices: int,
         outer_radius: int,
         inner_radius: int,
-        center: tuple[int, int],
+        center: Tuple[int, int],
         angle: float,
     ):
         points = []
