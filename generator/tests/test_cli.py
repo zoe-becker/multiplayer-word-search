@@ -7,6 +7,16 @@ from PIL import Image
 from word_search_generator.word import Direction, Word
 
 
+def check_chars(puzzle, word):
+    row, col = word.position
+    for c in word.text:
+        if c != puzzle[row][col]:
+            return False
+        row += word.direction.r_move
+        col += word.direction.c_move
+    return True
+
+
 def test_entrypoint():
     result = subprocess.run("word-search --help", shell=True)
     assert result.returncode == 0
@@ -27,13 +37,13 @@ def test_stdin():
     assert result.returncode == 0
 
 
-def test_export_pdf(tmp_path: Path):
+def test_export_pdf(tmp_path):
     fp = tmp_path.joinpath("test.pdf")
     result = subprocess.run(f'word-search some test words -o "{fp}"', shell=True)
     assert result.returncode == 0 and tmp_path.exists()
 
 
-def test_export_csv(tmp_path: Path):
+def test_export_csv(tmp_path):
     fp = tmp_path.joinpath("test.csv")
     result = subprocess.run(f'word-search some test words -o "{fp}"', shell=True)
     assert result.returncode == 0 and tmp_path.exists()
@@ -143,7 +153,7 @@ def test_invalid_mask():
     assert result.returncode == 2
 
 
-def test_image_mask(tmp_path: Path):
+def test_image_mask(tmp_path):
     name = "test_image.jpg"
     test_img = Image.new("L", (100, 100), (0))
     img_path = Path.joinpath(tmp_path, name)
@@ -168,15 +178,6 @@ def test_cli_output(iterations, builtin_mask_shapes):
             word.start_column = int(data[3]) - 1
             words.add(word)
         return words
-
-    def check_chars(puzzle, word):
-        row, col = word.position
-        for c in word.text:
-            if c != puzzle[row][col]:
-                return False
-            row += word.direction.r_move
-            col += word.direction.c_move
-        return True
 
     results = []
     for _ in range(iterations):

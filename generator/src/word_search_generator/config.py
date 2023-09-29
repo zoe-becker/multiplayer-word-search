@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from .word import Direction
 
 # puzzle settings
@@ -5,7 +7,7 @@ min_puzzle_size = 5
 max_puzzle_size = 50
 min_puzzle_words = 1
 max_puzzle_words = 100
-max_fit_tries = 1000
+max_fit_tries = 100
 
 # puzzle grid settings
 ACTIVE = "*"
