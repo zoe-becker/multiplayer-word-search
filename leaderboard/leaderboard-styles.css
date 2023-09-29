@@ -1,0 +1,78 @@
+/* Reset some default styles for the page */
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono&display=swap');
+*{
+    list-style: none;
+    font-family: 'Martian Mono', monospace;
+
+}
+body, html {
+    background-color: rgb(255, 255, 255);
+    background-size: cover; /* Cover the entire body with the image */
+    margin: 0; /* Remove default body margin */
+    padding: 0; /* Remove default body padding */
+}
+
+/* Center the container both horizontally and vertically */
+.container {
+    display: flex;
+    flex-direction: column; /* Arrange items vertically */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* This makes the container full-screen height */
+}
+
+/* Style the leaderboard container */
+.leaderboard {
+    background-color: white;
+    padding: 20px; /* Add some padding to create space inside the container */
+    border-radius: 10px; /* Add rounded corners to the container */
+    text-align: center; /* Center-align the content inside the container */
+    color: black; /* Set the text color to black */
+    display: flex;
+    align-items: center; /* Center-align items vertically */
+    justify-content: center; /* Center-align items horizontally */
+    width: 100%;
+    max-width: 600px; /* Set a maximum width to limit the container's size */
+    display: flex;
+    height: auto; /* Let the container's height adjust to its content */
+    margin-bottom: 20px; /* Add space between leaderboard and player boxes */
+    border: 4px solid #000000; /* Change the border color and thickness here */
+}
+
+/* Style the leaderboard title */
+.leaderboard h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+/* Style the list items */
+.leaderboard ol {
+    list-style: none; /* Remove default list styles */
+    padding: 0;
+}
+
+.leaderboard li {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+/* Style player boxes */
+.player-box {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    
+    text-align: left;
+    color: black;
+    flex-direction: column;
+    
+    align-items: center; /* Center-align items vertically */
+    justify-content: space-evenly; /* Center-align items horizontally */
+
+    width: 100%;
+    max-width: 400px;
+    max-height: 100px;
+    margin-bottom: 10px;
+    border: 4px solid #000000; /* Change the border color and thickness here */
+
+}
