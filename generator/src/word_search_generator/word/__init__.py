@@ -1,7 +1,13 @@
-from enum import Enum, unique
-from typing import Iterable, NamedTuple, TypeAlias, TypedDict
+from __future__ import annotations
 
-from .validator import Validator
+import sys
+from enum import Enum, unique
+from typing import Any, NamedTuple, Set, Union
+
+if sys.version_info >= (3, 8):
+    from typing import TypedDict
+else:
+    from typing_extensions import TypedDict  # pragma: no cover
 
 
 @unique
@@ -68,27 +74,6 @@ class Word:
         self.direction: Direction | None = None
         self.secret = secret
 
-    def validate(
-        self, validators: Iterable[Validator], placed_words: list[str]
-    ) -> bool:
-        """Validate the word against a list of validators.
-
-        Args:
-            validators (list[Validator]): Validators to test.
-
-        Raises:
-            TypeError: Incorrect validator type provided.
-
-        Returns:
-            bool: Word passes all validators.
-        """
-        for validator in validators:
-            if not isinstance(validator, Validator):
-                raise TypeError(f"Invalid validator: {validator}.")
-            if not validator.validate(self.text, placed_words=placed_words):
-                return False
-        return True
-
     @property
     def placed(self) -> bool:
         """Is the word currently placed in a puzzle.
@@ -110,25 +95,22 @@ class Word:
         return Position(self.start_row, self.start_column)
 
     @position.setter
-    def position(self, value: Position) -> None:
+    def position(self, val: Position) -> None:
         """Set the start position of the Word in the puzzle.
 
         Args:
             val (Position): Tuple of (row, column)
         """
-        self.start_row = value.row
-        self.start_column = value.column
+        self.start_row = val.row
+        self.start_column = val.column
 
     @property
-    def position_xy(self) -> Position:
-        """Returns a the word position with 1-based indexing
-        and a familiar (x, y) coordinate system"""
-        return Position(
-            self.start_row + 1 if self.start_row is not None else self.start_row,
-            self.start_column + 1
-            if self.start_column is not None
-            else self.start_column,
-        )
+    def position_xy(self) -> str | None:
+        """Returns a string representation of the word position with
+        1-based indexing and a familiar (x, y) coordinate system"""
+        if isinstance(self.start_row, int) and isinstance(self.start_column, int):
+            return f"({self.start_column + 1}, {self.start_row + 1})"
+        return None
 
     @property
     def key_info(self) -> KeyInfo:
@@ -151,65 +133,55 @@ class Word:
             "secret": self.secret,
         }
 
-    def key_string(self, bbox: tuple[tuple[int, int], tuple[int, int]]) -> str:
+    def key_string(self, bbox: tuple[tuple[int, int], tuple[int, int]]) -> str | None:
         """Returns a string representation of the Word placement
         information formatted correctly for a WordSearch puzzle key
         when the WordSearch object it output using the `print()` or
         `.show()` method.
 
         Args:
-            bbox (tuple[tuple[int, int], tuple[int, int]]): The current
+            bbox (Tuple[Tuple[int, int], Tuple[int, int]]): The current
                 puzzle bounding box. Used to offset the coordinates when
                 the puzzle has been masked and is no longer it's original
                 size.
         """
-        if self.placed:
-            col, row = self.offset_position_xy(bbox)
+        if isinstance(self.start_row, int) and isinstance(self.start_column, int):
             return (
                 f"{'*' if self.secret else ''}{self.text} "
                 + f"{self.direction.name if self.direction else self.direction}"
-                + f" @ {(col, row)}"
+                + f" @ {(self.offset_position_xy(bbox))}"
             )
-        return ""
+        return None
 
     def offset_position_xy(
         self, bbox: tuple[tuple[int, int], tuple[int, int]]
-    ) -> Position:
+    ) -> tuple[int, int] | None:
         """Returns a string representation of the word position with
         1-based indexing and a familiar (x, y) coordinate system. The
         position will be offset by the puzzle bounding box when a puzzle
         has been masked.
 
         Args:
-            bbox (tuple[tuple[int, int], tuple[int, int]]): The current
+            bbox (Tuple[Tuple[int, int], Tuple[int, int]]): The current
                 puzzle bounding box.
         """
-        return Position(
-            self.start_column + 1 - bbox[0][0]
-            if self.start_column is not None
-            else self.start_column,
-            self.start_row + 1 - bbox[0][1]
-            if self.start_row is not None
-            else self.start_row,
-        )
+        if isinstance(self.start_row, int) and isinstance(self.start_column, int):
+            offset_start_row = self.start_row + 1 - bbox[0][1]
+            offset_start_column = self.start_column + 1 - bbox[0][0]
+            return (offset_start_column, offset_start_row)
+        return None
 
     def offset_coordinates(
         self, bbox: tuple[tuple[int, int], tuple[int, int]]
-    ) -> list[Position]:
+    ) -> list[tuple[int, int]] | None:
         """Returns a list of the Word letter coordinates, offset
         by the puzzle bounding box.
 
         Args:
-            bbox (tuple[tuple[int, int], tuple[int, int]]): The current
+            bbox (Tuple[Tuple[int, int], Tuple[int, int]]): The current
                 puzzle bounding box.
         """
-        return [
-            Position(
-                x + 1 - bbox[0][0] if x is not None else x,
-                y + 1 - bbox[0][1] if y is not None else y,
-            )
-            for y, x in self.coordinates
-        ]
+        return [(x + 1 - bbox[0][0], y + 1 - bbox[0][1]) for y, x in self.coordinates]
 
     def remove_from_puzzle(self):
         """Remove word placement details when a puzzle is reset."""
@@ -235,4 +207,4 @@ class Word:
         return self.text
 
 
-WordSet: TypeAlias = set[Word]
+Wordlist = Union[Set[Word], Any]

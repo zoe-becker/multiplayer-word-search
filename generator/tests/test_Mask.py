@@ -168,23 +168,23 @@ def test_invert():
 
 def test_flip_horizontal():
     m = Mask()
-    m._mask = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
+    m._mask = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     m.flip_horizontal()
-    assert m.mask == [["3", "2", "1"], ["6", "5", "4"], ["9", "8", "7"]]
+    assert m.mask == [[3, 2, 1], [6, 5, 4], [9, 8, 7]]
 
 
 def test_flip_vertical():
     m = Mask()
-    m._mask = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
+    m._mask = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     m.flip_vertical()
-    assert m.mask == [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"]]
+    assert m.mask == [[7, 8, 9], [4, 5, 6], [1, 2, 3]]
 
 
 def test_transpose():
     m = Mask()
-    m._mask = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
+    m._mask = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     m.transpose()
-    assert m.mask == [["1", "4", "7"], ["2", "5", "8"], ["3", "6", "9"]]
+    assert m.mask == [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
 
 
 def test_ungenerated_mask():
@@ -314,7 +314,7 @@ def test_bitmap_mask_draw_exception():
         bm._draw()
 
 
-def test_image_mask_init(tmp_path: Path):
+def test_image_mask_init(tmp_path):
     name = "test_image.jpg"
     path = Path.joinpath(tmp_path, name)
     im = Image(path, method=2, static=False)
@@ -324,7 +324,7 @@ def test_image_mask_init(tmp_path: Path):
     assert im.static is False
 
 
-def test_image_mask_solid_black(tmp_path: Path):
+def test_image_mask_solid_black(tmp_path):
     name = "test_image_black.jpg"
     test_img = PILImage.new("L", (100, 100), (0))
     img_path = Path.joinpath(tmp_path, name)
@@ -335,7 +335,7 @@ def test_image_mask_solid_black(tmp_path: Path):
     assert im.mask == [[ACTIVE] * size] * size
 
 
-def test_image_mask_contrast_exception(tmp_path: Path):
+def test_image_mask_contrast_exception(tmp_path):
     name = "test_image_white.png"
     test_img = PILImage.new("L", (100, 100), (255))
     img_path = Path.joinpath(tmp_path, name)
