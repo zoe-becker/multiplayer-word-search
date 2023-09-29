@@ -369,38 +369,25 @@ class WordSearch:
         else:
             print("Empty puzzle.")
 
-    def save(
+    def to_json(
         self,
-        path: str | Path,
-        format: str = "PDF",
-        solution: bool = False,
-    ) -> str:
-        """Save the current puzzle to a file.
+        solution: bool = True
+        ) -> str:
+        """Returns the JSON encoded puzzle
 
         Args:
-            path (Union[str, Path]): File save path.
-            format (str, optional): Type of file to save ("CSV", "JSON", "PDF").
-                Defaults to "PDF".
             solution (bool, optional): Include solution with the saved file.
                 Only applies to PDF file type. Defaults to False.
 
         Returns:
             str: Final save path of the file.
         """
-        if format.upper() not in ["CSV", "JSON", "PDF"]:
-            raise ValueError('Save file format must be either "CSV", "JSON", or "PDF".')
-        # convert strings to PATH object
-        if isinstance(path, str):
-            path = Path(path)
-        # write the file
-        if format.upper() == "CSV":
-            saved_file = export.write_csv_file(path, self)
-        elif format.upper() == "JSON":
-            saved_file = export.write_json_file(path, self)
-        else:
-            saved_file = export.write_pdf_file(path, self, solution)
-        # return saved file path
-        return str(saved_file)
+        jsonCopy = json.loads(self.json)
+        print(solution)
+        if not solution:
+            del jsonCopy["key"]
+
+        return json.dumps(jsonCopy)
 
     def reset_size(self):
         """Reset the puzzle size to the default setting
