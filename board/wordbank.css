@@ -1,8 +1,12 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    padding-right: 10%;
+}
+
 .word-bank {
-    position: absolute;
-    top: 50%;  
-    right: 10%; 
-    transform: translateY(-50%);
     width: 200px; 
     border: 1px solid black;
     padding: 10px;
@@ -22,5 +26,11 @@
     text-align: center;
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     font-size: x-large;       
+}
+
+table {
+    width: 100%;
+    border: 1px solid;
+    
 }
 
