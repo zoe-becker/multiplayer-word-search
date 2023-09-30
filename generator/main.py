@@ -8,5 +8,5 @@ sys.path.insert(0, os.path.dirname(__file__))
 def application(environ, start_response):
     start_response('200 OK', [('Content-Type', 'text/plain')])
     puzzle = WordSearch("dog, cat, pig, horse, donkey, turtle, goat, sheep, unicorn")
-    response = str(puzzle)
+    response = str(puzzle.to_json())
     return [response.encode()]
