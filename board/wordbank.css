@@ -1,9 +1,10 @@
 .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     height: 100vh;
-    padding-right: 10%;
+    padding: 5%;
+    gap:10px
 }
 
 .word-bank {
@@ -29,8 +30,15 @@
 }
 
 table {
-    width: 100%;
+    table-layout: fixed;
+    width: 600px;
+    height: 600px;
     border: 1px solid;
-    
+    margin: 20px;
+    text-align: center;
+}
+
+table td:hover{
+    background-color: hotpink;
 }
 
