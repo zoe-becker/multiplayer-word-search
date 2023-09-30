@@ -27,6 +27,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
+    "pillow==9.4.0",
     "fpdf2==2.4.2",
     "typing_extensions==4.4.0",
 ]
@@ -48,10 +49,7 @@ dev = ["black>=21.12b0", "flake8>=4.0.1", "isort>=5.10.1", "mypy>=0.931", "pdfpl
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["word_search_generator"]
-
-[project.scripts]
-word-search = "word_search_generator.cli:main"
+include = ["word_search_generator", "word_search_generator.word", "word_search_generator.mask"]
 
 # TOOL CONFIGURATION
 

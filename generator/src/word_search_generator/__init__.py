@@ -383,7 +383,7 @@ class WordSearch:
             str: Final save path of the file.
         """
         jsonCopy = json.loads(self.json)
-        print(solution)
+
         if not solution:
             del jsonCopy["key"]
 
