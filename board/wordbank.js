@@ -52,6 +52,27 @@ function renderWordSearch(puzzle) {
     row.forEach(function (column) {
       let td = tr.insertCell();
       td.innerText = column; // Take string from placeholder variable and append it to <tr> node
+
+      // cell hover is set to a random color
+      td.addEventListener("mouseover", (event) => {
+        td.style.backgroundColor = randomColor();
+        td.style.fill = randomColor();
+      });
+
+      // reset the background to white once the cursor leaves the cell
+      // td.addEventListener("mouseleave", (event) => {
+      //   td.style.backgroundColor = "white";
+      //   td.style.fill = "white";
+      // });
     });
   });
+
+  function randomColor() {
+    let color = [];
+    for (let i = 0; i < 3; i++) {
+      color.push(Math.floor(Math.random() * 256) + 60);
+    }
+    console.log("rgb(" + color.join(", ") + ")");
+    return "rgb(" + color.join(", ") + ")";
+  }
 }
