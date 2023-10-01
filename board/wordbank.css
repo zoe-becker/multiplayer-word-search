@@ -3,7 +3,6 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 5%;
     gap:10px
 }
 
@@ -36,9 +35,5 @@ table {
     border: 1px solid;
     margin: 20px;
     text-align: center;
-}
-
-table td:hover{
-    background-color: hotpink;
 }
 
