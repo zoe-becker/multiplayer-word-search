@@ -1,13 +1,11 @@
-/* Reset some default styles for the page */
-@import url('https://fonts.googleapis.com/css2?family=Martian+Mono&display=swap');
+
 *{
     list-style: none;
-    font-family: 'Martian Mono', monospace;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
 
 }
 body, html {
     background-color: rgb(255, 255, 255);
-    /* background-size: cover; Cover the entire body with the image */
     margin: 10px; /* Remove default body margin */
     padding: 0; /* Remove default body padding */
 }
@@ -18,7 +16,6 @@ body, html {
     flex-direction: column; /* Arrange items vertically */
     justify-content: center;
     align-items: center;
-    /* height: 100vh; This makes the container full-screen height */
 }
 
 /* Style the leaderboard container */
@@ -55,24 +52,42 @@ body, html {
     font-size: 24px;
     margin: 10px 0;
 }
+/* CSS for the flex container */
+.player-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Add spacing between players */
+}
 
-/* Style player boxes */
-.player-box {
-    background-color: white;
+/* CSS for the flex box containing Rank and Name */
+.flex-box.rank-name {
+    display: flex;
+    align-items: center;
+    flex: 2;
+    max-width: 500px;
+    max-height: 100px;
     padding: 10px;
     border-radius: 5px;
-    
-    text-align: left;
-    color: black;
-    flex-direction: column;
-    
-    align-items: center; /* Center-align items vertically */
-    justify-content: space-evenly; /* Center-align items horizontally */
+}
 
-    width: 100%;
-    max-width: 400px;
-    max-height: 100px;
-    margin-bottom: 10px;
-    border: 4px solid #000000; /* Change the border color and thickness here */
+/* CSS for the flex box containing Score */
+.flex-box.score {
+    display: flex;
+    align-items: center;
+    flex: 1; 
+    max-width: 500px;
+    max-height: 33px;
+    padding: 10px;
+    border-radius: 5px;
+}
 
+.rank {
+    font-weight: bold;
+    margin-right: 5px; /* Add spacing between Rank and Name */
+}
+
+.highlighted {
+    background-color: lightpink;
+    transition: background-color 0.3s ease; /* Add a smooth transition */
 }
