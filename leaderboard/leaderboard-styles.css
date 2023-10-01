@@ -7,8 +7,8 @@
 }
 body, html {
     background-color: rgb(255, 255, 255);
-    background-size: cover; /* Cover the entire body with the image */
-    margin: 0; /* Remove default body margin */
+    /* background-size: cover; Cover the entire body with the image */
+    margin: 10px; /* Remove default body margin */
     padding: 0; /* Remove default body padding */
 }
 
@@ -18,7 +18,7 @@ body, html {
     flex-direction: column; /* Arrange items vertically */
     justify-content: center;
     align-items: center;
-    height: 100vh; /* This makes the container full-screen height */
+    /* height: 100vh; This makes the container full-screen height */
 }
 
 /* Style the leaderboard container */
