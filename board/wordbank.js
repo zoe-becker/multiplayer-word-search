@@ -60,10 +60,10 @@ function renderWordSearch(puzzle) {
       });
 
       // reset the background to white once the cursor leaves the cell
-      // td.addEventListener("mouseleave", (event) => {
-      //   td.style.backgroundColor = "white";
-      //   td.style.fill = "white";
-      // });
+      td.addEventListener("mouseleave", (event) => {
+        td.style.backgroundColor = "white";
+        td.style.fill = "white";
+      });
     });
   });
 
