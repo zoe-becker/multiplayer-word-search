@@ -28,16 +28,16 @@
                         $playerName = htmlspecialchars($player->name);
                         // Open a flex container for each player
                         echo "<li>";
-                        echo "<div class='player-container'>";
+                        echo "<div class='player-container highlight-hover'>";
 
                         // Flexbox for Rank and Name
-                        echo "<div class='flex-box rank-name highlight-hover'>";
+                        echo "<div class='flex-box rank-name'>";
                         echo "<span class='rank'>Rank {$rank}: </span>";
                         echo "<span class='player'>{$playerName}</span>";
                         echo "</div>";
 
                         // Flexbox for Score
-                        echo "<div class='flex-box score highlight-hover'>";
+                        echo "<div class='flex-box score'>";
                         echo "<span class='score'>Score: {$player->score}</span>";
                         echo "</div>";
 
