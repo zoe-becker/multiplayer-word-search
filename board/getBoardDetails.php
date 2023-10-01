@@ -3,10 +3,11 @@
 -->
 <?php
     // curl to generator for new grid
-    $requestURI = "http://" . gethostname() . "/word-search-generator/generator";
+    $requestURI = "http://" . $_SERVER["SERVER_NAME"] . "/word-search-generator/generator";
     $request = curl_init($requestURI);
 
     curl_setopt($request, CURLOPT_RETURNTRANSFER, true); // to get response back
+    curl_setopt($request, CURLOPT_FOLLOWLOCATION, true); // deployment server redirects http to https
 
     $result = curl_exec($request);
 
