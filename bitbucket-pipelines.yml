@@ -15,6 +15,7 @@ pipelines:
               variables:
                 SSH_USER: 'j1jjujqhggs6'
                 SERVER: 'verygoodbadthing.com'
+                MODE: 'script'
                 COMMAND: 'deployment_teardown_old.sh'
       - step:
           name: 'Deploy files'
@@ -35,4 +36,5 @@ pipelines:
               variables:
                 SSH_USER: 'j1jjujqhggs6'
                 SERVER: 'verygoodbadthing.com'
+                MODE: 'script'
                 COMMAND: 'deployment_install.sh'
