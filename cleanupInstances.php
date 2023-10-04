@@ -2,14 +2,25 @@
 /* Automatically deletes expired game instances on the server via a cron job
     *** in the local environment you must manually call this script or cleanup the instance directory yourself ***
 */
+    date_default_timezone_set("UTC");
     $INSTANCE_PREFIX = "ws";
     $INSTANCE_FOLDER = "board";
+    $GAMEFILE_NAME = "puzzle.json";
+    $DELETION_DELAY = 300; // number of seconds after game expiration until instance deletion
     $gameInstances = scandir($INSTANCE_FOLDER);
 
     foreach ($gameInstances as $instance) {
         // check that $instance is actually a game instance
         if (str_starts_with($instance, $INSTANCE_PREFIX)) {
-            rmdir_recursive($INSTANCE_FOLDER . "/$instance");
+            $gamefile = file_get_contents($GAMEFILE_NAME);
+
+            if (!$gamefile) continue;
+            $gamefile = json_decode($gamefile, true);
+
+            // check if game is expired enough for deletion
+            if ($gamefile["expiration"] >= time() + $DELETION_DELAY) {
+                rmdir_recursive($INSTANCE_FOLDER . "/$instance");
+            }
         }
     }
 
