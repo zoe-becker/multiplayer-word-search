@@ -9,6 +9,14 @@ pipelines:
   custom:
     deploy-to-webserver:
       - step:
+          name: 'Tear down previous deployment'
+          script:
+            - pipe: atlassian/ssh-run:0.6.1
+              variables:
+                SSH_USER: 'j1jjujqhggs6'
+                SERVER: 'verygoodbadthing.com'
+                COMMAND: 'deployment_teardown_old.sh'
+      - step:
           name: 'Deploy files'
           deployment: production
           script:
@@ -27,4 +35,4 @@ pipelines:
               variables:
                 SSH_USER: 'j1jjujqhggs6'
                 SERVER: 'verygoodbadthing.com'
-                COMMAND: 'source /home/j1jjujqhggs6/virtualenv/public_html/word-search-generator/generator/3.7/bin/activate && cd /home/j1jjujqhggs6/public_html/word-search-generator/generator && pip install . && touch tmp/restart.txt'
+                COMMAND: 'deployment_install.sh'
