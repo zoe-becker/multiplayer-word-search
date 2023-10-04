@@ -1,24 +1,13 @@
-<!--
-    This function returns a randomly generated board from the generator.
--->
 <?php
-    // curl to generator for new grid
-    $requestURI = "http://" . $_SERVER["SERVER_NAME"] . "/word-search-generator/generator";
-    $request = curl_init($requestURI);
+// This function is responsible for the ititial data needed by the client to setup their board
 
-    curl_setopt($request, CURLOPT_RETURNTRANSFER, true); // to get response back
-    curl_setopt($request, CURLOPT_FOLLOWLOCATION, true); // deployment server redirects http to https
+    $puzzle = file_get_contents("puzzle.json");
 
-    $result = curl_exec($request);
-
-    // interpret curl result
-    if ($result) {
+    if ($puzzle) {
         http_response_code(200);
-        echo $result;
+        return $puzzle;
     } else {
         http_response_code(500);
-        echo "could not fetch word search board from generator. Curl error: " . curl_error($request);
+        return "Puzzle retrieval error.";
     }
-
-    curl_close($request);
 ?>
