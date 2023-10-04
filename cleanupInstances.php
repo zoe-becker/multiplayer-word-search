@@ -8,17 +8,16 @@
     $GAMEFILE_NAME = "puzzle.json";
     $DELETION_DELAY = 300; // number of seconds after game expiration until instance deletion
     $gameInstances = scandir($INSTANCE_FOLDER);
-
+    
     foreach ($gameInstances as $instance) {
         // check that $instance is actually a game instance
         if (str_starts_with($instance, $INSTANCE_PREFIX)) {
-            $gamefile = file_get_contents($GAMEFILE_NAME);
+            $gamefile = file_get_contents("$INSTANCE_FOLDER/$instance/$GAMEFILE_NAME");
 
             if (!$gamefile) continue;
             $gamefile = json_decode($gamefile, true);
 
-            // check if game is expired enough for deletion
-            if ($gamefile["expiration"] >= time() + $DELETION_DELAY) {
+            if ($gamefile["endTime"] + $DELETION_DELAY <= time()) {
                 rmdir_recursive($INSTANCE_FOLDER . "/$instance");
             }
         }
