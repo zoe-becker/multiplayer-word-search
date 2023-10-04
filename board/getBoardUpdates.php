@@ -2,6 +2,11 @@
 /* This script is responsible for returning updates to polling clients about the board, game expiration, etc.
     Additionally, contains logic for when game gets marked as expired.
 */
+    // check request method
+    if ($_SERVER["REQUEST_METHOD"] != "GET") {
+        http_response_code(405);
+    }
+    
     date_default_timezone_set("UTC"); // keep timezone consistent
     
     $puzzle = file_get_contents($puzzle);
