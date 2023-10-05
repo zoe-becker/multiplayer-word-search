@@ -59,8 +59,9 @@
         }
     }
 
-    // store puzzle json in text file
+    // store puzzle json in text file, change permissions so users cannot access answers
     file_put_contents($instanceDir . "/puzzle.json", $puzzle);
+    chmod($instanceDir . "/puzzle.json", 0660);
 
     http_response_code(200);
     echo $instanceDir; // echo path to new instance
