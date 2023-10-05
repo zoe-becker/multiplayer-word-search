@@ -22,23 +22,35 @@
 
 // checks when page is loaded
 document.addEventListener("DOMContentLoaded", function (event) {
-  //When data is fetched successfully:
-  // parse the fetched data into json format
-  fetch("puzzle.json")
-    .then((response) => response.json())
-    .then((data) => {
-      // get the html element with ID "wordBankList" and store it as wordBankList
-      const wordBankList = document.getElementById("wordBankList");
+  // request board from server
+  let request = new XMLHttpRequest();
 
-      data.words.forEach((word) => {
-        let listItem = document.createElement("li"); //  create a new list item
-        listItem.textContent = word; // set contnet of the list item to the current word
-        wordBankList.appendChild(listItem); //  append the list item to the word banklist element
-      });
+  request.onreadystatechange = function() {
+    if (request.readyState == 4) {
+      if (request.status == 200) {
+        console.log(request.responseText);
+        data = JSON.parse(request.responseText);
+        // get the html element with ID "wordBankList" and store it as wordBankList
+        const wordBankList = document.getElementById("wordBankList");
+
+        data.words.forEach((word) => {
+          let listItem = document.createElement("li"); //  create a new list item
+          listItem.textContent = word; // set contnet of the list item to the current word
+          wordBankList.appendChild(listItem); //  append the list item to the word banklist element
+        });
 
       // draw the word search
       renderWordSearch(data.puzzle);
-    });
+      } else {
+        console.log("AJAX Error: " + request.responseText);
+      }
+    }
+  }
+
+  let windowPaths = window.location.href.split("/");
+  let instanceID = windowPaths.at(-1) == '' ? windowPaths.at(-2) : windowPaths.at(-1);
+  request.open("GET", "../getBoardDetails.php?instance=" + instanceID);
+  request.send();
 });
 
 function renderWordSearch(puzzle) {
