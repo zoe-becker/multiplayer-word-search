@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html>
     <head>
     <link rel="stylesheet" href="style.css">
     </head>
-    <link rel="stylesheet" href="homepage.css">
+    <!-- <link rel="stylesheet" href="homepage.css"> -->
     <script src="main.js"></script>
     <body>
         <div class="gif">
@@ -20,7 +20,5 @@
             <button onclick="location.href='/word-search-generator/leaderboard'" type="button">Leaderboard</button>
             <!-- <button onclick="requestBoard()">Play</button> -->
         </div>
-
-
     </body>
 </html>
