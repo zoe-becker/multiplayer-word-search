@@ -13,7 +13,7 @@
                 <li><a href="">Credits</a></li>
             </ul>
         </nav>
-        <h1> Welcome to WordSearch </h1>
+        <h1> WordSearch! </h1>
             <button type="button"> Lets Play! </button>
         </div>
 

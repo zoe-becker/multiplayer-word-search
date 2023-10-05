@@ -1,3 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .gif{
     background-image: url('bgImage.jpeg');
     background-size: cover;
@@ -5,8 +11,6 @@
     /* background-blend-mode: darken; */
     background-repeat: no-repeat;
     /* opacity: 0.65; */
-    /* position: absolute; */
-
     height: 100%;
     width: 100%;
     padding:0;
@@ -14,15 +18,16 @@
 }
 
 nav{
-    display: flex;
+    display:flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 0px;
+    padding: 5px 10px;
+    background-color: #5d7d65;
 }
 
 .logo{
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
     opacity: 0.7;
 }
 
@@ -40,9 +45,16 @@ nav ul li a{
 .gif h1{
     font-size: 75px;
     margin: auto;
-    padding: 30px;
+    padding: 0px;
     width: 380px;
     margin-top: 2%;
     font-family: cursive;
 
+}
+
+.gif button{
+    border: 50px;
+    outline: none;
+    padding: 15px 25px;
+    text-align: center;
 }
