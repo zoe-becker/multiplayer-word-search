@@ -14,7 +14,9 @@
             </ul>
         </nav>
         <h1> WordSearch! </h1>
-            <button type="button"> <span> </span>Lets Play! </button>
+            <button onclick="requestBoard()" type="button"> <span> </span>Lets Play!</button>
+            <button onclick="location.href='/word-search-generator/leaderboard'" type="button">Leaderboard</button>
+            <!-- <button onclick="requestBoard()">Play</button> -->
         </div>
 
 
