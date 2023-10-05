@@ -59,11 +59,14 @@ function renderWordSearch(puzzle) {
       });
 
       td.addEventListener("mousedown", (event) =>{
-        // TODO event listener logic here
+        startPoint = event.currentTarget;
       });
 
       td.addEventListener("mouseup", (event)=>{
         // TODO event listener logic here
+        endPoint = event.currentTarget;
+        let selectedWord  = getSelectedWord(startPoint,endPoint);
+        checkWordInWordBank(selectedWord);
       });
     });
   });
@@ -77,17 +80,64 @@ function renderWordSearch(puzzle) {
     return "rgb(" + color.join(", ") + ")";
   }
 
-  function getSelectedWord(start,end) {
-    // TODO write code to extract word from grid
-    return word;
+  function getSelectedWord(startPoint,endPoint) {
+    const start = {
+      row: startPoint.parentElement.rowIndex,
+      column: startPoint.cellIndex
+    };
+    const end = {
+      row: endPoint.parentElement.rowIndex,
+      column: endPoint.parentElement.cellIndex
+    };
   }
 
+  function isInsideGrid(td) {
+    const gridSize = 13;
+    const row = td.parentElement.rowIndex;
+    const column = td.cellIndex;
+    return row >= 0 && row < gridSize && column >= 0 && column < gridSize;
+  }
+
+  function getDirection(start,end){
+    const HORIZONTAL = "HORIZONTAL";
+    const VERTICAL = "VERTICAL";
+    const DIAGONAL = "DIAGONAL";
+    const NONE = "NONE";
+
+    if (start.row === end.row){
+      return HORIZONTAL;
+    } else if (start.column === end.column){
+      return VERTICAL;
+    } else if (Math.abs(start.row = end.row) === Math.abs(start.column - end.column)) {
+      return DIAGONAL;
+    } else {
+      return NONE;
+    }
+  }
+
+  function moveInDirection(td,direction){
+    const table = td.parentElement.parentElement;
+    const row =  td.parentElement.rowIndex;
+    const column = td.cellIndex;
+
+    switch(direction) {
+      case "HORIZONTAL":
+        return table.rows[row].cells[column + 1] || td;
+      case "VERTICAL":
+        return table.rows[row + 1]?.cells[column] || td;
+      case "DIAGONAL":
+        return table.rows[row + 1]?.cells[column + 1] || td;
+      default:
+        return td;
+    }
+  }
+  /*
   function wordSelected(){
-    let selectedWOrd = getSelectedWord(startPoint, endPoint);
+    let selectedWord = getSelectedWord(startPoint, endPoint);
     checkWordInWordBank(selectedWOrd);
 
   }
-
+  */
   function checkWordInWordBank(word) {
     const wordBankItems = document.querySelectorAll("#wordBankList li");
     wordBankItems.forEach(item => {
