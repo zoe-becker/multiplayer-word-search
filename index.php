@@ -14,8 +14,9 @@
             </ul>
         </nav>
         <h1> WordSearch! </h1>
-            <button type="button"> Lets Play! </button>
+            <button type="button"> <span> </span>Lets Play! </button>
         </div>
+
 
     </body>
 </html>

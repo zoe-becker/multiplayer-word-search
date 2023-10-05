@@ -66,7 +66,7 @@ nav ul li a{
     align-items: center;
     margin: 50px auto;
     width: 380px;
-    margin-top: 80px;
+    margin-top: 30px;
     margin-bottom: 100px;
     font-family: cursive;
     color: white;
@@ -75,16 +75,47 @@ nav ul li a{
 
 .gif button{
     cursor: pointer;
-    border-style:none;
-    border-radius: 10px;
+    width: 10%;
+    position: absolute;
+    top: 7%;
+    transform: translateY(0%);
+    text-align: center;
+
+
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #5a8668;
+    background-color: white;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 50px auto;
-    min-width: 100px;
-    min-height: 20px;
-    /* background-color: black;
-    color: white; */
-    /* background-color: #7e9f86; */
 
+    position: relative;
+    overflow:hidden;
+}
+
+span{
+    background: #5a8668;
+    height: 100%;
+    width: 0;
+    border-radius: 0px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5s;
+}
+
+
+.gif button:hover span{
+    width: 100%;
+}
+
+.gif button:hover{
+    border: none;
 }
