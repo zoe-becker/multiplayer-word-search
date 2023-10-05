@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
   request.onreadystatechange = function() {
     if (request.readyState == 4) {
       if (request.status == 200) {
-        console.log(request.responseText);
         data = JSON.parse(request.responseText);
         // get the html element with ID "wordBankList" and store it as wordBankList
         const wordBankList = document.getElementById("wordBankList");
@@ -84,7 +83,7 @@ function renderWordSearch(puzzle) {
     for (let i = 0; i < 3; i++) {
       color.push(Math.floor(Math.random() * 256) + 60);
     }
-    console.log("rgb(" + color.join(", ") + ")");
+
     return "rgb(" + color.join(", ") + ")";
   }
 }
