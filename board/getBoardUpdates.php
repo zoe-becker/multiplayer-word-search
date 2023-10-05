@@ -5,6 +5,7 @@
     // check request method
     if ($_SERVER["REQUEST_METHOD"] != "GET") {
         http_response_code(405);
+        exit(-1);
     }
 
     date_default_timezone_set("UTC"); // keep timezone consistent
@@ -17,7 +18,8 @@
 
     if (!$puzzle) {
         http_response_code(500);
-        return "could not get board updates";
+        echo "could not get board updates";
+        exit(-2);
     }
 
     $puzzle = json_decode($puzzle,true);
