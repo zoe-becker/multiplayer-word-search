@@ -1,6 +1,7 @@
 .gif{
     background-image: url('bgImage.jpeg');
     background-size: cover;
+    background-color: #AEC6CF;
     /* background-blend-mode: darken; */
     background-repeat: no-repeat;
     /* opacity: 0.65; */
@@ -16,6 +17,7 @@ nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 20px 0px;
 }
 
 .logo{
@@ -32,10 +34,15 @@ nav ul li{
 
 nav ul li a{
     color: black;
-    text-decoration: solid;
+    text-decoration: none;
 }
 
 .gif h1{
     font-size: 75px;
-    
+    margin: auto;
+    padding: 30px;
+    width: 380px;
+    margin-top: 2%;
+    font-family: cursive;
+
 }
