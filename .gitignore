@@ -1,0 +1,2 @@
+*.wsgi
+/board/ws-*/*

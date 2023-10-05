@@ -1,8 +1,10 @@
-
+<!DOCTYPE html>
 <html>
     <head>
     <link rel="stylesheet" href="style.css">
     </head>
+    <link rel="stylesheet" href="homepage.css">
+    <script src="main.js"></script>
     <body>
         <div class="gif">
         <nav> 
