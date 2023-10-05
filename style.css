@@ -5,12 +5,11 @@
 }
 
 .gif{
-    background-image: url('bgImage.jpeg');
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('bgImage.jpeg');
     background-size: cover;
     background-color: #AEC6CF;
-    /* background-blend-mode: darken; */
     background-repeat: no-repeat;
-    /* opacity: 0.65; */
+    background-position: center;
     height: 100%;
     width: 100%;
     padding:0;
@@ -22,12 +21,12 @@ nav{
     align-items: center;
     justify-content: space-between;
     padding: 5px 10px;
-    background-color: #5d7d65;
+    /* background-color: #526b58; */
 }
 
 .logo{
-    height: 80px;
-    width: 80px;
+    height: 50px;
+    width: 50px;
     opacity: 0.7;
 }
 
@@ -35,26 +34,57 @@ nav ul li{
     display: inline-block;
     list-style: none;
     margin: 10px 40px;
+    position: relative;
+}
+
+nav ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #5a8668;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+nav ul li:hover::after{
+    width: 100%;
 }
 
 nav ul li a{
-    color: black;
+    color: white;
     text-decoration: none;
+    text-transform: uppercase;
+    font-family: cursive;
+    font-size: 17;
 }
 
 .gif h1{
     font-size: 75px;
-    margin: auto;
-    padding: 0px;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
     width: 380px;
-    margin-top: 2%;
+    margin-top: 80px;
+    margin-bottom: 100px;
     font-family: cursive;
+    color: white;
 
 }
 
 .gif button{
-    border: 50px;
-    outline: none;
-    padding: 15px 25px;
-    text-align: center;
+    cursor: pointer;
+    border-style:none;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    min-width: 100px;
+    min-height: 20px;
+    /* background-color: black;
+    color: white; */
+    /* background-color: #7e9f86; */
+
 }
