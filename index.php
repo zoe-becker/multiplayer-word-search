@@ -6,6 +6,7 @@
     <body>
         <div class="gif">
         <nav> 
+            <img src="gorns.png" class="logo">
             <ul> 
                 <li><a href="">Home</a></li>
                 <li><a href="">About</a></li>
