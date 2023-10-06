@@ -1,8 +1,11 @@
+let selectedCells = [];  // to store the TD elements being selected
+let mouseIsPressed = false; // global variable to check if mouse is pressed or not
 
 // checks when page is loaded
 document.addEventListener("DOMContentLoaded", function (event) {
   // request board from server
   let request = new XMLHttpRequest();
+  
 
   request.onreadystatechange = function () {
     if (request.readyState == 4) {
@@ -35,8 +38,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 function renderWordSearch(puzzle) {
   let table = document.createElement("table");
   const container = document.getElementById("wordsearch");
-  let startPoint = null;
-  let endPoint = null;
   container.appendChild(table); // Drew the main table node on the document
 
   puzzle.forEach(function (row) {
@@ -50,25 +51,27 @@ function renderWordSearch(puzzle) {
       td.addEventListener("mouseenter", (event) => {
         td.style.backgroundColor = randomColor();
         td.style.fill = randomColor();
+        selectedCells.push(td); // Adds cell letter to selection array Scrum-62
       });
+
+      td.addEventListener("mousedown", (event) => {
+        mouseIsPressed = true;
+        selectedCells = [td];  // Start new selection
+        td.style.backgroundColor = randomColor();
+        td.style.fill = randomColor();
+      });
+    document.addEventListener("mouseup", function() {
+      mouseIsPressed = false;
+      let selectedWord = selectedCells.map(cell => cell.innerText).join(""); // concatenates the letters in the selected cells
+      checkWordInWordBank(selectedWord);
+      selectedCells = []; // clears selected cell
+    });
 
       // reset the background to white once the cursor leaves the cell
       td.addEventListener("mouseleave", (event) => {
         //want the image to fade out after a set timeout?
         td.style.backgroundColor = "white";
         td.style.fill = "white";
-        
-      });
-
-      td.addEventListener("mousedown", (event) =>{
-        startPoint = event.currentTarget;
-      });
-
-      td.addEventListener("mouseup", (event)=>{
-        // TODO event listener logic here
-        endPoint = event.currentTarget;
-        let selectedWord  = getSelectedWord(startPoint,endPoint);
-        checkWordInWordBank(selectedWord);
       });
     });
   });
@@ -81,98 +84,23 @@ function renderWordSearch(puzzle) {
 
     return "rgb(" + color.join(", ") + ")";
   }
-
-  function getSelectedWord(startPoint,endPoint) {
-    const start = {
-      row: startPoint.parentElement.rowIndex,
-      column: startPoint.cellIndex
-    };
-    const end = {
-      row: endPoint.parentElement.rowIndex,
-      column: endPoint.parentElement.cellIndex
-    };
-    
-    const direction = getDirection(start,end);
-    return extractWordFromGrid(startPoint, direction);
-  }
-
-  function extractWordFromGrid(startTd, direction) {
-    let word = "";
-    let currentTd = startTd;
-    
-    while (isInsideGrid(currentTd)) {
-        word += currentTd.innerText;
-        currentTd = moveInDirection(currentTd, direction);
-        
-        // Break if we've looped back to the starting point.
-        // This might happen if the moveInDirection doesn't find a valid next cell.
-        if (currentTd === startTd) break;
-    }
-    
-    return word;
 }
 
+function checkWordInWordBank(word) {
+  const wordBankList = document.getElementById("wordBankList");
+  const wordBankItems = wordBankList.getElementsByTagName("li");
 
+  for(let i = 0; i < wordBankItems.length; i++) {
+      if(wordBankItems[i].textContent === word) {
+          // alert for debugging purposes
+          //alert(`Found the word: ${word}`);
 
-  function isInsideGrid(td) {
-    const gridSize = 13;
-    const row = td.parentElement.rowIndex;
-    const column = td.cellIndex;
-    return row >= 0 && row < gridSize && column >= 0 && column < gridSize;
-  }
+          wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
 
-  function getDirection(start,end){
-    const HORIZONTAL = "HORIZONTAL";
-    const VERTICAL = "VERTICAL";
-    const DIAGONAL = "DIAGONAL";
-    const NONE = "NONE";
-
-    if (start.row === end.row){
-      return HORIZONTAL;
-    } else if (start.column === end.column){
-      return VERTICAL;
-    } else if (Math.abs(start.row = end.row) === Math.abs(start.column - end.column)) {
-      return DIAGONAL;
-    } else {
-      return NONE;
-    }
-  }
-
-  function moveInDirection(td,direction){
-    const table = td.parentElement.parentElement;
-    const row =  td.parentElement.rowIndex;
-    const column = td.cellIndex;
-
-    switch(direction) {
-      case "HORIZONTAL":
-        return table.rows[row].cells[column + 1] || td;
-      case "VERTICAL":
-        return table.rows[row + 1]?.cells[column] || td;
-      case "DIAGONAL":
-        return table.rows[row + 1]?.cells[column + 1] || td;
-      default:
-        return td;
-    }
-  }
-  /*
-  function wordSelected(){
-    let selectedWord = getSelectedWord(startPoint, endPoint);
-    checkWordInWordBank(selectedWOrd);
-
-  }
-  */
-  function checkWordInWordBank(word) {
-    const wordBankItems = document.querySelectorAll("#wordBankList li");
-    wordBankItems.forEach(item => {
-      if (item.textContent === word) {
-        item.style.textDecoration = "line-through";
+          // TODO scrum 26
+       
+          
+          return;
       }
-    });
   }
-
-
-
 }
-
-
-
