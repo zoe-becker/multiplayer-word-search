@@ -89,7 +89,28 @@ function renderWordSearch(puzzle) {
       row: endPoint.parentElement.rowIndex,
       column: endPoint.parentElement.cellIndex
     };
+    
+    const direction = getDirection(start,end);
+    return extractWordFromGrid(startPoint, direction);
   }
+
+  function extractWordFromGrid(startTd, direction) {
+    let word = "";
+    let currentTd = startTd;
+    
+    while (isInsideGrid(currentTd)) {
+        word += currentTd.innerText;
+        currentTd = moveInDirection(currentTd, direction);
+        
+        // Break if we've looped back to the starting point.
+        // This might happen if the moveInDirection doesn't find a valid next cell.
+        if (currentTd === startTd) break;
+    }
+    
+    return word;
+}
+
+
 
   function isInsideGrid(td) {
     const gridSize = 13;
