@@ -27,7 +27,7 @@ nav{
 .logo{
     height: 50px;
     width: 50px;
-    opacity: 0.7;
+    /* opacity: 0.7; */
 }
 
 nav ul li{
