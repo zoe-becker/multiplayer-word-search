@@ -1,29 +1,11 @@
-/**TODO
- * SCRUM-57
- * Display words on wordbank that aren't hardcoded
- *
- *  When document is loaded do:
- *      Fetch data from test json
- *
- *      When data is fetched successfully:
- *          parse the fetched data into json format
- *
- *             when json parsing is successful:
- *                  get the html element with ID "wordBankList" and store it as wordBankList
- *
- *                  For each word in the "words" list:
- *                          create a new list item
- *                           set the content of the list item to the current word.
- *                           append the list item to the wordBankList element
- *
- *
- * Add error handling later
- */
+let selectedCells = [];  // to store the TD elements being selected
+let mouseIsPressed = false; // global variable to check if mouse is pressed or not
 
 // checks when page is loaded
 document.addEventListener("DOMContentLoaded", function (event) {
   // request board from server
   let request = new XMLHttpRequest();
+  
 
   request.onreadystatechange = function () {
     if (request.readyState == 4) {
@@ -69,7 +51,21 @@ function renderWordSearch(puzzle) {
       td.addEventListener("mouseenter", (event) => {
         td.style.backgroundColor = randomColor();
         td.style.fill = randomColor();
+        selectedCells.push(td); // Adds cell letter to selection array Scrum-62
       });
+
+      td.addEventListener("mousedown", (event) => {
+        mouseIsPressed = true;
+        selectedCells = [td];  // Start new selection
+        td.style.backgroundColor = randomColor();
+        td.style.fill = randomColor();
+      });
+    document.addEventListener("mouseup", function() {
+      mouseIsPressed = false;
+      let selectedWord = selectedCells.map(cell => cell.innerText).join(""); // concatenates the letters in the selected cells
+      checkWordInWordBank(selectedWord);
+      selectedCells = []; // clears selected cell
+    });
 
       // reset the background to white once the cursor leaves the cell
       td.addEventListener("mouseleave", (event) => {
@@ -87,5 +83,24 @@ function renderWordSearch(puzzle) {
     }
 
     return "rgb(" + color.join(", ") + ")";
+  }
+}
+
+function checkWordInWordBank(word) {
+  const wordBankList = document.getElementById("wordBankList");
+  const wordBankItems = wordBankList.getElementsByTagName("li");
+
+  for(let i = 0; i < wordBankItems.length; i++) {
+      if(wordBankItems[i].textContent === word) {
+          // alert for debugging purposes
+          //alert(`Found the word: ${word}`);
+
+          wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
+
+          // TODO scrum 26
+       
+          
+          return;
+      }
   }
 }

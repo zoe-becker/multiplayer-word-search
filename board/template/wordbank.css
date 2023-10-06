@@ -36,6 +36,11 @@ table {
     margin: 20px;
     text-align: center;
     cursor: pointer;
+    /*code to stop  browser's default text higlighting */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 table th,td{
