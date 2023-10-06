@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   // request board from server
   let request = new XMLHttpRequest();
 
-  request.onreadystatechange = function() {
+  request.onreadystatechange = function () {
     if (request.readyState == 4) {
       if (request.status == 200) {
         data = JSON.parse(request.responseText);
@@ -17,16 +17,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
           wordBankList.appendChild(listItem); //  append the list item to the word banklist element
         });
 
-      // draw the word search
-      renderWordSearch(data.puzzle);
+        // draw the word search
+        renderWordSearch(data.puzzle);
       } else {
         console.log("AJAX Error: " + request.responseText);
       }
     }
-  }
+  };
 
   let windowPaths = window.location.href.split("/");
-  let instanceID = windowPaths.at(-1) == '' ? windowPaths.at(-2) : windowPaths.at(-1);
+  let instanceID =
+    windowPaths.at(-1) == "" ? windowPaths.at(-2) : windowPaths.at(-1);
   request.open("GET", "../getBoardDetails.php?instance=" + instanceID);
   request.send();
 });
@@ -46,13 +47,14 @@ function renderWordSearch(puzzle) {
       td.innerText = column; // Take string from placeholder variable and append it to <tr> node
 
       // cell hover is set to a random color
-      td.addEventListener("mouseover", (event) => {
+      td.addEventListener("mouseenter", (event) => {
         td.style.backgroundColor = randomColor();
         td.style.fill = randomColor();
       });
 
       // reset the background to white once the cursor leaves the cell
       td.addEventListener("mouseleave", (event) => {
+        //want the image to fade out after a set timeout?
         td.style.backgroundColor = "white";
         td.style.fill = "white";
         
