@@ -51,7 +51,9 @@ function renderWordSearch(puzzle) {
       td.addEventListener("mouseenter", (event) => {
         td.style.backgroundColor = randomColor();
         td.style.fill = randomColor();
-        selectedCells.push(td); // Adds cell letter to selection array Scrum-62
+        if(mouseIsPressed){
+          selectedCells.push(td); // Adds cell letter to selection array Scrum-62
+        }
       });
 
       td.addEventListener("mousedown", (event) => {
@@ -63,15 +65,24 @@ function renderWordSearch(puzzle) {
     document.addEventListener("mouseup", function() {
       mouseIsPressed = false;
       let selectedWord = selectedCells.map(cell => cell.innerText).join(""); // concatenates the letters in the selected cells
-      checkWordInWordBank(selectedWord);
+      let wordFound = checkWordInWordBank(selectedWord);
+      if(!wordFound){
+        selectedCells.forEach(cell => {
+          cell.style.backgroundColor = "white";
+          cell.style.fill = "white";
+
+        })
+      }
       selectedCells = []; // clears selected cell
     });
 
       // reset the background to white once the cursor leaves the cell
       td.addEventListener("mouseleave", (event) => {
         //want the image to fade out after a set timeout?
-        td.style.backgroundColor = "white";
-        td.style.fill = "white";
+        if(!selectedCells.includes(td)){
+          td.style.backgroundColor = "white";
+          td.style.fill = "white";
+        }
       });
     });
   });
@@ -89,6 +100,7 @@ function renderWordSearch(puzzle) {
 function checkWordInWordBank(word) {
   const wordBankList = document.getElementById("wordBankList");
   const wordBankItems = wordBankList.getElementsByTagName("li");
+  let wordFound = false;
 
   for(let i = 0; i < wordBankItems.length; i++) {
       if(wordBankItems[i].textContent === word) {
@@ -96,11 +108,14 @@ function checkWordInWordBank(word) {
           //alert(`Found the word: ${word}`);
 
           wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
+          wordFound = true;
 
           // TODO scrum 26
+
        
           
-          return;
+          break;
       }
   }
+  return wordFound;
 }
