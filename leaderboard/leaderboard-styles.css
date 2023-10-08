@@ -88,6 +88,6 @@ body, html {
 }
 
 .highlighted {
-    background-color: lightpink;
+    background-color: rgb(182, 205, 255);
     transition: background-color 0.3s ease; /* Add a smooth transition */
 }
