@@ -48,9 +48,13 @@ We're doing this to bring people together in fun, safe, competitive environment.
 ## Features 🎁
 List the ready features here:
 - [Wordsearch - Give the user the ablitity to play wordsearch against a friend. 🧩](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-10) 
+
 - [Leader board- Keeps score and updates for solo or head-to-head play. 🥇🥈🥉](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-6) 
-- [Color theme customization- The ability to customize the themes on the webpage. 🧑‍🎨](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-9) 
+
+- [Color themes- The ability to customize the themes on the webpage. 🧑‍🎨](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-9) 
+
 - [Word Themes - The ability to chose from different word search themes. 📚](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-7) 
+
 - [Play by Play updates ⚔](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-8) 
 
 
