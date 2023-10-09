@@ -17,11 +17,16 @@ Word Search
 
 
 ## The Team
-🥰**Ethan Reed**🥰
-🐈**Melanie Garza**🐈 
-🏈**Cameron Chalupa**🏈 
-🙈**Cruz Lopez**🙈 
-😹**Zoe Becker**😹
+
+🥰`Ethan Reed`🥰
+
+🐈`Melanie Garza`🐈
+
+🏈`Cameron Chalupa`🏈
+
+🙈`Cruz Lopez`🙈
+
+😹*`Zoe Becker`😹
 
 ## What We're Creating
 We're creating a competitive word search web app.
