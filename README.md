@@ -4,16 +4,16 @@ Word Search
 [//]: <> (Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->)
 
 ## Table of Contents
-* [The Team](#TheTeam)
-* [What We're Creating](#WhatWe'reCreating)
-* [Technologies Used](#TechnologiesUsed)
-* [Who Are We Doing This For?](#WhoAreWeDoingThisFor?)
-* [Why Are We Doing This?](#WhyAreWeDoingThis?)
-* [Features](#Features)
-* [Screenshots](#Screenshots)
-* [Installation](#Installation)
-* [Usage](#Usage)
-
+* [The Team](#TheTeam) 🤝
+* [What We're Creating](#WhatWe'reCreating) 🧰
+* [Technologies Used](#TechnologiesUsed) 🧑‍💻
+* [Who Are We Doing This For?](#WhoAreWeDoingThisFor?) 🫵
+* [Why Are We Doing This?](#WhyAreWeDoingThis?) 🤷‍♀️
+* [Features](#Features) 🎁
+* [Screenshots](#Screenshots) 🖼
+* [Installation](#Installation) 🛠
+* [Usage](#Usage) 🧩
+* [Sprint 1](#Sprint1) 🏃
 
 
 ## The Team
@@ -26,7 +26,7 @@ Word Search
 
 🙈`Cruz Lopez`🙈
 
-😹*`Zoe Becker`😹
+😹`Zoe Becker`😹
 
 ## What We're Creating
 We're creating a competitive word search web app.
