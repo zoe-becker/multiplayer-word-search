@@ -22,7 +22,7 @@ body, html {
 .leaderboard {
     background-color: white;
     padding: 20px; /* Add some padding to create space inside the container */
-    border-radius: 10px; /* Add rounded corners to the container */
+    border-radius: 5px; /* Add rounded corners to the container */
     text-align: center; /* Center-align the content inside the container */
     color: black; /* Set the text color to black */
     display: flex;
@@ -40,6 +40,7 @@ body, html {
 .leaderboard h1 {
     font-size: 48px;
     margin-bottom: 10px;
+    border-radius: 5px; /* Add rounded corners to the container */
 }
 
 /* Style the list items */
@@ -51,6 +52,7 @@ body, html {
 .leaderboard li {
     font-size: 24px;
     margin: 10px 0;
+
 }
 /* CSS for the flex container */
 .player-container {
@@ -58,6 +60,7 @@ body, html {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px; /* Add spacing between players */
+    border-radius: 5px;
 }
 
 /* CSS for the flex box containing Rank and Name */
@@ -88,6 +91,6 @@ body, html {
 }
 
 .highlighted {
-    background-color: rgb(182, 205, 255);
+    background-color: lightpink;
     transition: background-color 0.3s ease; /* Add a smooth transition */
 }
