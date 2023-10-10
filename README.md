@@ -133,37 +133,40 @@ Just import the WordSearch class from the package, supply it with a list of word
 
 <br />
 
-Cruz created the word bank container, wrote logic insert elements in wordbank, wrote the logic to parse the JSON wordbank words, wrote logic that crosses words out when the user selects the words, and createdsql database that will be ustilized in future sprints.    
+ - **Cruz** created the word bank container, wrote logic insert elements in wordbank, wrote the logic to parse the JSON wordbank words, wrote logic that crosses words out when the user selects the words, and createdsql database that will be ustilized in future sprints.  
+  
 
-SCRUM-79 Create SQL database with dummy values for leaderboard
+    - SCRUM-79 Create SQL database with dummy values for leaderboard
+    
+        - [SCRUM-79 Jira Link](https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=5fdcdece44065f013ff9d71e&selectedIssue=SCRUM-79)
 
-[SCRUM-79 Jira Link](https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=5fdcdece44065f013ff9d71e&selectedIssue=SCRUM-79)
+        - [SCRUM-79 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/88b635073c3bd70a86e2f8edc7d3733120837781)
 
-[SCRUM-79 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/88b635073c3bd70a86e2f8edc7d3733120837781)
+    - SCRUM-54-parse-word-search-words-from-js
 
-SCRUM-54-parse-word-search-words-from-js
+        - [SCRUM-54 Jira Link](https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=5fdcdece44065f013ff9d71e&selectedIssue=SCRUM-54)
 
-[SCRUM-54 Jira Link](https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=5fdcdece44065f013ff9d71e&selectedIssue=SCRUM-54)
+        - [SCRUM-54 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/a7dbeca3255528621403c3ea1f45c2bdd2221339)
 
-[SCRUM-54 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/a7dbeca3255528621403c3ea1f45c2bdd2221339)
+    - SCRUM-57 Display words on word bank
 
-SCRUM-57 Display words on word bank
+        - [SCRUM-57 Jira Link](https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=5fdcdece44065f013ff9d71e&selectedIssue=SCRUM-57)
 
-[SCRUM-57 Jira Link](https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=5fdcdece44065f013ff9d71e&selectedIssue=SCRUM-57)
+        - [SCRUM-57 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/9540d6538c7c1c2d64fc266d60dad8a9184eb6fd)
 
-[SCRUM-57 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/9540d6538c7c1c2d64fc266d60dad8a9184eb6fd)
+    - SCRUM-62 When word is selected, words are eliminated from word bank (css/js)
 
-SCRUM-62 When word is selected, words are eliminated from word bank (css/js)
+        - [SCRUM-62 Jira Link](https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=5fdcdece44065f013ff9d71e&selectedIssue=SCRUM-62)
 
-[SCRUM-62 Jira Link](https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=5fdcdece44065f013ff9d71e&selectedIssue=SCRUM-62)
+        - [SCRUM-62 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/8b0f24c18b79a8b00a9f8d8ea047f7d2e4e1f13f)
 
-[SCRUM-62 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/8b0f24c18b79a8b00a9f8d8ea047f7d2e4e1f13f)
+    - SCRUM-60-Create a word bank
 
-SCRUM-60-Create a word bank
+        - [SCRUM-60 Jira Link](https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=5fdcdece44065f013ff9d71e&selectedIssue=SCRUM-60)
 
-[SCRUM-60 Jira Link](https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/boards/1?assignee=5fdcdece44065f013ff9d71e&selectedIssue=SCRUM-60)
+        - [SCRUM-60 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/342ceaeed949084e060814f8131210ddb035cd2e)
 
-[SCRUM-60 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/342ceaeed949084e060814f8131210ddb035cd2e)
+<br />
 
 - **Cameron**: "Created leaderboard page front end and back end. Adjusted html and css on board page to create a better format for future adjustments. Added a container that a future game timer will be implemented into."
 	- `Jira Task SCRUM-21: Design a user-friendly leaderboard UI.`
