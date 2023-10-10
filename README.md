@@ -165,3 +165,17 @@ SCRUM-60-Create a word bank
 
 [SCRUM-60 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/342ceaeed949084e060814f8131210ddb035cd2e)
 
+- **Cameron**: "Created leaderboard page front end and back end. Adjusted html and css on board page to create a better format for future adjustments. Added a container that a future game timer will be implemented into."
+	- `Jira Task SCRUM-21: Design a user-friendly leaderboard UI.`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-21
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/771d1727a0ad8fdde31d6ad0d55e692671093543
+	- `Jira Task SCRUM-47: Implementing leaderboard UI in JavaScript`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-47
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/19bfa6dfd09aa2b85ada64ad38422feb1c3367ea
+	- `Jira Task SCRUM-63: Timer added into wordsearch (frontend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-63
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/27debb20b24550b2c16e230c19807acaa292aef2
+	- `Jira Task-72: Theme buttons (front and back-end)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-72
+		- reference: Not completed before sprint completion.
+<br />
