@@ -182,3 +182,14 @@ Just import the WordSearch class from the package, supply it with a list of word
         - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-72
 		- reference: Not completed before sprint completion.
 <br />
+## Next Steps
+- **Ethan**:
+    - multiplayer lobbies
+- **Mel**:
+    - gamelobby, about, and credits pages
+- **Cruz**:
+    - database implementation
+- **Zoe**:
+    - server-side word validation
+- **Cameron**:
+    - setting up theme-adaptive game board code
