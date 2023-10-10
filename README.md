@@ -133,7 +133,7 @@ Just import the WordSearch class from the package, supply it with a list of word
 
 <br />
 
- - **Cruz** created the word bank container, wrote logic insert elements in wordbank, wrote the logic to parse the JSON wordbank words, wrote logic that crosses words out when the user selects the words, and createdsql database that will be ustilized in future sprints.  
+ - **Cruz**: created the word bank container, wrote logic insert elements in wordbank, wrote the logic to parse the JSON wordbank words, wrote logic that crosses words out when the user selects the words, and createdsql database that will be ustilized in future sprints.  
   
 
     - SCRUM-79 Create SQL database with dummy values for leaderboard
