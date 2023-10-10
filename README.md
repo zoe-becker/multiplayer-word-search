@@ -98,3 +98,18 @@ Just import the WordSearch class from the package, supply it with a list of word
         - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-64
 		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/3c953f485fd9d68e1e98c30750196551efef0475  
 <br />
+
+- **Zoe**: "Created grid for wordsearch and parsed letters from JSON to fill grid. Worked on some HTML styling and added hover functionality for grid. Created Leaderboard button on homepage"
+	- `Jira Task SCRUM-22: Add buttons/links to allow users to view the leader board from the game's main page.`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-22
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/c59d21ae3bfd228fb4bcd6a764dc82490baa1dbe
+	- `Jira Task SCRUM-27: Style the game board and other UI elements with CSS for a pleasing user experience.`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-27
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/ebca6e0e7fd81b799e4aa83e82a76824d6b22a2c
+	- `Jira Task-28: Design the game board layout in HTML & Jira Task 55: Parse letters from JSON on client`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-28
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/e05818188bad77403692e9bd5eff27ca4f493508
+	- `Jira Task-78: More css for wordsearch board (add color)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-78
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/e5a2c905ac05aff678fce2980ad6b8833e3c9a11
+<br />
