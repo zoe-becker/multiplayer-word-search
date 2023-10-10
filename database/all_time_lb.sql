@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2023 at 01:06 AM
+-- Generation Time: Oct 07, 2023 at 02:14 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `ws_leaderboard`
 --
+CREATE DATABASE IF NOT EXISTS `ws_leaderboard` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `ws_leaderboard`;
 
 -- --------------------------------------------------------
 
