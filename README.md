@@ -76,3 +76,25 @@ Just import the WordSearch class from the package, supply it with a list of word
 >>> puzzle = WordSearch("dog, cat, pig, horse, donkey, turtle, goat, sheep")
 
 ## Sprint 1 🏃  (September 25 - October 6th)
+
+## Contributions
+- **Ethan**: "Added deployment scripts to deploy to webserver. Connected python generator to main PHP/JS stack. Implemented backend framework for the game timer."
+	- `Jira Task SCRUM-50: Get result from python word-search-generator in PHP`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-50
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/545087a9475c636d8e59012a63342c6033558614
+	- `Jira Task SCRUM-25: Create cron jobs for deployment server for instance cleanup`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-25
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/dc776f0ca5272f6856962d85ec21f275e7afbd97 
+	- `Jira Task-24: Get rid of direct gamefile access in favor of server request for game data`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-24
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/d50145e61bbf156296b669d440f304bd86d053e1
+	- `Jira Task-69: Start button in Home page (front-end) & (backend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-69
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/7c2202e8afe195179870ecafc895c7bc5b6e80b1 
+	- `Jira Task-49: Configure word-search-generator to return JSON`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-49
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/edd3b69a72a408492aee1a9d3375029abb83b395
+	- `Jira Task-64: Backend timer implementation`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-64
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/3c953f485fd9d68e1e98c30750196551efef0475  
+<br />
