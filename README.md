@@ -113,3 +113,22 @@ Just import the WordSearch class from the package, supply it with a list of word
         - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-78
 		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/e5a2c905ac05aff678fce2980ad6b8833e3c9a11
 <br />
+
+- **Melanie**: "Created the Homepage for wordsearch. Worked on a javascript feature to highlight words when selected from the word bank. Created a default word dictionary and then connected that dictionary to JSON generation."
+    - 'Jira Task SCRUM-26: Enable users to select letters on the grid by clicking or dragging.'
+        Jira Link: https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-26
+        reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/36f74a4c58cb33e31a7c95adf2478578d3832bf9
+
+    - 'Jira Task SCRUM-66: Create default word dictionary.'
+        Jira Link: https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-66
+        reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/6a7481053729b7b8ed385e210e5b9f93b2783248
+
+    - 'Jira Task SCRUM-67: Connect Word Dictionary to initial JSON generation.'
+        Jira Link: https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-67
+        reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/d63ff99f5614bbfd61339ac99be0281abe8d67c2
+
+    - 'Jira Task SCRUM-26: Home Page (HTML/CSS).'
+        Jira Link: https://cs3398f23gorns1.atlassian.net/jira/software/projects/SCRUM/issues/SCRUM-68
+        reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/90fe3b1aeab9de6de390a49e52a35b838284afbd
+
+<br />
