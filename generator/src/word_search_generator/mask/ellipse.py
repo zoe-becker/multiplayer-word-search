@@ -1,4 +1,5 @@
 import math
+from typing import List, Optional, Tuple
 
 from ..utils import distance, float_range
 from .bitmap import Bitmap
@@ -10,20 +11,20 @@ class Ellipse(Bitmap):
 
     def __init__(
         self,
-        width: int | None = None,
-        height: int | None = None,
-        center: tuple[int, int] | None = None,
+        width: Optional[int] = None,
+        height: Optional[int] = None,
+        center: Optional[Tuple[int, int]] = None,
         method: int = 1,
         static: bool = True,
     ) -> None:
         """Generate an ellipse mask.
 
         Args:
-            width int | None, optional): Ellipse width. Defaults to
+            width (Optional[int], optional): Ellipse width. Defaults to
                 `puzzle_width` provided to the `.generate()` method.
-            height int | None, optional): Ellipse height. Defaults to
+            height (Optional[int], optional): Ellipse height. Defaults to
                 `puzzle_width` provided to the `.generate()` method.
-            center tuple[int, int | None, optional): Center origin point
+            center (Optional[Tuple[int, int]], optional): Center origin point
                 from which the ellipse will be calculated. Defaults to puzzle center.
             method (int, optional): How Mask is applied to the puzzle
                 (1=Standard (Intersection), 2=Additive, 3=Subtractive). Defaults to 1.
@@ -53,9 +54,9 @@ class Ellipse(Bitmap):
     def calculate_ellipse_points(
         width: int,
         height: int,
-        origin: tuple[int, int],
+        origin: Tuple[int, int],
         puzzle_size: int,
-    ) -> list[tuple[int, int]]:
+    ) -> List[Tuple[int, int]]:
         """Calculate all coordinates within an ellipse."""
         width_r = width / 2
         height_r = height / 2

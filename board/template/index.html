@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Board</title>
+    <link rel="stylesheet" href="wordbank.css">
+    <script src="wordbank.js"></script>
+    <body>
+
+        <!--This is a container element with a class attribute set to "word-bank".-->
+        <div class="container">
+            <div class="timer-box">
+                <div class="inner-timer-box">1:30</div>
+            </div> 
+            <div class="puzzle-container">
+                <div id="wordsearch"></div>
+                <div class="word-bank">
+                    <h2>Word Bank</h2>
+                    <!-- element with the ID atribute set to wordBankList-->
+                    <!--the ID is used to identify this list in wordbank.css and wordbank.js-->
+                    <ul id="wordBankList">
+                        <!--the "word" contents of the puzzle.json are shown here-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

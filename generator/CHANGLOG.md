@@ -4,35 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-
 ## [Unreleased]
 
 ### Added
 
-- Validators: Previously, all word validation was done during the `WordSearch` object initialization (and also after making any changes to the puzzle words). Now, the default validation (no single letter words, no palindromes, no words that fit inside of other words or encase other words) hsa been abstracted away. Each validator is now based on a `Validator()` abstract base class, allowing users to create their own or disable the defaults. This thought has come up before but because of issue #45 I decided to tackle. Normally in a standard word search puzzle you don't want single-letter words, palindromes, or words that are part of other words, as each of these situations could potentially lead to multiple solutions for the same puzzle.
-    - `validators` argument added to `WordSearch` object
-    - `--no-validators` added to cli arguments to disable default validators
-    - Tests updated and added for new functionality
-
-### Changed
-
-- Minimum Python version updated to 3.10
-    - Updating all typing to use the new format (instead of importing from typing)
-- Tox config
-- `max_fit_tries` raised to 1000 to help more words fitting within smaller puzzles
-- `get_random_words()` now accepts a `max_length` argument, helpful when working with puzzles of a smaller size
-
-### Removed
-
-- `reset_size()` function no longer needed as it is included inside of `_generate()` noe
-
-## [3.5.0] 2023-07-07
-
-### Added
-
-- `save()` method now also supports the `solution` argument for "CSV" and "JSON" formats. This will remove all filler characters from the saved output, leaving only characters from the placed puzzle words. Closes issues #41 and #44.
 - Testing for solution highlighting in PDF output
-- `cropped_size` property which gives the size (in characters) of a cropped/masked puzzle as a (width, height) tuple
 
 ### Changed
 

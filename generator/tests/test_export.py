@@ -11,7 +11,6 @@ import pytest
 from pypdf import PdfReader
 
 from word_search_generator import WordSearch, config, utils
-from word_search_generator.game import EmptyPuzzleError
 from word_search_generator.word import Direction, Word
 
 
@@ -25,7 +24,7 @@ def check_chars(puzzle, word):
     return True
 
 
-def test_export_csv(words, tmp_path: Path):
+def test_export_csv(words, tmp_path):
     puzzle = WordSearch(words)
     path = Path.joinpath(tmp_path, "test.csv")
     puzzle.save(path, format="csv")
@@ -34,7 +33,7 @@ def test_export_csv(words, tmp_path: Path):
     assert not re.findall("\nSOLUTION\n", data)
 
 
-def test_export_json(words, tmp_path: Path):
+def test_export_json(words, tmp_path):
     puzzle = WordSearch(words)
     path = Path.joinpath(tmp_path, "test.json")
     final_path = puzzle.save(path, format="json")
@@ -43,22 +42,7 @@ def test_export_json(words, tmp_path: Path):
         assert word.text in data["words"]
 
 
-@pytest.mark.parametrize(
-    "format",
-    [
-        ("csv",),
-        ("json",),
-        ("pdf",),
-    ],
-)
-def test_export_empty_puzzle(tmp_path: Path, format):
-    puzzle = WordSearch()
-    path = Path.joinpath(tmp_path, f"test.{format}")
-    with pytest.raises(EmptyPuzzleError):
-        puzzle.save(path, format=format)
-
-
-def test_export_pdf_puzzles(iterations, tmp_path: Path):
+def test_export_pdf_puzzles(iterations, tmp_path):
     """Export a bunch of puzzles as PDF and make sure they are all 1-page."""
     puzzles = []
     pages = set()
@@ -81,7 +65,7 @@ def test_export_pdf_puzzles(iterations, tmp_path: Path):
     assert pages == {1}
 
 
-def test_export_pdf_puzzle_with_solution(iterations, tmp_path: Path):
+def test_export_pdf_puzzle_with_solution(iterations, tmp_path):
     """Make sure a pdf puzzle exported with the solution is 2 pages."""
     puzzles = []
     pages = set()
@@ -104,7 +88,7 @@ def test_export_pdf_puzzle_with_solution(iterations, tmp_path: Path):
     assert pages == {2}
 
 
-def test_export_pdf_overwrite_file_error(tmp_path: Path):
+def test_export_pdf_overwrite_file_error(tmp_path):
     """Try to export a puzzle with the name of a file that is already present."""
     path = Path.joinpath(tmp_path, "test_pdf.pdf")
     path.touch()
@@ -113,7 +97,7 @@ def test_export_pdf_overwrite_file_error(tmp_path: Path):
         puzzle.save(path)
 
 
-def test_export_csv_overwrite_file_error(tmp_path: Path):
+def test_export_csv_overwrite_file_error(tmp_path):
     """Try to export a puzzle with the name of a file that is already present."""
     path = Path.joinpath(tmp_path, "test_csv.pdf")
     path.touch()
@@ -122,7 +106,7 @@ def test_export_csv_overwrite_file_error(tmp_path: Path):
         puzzle.save(path, format="CSV")
 
 
-def test_export_json_overwrite_file_error(tmp_path: Path):
+def test_export_json_overwrite_file_error(tmp_path):
     """Try to export a puzzle with the name of a file that is already present."""
     path = Path.joinpath(tmp_path, "test_json.pdf")
     path.touch()
@@ -147,7 +131,7 @@ def test_export_csv_os_error(words):
         puzzle.save("/test.csv")
 
 
-def test_pdf_output_key(iterations, tmp_path: Path):
+def test_pdf_output_key(iterations, tmp_path):
     def parse_puzzle(extraction):
         puzzle = []
         for line in extraction.split("\n"):
@@ -187,7 +171,7 @@ def test_pdf_output_key(iterations, tmp_path: Path):
     assert all(results)
 
 
-def test_pdf_output_words(iterations, tmp_path: Path):
+def test_pdf_output_words(iterations, tmp_path):
     def parse_word_list(extraction):
         return {
             word.strip()
@@ -228,7 +212,7 @@ def test_pdf_output_words(iterations, tmp_path: Path):
     assert all(results)
 
 
-def test_pdf_output_puzzle_size(iterations, tmp_path: Path):
+def test_pdf_output_puzzle_size(iterations, tmp_path):
     def parse_puzzle(extraction):
         puzzle = []
         for line in extraction.split("\n"):
@@ -256,7 +240,7 @@ def test_pdf_output_puzzle_size(iterations, tmp_path: Path):
     assert all(results)
 
 
-def test_pdf_output_solution_characters(iterations, tmp_path: Path):
+def test_pdf_output_solution_characters(iterations, tmp_path):
     results = []
     for _ in range(iterations):
         ws = WordSearch(size=random.randint(8, 21))
@@ -278,7 +262,7 @@ def test_pdf_output_solution_characters(iterations, tmp_path: Path):
     assert all(results)
 
 
-def test_pdf_output_solution_character_placement(iterations, tmp_path: Path):
+def test_pdf_output_solution_character_placement(iterations, tmp_path):
     def check_chars(puzzle, word):
         row, col = word.position
         for c in word.text:
@@ -309,7 +293,7 @@ def test_pdf_output_solution_character_placement(iterations, tmp_path: Path):
 
 
 @pytest.mark.skipif(os.name == "nt", reason="need to figure out")
-def test_csv_output_puzzle_size(iterations, tmp_path: Path):
+def test_csv_output_puzzle_size(iterations, tmp_path):
     def parse_puzzle(fp):
         puzzle = []
         with open(fp, newline="") as f:

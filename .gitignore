@@ -1,0 +1,5 @@
+*.wsgi
+/board/ws-*/*
+.venv
+/.venv/
+/.vscode/

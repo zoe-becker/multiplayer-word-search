@@ -1,0 +1,9 @@
+{
+    "topPlayers": [
+      {"name": "Cameron", "score": 1000, "date": "2023-10-15"},
+      {"name": "Zoe", "score": 800, "date": "2023-10-14"},
+      {"name": "Cruz", "score": 600, "date": "2023-10-13"},
+      {"name": "Mel", "score": 400, "date": "2023-10-12"},
+      {"name": "Ethan :P", "score": 200, "date": "2023-10-11"}
+    ]
+  }

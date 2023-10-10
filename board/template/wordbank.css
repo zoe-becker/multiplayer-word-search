@@ -1,0 +1,82 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    gap:10px;
+}
+
+.timer-box {
+    /* Sits above puzzle-container */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 831px;
+    height: 20px;
+    color: black;
+    border-radius: 5px;
+    font-size: 35px;
+    
+    
+}
+.inner-timer-box {
+    /* Sits leftmost in timerbox so that it sits top left of grid */
+    position: flex;
+    width: 80px; 
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px; 
+    color: black;
+    border: 1px solid black;
+     
+}
+
+.puzzle-container {
+    /* Holds grid and work bank */
+    display:flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    align-items: center;
+}
+.word-bank {
+    width: 200px; 
+    border: 1px solid black;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);   
+}
+
+.word-bank h2 {
+    text-align: center;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+.word-bank ul {
+    list-style-type: none;  
+    padding: 10%;             
+    margin: 0;      
+    text-align: center;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size: x-large;       
+}
+
+table {
+    table-layout: fixed;
+    width: 600px;
+    height: 600px;
+    border: 1px solid;
+    text-align: center;
+    cursor: pointer;
+    /*code to stop  browser's default text higlighting */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+table th,td{
+    border-spacing: 30px;
+    border-radius: 20px;
+}
