@@ -1,10 +1,12 @@
-# Word Search
+## Multiplayer Word Search Generator
 
-[//]: <> (Outline a brief description of your project.)
-[//]: <> (Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->)
+Fall 2023 Software Engineering group project using the agile development methodology. We are building a multiplayer word search generator where you can competitively play word search with other people.
+
+Anticipated finish date November 30th, 2023.
+Demo running latest version of main branch can be found here: https://verygoodbadthing.com/word-search-generator
 
 ## Table of Contents
-* [The Team 🤝](#TheTeam) 
+* [The Team 🤝](#TheTem) 
 * [What We're Creating 🧰](#WhatWe'reCreating) 
 * [Technologies Used 🧑‍💻](#TechnologiesUsed) 
 * [Who Are We Doing This For? 🫵](#WhoAreWeDoingThisFor?) 
@@ -56,24 +58,6 @@ List the ready features here:
 - [Word Themes - The ability to chose from different word search themes. 📚](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-7) 
 
 - [Play by Play updates ⚔](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-8) 
-
-
-## Screenshots 🖼
-![Alt text](image.png)
-
-
-## Installation 🛠
-
-Install Word-Search-Generator with pip:
-
-$ pip install word-search-generator
-
-## Usage 🧩
-
-Just import the WordSearch class from the package, supply it with a list of words and you're set. 🧩
-
->>> from word_search_generator import WordSearch
->>> puzzle = WordSearch("dog, cat, pig, horse, donkey, turtle, goat, sheep")
 
 ## Sprint 1 🏃  (September 25 - October 6th)
 
