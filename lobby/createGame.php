@@ -1,7 +1,9 @@
 <?php
-    $GAME_DIR = "board";
+    $GAME_DIR = "../board";
     $INSTANCE_TEMPLATE_DIR = $GAME_DIR . "/template";
     $GAME_LENGTH = 900;
+    $INSTANCE_EXPIRATION_DELAY = 300; // amount of time after game ends before it is eligible to be deleted
+    
     date_default_timezone_set("UTC"); // keep timezone consistent
     // verify request
     $requestMethod = $_SERVER["REQUEST_METHOD"];
@@ -24,6 +26,7 @@
     if ($puzzle) {
         $puzzle = json_decode($puzzle, true);
         $puzzle["endTime"] = time() + $GAME_LENGTH; // set match expiration date
+        $puzzle["instanceExpiration"] = $puzzle["endTime"] + $INSTANCE_EXPIRATION_DELAY;
         $puzzle = json_encode($puzzle);
     } else {
         http_response_code(500);
