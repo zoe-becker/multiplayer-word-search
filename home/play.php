@@ -1,5 +1,5 @@
 <?php
-    $GAME_DIR = "board";
+    $GAME_DIR = "../board";
     $INSTANCE_TEMPLATE_DIR = $GAME_DIR . "/template";
     $GAME_LENGTH = 900;
     date_default_timezone_set("UTC"); // keep timezone consistent
