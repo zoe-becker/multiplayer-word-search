@@ -22,11 +22,16 @@
 ### Lobby instance file (lobbyData.json)
 - instanceExpiration: UTC timestamp of when the instance is eligible to be deleted from the server
 - players: same as players in puzzle.json
+- gameLink: false if game not started, otherwise the relative path from the lobby instance to the game instance
 
 ## Response objects (for frontend):
 ### PuzzleStructure object
 - puzzle, expireTime, foundWords, players keys from puzzle.json above
-    - NOTE: player objects in the players list only contain name and score keys
+    - NOTE: player objects in the players list only contain name, score, and isHost keys
 ### PuzzleState object
 - expireTime, foundWords, players keys from puzzle.json above
     - NOTE: player objects are sanitized the same way as above
+
+### LobbyData object
+- players and started keys from lobbyData.json above
+    - NOTE: player objects are sanitized the same way as in PuzzleStructure
