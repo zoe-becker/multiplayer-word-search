@@ -1,10 +1,59 @@
 <?php
+    /* This function is responsible for starting a game from a lobby at the host's request
+       Accepted methods: POST only
+       Required headers:
+          1. token: access token of the requester (the requester must be the lobby host)
+          2. lobby: lobby id (including the prefix)
+    */
+    // verify request method
+    if ($_SERVER["REQUEST_METHOD"] != "POST") {
+        http_response_code(405);
+        exit(-1);
+    }
+
+    // verify proper headers exist
+    if (!array_key_exists("HTTP_TOKEN", $_SERVER) || !array_key_exists("HTTP_LOBBY", $_SERVER)) {
+        http_response_code(400);
+        exit(-2);
+    }
+
     $GAME_DIR = "../board";
     $INSTANCE_TEMPLATE_DIR = $GAME_DIR . "/template";
+    $LOBBY_DATAFILE_NAME = "lobbyData.json";
     $GAME_LENGTH = 900;
     $INSTANCE_EXPIRATION_DELAY = 300; // amount of time after game ends before it is eligible to be deleted
+
+    // extract parameters from headers
+    $token = $_SERVER["HTTP_TOKEN"];
+    $lobbyID = $_SERVER["HTTP_LOBBY"];
     
-    date_default_timezone_set("UTC"); // keep timezone consistent
+    // verify instance exists
+    if (!file_exists($lobbyID)) {
+        echo "invalid instance ID";
+        http_response_code(400);
+        exit(-3);
+    }
+
+    // verify that the requester is the host
+    $lobbyData = json_decode(file_get_contents("$lobbyID/$LOBBY_DATAFILE_NAME"));
+    $players = $lobbyData["players"];
+    $validRequester = false;
+
+    foreach ($players as $player) {
+        if ($player["accessToken"] == $token) {
+            if ($player["isHost"]) {
+                $validRequester = true;
+                break;
+            }
+        }
+    }
+
+    if (!$validRequester) {
+        echo "Only hosts can start the game.";
+        http_response_code(403);
+        exit(-4);
+    }
+    
     // verify request
     $requestMethod = $_SERVER["REQUEST_METHOD"];
 
@@ -13,6 +62,9 @@
         exit(-1);
     }
 
+    // request is valid, start game
+
+    date_default_timezone_set("UTC"); // keep timezone consistent
     // curl to generator for new grid
     $requestURI = "http://" . $_SERVER["SERVER_NAME"] . "/word-search-generator/generator";
     $request = curl_init($requestURI);
