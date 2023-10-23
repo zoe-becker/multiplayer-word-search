@@ -36,11 +36,19 @@
         exit(-3);
     }
 
-    // verify that the requester is the host
+    // gather lobby data
     $lobbyData = json_decode(file_get_contents("$lobbyID/$LOBBY_DATAFILE_NAME"), true);
     $players = $lobbyData["players"];
     $validRequester = false;
 
+    // check that game has not already started
+    if ($lobbyData["gameLink"]) {
+        echo "game already started";
+        http_response_code(400);
+        exit(-4);
+    }
+
+    // check that the requester is the host
     foreach ($players as $player) {
         if ($player["accessToken"] == $token) {
             if ($player["isHost"]) {
@@ -122,7 +130,11 @@
     file_put_contents($instanceDir . "/puzzle.json", $puzzle);
     chmod($instanceDir . "/puzzle.json", 0660);
 
+    // update lobby to indicate game has started
+    $gameLink = "../" . $instanceDir . "/"; // add extra ../ since clients are in an instance directory
+    $lobbyData["gameLink"] = $gameLink;
+    file_put_contents("$lobbyID/$LOBBY_DATAFILE_NAME", json_encode($lobbyData)); 
+
     http_response_code(200);
-    // echo path to new instance, add extra ../ since clients are in an instance directory
-    echo "../" . $instanceDir . "/";
+    echo $gameLink;
 ?>

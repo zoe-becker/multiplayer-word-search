@@ -29,10 +29,18 @@
     if (!file_exists($lobbyID)) {
         echo "invalid instance code";
         http_response_code(400);
-        exit(-1);
+        exit(-3);
     }
 
     $lobbyData = json_decode(file_get_contents("$lobbyID/$LOBBY_DATAFILE_NAME"), true);
+
+    // verify game hasn't already started
+    if ($lobbyData["gameLink"]) {
+        echo "game already started";
+        http_response_code(400);
+        exit(-4);
+    }
+
     $newPlayer = array(
         "name" => $requestedName,
         "accessToken" => uniqid("", true), // create unique id, more entropy to reduce chance of collision
