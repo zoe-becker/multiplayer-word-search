@@ -37,7 +37,7 @@
     }
 
     // verify that the requester is the host
-    $lobbyData = json_decode(file_get_contents("$lobbyID/$LOBBY_DATAFILE_NAME"));
+    $lobbyData = json_decode(file_get_contents("$lobbyID/$LOBBY_DATAFILE_NAME"), true);
     $players = $lobbyData["players"];
     $validRequester = false;
 
@@ -123,5 +123,6 @@
     chmod($instanceDir . "/puzzle.json", 0660);
 
     http_response_code(200);
-    echo $instanceDir . "/"; // echo path to new instance
+    // echo path to new instance, add extra ../ since clients are in an instance directory
+    echo "../" . $instanceDir . "/";
 ?>
