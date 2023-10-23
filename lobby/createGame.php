@@ -79,6 +79,7 @@
         $puzzle = json_decode($puzzle, true);
         $puzzle["endTime"] = time() + $GAME_LENGTH; // set match expiration date
         $puzzle["instanceExpiration"] = $puzzle["endTime"] + $INSTANCE_EXPIRATION_DELAY;
+        $puzzle["foundWords"] = new stdClass(); // empty map
         $puzzle = json_encode($puzzle);
     } else {
         http_response_code(500);
