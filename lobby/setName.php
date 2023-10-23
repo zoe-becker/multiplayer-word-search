@@ -43,7 +43,6 @@
 
     // first player to set name is set to be host
     
-    print(gettype($lobbyData["players"]));
     if (count($lobbyData["players"]) == 0) {
         $newPlayer["isHost"] = true;
     }
