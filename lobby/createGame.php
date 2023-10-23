@@ -123,5 +123,5 @@
     chmod($instanceDir . "/puzzle.json", 0660);
 
     http_response_code(200);
-    echo $instanceDir; // echo path to new instance
+    echo $instanceDir . "/"; // echo path to new instance
 ?>

@@ -56,5 +56,5 @@
     chmod($instanceDir . "/" . $LOBBY_DATAFILE_NAME, 0660);
 
     http_response_code(200);
-    echo $instanceDir; // echo path to new instance
+    echo $instanceDir . "/"; // echo path to new instance
 ?>
