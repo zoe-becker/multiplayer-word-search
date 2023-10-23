@@ -16,7 +16,7 @@
             </ul>
         </nav>
         <h1> WordSearch! </h1>
-            <button onclick="requestBoard()" type="button"> <span> </span>Play</button>
+            <button onclick="createLobby()" type="button"> <span> </span>Create New Game</button>
             <button onclick="location.href='/word-search-generator/leaderboard'" type="button"><span> </span> Leaderboard</button>
             <!-- <button onclick="requestBoard()">Play</button> -->
         </div>
