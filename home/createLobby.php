@@ -1,4 +1,10 @@
 <?php
+    /* This function is responsible for creating a lobby
+       Accepted methods: GET only
+       Required headers: none
+
+       Return: Relative path to the newly created lobby instance
+    */
     $LOBBY_DIR = "../lobby";
     $INSTANCE_TEMPLATE_DIR = $LOBBY_DIR . "/template";
     $LOBBY_DATAFILE_NAME = "lobbyData.json";
@@ -9,7 +15,7 @@
     // verify request
     $requestMethod = $_SERVER["REQUEST_METHOD"];
 
-    if ($requestMethod != "POST") {
+    if ($requestMethod != "GET") {
         http_response_code(400); // bad request
         exit(-1);
     }

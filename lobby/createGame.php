@@ -4,6 +4,8 @@
        Required headers:
           1. token: access token of the requester (the requester must be the lobby host)
           2. lobby: lobby id (including the prefix)
+
+        Return: Relative path to the newly created game instance
     */
     // verify request method
     if ($_SERVER["REQUEST_METHOD"] != "POST") {
@@ -80,6 +82,7 @@
         $puzzle["endTime"] = time() + $GAME_LENGTH; // set match expiration date
         $puzzle["instanceExpiration"] = $puzzle["endTime"] + $INSTANCE_EXPIRATION_DELAY;
         $puzzle["foundWords"] = new stdClass(); // empty map
+        $puzzle["players"] = $lobbyData["players"];
         $puzzle = json_encode($puzzle);
     } else {
         http_response_code(500);
