@@ -1,5 +1,6 @@
 *.wsgi
 /board/ws-*/*
+/lobby/lb-*/*
 .venv
 /.venv/
 /.vscode/
