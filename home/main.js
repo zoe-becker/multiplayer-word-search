@@ -19,7 +19,7 @@ function createLobby() {
         }
 
         // send request
-        request.open("POST", "createLobby.php");
+        request.open("GET", "createLobby.php");
         request.send();
     }
 }
