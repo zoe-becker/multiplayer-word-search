@@ -19,7 +19,7 @@
                 require_once '../database/db_connect.php';
                 // Read and parse top_scores.json
                 
-                $query = "SELECT player AS name, score, date FROM leaderboard ORDER BY score DESC LIMIT 5";
+                $query = "SELECT player AS name, score, date FROM all_time_lb ORDER BY score DESC LIMIT 5";
                 $stmt = $pdo->query($query);
                 $top_scores = $stmt->fetchAll(PDO::FETCH_OBJ);
                 //$json = file_get_contents('top_scores.json');

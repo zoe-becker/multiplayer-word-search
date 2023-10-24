@@ -5,3 +5,4 @@
 /.venv/
 /.vscode/
 /database/login.php
+/.env
