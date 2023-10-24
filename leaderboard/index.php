@@ -16,6 +16,7 @@
         <div class="leaderboard">
             <ol>
                 <?php
+                require_once '../database/db_connect.php';
                 // Read and parse top_scores.json
                 
                 $query = "SELECT player AS name, score, date FROM all_time_lb ORDER BY score DESC LIMIT 5";
