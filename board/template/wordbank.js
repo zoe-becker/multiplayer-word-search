@@ -15,6 +15,7 @@ function getCookie(key) {
   return cookieValue;
 }
 
+// refresh warning
 window.addEventListener("beforeunload", function(event) {
   event.preventDefault();
 });
