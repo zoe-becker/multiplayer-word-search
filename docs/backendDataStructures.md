@@ -35,5 +35,5 @@
     - NOTE: player objects are sanitized the same way as above
 
 ### LobbyData object
-- players and started keys from lobbyData.json above
+- players and gameLink keys from lobbyData.json above
     - NOTE: player objects are sanitized the same way as in PuzzleStructure
