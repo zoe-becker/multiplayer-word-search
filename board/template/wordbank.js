@@ -15,6 +15,10 @@ function getCookie(key) {
   return cookieValue;
 }
 
+window.addEventListener("beforeunload", function(event) {
+  event.preventDefault();
+});
+
 // checks when page is loaded
 document.addEventListener("DOMContentLoaded", function (event) {
   // request board from server
