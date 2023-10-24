@@ -19,6 +19,7 @@
         - boardRetrieved: whether or not the player has retrieved the game board from the server
         - isHost: whether or not the player is the host
         - score: score for this player
+- dbUpdated: whether the database has been updated with data from this game (true/false)
 ### Lobby instance file (lobbyData.json)
 - instanceExpiration: UTC timestamp of when the instance is eligible to be deleted from the server
 - players: same as players in puzzle.json
@@ -26,10 +27,11 @@
 
 ## Response objects (for frontend):
 ### PuzzleStructure object
-- puzzle, expireTime, foundWords, players keys from puzzle.json above
+- puzzle, expireTime, foundWords, and players keys from puzzle.json above
     - NOTE: player objects in the players list only contain name, score, and isHost keys
 ### PuzzleState object
-- expireTime, foundWords, players keys from puzzle.json above
+- ended: whether the game timer is up (true/false)
+- foundWords, and players keys from puzzle.json above
     - NOTE: player objects are sanitized the same way as above
 
 ### LobbyData object

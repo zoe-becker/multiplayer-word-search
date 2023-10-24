@@ -91,6 +91,7 @@
         $puzzle["instanceExpiration"] = $puzzle["endTime"] + $INSTANCE_EXPIRATION_DELAY;
         $puzzle["foundWords"] = new stdClass(); // empty map
         $puzzle["players"] = $lobbyData["players"];
+        $puzzle["dbUpdated"] = false;
         $puzzle = json_encode($puzzle);
     } else {
         http_response_code(500);
