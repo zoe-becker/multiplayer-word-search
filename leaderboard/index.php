@@ -17,8 +17,12 @@
             <ol>
                 <?php
                 // Read and parse top_scores.json
-                $json = file_get_contents('top_scores.json');
-                $data = json_decode($json);
+                
+                $query = "SELECT player AS name, score, date FROM all_time_lb ORDER BY score DESC LIMIT 5";
+                $stmt = $pdo->query($query);
+                $top_scores = $stmt->fetchAll(PDO::FETCH_OBJ);
+                //$json = file_get_contents('top_scores.json');
+                //$data = json_decode($json);
 
                 // Check if data is not empty and is an array
                 if (!empty($data) && is_array($data->topPlayers)) {
