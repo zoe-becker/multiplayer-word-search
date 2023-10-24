@@ -19,6 +19,7 @@
     }
 
     include "../utilities/sanitizePlayers.php";
+    include "../utilities/fileSyncronization.php";
 
     $LOBBY_DATAFILE_NAME = "lobbyData.json";
     $lobbyID = $_GET["lobby"];
@@ -30,7 +31,8 @@
         exit(-3);
     }
 
-    $lobbyData = json_decode(file_get_contents("$lobbyID/$LOBBY_DATAFILE_NAME"), true);
+    $lobbyDataPath = "$lobbyID/$LOBBY_DATAFILE_NAME";
+    $lobbyData = json_decode(flock_read($lobbyDataPath), true);
 
     $response = array(
         "players" => util_sanitize_players($lobbyData["players"]),

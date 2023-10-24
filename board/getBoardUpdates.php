@@ -21,6 +21,7 @@
     date_default_timezone_set("UTC"); // keep timezone consistent
     
     $gameID = $_GET["game"];
+    $GAMEFILE_NAME = "puzzle.json";
 
     // verify game instance exists
     if (!file_exists($gameID)) {
@@ -30,7 +31,10 @@
     }
 
     include "../utilities/sanitizePlayers.php";
-    $puzzle = json_decode(file_get_contents($gameID), true);
+    include "../utilities/fileSyncronization.php";
+
+    $gamefilePath = "$gameID/$GAMEFILE_NAME";
+    $puzzle = json_decode(flock_read($gamefilePath), true);
 
     $responseObject = array(
         "expired" => false,

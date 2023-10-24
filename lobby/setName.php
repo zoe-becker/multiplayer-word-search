@@ -20,6 +20,7 @@
         exit(-2);
     }
 
+    include "../utilities/fileSyncronization.php";
     $LOBBY_DATAFILE_NAME = "lobbyData.json";
 
     $requestedName = $_SERVER["HTTP_NAME"];
@@ -32,7 +33,9 @@
         exit(-3);
     }
 
-    $lobbyData = json_decode(file_get_contents("$lobbyID/$LOBBY_DATAFILE_NAME"), true);
+    $lobbyDataPath = "$lobbyID/$LOBBY_DATAFILE_NAME";
+    $lockedStream = flock_acquireEX($lobbyDataPath); // acquire lock on file
+    $lobbyData = json_decode(fread($lockedStream, filesize($lobbyDataPath)), true);
 
     // verify game hasn't already started
     if ($lobbyData["gameLink"]) {
@@ -57,7 +60,10 @@
 
     array_push($lobbyData["players"], $newPlayer);
 
-    file_put_contents("$lobbyID/$LOBBY_DATAFILE_NAME", json_encode($lobbyData));
+    rewind($lockedStream); // rewind stream so new data can be written
+    fwrite($lockedStream, json_encode($lobbyData));
+    flock_release($lockedStream); // release lock
+    
     http_response_code(200);
     echo $newPlayer["accessToken"];
 ?>

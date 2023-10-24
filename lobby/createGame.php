@@ -19,6 +19,8 @@
         exit(-2);
     }
 
+    include "../utilities/fileSyncronization.php";
+
     $GAME_DIR = "../board";
     $INSTANCE_TEMPLATE_DIR = $GAME_DIR . "/template";
     $LOBBY_DATAFILE_NAME = "lobbyData.json";
@@ -37,7 +39,9 @@
     }
 
     // gather lobby data
-    $lobbyData = json_decode(file_get_contents("$lobbyID/$LOBBY_DATAFILE_NAME"), true);
+    $lobbyDataPath = "$lobbyID/$LOBBY_DATAFILE_NAME";
+    $lockedStream = flock_acquireEX($lobbyDataPath); // acquire lock while game, disallows new players from joining
+    $lobbyData = json_decode(fread($lockedStream, filesize($lobbyDataPath)), true);
     $players = $lobbyData["players"];
     $validRequester = false;
 
@@ -134,8 +138,10 @@
     // update lobby to indicate game has started
     $gameLink = "../" . $instanceDir . "/"; // add extra ../ since clients are in an instance directory
     $lobbyData["gameLink"] = $gameLink;
-    file_put_contents("$lobbyID/$LOBBY_DATAFILE_NAME", json_encode($lobbyData)); 
+    rewind($lockedStream); // reset stream to beginning for writing
+    fwrite($lockedStream, json_encode($lobbyData)); 
 
+    flock_release($lockedStream); // release lock
     http_response_code(200);
     echo $gameLink;
 ?>

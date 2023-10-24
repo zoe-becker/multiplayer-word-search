@@ -33,8 +33,11 @@
         exit(-3);
     }
 
+    include "../utilities/fileSyncronization.php";
     // if request is valid fetch puzzle file
-    $puzzle = json_decode(file_get_contents("$gameID/$GAMEFILE_NAME"), true);
+    $gamefilePath = "$gameID/$GAMEFILE_NAME";
+    $lockedStream = flock_acquireEX($gamefilePath); // modifying board state
+    $puzzle = json_decode(fread($lockedStream, filesize($gamefilePath)), true);
     $player = util_get_player($token, $puzzle["players"]);
 
     // verify player is in the list
@@ -55,7 +58,8 @@
 
     // update puzzle data with player's board retrieval marked
     $player["boardRetrieved"] = true;
-    file_put_contents("$gameID/$GAMEFILE_NAME", json_encode($puzzle));
+    rewind($lockedStream); // rewind stream to overwrite file
+    fwrite($lockedStream, json_encode($puzzle));
 
     $response = array(
         "puzzle" => $puzzle["puzzle"],
@@ -64,6 +68,7 @@
         "players" => util_sanitize_players($puzzle["players"])
     );
 
+    flock_release($lockedStream); // release lock
     http_response_code(200);
     echo json_encode($response);
 ?>
