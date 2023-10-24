@@ -1,6 +1,20 @@
 let selectedCells = [];  // to store the TD elements being selected
 let mouseIsPressed = false; // global variable to check if mouse is pressed or not
 
+// get the cookie labelled key
+function getCookie(key) {
+  let cookies = document.cookie.split("; ");
+  let cookieValue = false;
+
+  cookies.forEach(function(cookie) {
+    if (cookie.startsWith(key)) {
+      cookieValue = cookie.split("=")[1]; // get value from key-value pair
+    }
+  })
+
+  return cookieValue;
+}
+
 // checks when page is loaded
 document.addEventListener("DOMContentLoaded", function (event) {
   // request board from server
@@ -31,7 +45,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
   let windowPaths = window.location.href.split("/");
   let instanceID =
     windowPaths.at(-1) == "" ? windowPaths.at(-2) : windowPaths.at(-1);
-  request.open("GET", "../getBoardDetails.php?instance=" + instanceID);
+  request.open("POST", "../getInitialBoard.php");
+  request.setRequestHeader("game", instanceID);
+  request.setRequestHeader("token", getCookie("accessToken"));
   request.send();
 });
 
