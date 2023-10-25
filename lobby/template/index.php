@@ -7,7 +7,9 @@
     <script src="lobby.js"></script>
     <body>
             <div class="lobby-container">
-                <div class="lobby-title">Flex Box 1</div>
+                <div class="lobby-title">
+                    <div class="lobby-title-info">Wordsearch!</div>
+                </div>
                 <div class="lobby-playerlistandsettings">
                     <div class="host-settings-buttons"></div>
                     <div class ="player-list"></div>

@@ -17,18 +17,21 @@ body {
     background-color: #e6e6e6; /* Background color for the lobby flexbox */
 }
 
-.lobby-title,
-.lobby-sharecode {
+
+.lobby-title {
+    display: flex;
+    background-color: #ff9999; /* Gonna just be Wordsearch!*/
     width: 100%;
     height: 80px;
     margin: 10px;
-    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
-
-.lobby-title {
-    background-color: #ff9999; /* Gonna just be Wordsearch!*/
+.lobby-title-info{
+    margin-left: 0;
+    padding: 20px;
+    font-family: cursive;
+    font-size: 40px;
 }
 
 .lobby-playerlistandsettings {
@@ -54,4 +57,10 @@ body {
 
 .lobby-sharecode {
     background-color: #9999ff; /* Holds game code and a button to copy to clipboard */
+    width: 100%;
+    height: 80px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
