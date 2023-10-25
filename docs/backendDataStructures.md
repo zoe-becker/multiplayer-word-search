@@ -3,6 +3,7 @@
 ## Backend Only:
 ### Word search instance game file (puzzle.json)
 - puzzle: NxN array of letters, organized by row, where N is the size of the grid
+- words: array of all the words in the puzzle
 - key: dictionary of all words mapped to solution objects
     - solution object: 
         - start_row: row of the first letter of the solution
@@ -27,7 +28,7 @@
 
 ## Response objects (for frontend):
 ### PuzzleStructure object
-- puzzle, expireTime, foundWords, and players keys from puzzle.json above
+- puzzle, words, expireTime, foundWords, and players keys from puzzle.json above
     - NOTE: player objects in the players list only contain name, score, and isHost keys
 ### PuzzleState object
 - ended: whether the game timer is up (true/false)
