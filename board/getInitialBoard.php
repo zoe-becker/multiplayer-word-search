@@ -63,6 +63,7 @@
 
     $response = array(
         "puzzle" => $puzzle["puzzle"],
+        "words" => $puzzle["words"],
         "expireTime" => $puzzle["expireTime"],
         "foundWords" => $puzzle["foundWords"],
         "players" => util_sanitize_players($puzzle["players"])
