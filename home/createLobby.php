@@ -24,7 +24,7 @@
 
     $lobby["instanceExpiration"] = time() + $LOBBY_LIFETIME;
     $lobby["players"] = array(); // first player added will become host
-
+    $lobby["gameLink"] = false;
 
     /* create new game instance */
     $instanceID = uniqid("lb-");

@@ -19,6 +19,8 @@
         exit(-2);
     }
 
+    include "../utilities/fileSyncronization.php";
+
     $GAME_DIR = "../board";
     $INSTANCE_TEMPLATE_DIR = $GAME_DIR . "/template";
     $LOBBY_DATAFILE_NAME = "lobbyData.json";
@@ -36,11 +38,21 @@
         exit(-3);
     }
 
-    // verify that the requester is the host
-    $lobbyData = json_decode(file_get_contents("$lobbyID/$LOBBY_DATAFILE_NAME"), true);
+    // gather lobby data
+    $lobbyDataPath = "$lobbyID/$LOBBY_DATAFILE_NAME";
+    $lockedStream = flock_acquireEX($lobbyDataPath); // acquire lock while game, disallows new players from joining
+    $lobbyData = json_decode(fread($lockedStream, filesize($lobbyDataPath)), true);
     $players = $lobbyData["players"];
     $validRequester = false;
 
+    // check that game has not already started
+    if ($lobbyData["gameLink"]) {
+        echo "game already started";
+        http_response_code(400);
+        exit(-4);
+    }
+
+    // check that the requester is the host
     foreach ($players as $player) {
         if ($player["accessToken"] == $token) {
             if ($player["isHost"]) {
@@ -83,6 +95,7 @@
         $puzzle["instanceExpiration"] = $puzzle["endTime"] + $INSTANCE_EXPIRATION_DELAY;
         $puzzle["foundWords"] = new stdClass(); // empty map
         $puzzle["players"] = $lobbyData["players"];
+        $puzzle["dbUpdated"] = false;
         $puzzle = json_encode($puzzle);
     } else {
         http_response_code(500);
@@ -122,7 +135,13 @@
     file_put_contents($instanceDir . "/puzzle.json", $puzzle);
     chmod($instanceDir . "/puzzle.json", 0660);
 
+    // update lobby to indicate game has started
+    $gameLink = "../" . $instanceDir . "/"; // add extra ../ since clients are in an instance directory
+    $lobbyData["gameLink"] = $gameLink;
+    rewind($lockedStream); // reset stream to beginning for writing
+    fwrite($lockedStream, json_encode($lobbyData)); 
+
+    flock_release($lockedStream); // release lock
     http_response_code(200);
-    // echo path to new instance, add extra ../ since clients are in an instance directory
-    echo "../" . $instanceDir . "/";
+    echo $gameLink;
 ?>
