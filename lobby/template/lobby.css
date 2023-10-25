@@ -1,0 +1,57 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f2f2f2; /* Background color for the entire screen */
+}
+
+.lobby-container {  /* Holds everything that you see */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 700px;
+    height: 700px;
+    background-color: #e6e6e6; /* Background color for the lobby flexbox */
+}
+
+.lobby-title,
+.lobby-sharecode {
+    width: 100%;
+    height: 80px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lobby-title {
+    background-color: #ff9999; /* Gonna just be Wordsearch!*/
+}
+
+.lobby-playerlistandsettings {
+    background-color: #99ff99; /* Holds player list and settings for host*/
+    width: 100%;
+    height: 60%;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.host-settings-buttons{
+    background-color: #4da64d;
+    width: 60%;
+    height: 100%;
+}
+.player-list{
+    background-color: #176217;
+    width: 40%;
+    height: 100%;
+}
+
+.lobby-sharecode {
+    background-color: #9999ff; /* Holds game code and a button to copy to clipboard */
+}
