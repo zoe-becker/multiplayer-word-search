@@ -49,10 +49,30 @@ body {
     width: 60%;
     height: 100%;
 }
-.player-list{
+.player-list-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background-color: #176217;
     width: 40%;
     height: 100%;
+}
+.player-list-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #52b752;
+    width: 100%;
+    height: 10%;
+    font-family: cursive;
+    font-size: 20px;
+
+}
+.player-list{
+    background-color: #1c341c;
+    width: 100%;
+    height: 90%;
 }
 
 .lobby-sharecode {
