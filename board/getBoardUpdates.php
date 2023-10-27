@@ -6,55 +6,52 @@
 
     Return: PuzzleState object (see docs)
 */
-    // check request method
-    if ($_SERVER["REQUEST_METHOD"] != "GET") {
-        http_response_code(405);
-        exit(-1);
-    }
+    require "../utilities/sanitizePlayers.php";
+    require "../utilities/fileSyncronization.php";
+    require "../utilities/requestValidation.php";
+    require "validateGame.php";
 
-    // check query parameters
-    if (!array_key_exists("game", $_GET)) {
-        http_response_code(400);
-        exit(-2);
-    }
-
-    date_default_timezone_set("UTC"); // keep timezone consistent
-    
-    $gameID = $_GET["game"];
     $GAMEFILE_NAME = "puzzle.json";
 
-    // verify game instance exists
-    if (!file_exists($gameID)) {
-        echo "invalid instance ID";
-        http_response_code(400);
-        exit(-3);
-    }
+    // check whether game is expired
+    // returns true if the game has expired
+    function checkGameExpiration(&$puzzle) {
+        $isExpired = false;
 
-    include "../utilities/sanitizePlayers.php";
-    include "../utilities/fileSyncronization.php";
-
-    $gamefilePath = "$gameID/$GAMEFILE_NAME";
-    $puzzle = json_decode(flock_read($gamefilePath), true);
-
-    $responseObject = array(
-        "expired" => false,
-        "foundWords" => $puzzle["foundWords"],
-        "players" => util_sanitize_players($puzzle["players"])
-    );
-
-    $puzzle = json_decode($puzzle,true);
-
-    // check if game is expired
-    if ($puzzle["expireTime"] <= time()) {
-        if ($puzzle["dbUpdated"] == false) {
-            include "updateDB.php";
-            // SCRUM 90
+        // check if game is expired
+        if ($puzzle["expireTime"] <= time()) {
+            $isExpired = true;
+            if ($puzzle["dbUpdated"] == false) {
+                include "updateDB.php";
+                // SCRUM 90
+            }
         }
-        $responseObject["expired"] = true;
+
+        return $isExpired;
+    }
+    function main() {
+        global $GAMEFILE_NAME;
+        validateGET(array("game"), true); // validate request
+
+        date_default_timezone_set("UTC"); // keep timezone consistent
+        $gameID = $_GET["game"];
+        $gamefilePath = "$gameID/$GAMEFILE_NAME";
+
+        validateGame($gameID, true); // validate game exists
+
+        $puzzle = json_decode(flock_read_and_release($gamefilePath), true); // read data
+    
+        $expired = checkGameExpiration($puzzle); // see if game has expired
+        
+        $responseObject = array(
+            "expired" => $expired,
+            "foundWords" => $puzzle["foundWords"],
+            "players" => util_sanitize_players($puzzle["players"])
+        );
+
+        http_response_code(200);
+        echo json_encode($responseObject);
     }
 
-    
-    http_response_code(200);
-    return json_encode($responseObject);
-
+    main();
 ?>
