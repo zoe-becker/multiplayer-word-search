@@ -52,7 +52,10 @@
         validateEligibility($playerData); // validate player can retrieve board
 
         // update puzzle data with player's board retrieval marked and write data back to file
-        $puzzle["players"][$player_index]["boardRetrieved"] = true;
+        // ignore for test environment so board doesn't have to be reset every time
+        if ($gameID != "testenv") {
+            $puzzle["players"][$player_index]["boardRetrieved"] = true;
+        }
 
         rewind($gameStream); // rewind stream and truncate to overwrite file
         ftruncate($gameStream, 0);

@@ -1,5 +1,7 @@
 *.wsgi
 /board/ws-*/*
+/board/testenv/*
+!/board/testenv/index.php
 /lobby/lb-*/*
 .venv
 /.venv/
