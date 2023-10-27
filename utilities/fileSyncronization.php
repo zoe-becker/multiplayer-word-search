@@ -5,7 +5,7 @@
 // Acquire a shared (read) lock on a file and return the contents of the file
 // $file: path to the file to be read. The lock is automatically released after the read
 // returns: the contents of the file
-function flock_read($file) {
+function flock_read_and_release($file) {
     $stream = fopen($file, "r");
     $lock = flock($stream, LOCK_SH); // lock file
     

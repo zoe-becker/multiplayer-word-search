@@ -6,39 +6,31 @@
 
         Return: LobbyData object (see docs)
     */
-
-    if ($_SERVER["REQUEST_METHOD"] != "POST") {
-        http_response_code(405);
-        exit(-1);
-    }
-    
-    if (!array_key_exists("lobby", $_GET)) {
-        echo "invalid lobby id";
-        http_response_code(400);
-        exit(-2);
-    }
-
-    include "../utilities/sanitizePlayers.php";
-    include "../utilities/fileSyncronization.php";
+    require "../utilities/requestValidation.php";
+    require "../utilities/sanitizePlayers.php";
+    require "../utilities/fileSyncronization.php";
+    require "validateLobby.php";
 
     $LOBBY_DATAFILE_NAME = "lobbyData.json";
-    $lobbyID = $_GET["lobby"];
 
-    // verify lobby id exists
-    if (!file_exists($lobbyID)) {
-        echo "invalid instance ID";
-        http_response_code(400);
-        exit(-3);
+    function main() {
+        global $LOBBY_DATAFILE_NAME;
+        validateGET(array("lobby"), true); // validate request
+
+        $lobbyID = $_GET["lobby"];
+        $lobbyDataPath = "$lobbyID/$LOBBY_DATAFILE_NAME";
+        validateLobby($lobbyID, true); // validate lobby exists
+
+        $lobbyData = json_decode(flock_read_and_release($lobbyDataPath), true);
+
+        $response = array(
+            "players" => util_sanitize_players($lobbyData["players"]),
+            "gameLink" => $lobbyData["gameLink"]
+        );
+    
+        http_response_code(200);
+        echo json_encode($response);
     }
 
-    $lobbyDataPath = "$lobbyID/$LOBBY_DATAFILE_NAME";
-    $lobbyData = json_decode(flock_read($lobbyDataPath), true);
-
-    $response = array(
-        "players" => util_sanitize_players($lobbyData["players"]),
-        "gameLink" => $lobbyData["gameLink"]
-    );
-
-    http_response_code(200);
-    echo json_encode($response);
+    main();
 ?>
