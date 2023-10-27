@@ -1,6 +1,8 @@
 *.wsgi
 /board/ws-*/*
+/lobby/lb-*/*
 .venv
 /.venv/
 /.vscode/
-/lobby/ls-*/*
+/database/login.php
+/.env
