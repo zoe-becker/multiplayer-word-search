@@ -201,8 +201,8 @@ body {
     border-radius: 50px;
     text-align: center;
     border-radius: 10px;
-    border: solid black; /* Add border style as well */
-    border-width: 2px;
+    border: solid #bc8942; /* Add border style as well */
+    border-width: 5px;
     background-color: #e6e6e6; /* Holds game code and a button to copy to clipboard */
     width: 90%;
     display: flex;
