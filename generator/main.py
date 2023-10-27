@@ -2,33 +2,41 @@ import os
 import sys
 import random
 import json
+from urllib.parse import parse_qs
 from word_search_generator import WordSearch
 
 sys.path.insert(0, os.path.dirname(__file__))
 
-THEME = 'nicki.json'
+# THEME = 'nicki.json'
 
 def application(environ, start_response):
     start_response('200 OK', [('Content-Type', 'text/plain')])
-    wordBank = random_words()
+    wordBank = random_words(environ)
     puzzle = WordSearch(wordBank)
     response = str(puzzle.to_json())
     return [response.encode()]
 
 
-def random_words():
-    file_path = f'c:/cs3398 downloads/htdocs/word-search-generator/generator/themes/{THEME}'
-    words = load_json(file_path)
-    wordBank= []
-    word = random.sample(range(0, len(words["words"])), 9)
-    random.sample(range(0, len(words["words"])), 9)
+def get_theme_from_url(query_string):
+    query_dict = parse_qs(query_string)
+    theme_list = query_dict.get('theme')
+    return theme_list[0]
 
-    for num in word:
-        wordBank.append(words["words"][num])
-        
+def random_words(environ):
+    THEME = get_theme_from_url(environ['QUERY_STRING'])
+    print(THEME)
+    if THEME is None:
+        return "Theme not found"
+
+    file_path = os.path.join( os.path.dirname(__file__), 'themes', f'{THEME}.json')
+    print(file_path)
+    words = load_json(file_path)
+    if words is None:
+        return "Failed to load JSON data"
+
+    wordBank = random.sample(words["words"], min(9, len(words["words"])))
     result = ', '.join(map(str, wordBank))
     return result
-
 
 def load_json(file_path):
     try:
@@ -41,3 +49,4 @@ def load_json(file_path):
         print("The file was not found.")
     except Exception as e:
         print(f"An error occurred: {e}")
+    return None
