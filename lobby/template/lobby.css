@@ -80,6 +80,7 @@ body {
     align-items: center;
     flex-wrap: wrap; /* Allow flex items to wrap to the next line if needed */
     max-width: 100%; /* Limit the maximum width to the size of the flex box */
+    font-family: Arial, Helvetica, sans-serif; /*should probably change */
     /*overflow: auto;*/
 }
 .row{
@@ -113,7 +114,7 @@ body {
     /* other CSS styles */
 }
 [data-special-cell="how-to-win!"] {
-    background-color: rgb(224, 224, 68);
+    background-color: rgb(82, 174, 213);
     /* other CSS styles */
 }
 [data-special-cell="settings"] {
