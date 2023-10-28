@@ -130,6 +130,7 @@ function checkWordInWordBank(word) {
 
           wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
           wordFound = true;
+          
           if(wordFound) {
             let lastCell = selectedCells[selectedCells.length - 1];
             let rect = lastCell.getBoundingClientRect();
@@ -138,38 +139,20 @@ function checkWordInWordBank(word) {
         
             triggerConfetti(x, y);
         }
-        
-
-
           break;
       }
   }
   return wordFound;
 }
 
-const confettiButton = document.querySelector('.btn-confetti');
-const pop = new Audio('pop.wav');
-
-// confettiButton.addEventListener('click', function() {
-// confetti({
-//   particleCount: 30,
-//   angle: 10,
-//   drift: 5,
-//   spread: 15,
-//   origin: { y: 0.5, x: 0.5 }
-// });
-
-// pop.play();
-// });
-
 function triggerConfetti(x,y){
+  const pop = new Audio('pop.wav');
   confetti({
     particleCount: 30,
-    angle: 10,
+    angle: 90,
     drift: 5,
     spread: 15,
     origin: { y: y, x: x }
-  });
-  
+  });  
   pop.play();
 }
