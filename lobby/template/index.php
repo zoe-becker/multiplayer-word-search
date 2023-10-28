@@ -212,14 +212,14 @@
                         <img src="fixed-CopyPasteIcon.png" id="copy-button">
                     </div>
                     <div id="game-code-box">
-                        <p id="game-code"></p>
+                        <p id="game-code">code</p>
                         <img src="fixed-CopyPasteIcon.png" id="copy-button">
                     </div>
                 </div>
-                <form id="add-player-form">
-                    <input type="text" id="player-name" placeholder="Enter player name">
-                    <button type="button" onclick="simulateAddPlayer()">Add Player</button>
-                </form>
+                <div id="lobby-invite-prompt">
+                    <div id="lobby-invite-text">Invite your friends with the link or lobby code! </div>
+                </div>
+               
             </div>
             <div id ="player-list-box">
                     <div id ="player-list-title">
