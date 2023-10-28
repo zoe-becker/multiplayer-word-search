@@ -103,21 +103,25 @@ body {
 [data-special-cell="themes"] {
     background-color: #9F405C;
     cursor: pointer;
+    font-weight: bold;
     /* other CSS styles */
 }
 [data-special-cell="start"] {
     background-color: #A77442;
     cursor: pointer;
+    font-weight: bold;
     /* other CSS styles */
 }
 [data-special-cell="how-to-win!"] {
     background-color: #52709d;
     cursor: pointer;
+    font-weight: bold;
     /* other CSS styles */
 }
 [data-special-cell="settings"] {
     background-color: rgb(155, 155, 153);
     cursor: pointer;
+    font-weight: bold;
     /* other CSS styles */
 }
 .brighten {
