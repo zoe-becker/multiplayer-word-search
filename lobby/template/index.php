@@ -9,7 +9,7 @@
         <div id = "outer-lobby-container">
             <div id="lobby-container">
                 <div id="lobby-title">
-                    <div id="lobby-title-info">WordSearch!</div>
+                    <div id="lobby-title-info">Pre-Game Lobby</div>
                 </div>
                 <div id="lobby-playerlistandsettings">
                     <div id="host-settings-buttons">
@@ -206,7 +206,12 @@
                             </div>
                     </div>
                 </div>
-                <div id="lobby-sharecode">To Do: gamecode</div>
+                <div id="lobby-sharecode">
+                    <div id="game-link-box"> 
+                        <p id="share-link"></p>
+                        <img src="copypasteicon.png" id="copy-button"></div>
+                    <div id="game-code-box"> </div>
+                    </div>
                 <form id="add-player-form">
                     <input type="text" id="player-name" placeholder="Enter player name">
                     <button type="button" onclick="simulateAddPlayer()">Add Player</button>

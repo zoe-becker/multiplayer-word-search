@@ -14,7 +14,21 @@ function simulateAddPlayer() {
     if (playerName !== '') {
         addPlayer(playerName);
     }
-}
+}   document.addEventListener('DOMContentLoaded', (event) => {
+     //getting the current URL
+     const currentUrl = window.location.href;
+
+     //accessing the share-link div
+     const shareLinkDiv = document.getElementById('share-link');
+ 
+     //check if the element with the id 'share-link' exists
+     if (shareLinkDiv) {
+       //setting the text content of the share-link div to the current URL
+       shareLinkDiv.textContent = currentUrl;
+     } else {
+       console.error("Element with id 'share-link' not found.");
+     }
+});
     console.log("JavaScript file is linked successfully.");
 
     document.addEventListener('DOMContentLoaded', (event) => {

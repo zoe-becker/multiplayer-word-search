@@ -167,7 +167,7 @@ body {
     overflow-x: hidden;
 }
 .player-box{
-    background-color: #b34141;
+    background-color: #9292c4;
     justify-content: center;
     text-align: center;
     width: 100%;
@@ -196,16 +196,65 @@ body {
 }
 
 #lobby-sharecode {
-    padding: 16px 30px;
-    cursor: pointer;
+    flex-grow: 1;
+     /* Holds game code and a button to copy to clipboard */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+#game-code-box, #game-link-box{
+    padding: 10px;    
     border-radius: 50px;
     text-align: center;
     border-radius: 10px;
     border: solid #bc8942; /* Add border style as well */
     border-width: 5px;
-    background-color: #e6e6e6; /* Holds game code and a button to copy to clipboard */
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: #e6e6e6;
 }
+#game-code-box{
+    width: 40%
+
+}
+#game-link-box{
+    width: 60%;
+    display: flex;
+    flex-grow:1;
+    align-items: center;
+    overflow: hidden; /* Hide any content that overflows the box */
+
+}
+#share-link {
+    width: 95%;
+    height: 100%;
+    font-family: cursive;
+    font-size: 14px;
+    margin: 5px;
+    color: #bc8942;
+    overflow: auto; /* Add a horizontal scroll bar when the content overflows */
+    white-space: nowrap; /* Prevent wrapping of text */
+  }
+  #share-link::-webkit-scrollbar {
+    width: 1px; /* Adjust the width of the scrollbar */
+    height: 7px;
+  }
+  
+  #share-link::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Adjust the background color of the track */
+  }
+  
+  #share-link::-webkit-scrollbar-thumb {
+    background: #bc8942; /* Adjust the color of the scrollbar */
+  }
+  
+  #share-link::-webkit-scrollbar-thumb:hover {
+    background: #976f32; /* Adjust the color when hovering over the scrollbar */
+  }
+
+#copy-button {
+    /* background-image: url('cpiconblack.png'); */
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
