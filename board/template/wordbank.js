@@ -130,13 +130,29 @@ function checkWordInWordBank(word) {
 
           wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
           wordFound = true;
-
-          // TODO scrum 26
-
-       
           
+          if(wordFound) {
+            let lastCell = selectedCells[selectedCells.length - 1];
+            let rect = lastCell.getBoundingClientRect();
+            let x = (rect.left + rect.right) / 2 / window.innerWidth;
+            let y = (rect.top + rect.bottom) / 2 / window.innerHeight;
+        
+            triggerConfetti(x, y);
+        }
           break;
       }
   }
   return wordFound;
+}
+
+function triggerConfetti(x,y){
+  const pop = new Audio('pop.wav');
+  confetti({
+    particleCount: 30,
+    angle: 90,
+    drift: 5,
+    spread: 15,
+    origin: { y: y, x: x }
+  });  
+  pop.play();
 }
