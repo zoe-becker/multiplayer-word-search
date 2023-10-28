@@ -209,9 +209,13 @@
                 <div id="lobby-sharecode">
                     <div id="game-link-box"> 
                         <p id="share-link"></p>
-                        <img src="copypasteicon.png" id="copy-button"></div>
-                    <div id="game-code-box"> </div>
+                        <img src="fixed-CopyPasteIcon.png" id="copy-button">
                     </div>
+                    <div id="game-code-box">
+                        <p id="game-code"></p>
+                        <img src="fixed-CopyPasteIcon.png" id="copy-button">
+                    </div>
+                </div>
                 <form id="add-player-form">
                     <input type="text" id="player-name" placeholder="Enter player name">
                     <button type="button" onclick="simulateAddPlayer()">Add Player</button>

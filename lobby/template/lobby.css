@@ -29,6 +29,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center; /* Background color for the lobby flexbox */
+    min-width: 0;
 }
 
 
@@ -47,10 +48,10 @@ body {
 #lobby-title-info{
     
     margin-left: 0;
-    padding: 20px;
     font-family: cursive;
     font-size: 60px;
     color: white;
+    white-space: nowrap;
 }
 
 #lobby-playerlistandsettings {
@@ -84,6 +85,7 @@ body {
     max-width: 100%; /* Limit the maximum width to the size of the flex box */
     font-family: Arial, Helvetica, sans-serif; /*should probably change */
     /*overflow: auto;*/
+    padding: 5px 25px 5px 33px;
 }
 .row{
     display: flex;
@@ -99,17 +101,17 @@ body {
     /* Add more styling for the cells */
 }
 [data-special-cell="themes"] {
-    background-color: rgb(200, 56, 52);
+    background-color: #9F405C;
     cursor: pointer;
     /* other CSS styles */
 }
 [data-special-cell="start"] {
-    background-color: rgb(60, 180, 102);
+    background-color: #A77442;
     cursor: pointer;
     /* other CSS styles */
 }
 [data-special-cell="how-to-win!"] {
-    background-color: rgb(82, 174, 213);
+    background-color: #52709d;
     cursor: pointer;
     /* other CSS styles */
 }
@@ -193,6 +195,7 @@ body {
     font-size: 20px;
     margin: 5px;
     color: #bc8942;
+    white-space: nowrap;
 }
 
 #lobby-sharecode {
@@ -214,18 +217,24 @@ body {
     background-color: #e6e6e6;
 }
 #game-code-box{
-    width: 40%
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-grow:1;
+    align-items: center;
+    overflow: hidden;
 
 }
 #game-link-box{
     width: 60%;
+    height: 100%;
     display: flex;
     flex-grow:1;
     align-items: center;
     overflow: hidden; /* Hide any content that overflows the box */
 
 }
-#share-link {
+#share-link, #game-code {
     width: 95%;
     height: 100%;
     font-family: cursive;
