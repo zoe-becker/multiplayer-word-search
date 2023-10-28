@@ -1,4 +1,26 @@
 //lobby js
+document.addEventListener('DOMContentLoaded', (event) => {
+    var playerName = "";
+    while (playerName.length > 13 || playerName.length === 0) {
+        // Show a modal dialog to prompt the user for a name
+        playerName = prompt("Please enter your name (max 13 characters):");
+
+        // Check if the user cancelled the prompt
+        if (playerName === null) {
+            // Alert the user that a name is required
+            alert("A name is required to add a player.");
+            return;
+        }
+
+        // Check if the name is too long
+        if (playerName.length > 13) {
+            alert("The name should be 13 characters or fewer.");
+        }
+    }
+
+    // Call the addPlayer function with the validated name
+    addPlayer(playerName);
+});
 function addPlayer(name) {
     var playerList = document.getElementById('player-list-container');
     var playerBox = document.createElement('div');
@@ -15,21 +37,6 @@ function simulateAddPlayer() {
         addPlayer(playerName);
     }
 }
-//   document.addEventListener('DOMContentLoaded', (event) => {
-//      //getting the current URL
-//      const currentUrl = window.location.href;
-
-//      //accessing the share-link div
-//      const shareLinkDiv = document.getElementById('share-link');
- 
-//      //check if the element with the id 'share-link' exists
-//      if (shareLinkDiv) {
-//        //setting the text content of the share-link div to the current URL
-//        shareLinkDiv.textContent = currentUrl;
-//      } else {
-//        console.error("Element with id 'share-link' not found.");
-//      }
-// });
     document.addEventListener('DOMContentLoaded', (event) => {
         // Getting the current URL
         //const currentUrl = window.location.href;

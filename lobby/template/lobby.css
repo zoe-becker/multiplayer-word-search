@@ -5,7 +5,7 @@ body {
     height: 100vh;
     margin: 0;
     /*background-color: #d5bdc1;*/
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('wordImage.gif'); /* Add linear gradient for darkness */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/wordImage.gif'); /* Add linear gradient for darkness */
     background-size: cover;
     background-blend-mode: multiply; /*Set blend mode to multiply for darkening effect*/
 }
