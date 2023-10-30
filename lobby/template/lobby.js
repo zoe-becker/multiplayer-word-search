@@ -1,26 +1,24 @@
 //lobby js
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    var playerName = "";
-    while (playerName.length > 13 || playerName.length === 0) {
-        // Show a modal dialog to prompt the user for a name
-        playerName = prompt("Please enter your name (max 13 characters):");
-        // Check if the user cancelled the prompt
-        if (playerName === null) {
-            // Alert the user that a name is required
-            alert("A name is required to add a player.");
-            return;
-        }
-
-        // Check if the name is too long
-        if (playerName.length > 13) {
-            alert("The name should be 13 characters or fewer.");
-        }
+function checkUsername() {
+    var username = document.getElementById("username").value;
+    if (username.length > 0 && username.length <= 13) {
+      setName(username);
+      clearSplashScreen();
+    } else {
+      alert("Username should be between 1 and 13 characters long.");
     }
-
-    // Call the addPlayer function with the validated name
-    addPlayer(playerName);
-});
+  }
+  
+  function setName(username) {
+    // Your logic for setting the username goes here
+    addPlayer(username);
+    console.log("Username set to: " + username);
+  }
+  
+  function clearSplashScreen() {
+    var splashScreen = document.getElementById("splash-screen");
+    splashScreen.classList.add("hidden");
+  }
 function addPlayer(name) {
     var playerList = document.getElementById('player-list-container');
     var playerBox = document.createElement('div');
