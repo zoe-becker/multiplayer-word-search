@@ -217,11 +217,11 @@
                 <div id="lobby-sharecode">
                     <div id="game-link-box"> 
                         <p id="share-link"></p>
-                        <img src="../images/fixed-CopyPasteIcon.png" id="copy-button">
+                        <img src="../images/fixed-CopyPasteIcon.png" id="share-link-copy-button">
                     </div>
                     <div id="game-code-box">
-                        <p id="game-code">code</p>
-                        <img src="../images/fixed-CopyPasteIcon.png" id="copy-button">
+                        <p id="game-code"></p>
+                        <img src="../images/fixed-CopyPasteIcon.png" id="game-code-copy-button">
                     </div>
                 </div>
                 <div id="lobby-invite-prompt">

@@ -65,19 +65,26 @@ partial pseudo not law
 
 */
 
+function getLobbyURL() {
+    //const currentUrl = window.location.href;
+    const currentUrl = "https://verygoodbadthing.com/word-search-generator/lobby/ws-700d3a3d17fd3/";
+    return currentUrl;
+}
 
+function getLobbyCode() {
+    const currentUrl = getLobbyURL();
 
+    let code = currentUrl;
+    if (code.endsWith('/')) {
+        code = code.slice(0, -1); // Remove the trailing '/'
+    }
+    code = code.substring(code.lastIndexOf('/') + 1);
 
-
-
+    return code;
+}
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    // Getting the current URL
-    //const currentUrl = window.location.href;
-    const currentUrl = "https://verygoodbadthing.com/word-search-generator/lobby/ws-653d3a3d17fd3/";
-
-
     // Accessing the share-link div
     const shareLinkDiv = document.getElementById('share-link');
 
@@ -87,19 +94,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Check if the elements with the specified IDs exist
     if (shareLinkDiv && gameCodeParagraph) {
         // Setting the text content of the share-link div to the current URL
-        shareLinkDiv.textContent = currentUrl;
+        shareLinkDiv.textContent = getLobbyURL();
 
-        let code = currentUrl;
-    if (code.endsWith('/')) {
-        code = code.slice(0, -1); // Remove the trailing '/'
-    }
-    code = code.substring(code.lastIndexOf('/') + 1);
         // Setting the extracted code to the game-code paragraph
-        gameCodeParagraph.textContent = code;
+        gameCodeParagraph.textContent = getLobbyCode();
     } else {
         console.error("Element with id 'share-link' or 'game-code' not found.");
     }
-    });
+});
     document.addEventListener('DOMContentLoaded', (event) => {
     // Get all elements with the data-special-cell attribute
     const specialCells = document.querySelectorAll('[data-special-cell]');
@@ -127,4 +129,40 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
         });
     }); 
-   
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function() {
+            console.log('Async: Copying to clipboard was successful!');
+        }, function(err) {
+            console.error('Async: Could not copy text: ', err);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // Accessing the share-link div
+        const shareLinkDiv = document.getElementById('share-link');
+
+        // Accessing the game-code paragraph
+        const gameCodeParagraph = document.getElementById('game-code');
+
+        // Accessing the copy icon elements
+        const shareLinkCopyIcon = document.getElementById('share-link-copy-button');
+        const gameCodeCopyIcon = document.getElementById('game-code-copy-button');
+
+        // Check if the elements with the specified IDs exist
+        if (shareLinkDiv && gameCodeParagraph && shareLinkCopyIcon && gameCodeCopyIcon) {
+            // Setting up click events for the copy icons
+            shareLinkCopyIcon.addEventListener('click', () => {
+                copyToClipboard(getLobbyURL());
+                alert('Link copied to clipboard!');
+                console.log('link copied');
+            });
+
+            gameCodeCopyIcon.addEventListener('click', () => {
+                copyToClipboard(getLobbyCode());
+                alert('Game code copied to clipboard!');
+                console.log('code copied');
+            });
+        } else {
+            console.error("Element with provided IDs not found.");
+        }
+    });
