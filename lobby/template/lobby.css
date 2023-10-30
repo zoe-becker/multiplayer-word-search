@@ -304,12 +304,16 @@ body {
     background: #976f32; /* Adjust the color when hovering over the scrollbar */
   }
 
-#copy-button {
+#share-link-copy-button,
+#game-code-copy-button {
     /* background-image: url('cpiconblack.png'); */
     width: 30px;
     height: 30px;
     cursor: pointer;
   }
+  #share-link-copy-button:hover, #game-code-copy-button:hover {
+    filter: brightness(.5); /* Adjust this value to control the brightness */
+}
   #lobby-invite-prompt {
     display: flex;
     margin: 0px;
@@ -330,3 +334,4 @@ body {
     color: white;
     white-space: nowrap;
   }
+  
