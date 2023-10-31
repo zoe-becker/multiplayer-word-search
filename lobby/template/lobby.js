@@ -80,10 +80,8 @@ function getLobbyCode() {
         code = code.slice(0, -1); // Remove the trailing '/'
     }
     code = code.substring(code.lastIndexOf('/') + 1);
-
     return code;
 }
-
 
 //LOAD LOBBY LINK AND CODE INTO BOTTOM BOXES
 document.addEventListener('DOMContentLoaded', (event) => {
