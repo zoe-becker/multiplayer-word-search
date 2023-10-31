@@ -1,5 +1,9 @@
 //no double requests on setname call
 var requestSetNamePending = false;
+let playerSet = new Set();
+
+
+
 //Checks if splash screen needs to be called based on token and lobby id
 //if it hasnt been set then token, lobby id, and isHost are set.
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -47,8 +51,12 @@ function setName(username) {
             localStorage.setItem('themes', themes);
            }
            clearSplashScreen();
+           updateLobby();
+           setInterval(updateLobby(), 3000);
         } else {
-          console.log("AJAX Error: " + request.responseText);
+          if(request.responseText == 'Taken'){
+            alert("Username already taken.")
+          }else console.log("AJAX Error: " + request.responseText);
         }
       }
     };
@@ -77,56 +85,49 @@ function clientCheckUsername(passedUsername) {
   }
   //ADD PLAYERBOX TO PLAYERLIST
 function addPlayer(name) {
-    var playerList = document.getElementById('player-list-container');
-    var playerBox = document.createElement('div');
-    playerBox.classList.add('player-box');
-    var playerBoxParagraph = document.createElement('p');
-    playerBoxParagraph.textContent = name;
-    playerBox.appendChild(playerBoxParagraph);
-    playerList.appendChild(playerBox);
+    if(!playerSet.has(name)){
+        playerSet.add(name);
+        var playerList = document.getElementById('player-list-container');
+        var playerBox = document.createElement('div');
+        playerBox.classList.add('player-box');
+        var playerBoxParagraph = document.createElement('p');
+        playerBoxParagraph.textContent = name;
+        playerBox.appendChild(playerBoxParagraph);
+        playerList.appendChild(playerBox);
+    }
+}
+function updateLobby(){
+    let request = new XMLHttpRequest();
+    
+    request.onreadystatechange = function () {
+      if (request.readyState == 4) {
+        if (request.status == 200) {
+          data = JSON.parse(request.responseText);
+          num_players = data.players.length;
+          //theres more players in list than client has in set
+          if(num_players != playerSet.size){
+            //adds each new player to set
+            for(let i = 0; i < num_players; i++) addPlayer(data.players[i]);
+          }
+          if(data.gameLink != false){
+            window.location.href = data.gameLink;
+          }
+          
+        } else {
+          console.log("AJAX Error: " + request.responseText);
+        }
+      }
+    };
+  
+    request.open("GET", "../getLobbyUpdates.php");
+    request.setRequestHeader("lobby", getLobbyCode());
+    request.send();
 }
 
 
-
-
-
-
-
-
-/*
-Functions to implement:
-Polling:
-getLobbyUpdates() -> make http request to getLobbyUpdates.php
-    recieves json from server
-updateLobby(data) -> update the lobby based on response
-    recieving a json - holds players and gamelist(false if not started- if started then its the link of the game)
-    make sure to remove all player-boxes before parsing json and re-adding them
-    removeChild()?
-*/
-/*
-open splash screen
-get user input
-press send
-client side check (char limit)
-setName
-pass =
-set cookie
-
-partial pseudo not law
-
-only call splash screen if there is no token stored or stored lobby code != current lobby code
-store lobby code 
-store token
-store isHost
-
-
-
-
-*/
-
 function getLobbyURL() {
-    //const currentUrl = window.location.href;
-    const currentUrl = "https://verygoodbadthing.com/word-search-generator/lobby/ws-700d3a3d17fd3/";
+    const currentUrl = window.location.href;
+   // const currentUrl = "https://verygoodbadthing.com/word-search-generator/lobby/ws-700d3a3d17fd3/";
     return currentUrl;
 }
 
@@ -146,9 +147,6 @@ function getLobbyCode() {
 
 
 
-
-//LOAD LOBBY LINK AND CODE INTO BOTTOM BOXES
-document.addEventListener('DOMContentLoaded', (event) => {
 //LOAD LOBBY LINK AND CODE INTO BOTTOM BOXES
 document.addEventListener('DOMContentLoaded', (event) => {
     // Accessing the share-link div
