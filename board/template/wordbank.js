@@ -71,7 +71,7 @@ function renderWordSearch(puzzle) {
       td.addEventListener("mouseenter", (event) => {
         td.style.backgroundColor = randomColor();
         td.style.fill = randomColor();
-        if (mouseIsPressed) {
+        if (mouseIsPressed && !td.classList.contains("found")) {
           selectedCells.push(td); // Adds cell letter to selection array Scrum-62
           highlightSelectedCells();
         }
