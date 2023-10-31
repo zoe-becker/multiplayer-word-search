@@ -2,9 +2,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    /* flex-direction: column;  */
     height: 100vh;
     gap:10px;
+}
+
+.game-board{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .timer-box {
@@ -16,21 +22,26 @@
     height: 20px;
     color: black;
     border-radius: 5px;
-    font-size: 35px;
-    
-    
+    font-size: 35px; 
 }
+
 .inner-timer-box {
     /* Sits leftmost in timerbox so that it sits top left of grid */
-    position: flex;
+    /* position: flex; */
     width: 80px; 
     text-align: center;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
     font-size: 30px; 
     color: black;
     border: 1px solid black;
-     
+    margin-top: -20px;
+}
+
+.puzzle-section {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
 }
 
 .puzzle-container {
@@ -39,7 +50,8 @@
     flex-direction: row;
     align-items: flex-start;
     gap: 10px;
-    align-items: center;
+    /* flex-grow: 1; */
+    /* align-items: center; */
 }
 .word-bank {
     width: 200px; 
@@ -79,4 +91,27 @@ table {
 table th,td{
     border-spacing: 30px;
     border-radius: 20px;
+}
+
+.players {
+    /* position: flex; */
+    width: 200px;
+    border: 1px solid black;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    transform: translate(-10px, -137px); /* first # moves to the left, second # moves up */
+}
+
+.players h2 {
+    text-align: center;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+.players ul {
+    list-style-type: none;
+    padding: 10%;
+    margin: 0;
+    text-align: center;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size: x-large;
 }

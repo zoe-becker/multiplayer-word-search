@@ -11,18 +11,21 @@
     $INSTANCE_TEMPLATE_DIR = $LOBBY_DIR . "/template";
     $LOBBY_DATAFILE_NAME = "lobbyData.json";
     $LOBBY_LIFETIME = 28800; // 8 hours
+    $DEFAULT_THEME = "Animals";
 
     // handles creation of the lobby
     // will exit with appropriate messages sent to client if creation fails
     function createLobby() {
         // load in globals
-        global $LOBBY_DIR, $INSTANCE_TEMPLATE_DIR, $LOBBY_DATAFILE_NAME, $LOBBY_LIFETIME;
+        global $LOBBY_DIR, $INSTANCE_TEMPLATE_DIR, $LOBBY_DATAFILE_NAME, $LOBBY_LIFETIME, $DEFAULT_THEME;
 
         $lobby = array();
 
+        // set initial lobby state
         $lobby["instanceExpiration"] = time() + $LOBBY_LIFETIME;
         $lobby["players"] = array(); // first player added will become host
         $lobby["gameLink"] = false;
+        $lobby["theme"] = $DEFAULT_THEME;
 
         /* create new game instance */
         $instanceID = uniqid("lb-");
