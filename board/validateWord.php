@@ -16,10 +16,11 @@
         $MAX_TIME = 180; // 3 minutes
         $greenThreshold = $MAX_TIME * 0.5; // 1:30 or 90 seconds
         $yellowThreshold = $MAX_TIME * 0.1667; // 0:30 or 30 seconds
-        $startTime = strtotime($time);
-        $currentTime = "2023-10-31 01:57:12";
-        //$currentTime = time();
-        $timeElapsed = strtotime($currentTime) - $startTime;
+        //$startTime = strtotime($time);
+        //hardcoded for testing
+        //$currentTime = "2023-10-31 01:57:12";
+        $currentTime = time();
+        $timeElapsed = $currentTime - $time;
 
         $orientation = "";
 
@@ -65,6 +66,9 @@
         return $wordScore;
     }
 
+
+    // Test Cases
+    /*
     function main() {
         // Test Cases
         $testCases = [
@@ -88,4 +92,5 @@
     }
 
     main();
+    */
 ?>
