@@ -80,3 +80,10 @@ table th,td{
     border-spacing: 30px;
     border-radius: 20px;
 }
+
+.playerliist {
+    width: 200px;
+    border: 1px solid black;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
