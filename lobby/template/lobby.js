@@ -82,6 +82,7 @@ function clientCheckUsername(passedUsername) {
     var splashScreen = document.getElementById("splash-screen");
     splashScreen.classList.remove("hidden"); // Remove the 'hidden' class to display the splash screen
 }
+  //HIDE USER NAME PROMPT SPLASH SCREEN
   function clearSplashScreen() {
     var splashScreen = document.getElementById("splash-screen");
     splashScreen.classList.add("hidden");
