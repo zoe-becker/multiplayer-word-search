@@ -1,6 +1,6 @@
 <?php
     $GAMEFILE_NAME = "puzzle.json";
-    $MAX_TIME = 180; // 3 minutes
+
     /* 
     Word score[base word 300 pts :: every letter more than 4 is an additional 50 pts]  
     time mult[ Green 1x -- Yellow 1.2x -- Red 2x] 
@@ -13,8 +13,12 @@
     please give counter suggestions
     */
     function calculateScore($word, $time, $direction) {
+        $MAX_TIME = 180; // 3 minutes
+        $greenThreshold = $MAX_TIME * 0.5; // 1:30 or 90 seconds
+        $yellowThreshold = $MAX_TIME * 0.1667; // 0:30 or 30 seconds
         $startTime = strtotime($time);
-        $currentTime = time();
+        $currentTime = "2023-10-31 01:57:12";
+        //$currentTime = time();
         $timeElapsed = strtotime($currentTime) - $startTime;
 
         $orientation = "";
@@ -25,12 +29,13 @@
             $wordScore += (strlen($word) - 4) * 50;
         }
 
-        if ($timeElapsed <= 90) {
-            $wordScore *= 1;
-        } else if ($timeElapsed <= 150) {
-            $wordScore *= 1.2;
+        
+        if ($timeElapsed <= $greenThreshold) {
+            $wordScore *= 1; // Green logic
+        } else if ($timeElapsed <= ($MAX_TIME - $yellowThreshold)) {
+            $wordScore *= 1.2; // Yellow logic
         } else {
-            $wordScore *= 2;
+            $wordScore *= 2; // Red logic
         }
 
 
@@ -42,7 +47,7 @@
             $orientation = "diagonal";
         }
 
-        switch ($direction) {
+        switch ($orientation) {
             case "horizontal":
                 $wordScore *= 1;
                 break;
@@ -61,14 +66,25 @@
     }
 
     function main() {
-        // Set the default timezone to UTC
-        date_default_timezone_set('UTC');
-
-        // Create a DateTime object for the current time
-        $currentUTC = new DateTime();
-
-        $currentTime = time();
-        
+        // Test Cases
+        $testCases = [
+            ["hello", "2023-10-31 01:56:00", "N"], // 72 seconds passed
+            ["apple", "2023-10-31 01:55:00", "E"], // 132 seconds passed
+            ["banana", "2023-10-31 01:54:00", "SE"], // 192 seconds passed
+            ["kiwi", "2023-10-31 01:56:50", "N"], // 22 seconds passed
+            ["orange", "2023-10-31 01:54:50", "SW"] // 132 seconds passed 
+            
+        ];
+    
+        foreach ($testCases as $testCase) {
+            $word = $testCase[0];
+            $time = $testCase[1];
+            $direction = $testCase[2];
+            
+            $score = calculateScore($word, $time, $direction);
+            echo "Word: $word, Time: $time, Direction: $direction -> Score: $score<br>";
+            
+        }
     }
 
     main();
