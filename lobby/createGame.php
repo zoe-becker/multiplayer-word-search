@@ -10,12 +10,13 @@
     // verify request method
     require "../utilities/requestValidation.php";
     require "../utilities/fileSyncronization.php";
+    require "../utilities/themeFetcher.php";
     require "validateLobby.php";
 
     $GAME_DIR = "../board";
     $INSTANCE_TEMPLATE_DIR = $GAME_DIR . "/template";
     $LOBBY_DATAFILE_NAME = "lobbyData.json";
-    $GAME_LENGTH = 900;
+    $GAME_LENGTH = 180;
     $INSTANCE_EXPIRATION_DELAY = 300; // amount of time after game ends before it is eligible to be deleted
 
     // validate that game has not started and that the player is the host
@@ -55,22 +56,30 @@
         global $GAME_LENGTH, $INSTANCE_EXPIRATION_DELAY, $GAME_DIR, $INSTANCE_TEMPLATE_DIR;
 
         // curl to generator for new grid
-        $requestURI = "http://" . $_SERVER["SERVER_NAME"] . "/word-search-generator/generator";
+        $requestURI = "http://" . $_SERVER["SERVER_NAME"] . 
+            "/word-search-generator/generator?theme=" . $lobbyData["theme"];
         $request = curl_init($requestURI);
 
         curl_setopt($request, CURLOPT_RETURNTRANSFER, true); // to get response back
         curl_setopt($request, CURLOPT_FOLLOWLOCATION, true); // deployment server redirects http to https
 
         $puzzle = curl_exec($request);
+        $curlStatus = curl_getinfo($request, CURLINFO_HTTP_CODE);
 
-        // interpret curl result
-        if ($puzzle) {
+        // interpret curl result and initialize board
+        if ($curlStatus == 200) {
             $puzzle = json_decode($puzzle, true);
             $puzzle["expireTime"] = time() + $GAME_LENGTH; // set match expiration date
             $puzzle["instanceExpiration"] = $puzzle["expireTime"] + $INSTANCE_EXPIRATION_DELAY;
             $puzzle["foundWords"] = new stdClass(); // empty map
             $puzzle["players"] = $lobbyData["players"];
             $puzzle["dbUpdated"] = false;
+
+            // extract theme data and add it to board data
+            $themeData = getThemeData($lobbyData["theme"]);
+            unset($themeData["words"]);
+            $puzzle["theme"] = $themeData;
+
             $puzzle = json_encode($puzzle);
         } else {
             http_response_code(500);
