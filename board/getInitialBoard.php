@@ -67,6 +67,7 @@
             "words" => $puzzle["words"],
             "expireTime" => $puzzle["expireTime"],
             "foundWords" => $puzzle["foundWords"],
+            "theme" => $puzzle["theme"],
             "players" => util_sanitize_players($puzzle["players"])
         );
 
