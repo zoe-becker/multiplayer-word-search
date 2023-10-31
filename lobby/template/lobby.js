@@ -1,20 +1,75 @@
-//lobby js
-function checkUsername() {
-    var username = document.getElementById("username").value;
-    if (username.length > 0 && username.length <= 13) {
-      setName(username);
-      clearSplashScreen();
-    } else {
-      alert("Username should be between 1 and 13 characters long.");
+//no double requests on setname call
+var requestSetNamePending = false;
+//Checks if splash screen needs to be called based on token and lobby id
+//if it hasnt been set then token, lobby id, and isHost are set.
+document.addEventListener("DOMContentLoaded", function (event) {
+    var storedToken = localStorage.getItem('accessToken'); 
+    var storedLobbyCode = localStorage.getItem('lobbyCode'); 
+    var currentLobbyCode = getLobbyCode();
+
+    if(storedToken === null || storedLobbyCode === null || storedLobbyCode !== currentLobbyCode){
+        showSplashScreen();
+        var submitButton = document.getElementById("submit-button");
+        submitButton.addEventListener("click", function() {
+            var username = document.getElementById("username").value;
+            //valid client username and no setname request pending
+            if (clientCheckUsername(username) && !requestSetNamePending) {
+                requestSetNamePending = true;
+                setName(username);
+                requestSetNamePending = false;
+            } else {
+                alert("Username should be between 1 and 13 characters long.");
+            }
+        });
     }
-  }
-  
-  function setName(username) {
+});
+
+function setName(username) {
     // Your logic for setting the username goes here
-    addPlayer(username);
-    console.log("Username set to: " + username);
+    // addPlayer(username);
+    // console.log("Username set to: " + username);
+    // request board from server
+    let request = new XMLHttpRequest();
+    
+    request.onreadystatechange = function () {
+      if (request.readyState == 4) {
+        if (request.status == 200) {
+          data = JSON.parse(request.responseText);
+           //logic for setting the username goes here
+           var lobbyCode = getLobbyCode();
+           var accessToken = data.accessToken; // Replace 'exampleToken' with your desired token
+           var isHost = data.isHost;
+           localStorage.setItem('accessToken', accessToken);
+           localStorage.setItem('lobbyCode', lobbyCode);
+           localStorage.setItem('isHost',isHost);
+           if(isHost === true){
+            var themes = data.themes;
+            localStorage.setItem('themes', themes);
+           }
+           clearSplashScreen();
+        } else {
+          console.log("AJAX Error: " + request.responseText);
+        }
+      }
+    };
+  
+    request.open("POST", "../setName.php");
+    request.setRequestHeader("name", username);
+    request.setRequestHeader("lobby", getLobbyCode());
+    request.send();
   }
+//BOOLEAN CLIENT SIDE CHECK TO SEE IF USERNAME IS VALID (char limits)
+function clientCheckUsername(passedUsername) {
+    //var username = document.getElementById("username").value;
+ 
+        if (passedUsername.length > 0 && passedUsername.length <= 13) return true;
+        else return false; 
+    }  
   //HIDE USER NAME PROMPT SPLASH SCREEN
+  function showSplashScreen() {
+    var splashScreen = document.getElementById("splash-screen");
+    splashScreen.classList.remove("hidden"); // Remove the 'hidden' class to display the splash screen
+}
   function clearSplashScreen() {
     var splashScreen = document.getElementById("splash-screen");
     splashScreen.classList.add("hidden");
@@ -29,6 +84,14 @@ function addPlayer(name) {
     playerBox.appendChild(playerBoxParagraph);
     playerList.appendChild(playerBox);
 }
+
+
+
+
+
+
+
+
 /*
 Functions to implement:
 Polling:
@@ -38,20 +101,6 @@ updateLobby(data) -> update the lobby based on response
     recieving a json - holds players and gamelist(false if not started- if started then its the link of the game)
     make sure to remove all player-boxes before parsing json and re-adding them
     removeChild()?
-setName:
-setName() -> make http request to setName.php
-    recieves accesstoken- create cookie for client 
-    cookie holds data over pages- between lobby page and game page
-    const token = setName(name, gameid)
-    let request = new XMLHttpRequest
-    if(token.status == 200){
-
-    }
-    document.cookie = "accessToken=" + token;
-
-clearSplashscreen() -> if setName if successful this gets called
-    make splash in php
-    make all splash screen
 */
 /*
 open splash screen
@@ -63,6 +112,14 @@ pass =
 set cookie
 
 partial pseudo not law
+
+only call splash screen if there is no token stored or stored lobby code != current lobby code
+store lobby code 
+store token
+store isHost
+
+
+
 
 */
 
@@ -82,6 +139,12 @@ function getLobbyCode() {
     code = code.substring(code.lastIndexOf('/') + 1);
     return code;
 }
+
+
+
+
+
+
 
 //LOAD LOBBY LINK AND CODE INTO BOTTOM BOXES
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -140,7 +203,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.error('Async: Could not copy text: ', err);
         });
     }
-
+    // BUTTON CLICK CALLS COPYTOCLIPBOARD
     document.addEventListener('DOMContentLoaded', (event) => {
         // Accessing the share-link div
         const shareLinkDiv = document.getElementById('share-link');

@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="lobby.css">
     <script src="lobby.js"></script>
     <body>
-    <div id="splash-screen">
+    <div id="splash-screen" class="hidden">
         <div id="splash-content">
             <h2>Welcome!</h2>
             <h2>Please create a username.</h2>
             <input type="text" id="username" placeholder="Enter your username">
-            <button onclick="checkUsername()">Submit</button>
+            <button id="submit-button">Submit</button>
         </div>
     </div>
         <div id = "outer-lobby-container">
