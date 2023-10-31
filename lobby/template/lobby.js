@@ -14,11 +14,12 @@ function checkUsername() {
     addPlayer(username);
     console.log("Username set to: " + username);
   }
-  
+  //HIDE USER NAME PROMPT SPLASH SCREEN
   function clearSplashScreen() {
     var splashScreen = document.getElementById("splash-screen");
     splashScreen.classList.add("hidden");
   }
+  //ADD PLAYERBOX TO PLAYERLIST
 function addPlayer(name) {
     var playerList = document.getElementById('player-list-container');
     var playerBox = document.createElement('div');
@@ -79,11 +80,10 @@ function getLobbyCode() {
         code = code.slice(0, -1); // Remove the trailing '/'
     }
     code = code.substring(code.lastIndexOf('/') + 1);
-
     return code;
 }
 
-
+//LOAD LOBBY LINK AND CODE INTO BOTTOM BOXES
 document.addEventListener('DOMContentLoaded', (event) => {
     // Accessing the share-link div
     const shareLinkDiv = document.getElementById('share-link');
@@ -102,6 +102,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         console.error("Element with id 'share-link' or 'game-code' not found.");
     }
 });
+
+    //BUTTONS ON WORDGRID
     document.addEventListener('DOMContentLoaded', (event) => {
     // Get all elements with the data-special-cell attribute
     const specialCells = document.querySelectorAll('[data-special-cell]');
@@ -129,6 +131,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
         });
     }); 
+
+    //clipboard button icons
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(function() {
             console.log('Async: Copying to clipboard was successful!');
@@ -140,11 +144,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.addEventListener('DOMContentLoaded', (event) => {
         // Accessing the share-link div
         const shareLinkDiv = document.getElementById('share-link');
-
-        // Accessing the game-code paragraph
         const gameCodeParagraph = document.getElementById('game-code');
 
-        // Accessing the copy icon elements
         const shareLinkCopyIcon = document.getElementById('share-link-copy-button');
         const gameCodeCopyIcon = document.getElementById('game-code-copy-button');
 
@@ -153,13 +154,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
             // Setting up click events for the copy icons
             shareLinkCopyIcon.addEventListener('click', () => {
                 copyToClipboard(getLobbyURL());
-                alert('Link copied to clipboard!');
                 console.log('link copied');
             });
 
             gameCodeCopyIcon.addEventListener('click', () => {
                 copyToClipboard(getLobbyCode());
-                alert('Game code copied to clipboard!');
                 console.log('code copied');
             });
         } else {
