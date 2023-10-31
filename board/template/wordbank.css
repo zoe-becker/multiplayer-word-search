@@ -35,7 +35,7 @@
     font-size: 30px; 
     color: black;
     border: 1px solid black;
-     
+    margin-top: -20px;
 }
 
 .puzzle-section {
@@ -99,6 +99,7 @@ table th,td{
     border: 1px solid black;
     padding: 10px;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    transform: translate(-10px, -137px); /* first # moves to the left, second # moves up */
 }
 
 .players h2 {
