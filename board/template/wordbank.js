@@ -69,8 +69,10 @@ function renderWordSearch(puzzle) {
 
       // cell hover is set to a random color
       td.addEventListener("mouseenter", (event) => {
-        td.style.backgroundColor = randomColor();
-        td.style.fill = randomColor();
+        if (!td.classList.contains("found")) {
+          td.style.backgroundColor = randomColor();
+          td.style.fill = randomColor();
+        }
         if (mouseIsPressed) {
           selectedCells.push(td); // Adds cell letter to selection array Scrum-62
           highlightSelectedCells();
@@ -80,20 +82,12 @@ function renderWordSearch(puzzle) {
       td.addEventListener("mousedown", (event) => {
         mouseIsPressed = true;
         selectedCells = [td]; // Start new selection
-        console.log("cells", selectedCells);
-        let wordColor = randomColor();
-        td.style.backgroundColor = wordColor;
-        td.style.fill = wordColor;
       });
       document.addEventListener("mouseup", function () {
         mouseIsPressed = false;
         let selectedWord = selectedCells.map((cell) => cell.innerText).join(""); // concatenates the letters in the selected cells
         let wordFound = checkWordInWordBank(selectedWord);
         if (!wordFound) {
-          // selectedCells.forEach((cell) => {
-          //   cell.style.backgroundColor = "white";
-          //   cell.style.fill = "white";
-          // });
           unhighlightSelectedCells();
         }
         selectedCells = []; // clears selected cell
@@ -109,35 +103,27 @@ function renderWordSearch(puzzle) {
       });
     });
   });
+}
 
-  function highlightSelectedCells() {
-    selectedCells.forEach((cell) => {
-      cell.style.backgroundColor = randomColor();
-      cell.style.fill = randomColor();
-    });
-  }
+function highlightSelectedCells() {
+  selectedCells.forEach((cell) => {
+    cell.style.backgroundColor = randomColor();
+    cell.style.fill = randomColor();
+  });
+}
 
-  function unhighlightSelectedCells() {
-    selectedCells.forEach((cell) => {
-      cell.style.backgroundColor = "white";
-      cell.style.fill = "white";
-    });
-  }
-
-  function randomColor() {
-    let color = [];
-    for (let i = 0; i < 3; i++) {
-      color.push(Math.floor(Math.random() * 256) + 80);
-    }
-
-    return "rgb(" + color.join(", ") + ")";
-  }
+function unhighlightSelectedCells() {
+  selectedCells.forEach((cell) => {
+    cell.style.backgroundColor = "white";
+    cell.style.fill = "white";
+  });
 }
 
 function checkWordInWordBank(word) {
   const wordBankList = document.getElementById("wordBankList");
   const wordBankItems = wordBankList.getElementsByTagName("li");
   let wordFound = false;
+  let wordColor = randomColor();
 
   for (let i = 0; i < wordBankItems.length; i++) {
     if (wordBankItems[i].textContent === word) {
@@ -152,6 +138,12 @@ function checkWordInWordBank(word) {
         let rect = lastCell.getBoundingClientRect();
         let x = (rect.left + rect.right) / 2 / window.innerWidth;
         let y = (rect.top + rect.bottom) / 2 / window.innerHeight;
+
+        // Set the same color for all cells in the found word
+        selectedCells.forEach((cell) => {
+          cell.style.backgroundColor = wordColor;
+          cell.style.fill = wordColor;
+        });
 
         triggerConfetti(x, y);
       }
@@ -176,4 +168,13 @@ function triggerConfetti(x, y) {
     origin: { y: y, x: x },
   });
   pop.play();
+}
+
+function randomColor() {
+  let color = [];
+  for (let i = 0; i < 3; i++) {
+    color.push(Math.floor(Math.random() * 256) + 90);
+  }
+
+  return "rgb(" + color.join(", ") + ")";
 }
