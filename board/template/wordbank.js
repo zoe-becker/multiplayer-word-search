@@ -1,22 +1,22 @@
-let selectedCells = [];  // to store the TD elements being selected
+let selectedCells = []; // to store the TD elements being selected
 let mouseIsPressed = false; // global variable to check if mouse is pressed or not
-
+let foundWordsData = []; // stores the found words
 // get the cookie labelled key
 function getCookie(key) {
   let cookies = document.cookie.split("; ");
   let cookieValue = false;
 
-  cookies.forEach(function(cookie) {
+  cookies.forEach(function (cookie) {
     if (cookie.startsWith(key)) {
       cookieValue = cookie.split("=")[1]; // get value from key-value pair
     }
-  })
+  });
 
   return cookieValue;
 }
 
 // refresh warning
-window.addEventListener("beforeunload", function(event) {
+window.addEventListener("beforeunload", function (event) {
   event.preventDefault();
 });
 
@@ -24,7 +24,6 @@ window.addEventListener("beforeunload", function(event) {
 document.addEventListener("DOMContentLoaded", function (event) {
   // request board from server
   let request = new XMLHttpRequest();
-  
 
   request.onreadystatechange = function () {
     if (request.readyState == 4) {
@@ -72,35 +71,38 @@ function renderWordSearch(puzzle) {
       td.addEventListener("mouseenter", (event) => {
         td.style.backgroundColor = randomColor();
         td.style.fill = randomColor();
-        if(mouseIsPressed){
+        if (mouseIsPressed) {
           selectedCells.push(td); // Adds cell letter to selection array Scrum-62
+          highlightSelectedCells();
         }
       });
 
       td.addEventListener("mousedown", (event) => {
         mouseIsPressed = true;
-        selectedCells = [td];  // Start new selection
-        td.style.backgroundColor = randomColor();
-        td.style.fill = randomColor();
+        selectedCells = [td]; // Start new selection
+        console.log("cells", selectedCells);
+        let wordColor = randomColor();
+        td.style.backgroundColor = wordColor;
+        td.style.fill = wordColor;
       });
-    document.addEventListener("mouseup", function() {
-      mouseIsPressed = false;
-      let selectedWord = selectedCells.map(cell => cell.innerText).join(""); // concatenates the letters in the selected cells
-      let wordFound = checkWordInWordBank(selectedWord);
-      if(!wordFound){
-        selectedCells.forEach(cell => {
-          cell.style.backgroundColor = "white";
-          cell.style.fill = "white";
-
-        })
-      }
-      selectedCells = []; // clears selected cell
-    });
+      document.addEventListener("mouseup", function () {
+        mouseIsPressed = false;
+        let selectedWord = selectedCells.map((cell) => cell.innerText).join(""); // concatenates the letters in the selected cells
+        let wordFound = checkWordInWordBank(selectedWord);
+        if (!wordFound) {
+          // selectedCells.forEach((cell) => {
+          //   cell.style.backgroundColor = "white";
+          //   cell.style.fill = "white";
+          // });
+          unhighlightSelectedCells();
+        }
+        selectedCells = []; // clears selected cell
+      });
 
       // reset the background to white once the cursor leaves the cell
       td.addEventListener("mouseleave", (event) => {
         //want the image to fade out after a set timeout?
-        if(!selectedCells.includes(td)){
+        if (!selectedCells.includes(td) && !td.classList.contains("found")) {
           td.style.backgroundColor = "white";
           td.style.fill = "white";
         }
@@ -108,10 +110,24 @@ function renderWordSearch(puzzle) {
     });
   });
 
+  function highlightSelectedCells() {
+    selectedCells.forEach((cell) => {
+      cell.style.backgroundColor = randomColor();
+      cell.style.fill = randomColor();
+    });
+  }
+
+  function unhighlightSelectedCells() {
+    selectedCells.forEach((cell) => {
+      cell.style.backgroundColor = "white";
+      cell.style.fill = "white";
+    });
+  }
+
   function randomColor() {
     let color = [];
     for (let i = 0; i < 3; i++) {
-      color.push(Math.floor(Math.random() * 256) + 60);
+      color.push(Math.floor(Math.random() * 256) + 80);
     }
 
     return "rgb(" + color.join(", ") + ")";
@@ -123,36 +139,41 @@ function checkWordInWordBank(word) {
   const wordBankItems = wordBankList.getElementsByTagName("li");
   let wordFound = false;
 
-  for(let i = 0; i < wordBankItems.length; i++) {
-      if(wordBankItems[i].textContent === word) {
-          // alert for debugging purposes
-          //alert(`Found the word: ${word}`);
+  for (let i = 0; i < wordBankItems.length; i++) {
+    if (wordBankItems[i].textContent === word) {
+      // alert for debugging purposes
+      //alert(`Found the word: ${word}`);
 
-          wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
-          wordFound = true;
-          
-          if(wordFound) {
-            let lastCell = selectedCells[selectedCells.length - 1];
-            let rect = lastCell.getBoundingClientRect();
-            let x = (rect.left + rect.right) / 2 / window.innerWidth;
-            let y = (rect.top + rect.bottom) / 2 / window.innerHeight;
-        
-            triggerConfetti(x, y);
-        }
-          break;
+      wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
+      wordFound = true;
+
+      if (wordFound) {
+        let lastCell = selectedCells[selectedCells.length - 1];
+        let rect = lastCell.getBoundingClientRect();
+        let x = (rect.left + rect.right) / 2 / window.innerWidth;
+        let y = (rect.top + rect.bottom) / 2 / window.innerHeight;
+
+        triggerConfetti(x, y);
       }
+
+      selectedCells.forEach((cell) => {
+        cell.classList.add("found");
+      });
+
+      break;
+    }
   }
   return wordFound;
 }
 
-function triggerConfetti(x,y){
-  const pop = new Audio('pop.wav');
+function triggerConfetti(x, y) {
+  const pop = new Audio("pop.wav");
   confetti({
     particleCount: 30,
     angle: 90,
     drift: 5,
     spread: 15,
-    origin: { y: y, x: x }
-  });  
+    origin: { y: y, x: x },
+  });
   pop.play();
 }
