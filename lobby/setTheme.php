@@ -1,5 +1,12 @@
 <?php
+    /* Responsible for changing the selected theme at the hosts request
+        Accepted methods: POST only
+        Required headers:
+            1. token: access token of the requesting user
+            2. theme: formatted theme name to change to (first letter capitalized)
 
+        return: none
+    */
     require "../utilities/fileSyncronization.php";
     require "../utilities/requestValidation.php";
     require "../utilities/themeFetcher.php";
@@ -50,7 +57,7 @@
         global $LOBBY_DATAFILE_NAME;
 
         // called validatePost function
-        validatePOST(['accesstoken', 'theme', 'lobby'], true);
+        validatePOST(['token', 'theme', 'lobby'], true);
 
         // makes sure request method is POST
         if($_SERVER['REQUEST_METHOD'] !== 'POST'){
@@ -59,7 +66,7 @@
         }
 
         // get the access token, theme & lobby code from HTTP headers 
-        $accessToken = $_SERVER["HTTP_ACCESSTOKEN"];
+        $accessToken = $_SERVER["HTTP_TOKEN"];
         $theme = $_SERVER["HTTP_THEME"];
         $lobbyCode = $_SERVER["HTTP_LOBBY"];
 
