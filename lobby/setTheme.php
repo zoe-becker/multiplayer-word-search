@@ -63,9 +63,9 @@
 
         $lobbyID = validateLobby("", false);
 
-        $LobbyDataPath = "$lobbyID/$LOBBY_DATAFILE_NAME";
-        $LobbyStream = flock_acquireEX($lobbyDataPath); // acquire exclusive lock on lobbyData file
-        $lobbyData = json_decode(fread($LobbyStream, filesize($lobbyDataPath)), true);
+        $lobbyDataPath = "$lobbyID/$LOBBY_DATAFILE_NAME";
+        $lobbyStream = flock_acquireEX($lobbyDataPath); // acquire exclusive lock on lobbyData file
+        $lobbyData = json_decode(fread($lobbyStream, filesize($lobbyDataPath)), true);
 
         verifyAccessToken($lobbyData, $accessToken);
 
@@ -81,6 +81,6 @@
 
         http_response_code(200); // successful request
     }
-    
+
     main();
 ?>
