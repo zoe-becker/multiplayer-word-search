@@ -64,11 +64,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
 // testing fetch player and scores function
 function fetchPlayersAndScores(){
     // fetch player data from json file
-    fetch('platers.json')
+    fetch('players.json')
       .then(response => response.json())
       .then(data =>{
-        
-      })
+        const playersList = document.querySelector(".players ul");
+
+        playersList.innerHTML = "";
+
+        data.players.forEach(player => {
+          let listItem = document.createElement("li");
+          listItem.innerHTML = `${player.name}: <span class="score">${player.score}</span>`;
+          playersList.appendChild(listItem);
+        });
+      });
 }
 
 
