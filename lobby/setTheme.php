@@ -64,7 +64,15 @@
 
         verifyTheme($theme);
 
-        
+        // set the theme
+        $lobbyData['theme'] = $theme;
+
+        // rewinds the file pointer, write the updated lobby data, and release the lock
+        rewind($LobbyStream);
+        fwrite($lobbyStream, json_encode($lobbyData));
+        flock_release($lobbyStream); // release lock
+
+        http_response_code(200); // successful request
     }
     main();
 ?>
