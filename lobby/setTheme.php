@@ -51,6 +51,20 @@
         // get the access token and theme from HTTP headers
         $accessToken = $_SERVER["HTTP_ACCESSTOKEN"];
         $theme = $_SERVER["HTTP_THEME"];
+
+        validateRequest($accessToken, $theme);
+
+        $lobbyID = validateLobby("", false);
+
+        $LobbyDataPath = "$lobbyID/$LOBBY_DATAFILE_NAME";
+        $LobbyStream = flock_acquireEX($lobbyDataPath); // acquire exclusive lock on lobbyData file
+        $lobbyData = json_decode(fread($LobbyStream, filesize($lobbyDataPath)), true);
+
+        verifyAccessToken($lobbyData, $accessToken);
+
+        verifyTheme($theme);
+
+        
     }
     main();
 ?>
