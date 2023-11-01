@@ -65,7 +65,7 @@
 
         validateRequest($accessToken, $theme);
 
-        $lobbyID = validateLobby("", false);
+        $lobbyID = validateLobby($lobbyCode, false);
 
         $lobbyDataPath = "$lobbyID/$LOBBY_DATAFILE_NAME";
         $lobbyStream = flock_acquireEX($lobbyDataPath); // acquire exclusive lock on lobbyData file
