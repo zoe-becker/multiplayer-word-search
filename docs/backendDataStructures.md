@@ -1,6 +1,4 @@
 # Format of the various backend data structures
-
-## Backend Only:
 ### Word search instance game file (puzzle.json)
 - puzzle: NxN array of letters, organized by row, where N is the size of the grid
 - words: array of all the words in the puzzle
@@ -35,18 +33,3 @@
 - players: same as players in puzzle.json
 - gameLink: false if game not started, otherwise the relative path from the lobby instance to the game instance
 - theme: currently selected theme (in string form)
-## Response objects (for frontend):
-### PuzzleStructure object
-- puzzle, words, expireTime, foundWords, theme, and players keys from puzzle.json above
-    - NOTE: player objects in the players list only contain name, score, and isHost keys
-### PuzzleState object
-- ended: whether the game timer is up (true/false)
-- foundWords, and players keys from puzzle.json above
-    - NOTE: player objects are sanitized the same way as above
-### LobbyData object
-- players and gameLink keys from lobbyData.json above
-    - NOTE: player objects are sanitized the same way as in PuzzleStructure
-### setNameResponse object
-- accessToken: access token of the newly created player
-- isHost: true if the player is the host, false otherwise
-- themes (only present if isHost is true): array of available themes
