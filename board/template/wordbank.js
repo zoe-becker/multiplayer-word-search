@@ -107,15 +107,19 @@ function renderWordSearch(puzzle) {
 
 function highlightSelectedCells() {
   selectedCells.forEach((cell) => {
-    cell.style.backgroundColor = randomColor();
-    cell.style.fill = randomColor();
+    if (!cell.classList.contains("found")) {
+      cell.style.backgroundColor = randomColor();
+      cell.style.fill = randomColor();
+    }
   });
 }
 
 function unhighlightSelectedCells() {
   selectedCells.forEach((cell) => {
-    cell.style.backgroundColor = "white";
-    cell.style.fill = "white";
+    if (!cell.classList.contains("found")) {
+      cell.style.backgroundColor = "white";
+      cell.style.fill = "white";
+    }
   });
 }
 
@@ -172,8 +176,11 @@ function triggerConfetti(x, y) {
 
 function randomColor() {
   let color = [];
+
+  // let minValue = 10; // Minimum RGB value to avoid being too close to black (adjust as needed)
+  // let maxValue = 225; // Maximum RGB value to avoid being too close to white (adjust as needed)
   for (let i = 0; i < 3; i++) {
-    color.push(Math.floor(Math.random() * 256) + 90);
+    color.push(Math.floor(Math.random() * 256) + 30);
   }
 
   return "rgb(" + color.join(", ") + ")";
