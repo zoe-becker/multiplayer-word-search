@@ -48,7 +48,9 @@
 
     function main() {
         global $LOBBY_DATAFILE_NAME;
-        
+        // get the access token and theme from HTTP headers
+        $accessToken = $_SERVER["HTTP_ACCESSTOKEN"];
+        $theme = $_SERVER["HTTP_THEME"];
     }
     main();
 ?>
