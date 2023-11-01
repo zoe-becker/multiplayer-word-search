@@ -22,6 +22,11 @@ window.addEventListener("beforeunload", function (event) {
 
 // checks when page is loaded
 document.addEventListener("DOMContentLoaded", function (event) {
+  
+  // fetching player data & display
+  fetchPlayersAndScores();
+
+
   // request board from server
   let request = new XMLHttpRequest();
 
