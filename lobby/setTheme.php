@@ -48,6 +48,12 @@
 
     function main() {
         global $LOBBY_DATAFILE_NAME;
+
+        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+            http_response_code(405);
+            exit("POST method required");
+        }
+
         // get the access token and theme from HTTP headers
         $accessToken = $_SERVER["HTTP_ACCESSTOKEN"];
         $theme = $_SERVER["HTTP_THEME"];
