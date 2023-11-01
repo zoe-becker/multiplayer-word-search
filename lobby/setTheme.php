@@ -26,7 +26,21 @@
         }
     }
 
-    
+    // will verify if access token is valid and if player is the host
+    function verifyAccessToken($lobbyData, $accessToken){
+        foreach ($lobbyData['players'] as $player){
+            if($player['accessToken'] === $accessToken){
+                if($player['isHost']){
+                    return true;
+                } else {
+                    echo "Player is not the host";
+                    http_response_code(403);
+                    exit;
+                }
+            }
+        }
+        
+    }
 
     function main() {
         global $LOBBY_DATAFILE_NAME;
