@@ -1,6 +1,9 @@
 let selectedCells = []; // to store the TD elements being selected
 let mouseIsPressed = false; // global variable to check if mouse is pressed or not
 let foundWordsData = []; // stores the found words
+let gameEndTime = 0;
+let timerIntervalObj;
+
 // get the cookie labelled key
 function getCookie(key) {
   let cookies = document.cookie.split("; ");
@@ -13,6 +16,29 @@ function getCookie(key) {
   });
 
   return cookieValue;
+}
+
+// ticks the timer down
+function ticktok() {
+  let timer = document.getElementById("timer");
+  let timeLeft = gameEndTime - Math.floor(Date.now() / 1000);
+  let minutesLeft = Math.floor(timeLeft / 60);
+  let secondsLeft = timeLeft - minutesLeft * 60;
+
+  // check if timer is finished
+  if (timeLeft <= 0) {
+    clearInterval(timerIntervalObj);
+    minutesLeft = 0;
+    secondsLeft = 0;
+  }
+
+  if (secondsLeft < 10) {
+    secondsLeft = "0" + secondsLeft;
+  }
+
+  timer.textContent = minutesLeft + ":" + secondsLeft;
+
+  //  SCRUM 85
 }
 
 // refresh warning
@@ -36,6 +62,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
           let listItem = document.createElement("li"); //  create a new list item
           listItem.textContent = word; // set contnet of the list item to the current word
           wordBankList.appendChild(listItem); //  append the list item to the word banklist element
+
+          // set up timer
+          gameEndTime = data.expireTime;
+          ticktok();
+          timerIntervalObj = setInterval(ticktok, 1000);
         });
 
         // draw the word search
