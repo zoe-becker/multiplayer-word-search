@@ -44,6 +44,12 @@
         exit;
     }
 
+
+    function verifyTheme($theme){
+        $possibleThemes = getThemeNames();
+    }
+
+
     function main() {
         global $LOBBY_DATAFILE_NAME;
         validatePOST(array("lobby", "name"), true); // validate request
