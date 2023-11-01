@@ -25,7 +25,7 @@
     font-size: 35px; 
 }
 
-.inner-timer-box {
+#timer {
     /* Sits leftmost in timerbox so that it sits top left of grid */
     /* position: flex; */
     width: 80px; 
@@ -35,7 +35,7 @@
     font-size: 30px; 
     color: black;
     border: 1px solid black;
-    margin-top: -20px;
+    margin-top: 0;
 }
 
 .puzzle-section {
