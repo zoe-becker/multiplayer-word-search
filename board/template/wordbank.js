@@ -22,7 +22,7 @@ window.addEventListener("beforeunload", function (event) {
 
 // checks when page is loaded
 document.addEventListener("DOMContentLoaded", function (event) {
-  
+
   // fetching player data & display
   fetchPlayersAndScores();
 
@@ -59,6 +59,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
   request.setRequestHeader("token", getCookie("accessToken"));
   request.send();
 });
+
+
+// testing fetch player and scores function
+function fetchPlayersAndScores(){
+    // fetch player data from json file
+    fetch('platers.json')
+      .then(response => response.json())
+      .then(data =>{
+        
+      })
+}
+
+
+
 
 function renderWordSearch(puzzle) {
   let table = document.createElement("table");
