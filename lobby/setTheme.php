@@ -80,6 +80,7 @@
 
         // rewinds the file pointer, write the updated lobby data, and release the lock
         rewind($lobbyStream);
+        ftruncate($lobbyStream, 0);
         fwrite($lobbyStream, json_encode($lobbyData));
         flock_release($lobbyStream); // release lock
 
