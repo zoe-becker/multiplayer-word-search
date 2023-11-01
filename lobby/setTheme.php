@@ -49,6 +49,7 @@
     function main() {
         global $LOBBY_DATAFILE_NAME;
 
+        // makes sure request method is POST
         if($_SERVER['REQUEST_METHOD'] !== 'POST'){
             http_response_code(405);
             exit("POST method required");
@@ -70,7 +71,7 @@
 
         verifyTheme($theme);
 
-        // set the theme
+        // set the theme key in lobbyData object
         $lobbyData['theme'] = $theme;
 
         // rewinds the file pointer, write the updated lobby data, and release the lock
@@ -80,5 +81,6 @@
 
         http_response_code(200); // successful request
     }
+    
     main();
 ?>
