@@ -45,7 +45,16 @@
             "isHost" => false,
             "score" => 0
         );
-
+        
+        // check that name is unique
+        foreach ($lobbyData["players"] as $existingPlayer) {
+            if ($existingPlayer["name"] == $name) {
+                http_response_code(400);
+                echo "Taken";
+                exit(-1);
+            }
+        }
+        
         // first player to set name is set to be host
         
         if (count($lobbyData["players"]) == 0) {
@@ -70,7 +79,7 @@
         $lobbyStream = flock_acquireEX($lobbyDataPath); // acquire lock on file since we may write to it
         $lobbyData = json_decode(fread($lobbyStream, filesize($lobbyDataPath)), true);
 
-        // validate name is valid and game hasn't started
+        // validate name fits size constraints and game hasn't started
         validateRequest($lobbyData, $requestedName);
 
         $player = addPlayer($lobbyData, $requestedName);
