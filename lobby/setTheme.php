@@ -39,7 +39,9 @@
                 }
             }
         }
-        
+        echo "Invalid access token";
+        http_response_code(401);
+        exit;
     }
 
     function main() {
