@@ -71,6 +71,8 @@ function setName(username) {
     request.setRequestHeader("lobby", getLobbyCode());
     request.send();
   }
+  //push test
+  
 //BOOLEAN CLIENT SIDE CHECK TO SEE IF USERNAME IS VALID (char limits)
 function clientCheckUsername(passedUsername) {
     //var username = document.getElementById("username").value;
