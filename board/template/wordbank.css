@@ -97,9 +97,20 @@ table th,td{
     /* position: flex; */
     width: 200px;
     border: 1px solid black;
-    padding: 10px;
+    padding: 20px;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    transform: translate(-10px, -137px); /* first # moves to the left, second # moves up */
+    margin-right: 10px;
+    display: flex;
+    margin-bottom: 100px;
+
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden; 
+    margin-top: -38px;
+    position: relative;
+    align-items:flex;
+    flex-basis: auto;
+    height: 400px;
 }
 
 .players h2 {
@@ -127,5 +138,7 @@ table th,td{
     font-size: 20px;
     font-weight: bold;
     margin: 10px 0;
-    text-align: center;
+    text-align: right;
+    /* display: flex; */
+    flex-direction: column;
 }
