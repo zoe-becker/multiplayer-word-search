@@ -47,6 +47,11 @@
 
     function verifyTheme($theme){
         $possibleThemes = getThemeNames();
+        if(!in_array($theme, $possibleThemes)){
+            echo "Invalid theme";
+            http_response_code(400);
+            exit;
+        }
     }
 
 
