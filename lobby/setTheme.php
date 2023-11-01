@@ -49,15 +49,19 @@
     function main() {
         global $LOBBY_DATAFILE_NAME;
 
+        // called validatePost function
+        validatePOST(['accesstoken', 'theme', 'lobby'], true);
+
         // makes sure request method is POST
         if($_SERVER['REQUEST_METHOD'] !== 'POST'){
             http_response_code(405);
             exit("POST method required");
         }
 
-        // get the access token and theme from HTTP headers
+        // get the access token, theme & lobby code from HTTP headers 
         $accessToken = $_SERVER["HTTP_ACCESSTOKEN"];
         $theme = $_SERVER["HTTP_THEME"];
+        $lobbyCode = $_SERVER["HTTP_LOBBY"];
 
         validateRequest($accessToken, $theme);
 
