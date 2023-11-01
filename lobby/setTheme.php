@@ -15,24 +15,14 @@
     require "validateLobby.php";
 
     $LOBBY_DATAFILE_NAME = "lobbyData.json";
-    $MAX_NAME_LENGTH = 13;
 
-    // validates that game hasn't already started and name is valid
-    // exits if something is invalid
-    // NOTE: name is always valid right now
-    function validateRequest(&$lobbyData, $name) {
-        global $MAX_NAME_LENGTH;
-
-        if ($lobbyData["gameLink"]) {
-            echo "game already started";
+    // validates the request
+    function validateRequest(&$accessToken, $theme) {
+        // will check if both required headers are present
+        if(empty($accessToken) || empty($theme)){
+            echo "Missing required headers";
             http_response_code(400);
-            exit(-4);
-        }
-
-        if (strlen($name) < 1 || strlen($name) >= $MAX_NAME_LENGTH) {
-            echo "name does not fit size constraints";
-            http_response_code(400);
-            exit(-4);
+            exit;
         }
     }
 
