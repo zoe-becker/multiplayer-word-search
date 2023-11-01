@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
   // fetching player data & display with new function
   fetchPlayersAndScores();
 
-
   // request board from server
   let request = new XMLHttpRequest();
 
@@ -84,7 +83,6 @@ function fetchPlayersAndScores(){
         console.error("Error fetching player data: ", error);
       });
 }
-
 
 
 function renderWordSearch(puzzle) {
