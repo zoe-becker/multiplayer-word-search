@@ -75,7 +75,7 @@
         $lobbyData['theme'] = $theme;
 
         // rewinds the file pointer, write the updated lobby data, and release the lock
-        rewind($LobbyStream);
+        rewind($lobbyStream);
         fwrite($lobbyStream, json_encode($lobbyData));
         flock_release($lobbyStream); // release lock
 
