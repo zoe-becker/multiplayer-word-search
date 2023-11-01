@@ -21,20 +21,32 @@
         - isHost: whether or not the player is the host
         - score: score for this player
 - dbUpdated: whether the database has been updated with data from this game (true/false)
+- theme: themeData object for the theme that was chosen in the lobby phase
+    - NOTE: does not contain the words key
+
+### ThemeData object
+- words: array of possible words that can be in the wordlist for the theme
+- backgroundImage: background image name
+    - NOTE: not full path, use a global variable for the themeAssets directory
+- video (optional): background video
+    - NOTE not full path, use a global variable for the themeAssets directory
 ### Lobby instance file (lobbyData.json)
 - instanceExpiration: UTC timestamp of when the instance is eligible to be deleted from the server
 - players: same as players in puzzle.json
 - gameLink: false if game not started, otherwise the relative path from the lobby instance to the game instance
-
+- theme: currently selected theme (in string form)
 ## Response objects (for frontend):
 ### PuzzleStructure object
-- puzzle, words, expireTime, foundWords, and players keys from puzzle.json above
+- puzzle, words, expireTime, foundWords, theme, and players keys from puzzle.json above
     - NOTE: player objects in the players list only contain name, score, and isHost keys
 ### PuzzleState object
 - ended: whether the game timer is up (true/false)
 - foundWords, and players keys from puzzle.json above
     - NOTE: player objects are sanitized the same way as above
-
 ### LobbyData object
 - players and gameLink keys from lobbyData.json above
     - NOTE: player objects are sanitized the same way as in PuzzleStructure
+### setNameResponse object
+- accessToken: access token of the newly created player
+- isHost: true if the player is the host, false otherwise
+- themes (only present if isHost is true): array of available themes
