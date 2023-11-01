@@ -22,6 +22,10 @@ window.addEventListener("beforeunload", function (event) {
 
 // checks when page is loaded
 document.addEventListener("DOMContentLoaded", function (event) {
+
+  // fetching player data & display with new function
+  fetchPlayersAndScores();
+
   // request board from server
   let request = new XMLHttpRequest();
 
@@ -54,6 +58,32 @@ document.addEventListener("DOMContentLoaded", function (event) {
   request.setRequestHeader("token", getCookie("accessToken"));
   request.send();
 });
+
+
+// testing fetch player and scores function
+function fetchPlayersAndScores(){
+    // fetch player data from json file
+    fetch('players.json')
+      .then(response => response.json())
+      .then(data =>{
+        // get the HTML element with the class "players" and find the <ul> inside it
+        const playersList = document.querySelector(".players ul");
+
+        // remove the hard coded player names & scores
+        playersList.innerHTML = "";
+
+        // will append the player names and scores dynamically
+        data.players.forEach(player => {
+          let listItem = document.createElement("li");
+          listItem.innerHTML = `${player.name}: <span class="score">${player.score}</span>`;
+          playersList.appendChild(listItem);
+        });
+      })
+      .catch(error => {
+        console.error("Error fetching player data: ", error);
+      });
+}
+
 
 function renderWordSearch(puzzle) {
   let table = document.createElement("table");
