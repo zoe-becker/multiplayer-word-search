@@ -6,7 +6,7 @@
           1. name: name of new player
           2. lobby: lobby id (including the prefix)
 
-        Return: setNameResponse object
+        Return: SetNameResponse object
     */
 
     require "../utilities/fileSyncronization.php";
@@ -54,7 +54,7 @@
                 exit(-1);
             }
         }
-        
+
         // first player to set name is set to be host
         
         if (count($lobbyData["players"]) == 0) {

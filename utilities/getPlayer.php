@@ -4,7 +4,7 @@
 */
 
 // returns the index of the player or -1 if the player is not in the list
-function util_get_player_index($playerToken, $players) {
+function util_get_player_index($playerToken, &$players) {
     $foundPlayer = -1;
 
     for ($i = 0; $i<count($players); $i++) {
