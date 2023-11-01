@@ -80,7 +80,9 @@ function fetchPlayersAndScores(){
           playersList.appendChild(listItem);
         });
       })
-      
+      .catch(error => {
+        console.error("Error fetching player data: ", error);
+      });
 }
 
 
