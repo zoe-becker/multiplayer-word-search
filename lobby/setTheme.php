@@ -26,26 +26,7 @@
         }
     }
 
-    // adds player $name to the referenced lobbyData associative array and returns the new player object
-    function addPlayer(&$lobbyData, $name) {
-        $newPlayer = array(
-            "name" => $name,
-            "accessToken" => uniqid("", true), // create unique id, more entropy to reduce chance of collision
-            "boardRetrieved" => false,
-            "isHost" => false,
-            "score" => 0
-        );
-
-        // first player to set name is set to be host
-        
-        if (count($lobbyData["players"]) == 0) {
-            $newPlayer["isHost"] = true;
-        }
-
-        array_push($lobbyData["players"], $newPlayer);
-
-        return $newPlayer;
-    }
+    
 
     function main() {
         global $LOBBY_DATAFILE_NAME;
