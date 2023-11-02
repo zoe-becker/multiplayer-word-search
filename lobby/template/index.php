@@ -6,14 +6,28 @@
     <link rel="stylesheet" href="lobby.css">
     <script src="lobby.js"></script>
     <body>
-    <div id="splash-screen" class="hidden">
-        <div id="splash-content">
-            <h2>Welcome!</h2>
-            <h2>Please create a username.</h2>
-            <input type="text" id="username" placeholder="Enter your username">
-            <button id="submit-button">Submit</button>
+        <div id="splash-screen" class="hidden">
+            <div id="splash-content">
+                <h2>Welcome!</h2>
+                <h2>Please create a username.</h2>
+                <input type="text" id="username" placeholder="Enter your username">
+                <button id="submit-button">Submit</button>
+            </div>
         </div>
-    </div>
+        <div id="HTW-screen" class="hidden">
+                <div id="HTW-content">
+                    <p1>How to win!!!</p1>
+                    <p>3 letter words are worth 300pts! Where every additional letter is +50 points! </p>
+                    <p>Diagonal words give a 1.2x multiplier!</p>
+                    <p>The color of the timer matters so pay attention!</p>
+                    <p>If the timer color is: </p>
+                    <p><span style="color: green">Green</span>: 1x score multiplier</p>
+                    <p><span style="color: #91913d">Yellow</span>: 1.2x score multiplier</p>
+                    <p><span style="color: red">Red</span>: 2x score multiplier!</p>
+                    <button id="close-button">Close</button>
+                    </p>
+                </div> 
+        </div>
         <div id = "outer-lobby-container">
             <div id="lobby-container">
                 <div id="lobby-title">
