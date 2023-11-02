@@ -153,10 +153,12 @@ function renderWordSearch(puzzle) {
 
       // reset the background to white once the cursor leaves the cell
       td.addEventListener("mouseleave", (event) => {
-        //want the image to fade out after a set timeout?
+        background = getComputedStyle(
+          document.documentElement
+        ).getPropertyValue(" background-color");
         if (!selectedCells.includes(td) && !td.classList.contains("found")) {
-          td.style.backgroundColor = "white";
-          td.style.fill = "white";
+          td.style.backgroundColor = background;
+          td.style.fill = background;
         }
       });
     });
@@ -173,10 +175,13 @@ function highlightSelectedCells() {
 }
 
 function unhighlightSelectedCells() {
+  background = getComputedStyle(document.documentElement).getPropertyValue(
+    " background-color"
+  );
   selectedCells.forEach((cell) => {
     if (!cell.classList.contains("found")) {
-      cell.style.backgroundColor = "white";
-      cell.style.fill = "white";
+      cell.style.backgroundColor = background;
+      cell.style.fill = background;
     }
   });
 }
@@ -235,10 +240,13 @@ function triggerConfetti(x, y) {
 function randomColor() {
   let color = [];
 
-  // let minValue = 10; // Minimum RGB value to avoid being too close to black (adjust as needed)
-  // let maxValue = 225; // Maximum RGB value to avoid being too close to white (adjust as needed)
+  let minValue = 150; // Minimum RGB value to avoid being too close to black (adjust as needed)
+  let maxValue = 255; // Maximum RGB value to avoid being too close to white (adjust as needed)
   for (let i = 0; i < 3; i++) {
-    color.push(Math.floor(Math.random() * 200) + 30);
+    // color.push(Math.floor(Math.random() * 225) + 50);
+    color.push(
+      Math.floor(Math.random() * (maxValue - minValue + 1) + minValue)
+    );
   }
 
   return "rgb(" + color.join(", ") + ")";
