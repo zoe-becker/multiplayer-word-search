@@ -153,12 +153,9 @@ function renderWordSearch(puzzle) {
 
       // reset the background to white once the cursor leaves the cell
       td.addEventListener("mouseleave", (event) => {
-        background = getComputedStyle(
-          document.documentElement
-        ).getPropertyValue(" background-color");
         if (!selectedCells.includes(td) && !td.classList.contains("found")) {
-          td.style.backgroundColor = background;
-          td.style.fill = background;
+          td.style.backgroundColor = "transparent";
+          td.style.fill = "transparent";
         }
       });
     });
@@ -175,13 +172,10 @@ function highlightSelectedCells() {
 }
 
 function unhighlightSelectedCells() {
-  background = getComputedStyle(document.documentElement).getPropertyValue(
-    " background-color"
-  );
   selectedCells.forEach((cell) => {
     if (!cell.classList.contains("found")) {
-      cell.style.backgroundColor = background;
-      cell.style.fill = background;
+      cell.style.backgroundColor = "transparent";
+      cell.style.fill = "transparent";
     }
   });
 }
