@@ -9,7 +9,7 @@ body {
     background-size: cover;
     background-blend-mode: multiply; /*Set blend mode to multiply for darkening effect*/
 }
-#splash-screen {
+#splash-screen, #HTW-screen {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,7 +22,7 @@ body {
     z-index: 9999;
   }
   
-  #splash-content {
+  #splash-content, #HTW-content {
     text-align: center;
     border-radius: 10px;
     border: solid #bc8942; /* Add border style as well */
@@ -30,12 +30,30 @@ body {
     background-color: #e6e6e6;
     margin: 10px;
   }
+  #HTW-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   #splash-content h2{
     margin: 10px;
     font-family: cursive;
     color: #bc8942;
   }
-  #splash-content button, #splash-content input[type="text"]{
+  #HTW-content p1{
+    margin: 10px;
+    font-family: cursive;
+    color: #bc8942;
+    font-size: 30px;
+  }
+  #HTW-content p{
+    margin: 5px;
+    font-family: cursive;
+    color: #bc8942;
+    font-size: 15px;
+  }
+
+  #splash-content button, #splash-content input[type="text"], #HTW-content button{
     margin: 10px;
     font-family: cursive; /* Set the same font as the h2 */
     color: #bc8942; /* Set the same color as the h2 */
@@ -43,11 +61,19 @@ body {
     border-radius: 10px;
     border-width: 2px;
     padding: 5px;
+    cursor: pointer;
+  }
+  #HTW-content button{
+    width: 50px;
   }
   
   #splash-screen.hidden {
     display: none;
   }
+  #HTW-screen.hidden{
+    display: none;
+  }
+
 #outer-lobby-container {  /* Holds everything that you see */
     display: flex;
     flex-direction: row;

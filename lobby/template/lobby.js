@@ -72,7 +72,7 @@ function setName(username) {
     request.send();
   }
   //push test
-  
+
 //BOOLEAN CLIENT SIDE CHECK TO SEE IF USERNAME IS VALID (char limits)
 function clientCheckUsername(passedUsername) {
     //var username = document.getElementById("username").value;
@@ -89,6 +89,17 @@ function clientCheckUsername(passedUsername) {
     var splashScreen = document.getElementById("splash-screen");
     splashScreen.classList.add("hidden");
   }
+  //HIDE USER NAME PROMPT SPLASH SCREEN
+  function showHTWScreen() {
+    var splashScreen = document.getElementById("HTW-screen");
+    splashScreen.classList.remove("hidden"); // Remove the 'hidden' class to display the splash screen
+  }
+  //HIDE USER NAME PROMPT SPLASH SCREEN
+  function clearHTWScreen() {
+    var splashScreen = document.getElementById("HTW-screen");
+    splashScreen.classList.add("hidden");
+  }
+
   //ADD PLAYERBOX TO PLAYERLIST
 function addPlayer(name) {
     let key = "playerSet";
@@ -222,13 +233,57 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 specialCell.classList.remove('brighten');
             });
         });
-        cell.addEventListener('click', function() {
+         cell.addEventListener('click', function() {
             // Handle click event based on the type of data-special-cell
-                const cellType = cell.getAttribute('data-special-cell');
+            const cellType = cell.getAttribute('data-special-cell');
+            if (cellType === 'settings') {
+                // Implement functionality for 'settings' cell type
+                console.log('Clicked on settings cell:', cell.textContent);
+            } else if (cellType === 'how-to-win!') {
+                handleHTWClick();
+                // Implement functionality for 'how-to-win!' cell type
+                console.log('Clicked on how-to-win! cell:', cell.textContent);
+            } else if (cellType === 'start') {
+                handleStartClick();
+                // Implement functionality for 'start' cell type
+                console.log('Clicked on start cell:', cell.textContent);
+            } else if (cellType === 'themes') {
+                handleThemesClick();
+                // Implement functionality for 'themes' cell type
+                console.log('Clicked on themes cell:', cell.textContent);
+            } else {
+                // Implement default functionality for other cell types
                 console.log(`Clicked on cell with attribute ${cellType}:`, cell.textContent);
-            });
+            }
         });
+    });
     }); 
+    //HANDLING BUTTON CLICKS
+
+    function handleStartClick(){
+    }
+    function handleThemesClick(){
+
+    }
+    function handleHTWClick(){
+        showHTWScreen();
+        var closeButton = document.getElementById("close-button");
+
+        closeButton.addEventListener('mouseover', function() {
+            closeButton.classList.add('brighten');
+        });
+        
+        closeButton.addEventListener('mouseout', function() {
+            closeButton.classList.remove('brighten');
+        });
+        closeButton.addEventListener("click", function() {
+            clearHTWScreen();
+        });
+    
+    }
+
+
+
 
     //clipboard button icons
     function copyToClipboard(text) {
