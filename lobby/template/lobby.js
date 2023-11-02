@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         //user hasnt been to this lobby before, so reset any playerSet thats been in there.
         localStorage.setItem('playerSet', JSON.stringify(Array.from(new Set())));
         //give user option to create username
-        showSplashScreen();
+        toggleScreen('splash-screen','show');
         var submitButton = document.getElementById("submit-button");
         submitButton.addEventListener("click", function() {
             var username = document.getElementById("username").value;
@@ -54,7 +54,7 @@ function setName(username) {
             var themes = data.themes;
             localStorage.setItem('themes', themes);
            }
-           clearSplashScreen();
+           toggleScreen('splash-screen','hide');
            //polling instantly so there isnt a delay for the names to pop up
            updateLobby();
            //3 second polling for lobby indefinetly
@@ -84,21 +84,17 @@ function clientCheckUsername(passedUsername) {
     var splashScreen = document.getElementById("splash-screen");
     splashScreen.classList.remove("hidden"); // Remove the 'hidden' class to display the splash screen
 }
-  //HIDE USER NAME PROMPT SPLASH SCREEN
-  function clearSplashScreen() {
-    var splashScreen = document.getElementById("splash-screen");
-    splashScreen.classList.add("hidden");
-  }
-  //HIDE USER NAME PROMPT SPLASH SCREEN
-  function showHTWScreen() {
-    var splashScreen = document.getElementById("HTW-screen");
-    splashScreen.classList.remove("hidden"); // Remove the 'hidden' class to display the splash screen
-  }
-  //HIDE USER NAME PROMPT SPLASH SCREEN
-  function clearHTWScreen() {
-    var splashScreen = document.getElementById("HTW-screen");
-    splashScreen.classList.add("hidden");
-  }
+  //HIDING OR SHOWING SCREENS
+  function toggleScreen(screenId, action) {
+    var screen = document.getElementById(screenId);
+    if (screen) {
+        if (action === 'show') {
+            screen.classList.remove('hidden');
+        } else if (action === 'hide') {
+            screen.classList.add('hidden');
+        }
+    }
+}
 
   //ADD PLAYERBOX TO PLAYERLIST
 function addPlayer(name) {
@@ -261,12 +257,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
     //HANDLING BUTTON CLICKS
 
     function handleStartClick(){
-    }
-    function handleThemesClick(){
 
     }
+    function handleThemesClick(){
+        var isHost= localStorage.getItem('isHost');
+        if(isHost){
+            //create themes screen
+        }else{
+            alert("Only host can select themes.")
+        }
+    }
     function handleHTWClick(){
-        showHTWScreen();
+        toggleScreen('HTW-screen', 'show');
+        console.log("new fun worked");
         var closeButton = document.getElementById("close-button");
 
         closeButton.addEventListener('mouseover', function() {
@@ -277,7 +280,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             closeButton.classList.remove('brighten');
         });
         closeButton.addEventListener("click", function() {
-            clearHTWScreen();
+            toggleScreen('HTW-screen','hide');
         });
     
     }

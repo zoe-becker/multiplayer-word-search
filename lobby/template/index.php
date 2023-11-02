@@ -15,18 +15,24 @@
             </div>
         </div>
         <div id="HTW-screen" class="hidden">
-                <div id="HTW-content">
-                    <p1>How to win!!!</p1>
-                    <p>3 letter words are worth 300pts! Where every additional letter is +50 points! </p>
-                    <p>Diagonal words give a 1.2x multiplier!</p>
-                    <p>The color of the timer matters so pay attention!</p>
-                    <p>If the timer color is: </p>
-                    <p><span style="color: green">Green</span>: 1x score multiplier</p>
-                    <p><span style="color: #91913d">Yellow</span>: 1.2x score multiplier</p>
-                    <p><span style="color: red">Red</span>: 2x score multiplier!</p>
-                    <button id="close-button">Close</button>
-                    </p>
-                </div> 
+            <div id="HTW-content">
+                <p1>How to win!!!</p1>
+                <p>3 letter words are worth 300pts! Where every additional letter is +50 points! </p>
+                <p>Diagonal words give a 1.2x multiplier!</p>
+                <p>The color of the timer matters so pay attention!</p>
+                <p>If the timer color is: </p>
+                <p><span style="color: green">Green</span>: 1x score multiplier</p>
+                <p><span style="color: #91913d">Yellow</span>: 1.2x score multiplier</p>
+                <p><span style="color: red">Red</span>: 2x score multiplier!</p>
+                <button id="close-button">Close</button>
+                </p>
+            </div> 
+        </div>
+        <div id="Themes-screen" class="hidden">
+            <div id="Themes-content">
+                <p1>Select Theme</p1>
+                <div id="Themes-container"></div>
+            </div>
         </div>
         <div id = "outer-lobby-container">
             <div id="lobby-container">
