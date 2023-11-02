@@ -48,7 +48,6 @@ window.addEventListener("beforeunload", function (event) {
 
 // checks when page is loaded
 document.addEventListener("DOMContentLoaded", function (event) {
-
   // fetching player data & display with new function
   fetchPlayersAndScores();
 
@@ -90,31 +89,29 @@ document.addEventListener("DOMContentLoaded", function (event) {
   request.send();
 });
 
-
 // testing fetch player and scores function
-function fetchPlayersAndScores(){
-    // fetch player data from json file
-    fetch('players.json')
-      .then(response => response.json())
-      .then(data =>{
-        // get the HTML element with the class "players" and find the <ul> inside it
-        const playersList = document.querySelector(".players ul");
+function fetchPlayersAndScores() {
+  // fetch player data from json file
+  fetch("players.json")
+    .then((response) => response.json())
+    .then((data) => {
+      // get the HTML element with the class "players" and find the <ul> inside it
+      const playersList = document.querySelector(".players ul");
 
-        // remove the hard coded player names & scores
-        playersList.innerHTML = "";
+      // remove the hard coded player names & scores
+      playersList.innerHTML = "";
 
-        // will append the player names and scores dynamically
-        data.players.forEach(player => {
-          let listItem = document.createElement("li");
-          listItem.innerHTML = `${player.name}: <span class="score">${player.score}</span>`;
-          playersList.appendChild(listItem);
-        });
-      })
-      .catch(error => {
-        console.error("Error fetching player data: ", error);
+      // will append the player names and scores dynamically
+      data.players.forEach((player) => {
+        let listItem = document.createElement("li");
+        listItem.innerHTML = `${player.name}: <span class="score">${player.score}</span>`;
+        playersList.appendChild(listItem);
       });
+    })
+    .catch((error) => {
+      console.error("Error fetching player data: ", error);
+    });
 }
-
 
 function renderWordSearch(puzzle) {
   let table = document.createElement("table");
@@ -241,7 +238,7 @@ function randomColor() {
   // let minValue = 10; // Minimum RGB value to avoid being too close to black (adjust as needed)
   // let maxValue = 225; // Maximum RGB value to avoid being too close to white (adjust as needed)
   for (let i = 0; i < 3; i++) {
-    color.push(Math.floor(Math.random() * 256) + 30);
+    color.push(Math.floor(Math.random() * 200) + 30);
   }
 
   return "rgb(" + color.join(", ") + ")";
