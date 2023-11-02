@@ -2,8 +2,9 @@
     /* Responsible for changing the selected theme at the hosts request
         Accepted methods: POST only
         Required headers:
-            1. token: access token of the requesting user
-            2. theme: formatted theme name to change to (first letter capitalized)
+            1. lobby: lobby id of the lobby to change
+            2. token: access token of the requesting user
+            3. theme: formatted theme name to change to (first letter capitalized)
 
         return: none
     */
