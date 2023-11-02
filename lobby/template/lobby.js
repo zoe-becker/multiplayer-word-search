@@ -263,6 +263,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
         var isHost= localStorage.getItem('isHost');
         if(isHost){
             //create themes screen
+            toggleScreen('Themes-screen','show');
+            //load 'Themes-container' full of buttons based on list of available themes stored
+            //in localStorage.
+            //css should already be applied, but highlight may need implementation
+            //once button clicked it should call setTheme(need isHost?)
+            //should hide themes screen if a button is clicked.
+            //make sure that in updateLobby() the text content of the theme container is updated based on selected theme
+
+            
         }else{
             alert("Only host can select themes.")
         }
