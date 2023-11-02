@@ -21,7 +21,7 @@
             <button onclick="createLobby()" type="button"> <span> </span>Create New Game</button>
             <form id="gameForm"> 
                 <input type="text" id="gameCode" placeholder="Game Code" required>
-                <button type="button" id="joinButton"><span> </span>Join Game</button>
+                <button type="button" id="joinButton"><span> </span>Join</button>
             </form>
             <button onclick="location.href='/word-search-generator/leaderboard'" type="button"><span> </span> Leaderboard</button>
             <!-- <button onclick="requestBoard()">Play</button> -->
