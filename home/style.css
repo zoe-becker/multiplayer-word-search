@@ -60,6 +60,13 @@ nav ul li a{
     font-size: 17;
 }
 
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .gif h1{
     font-size: 75px;
     justify-content: center;
@@ -75,14 +82,13 @@ nav ul li a{
 
 .gif button{
     cursor: pointer;
-    width: 10%;
     position: absolute;
-    top: 7%;
+    /* top: 7%; */
     transform: translateY(0%);
     text-align: center;
 
 
-    padding: 15px 0;
+    padding: 10px 15px;
     text-align: center;
     margin: 20px 10px;
     border-radius: 25px;
@@ -93,11 +99,12 @@ nav ul li a{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 50px auto;
 
     position: relative;
     overflow:hidden;
 }
+
+
 
 span{
     background: #5a8668;
@@ -119,3 +126,17 @@ span{
 .gif button:hover{
     border: none;
 }
+
+form{
+    display:flex;
+    align-items: center;
+}
+
+input[type=text]{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  
