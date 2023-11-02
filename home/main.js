@@ -35,6 +35,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (isValidGameCode(input)) {
       const fullURL = `http://localhost/word-search-generator/lobby/${input}`;
       window.open(fullURL, "_blank");
+    } else {
+      alert("Invalid game code.");
     }
   });
+
+  // Function to validate game code format
+  function isValidGameCode(code) {
+    const regex = /^lb-[0-9a-fA-F]{13}$/;
+    return regex.test(code);
+  }
 });
