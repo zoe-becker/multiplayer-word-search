@@ -6,7 +6,10 @@
       "monkey", "racoon", "squirrel", "shark", "ostrich", "owl", "tarantula", "penguin", "vulture",
       "armadillo", "bat", "fox", "giraffe", "hamster", "lynx", "puma", "seal", "skunk"
     ],
-    "backgroundImage": "animals_2.png"
-
+    "backgroundImage": "animals_2.png",
+    "playerBoxColor": "#7bb380",
+    "tableBox": "#7bb380",
+    "wordBankBox": "#7bb380",
+    "timerBox": "#7bb380"
   }
   

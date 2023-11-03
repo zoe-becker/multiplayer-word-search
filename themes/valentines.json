@@ -7,6 +7,10 @@
       "Dinner", "Emotion", "Heartthrob", "Jewelry", "Kiss", "Lover", "Romantic", "Sweets", "TeddyBear", "Cards", 
       "Pink"
     ],
-    "backgroundImage": "vday_2.png"
+    "backgroundImage": "vday_2.png",
+    "playerBoxColor": "#de95aa",
+    "tableBox": "#de95aa",
+    "wordBankBox": "#de95aa",
+    "timerBox": "#de95aa"
   }
   

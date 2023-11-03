@@ -7,6 +7,10 @@
       "Gobble", "Bountiful", "Blessings", "Festivity", "Homestead", "Cornbread", "Rolls", "Dessert", 
       "Tradition", "Roast", "Cooking", "Gather", "Reunion", "Leaves"
     ],
-    "backgroundImage": "thg_3.png"
+    "backgroundImage": "thg_3.png",
+    "playerBoxColor": "#ad7b51",
+    "tableBox": "#ad7b51",
+    "wordBankBox": "#ad7b51",
+    "timerBox": "#ad7b51"
   }
   
