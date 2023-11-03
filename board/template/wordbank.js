@@ -6,6 +6,7 @@ let startTime = 0;
 let gameLength = 0;
 
 let timerIntervalObj;
+let themeAssets = '../../themes/themeAssets/'
 document.addEventListener("DOMContentLoaded", function (event) {
   setInterval(updateBoard, 2000);
 });
@@ -82,6 +83,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
           listItem.textContent = word; // set contnet of the list item to the current word
           wordBankList.appendChild(listItem); //  append the list item to the word banklist element
 
+        // rendering theme
+        renderTheme(data.theme);
+       
           // set up timer
           gameEndTime = data.expireTime;
           startTime = data.startTime;
@@ -102,10 +106,59 @@ document.addEventListener("DOMContentLoaded", function (event) {
     windowPaths.at(-1) == "" ? windowPaths.at(-2) : windowPaths.at(-1);
   request.open("POST", "../getInitialBoard.php");
   request.setRequestHeader("game", instanceID);
-  request.setRequestHeader("token", getCookie("accessToken"));
+  request.setRequestHeader("token", localStorage.getItem("accessToken"));
   request.send();
 });
 
+
+
+
+// function to get themes and its features
+function renderTheme(dataTheme) {
+      if (dataTheme.backgroundImage) {
+        document.body.style.backgroundImage = `url(${themeAssets + dataTheme.backgroundImage})`;
+      }  
+
+      if (dataTheme.playerBoxColor) {
+        const playerBox = document.querySelector('.players');
+        if (playerBox) {
+          playerBox.style.backgroundColor = dataTheme.playerBoxColor;
+        }
+      }
+
+      //not working
+      if (dataTheme.tableBox) {
+        const tableBox = document.querySelector('table');
+        if (tableBox) {
+          tableBox.style.backgroundColor = dataTheme.tableBox;
+        }
+      }
+
+      if (dataTheme.wordBankBox) {
+        const wordBankBox = document.querySelector('.word-bank');
+        if (wordBankBox) {
+          wordBankBox.style.backgroundColor = dataTheme.wordBankBox;
+        }
+      }
+
+      if (dataTheme.timerBox) {
+        const timerBox = document.querySelector('#timer');
+        if (timerBox) {
+          timerBox.style.backgroundColor = dataTheme.timerBox;
+        }
+      }
+}
+
+
+
+// testing fetch player and scores function
+function fetchPlayersAndScores() {
+  // fetch player data from json file
+  fetch("players.json")
+    .then((response) => response.json())
+    .then((data) => {
+      // get the HTML element with the class "players" and find the <ul> inside it
+      const playersList = document.querySelector(".players ul");
 function getBoardURL() {
   const currentUrl = window.location.href;
   return currentUrl;
