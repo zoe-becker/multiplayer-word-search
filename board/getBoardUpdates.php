@@ -23,7 +23,6 @@
         if ($puzzle["expireTime"] <= time()) {
             $isExpired = true;
             if ($puzzle["dbUpdated"] == false) {
-                include "updateDB.php";
                 foreach ($puzzle["players"] as $player) {
                     updateDataBase($player["name"], $player["score"], date('H:i:s', $puzzle['expireTime']), date('Y-m-d'));
                 }
