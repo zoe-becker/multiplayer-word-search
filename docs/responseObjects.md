@@ -1,6 +1,6 @@
 # Response objects that are returned by backend scripts:
 ### PuzzleStructure object
-- puzzle, words, expireTime, foundWords, theme, and players keys from puzzle.json above
+- puzzle, words, startTime, expireTime, foundWords, theme, and players keys from puzzle.json above
     - NOTE: player objects in the players list only contain name, score, and isHost keys
 ### PuzzleState object
 - ended: whether the game timer is up (true/false)
