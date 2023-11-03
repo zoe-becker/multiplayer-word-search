@@ -8,6 +8,7 @@
         - start_col: column of the first letter of the solution
         - direction: direction (N,E,S,W,NE,NW,SE,SW) that the solution goes in
         - secret: unused
+- startTime: UTC timestamp (seconds) of when the game starts
 - expireTime: UTC timestamp (seconds) of when the game ends
 - instanceExpiration: UTC timestamp of when the instance is eligible to be deleted from the server
 - foundWords: dictionary of words found so far mapped to foundWord objects
