@@ -46,7 +46,7 @@ function ticktok() {
     timer.style.color = "green";
   }
   else if(timeLeft >= gameLength * 0.1667) {
-    timer.style.color = "yellow";
+    timer.style.color = "orange";
   } else{
     timer.style.color = "red";
   }
