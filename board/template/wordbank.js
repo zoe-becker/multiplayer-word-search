@@ -1,6 +1,6 @@
 let selectedCells = []; // to store the TD elements being selected
 let direction = null; // Variable to store the current direction
-// let mouseIsPressed = false; // global variable to check if mouse is pressed or not
+let mouseIsPressed = false; // global variable to check if mouse is pressed or not
 let foundWordsData = []; // stores the found words
 let gameEndTime = 0;
 let startTime = 0;
@@ -181,7 +181,7 @@ function renderWordSearch(puzzle) {
 
       // cell hover is set to a random color
       td.addEventListener("mouseenter", (event) => {
-        if (!td.classList.contains("found")) {
+        if (!td.classList.contains("found") && !mouseIsPressed) {
           td.style.backgroundColor = randomColor();
           td.style.fill = randomColor();
         }
@@ -197,6 +197,7 @@ function renderWordSearch(puzzle) {
               td
             );
             if (newDirection === direction) {
+              // highlightSelectedCells();
               selectedCells.push(td);
             }
           }
