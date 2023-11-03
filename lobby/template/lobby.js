@@ -64,6 +64,8 @@ function setName(username) {
         } else {
           if(request.responseText == 'Taken'){
             alert("Username already taken.")
+          }else if(request.responseText == 'game already started'){
+            alert("Too late! Game has already started.")
           }else console.log("AJAX Error: " + request.responseText);
         }
         requestSetNamePending = false;
