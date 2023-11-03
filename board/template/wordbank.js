@@ -183,9 +183,23 @@ function reRenderPlayerlist(){
 
    // will append the player names and scores dynamically
    data.players.forEach((player) => {
-    let listItem = document.createElement("li");
-    listItem.innerHTML = `${player.name}: <span class="score">${player.score}</span>`;
-    playersList.appendChild(listItem); 
+    let listItem = playersList.querySelector(`li[data-player-name="${player.name}"]`);
+
+    // create list item if it doesn't exist
+    if (!listItem) {
+        listItem = document.createElement("li");
+        listItem.setAttribute("data-player-name", player.name);
+        listItem.innerHTML = `${player.name}: <span class="score">${player.score}</span>`;
+        playersList.appendChild(listItem);
+    } else {
+      // update score
+      const scoreSpan = listItem.querySelector(".score");
+      scoreSpan.textContent = player.score;
+    }
+
+    //let listItem = document.createElement("li");
+    //listItem.innerHTML = `${player.name}: <span class="score">${player.score}</span>`;
+    //playersList.appendChild(listItem); 
     //FIX THIS - handle append problem, currently infinitely adds children. by using name
     //update score each poll
 });
