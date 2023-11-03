@@ -1,4 +1,5 @@
 let selectedCells = []; // to store the TD elements being selected
+let direction = null; // Variable to store the current direction
 let mouseIsPressed = false; // global variable to check if mouse is pressed or not
 let foundWords = []; // stores the found words
 let gameEndTime = 0;
@@ -49,13 +50,11 @@ function ticktok() {
 
   if (timeLeft >= gameLength * 0.5) {
     timer.style.color = "green";
-  }
-  else if(timeLeft >= gameLength * 0.1667) {
+  } else if (timeLeft >= gameLength * 0.1667) {
     timer.style.color = "orange";
-  } else{
+  } else {
     timer.style.color = "red";
   }
-
 }
 
 // refresh warning
@@ -83,9 +82,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
           listItem.textContent = word; // set contnet of the list item to the current word
           wordBankList.appendChild(listItem); //  append the list item to the word banklist element
 
-        // rendering theme
-        renderTheme(data.theme);
-       
+          // rendering theme
+          renderTheme(data.theme);
+
           // set up timer
           gameEndTime = data.expireTime;
           startTime = data.startTime;
@@ -110,46 +109,43 @@ document.addEventListener("DOMContentLoaded", function (event) {
   request.send();
 });
 
-
-
-
 // function to get themes and its features
 function renderTheme(dataTheme) {
-      if (dataTheme.backgroundImage) {
-        document.body.style.backgroundImage = `url(${themeAssets + dataTheme.backgroundImage})`;
-      }  
+  if (dataTheme.backgroundImage) {
+    document.body.style.backgroundImage = `url(${
+      themeAssets + dataTheme.backgroundImage
+    })`;
+  }
 
-      if (dataTheme.playerBoxColor) {
-        const playerBox = document.querySelector('.players');
-        if (playerBox) {
-          playerBox.style.backgroundColor = dataTheme.playerBoxColor;
-        }
-      }
+  if (dataTheme.playerBoxColor) {
+    const playerBox = document.querySelector(".players");
+    if (playerBox) {
+      playerBox.style.backgroundColor = dataTheme.playerBoxColor;
+    }
+  }
 
-      //not working
-      if (dataTheme.tableBox) {
-        const tableBox = document.querySelector('table');
-        if (tableBox) {
-          tableBox.style.backgroundColor = dataTheme.tableBox;
-        }
-      }
+  //not working
+  if (dataTheme.tableBox) {
+    const tableBox = document.querySelector("table");
+    if (tableBox) {
+      tableBox.style.backgroundColor = dataTheme.tableBox;
+    }
+  }
 
-      if (dataTheme.wordBankBox) {
-        const wordBankBox = document.querySelector('.word-bank');
-        if (wordBankBox) {
-          wordBankBox.style.backgroundColor = dataTheme.wordBankBox;
-        }
-      }
+  if (dataTheme.wordBankBox) {
+    const wordBankBox = document.querySelector(".word-bank");
+    if (wordBankBox) {
+      wordBankBox.style.backgroundColor = dataTheme.wordBankBox;
+    }
+  }
 
-      if (dataTheme.timerBox) {
-        const timerBox = document.querySelector('#timer');
-        if (timerBox) {
-          timerBox.style.backgroundColor = dataTheme.timerBox;
-        }
-      }
+  if (dataTheme.timerBox) {
+    const timerBox = document.querySelector("#timer");
+    if (timerBox) {
+      timerBox.style.backgroundColor = dataTheme.timerBox;
+    }
+  }
 }
-
-
 
 // testing fetch player and scores function
 function fetchPlayersAndScores() {
@@ -255,12 +251,26 @@ function renderWordSearch(puzzle) {
 
       // cell hover is set to a random color
       td.addEventListener("mouseenter", (event) => {
-        if (!td.classList.contains("found")) {
+        if (!td.classList.contains("found") && !mouseIsPressed) {
           td.style.backgroundColor = randomColor();
           td.style.fill = randomColor();
         }
         if (mouseIsPressed) {
-          selectedCells.push(td); // Adds cell letter to selection array Scrum-62
+          if (selectedCells.length < 2) {
+            selectedCells.push(td);
+            if (selectedCells.length === 2) {
+              direction = getDirection(selectedCells[0], selectedCells[1]);
+            }
+          } else {
+            const newDirection = getDirection(
+              selectedCells[selectedCells.length - 1],
+              td
+            );
+            if (newDirection === direction) {
+              // highlightSelectedCells();
+              selectedCells.push(td);
+            }
+          }
           highlightSelectedCells();
         }
       });
@@ -269,6 +279,7 @@ function renderWordSearch(puzzle) {
         mouseIsPressed = true;
         selectedCells = [td]; // Start new selection
       });
+
       document.addEventListener("mouseup", function () {
         mouseIsPressed = false;
         let selectedWord = selectedCells.map((cell) => cell.innerText).join(""); // concatenates the letters in the selected cells
@@ -288,6 +299,31 @@ function renderWordSearch(puzzle) {
       });
     });
   });
+}
+
+function getDirection(cell1, cell2) {
+  // Calculate the direction based on the difference in row and column indexes
+  const rowDiff = cell2.parentNode.rowIndex - cell1.parentNode.rowIndex;
+  const colDiff = cell2.cellIndex - cell1.cellIndex;
+
+  if (rowDiff === 0 && colDiff === 1) {
+    return "E"; // East
+  } else if (rowDiff === 1 && colDiff === 1) {
+    return "SE"; // Southeast
+  } else if (rowDiff === 1 && colDiff === 0) {
+    return "S"; // South
+  } else if (rowDiff === 1 && colDiff === -1) {
+    return "SW"; // Southwest
+  } else if (rowDiff === 0 && colDiff === -1) {
+    return "W"; // West
+  } else if (rowDiff === -1 && colDiff === -1) {
+    return "NW"; // Northwest
+  } else if (rowDiff === -1 && colDiff === 0) {
+    return "N"; // North
+  } else if (rowDiff === -1 && colDiff === 1) {
+    return "NE"; // Northeast
+  }
+  return null; // Unknown direction
 }
 
 function highlightSelectedCells() {
