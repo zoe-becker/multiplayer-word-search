@@ -2,6 +2,7 @@
 // Sets up the test environment
 $TEMPLATE_DIR = "../template";
 $TEST_FILES_DIR = "../testenvFiles";
+$GAME_LEN = 180;
 
 require "../../utilities/themeFetcher.php";
 
@@ -31,7 +32,9 @@ foreach ($testFilesScan as $file) {
     if ($file == "puzzle.json") {
         $puzzle = json_decode(file_get_contents("$TEST_FILES_DIR/$file"), true);
         $puzzle["theme"] = getThemeData($puzzle["theme"]);
-
+        $puzzle["startTime"] = time();
+        $puzzle["expireTime"] = time() + $GAME_LEN;
+        
         unset($puzzle["theme"]["words"]);
         file_put_contents("$file", json_encode($puzzle));
     } else {
