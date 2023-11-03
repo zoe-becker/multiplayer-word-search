@@ -3,6 +3,8 @@
 $TEMPLATE_DIR = "../template";
 $TEST_FILES_DIR = "../testenvFiles";
 
+require "../../utilities/themeFetcher.php";
+
 $templateScan = scandir($TEMPLATE_DIR);
 $testFilesScan = scandir($TEST_FILES_DIR);
 $currentDirScan = scandir(".");
@@ -26,7 +28,15 @@ foreach ($templateScan as $file) {
 foreach ($testFilesScan as $file) {
     if ($file == "." || $file == "..") continue;
 
-    copy("$TEST_FILES_DIR/$file", $file);
+    if ($file == "puzzle.json") {
+        $puzzle = json_decode(file_get_contents("$TEST_FILES_DIR/$file"), true);
+        $puzzle["theme"] = getThemeData($puzzle["theme"]);
+
+        unset($puzzle["theme"]["words"]);
+        file_put_contents("$file", json_encode($puzzle));
+    } else {
+        copy("$TEST_FILES_DIR/$file", $file);
+    }
 }
 
 echo file_get_contents("$TEMPLATE_DIR/index.html");
