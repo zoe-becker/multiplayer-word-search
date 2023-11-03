@@ -2,6 +2,9 @@ let selectedCells = []; // to store the TD elements being selected
 let mouseIsPressed = false; // global variable to check if mouse is pressed or not
 let foundWordsData = []; // stores the found words
 let gameEndTime = 0;
+let startTime = 0;
+let gameLength = 0;
+
 let timerIntervalObj;
 
 // get the cookie labelled key
@@ -22,8 +25,13 @@ function getCookie(key) {
 function ticktok() {
   let timer = document.getElementById("timer");
   let timeLeft = gameEndTime - Math.floor(Date.now() / 1000);
+  startTime = data.startTime;
+  gameLength = gameEndTime - startTime;
   let minutesLeft = Math.floor(timeLeft / 60);
   let secondsLeft = timeLeft - minutesLeft * 60;
+  let greenThreshold = gameLength * 0.5;
+  let yellowThreshold = gameLength * 0.1667;
+
 
   // check if timer is finished
   if (timeLeft <= 0) {
@@ -38,13 +46,12 @@ function ticktok() {
 
   timer.textContent = minutesLeft + ":" + secondsLeft;
 
-  // $greenThreshold = $GAME_LENGTH * 0.5;
-  // $yellowThreshold = $GAME_LENGTH * 0.1667;
+  // first 30 percent of time is green, next 30 is yellow, last 30 is red
 
-  if (timer.textContent >= "1:00") {
+  if (timer.textContent >= greenThreshold) {
     timer.style.color = "green";
   }
-  else if(timer.textContent >= "0:30") {
+  else if(timer.textContent >= yellowThreshold) {
     timer.style.color = "yellow";
   } else{
     timer.style.color = "red";
