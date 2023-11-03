@@ -10,6 +10,7 @@
     require "../utilities/fileSyncronization.php";
     require "../utilities/requestValidation.php";
     require "validateGame.php";
+    require "updateDB.php";
 
     $GAMEFILE_NAME = "puzzle.json";
 
@@ -23,7 +24,7 @@
             $isExpired = true;
             if ($puzzle["dbUpdated"] == false) {
                 include "updateDB.php";
-                // SCRUM 90
+                updateDataBase($players->name,$players->score,$puzzle->expireTime,date('Y-m-d'));
             }
         }
 
