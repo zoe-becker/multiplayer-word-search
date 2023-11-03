@@ -2,7 +2,7 @@ let selectedCells = []; // to store the TD elements being selected
 let mouseIsPressed = false; // global variable to check if mouse is pressed or not
 let foundWordsData = []; // stores the found words
 let gameEndTime = 0;
-let startTime = data.startTime;
+let startTime = 0;
 let gameLength = 0;
 
 let timerIntervalObj;
@@ -86,6 +86,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
           // set up timer
           gameEndTime = data.expireTime;
+          startTime = data.startTime;
           ticktok();
           timerIntervalObj = setInterval(ticktok, 1000);
         });
