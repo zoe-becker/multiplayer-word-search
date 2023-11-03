@@ -1,5 +1,7 @@
 //no double requests on setname call
 var requestSetNamePending = false;
+var requestSetThemePending = false;
+var requestStartGamePending = false;
 
 //Checks if splash screen needs to be called based on token and lobby id
 //if it hasnt been set then token, lobby id, and isHost are set.
@@ -13,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         //user hasnt been to this lobby before, so reset any playerSet thats been in there.
         localStorage.setItem('playerSet', JSON.stringify(Array.from(new Set())));
         //give user option to create username
-        showSplashScreen();
+        toggleScreen('splash-screen','show');
         var submitButton = document.getElementById("submit-button");
         submitButton.addEventListener("click", function() {
             var username = document.getElementById("username").value;
@@ -22,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 if (!requestSetNamePending) {
                     requestSetNamePending = true;
                     setName(username);
-                    requestSetNamePending = false;
                 } else {
                     alert("One moment please, username request pending.");
                 }
@@ -52,9 +53,10 @@ function setName(username) {
            localStorage.setItem('isHost',isHost);
            if(isHost === true){
             var themes = data.themes;
-            localStorage.setItem('themes', themes);
+            localStorage.setItem('themes', JSON.stringify(themes));
+            loadThemeBoxes();
            }
-           clearSplashScreen();
+           toggleScreen('splash-screen','hide');
            //polling instantly so there isnt a delay for the names to pop up
            updateLobby();
            //3 second polling for lobby indefinetly
@@ -62,8 +64,11 @@ function setName(username) {
         } else {
           if(request.responseText == 'Taken'){
             alert("Username already taken.")
+          }else if(request.responseText == 'game already started'){
+            alert("Too late! Game has already started.")
           }else console.log("AJAX Error: " + request.responseText);
         }
+        requestSetNamePending = false;
       }
     };
     request.open("POST", "../setName.php");
@@ -71,6 +76,24 @@ function setName(username) {
     request.setRequestHeader("lobby", getLobbyCode());
     request.send();
   }
+//START GAME
+function startGame(){
+    let request = new XMLHttpRequest();
+    
+    request.onreadystatechange = function () {
+      if (request.readyState == 4) {
+        if (request.status == 200) {
+
+        } else console.log("AJAX Error: " + request.responseText);
+        requestSetNamePending = false;
+      }
+    };
+    request.open("POST", "../createGame.php");
+    request.setRequestHeader("token", localStorage.getItem('accessToken'));
+    request.setRequestHeader("lobby", getLobbyCode());
+    request.send(); 
+}
+
 //BOOLEAN CLIENT SIDE CHECK TO SEE IF USERNAME IS VALID (char limits)
 function clientCheckUsername(passedUsername) {
     //var username = document.getElementById("username").value;
@@ -82,11 +105,18 @@ function clientCheckUsername(passedUsername) {
     var splashScreen = document.getElementById("splash-screen");
     splashScreen.classList.remove("hidden"); // Remove the 'hidden' class to display the splash screen
 }
-  //HIDE USER NAME PROMPT SPLASH SCREEN
-  function clearSplashScreen() {
-    var splashScreen = document.getElementById("splash-screen");
-    splashScreen.classList.add("hidden");
-  }
+  //HIDING OR SHOWING SCREENS
+  function toggleScreen(screenId, action) {
+    var screen = document.getElementById(screenId);
+    if (screen) {
+        if (action === 'show') {
+            screen.classList.remove('hidden');
+        } else if (action === 'hide') {
+            screen.classList.add('hidden');
+        }
+    }
+}
+
   //ADD PLAYERBOX TO PLAYERLIST
 function addPlayer(name) {
     let key = "playerSet";
@@ -112,6 +142,7 @@ function updateLobby(){
       if (request.readyState == 4) {
         if (request.status == 200) {
           data = JSON.parse(request.responseText);
+          localStorage.setItem('currentTheme',data.theme);
           num_players = data.players.length;
           //theres more players in list than client has in set
           let key = "playerSet";
@@ -125,6 +156,8 @@ function updateLobby(){
           if(data.gameLink != false){
             window.location.href = data.gameLink;
           }
+          updateLobbyTheme();
+          console.log(getCurrentTheme);
         } else {
           console.log("AJAX Error: " + request.responseText);
         }
@@ -135,7 +168,36 @@ function updateLobby(){
     request.open("GET", url);
     request.send();
 }
+//LOAD THEME BOXES FROM LOCAL STORAGE
+function loadThemeBoxes(){
+    let key = "themes";
+    let storedThemes = JSON.parse(localStorage.getItem(key));
+    let themesContainer = document.getElementById('Themes-container');
+    themesContainer.innerHTML = ""; //clear the container before rendering
+    
+    storedThemes.forEach(theme => {
+        var themeBox = document.createElement('div');
+        themeBox.classList.add('theme-box');
+        var themeBoxButton = document.createElement('button');
+        themeBoxButton.addEventListener('click', function() {
+            requestSetThemePending = true;
+            console.log(theme + 'changed');
+            setTheme(theme);
+            updateLobby();
+            toggleScreen('Themes-screen','hide');
+        });
+        themeBoxButton.addEventListener('mouseover', function() {
+            themeBoxButton.classList.add('brighten');
+        });
 
+        themeBoxButton.addEventListener('mouseout', function() {
+            themeBoxButton.classList.remove('brighten');
+        });
+        themeBoxButton.textContent = theme; //assuming each theme is a string
+        themeBox.appendChild(themeBoxButton);
+        themesContainer.appendChild(themeBox);
+    });
+}
 //RERENDER PLAYERLIST ON PAGE REFRESH
 function renderPlayersFromSet() {
     let key = "playerSet";
@@ -173,9 +235,35 @@ function getLobbyCode() {
     code = code.substring(code.lastIndexOf('/') + 1);
     return code;
 }
+function getCurrentTheme(){
+    return localStorage.getItem('currentTheme');
+}
 
+//SET THEME
+function setTheme(theme){
+    let request = new XMLHttpRequest();
+    
+    request.onreadystatechange = function () {
+      if (request.readyState == 4) {
+        if (request.status == 200) {
+        } else {
+          console.log("AJAX Error: " + request.responseText);
+        }
+        requestSetThemePending = false;
+      }
+    };
+    request.open("POST", "../setTheme.php");
+    request.setRequestHeader("token", localStorage.getItem('accessToken'));
+    request.setRequestHeader("theme", theme);
+    request.setRequestHeader("lobby", getLobbyCode());
+    request.send();
 
-
+}
+//LOAD SELECTED THEME INTO THEMEBOX AT BOTTOM
+    function updateLobbyTheme() {
+    const currentTheme = document.getElementById('current-theme');
+    currentTheme.textContent = getCurrentTheme();
+}
 
 
 
@@ -220,13 +308,106 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 specialCell.classList.remove('brighten');
             });
         });
-        cell.addEventListener('click', function() {
+         cell.addEventListener('click', function() {
             // Handle click event based on the type of data-special-cell
-                const cellType = cell.getAttribute('data-special-cell');
+            const cellType = cell.getAttribute('data-special-cell');
+            if (cellType === 'settings') {
+                // Implement functionality for 'settings' cell type
+                console.log('Clicked on settings cell:', cell.textContent);
+            } else if (cellType === 'how-to-win!') {
+                handleHTWClick();
+                // Implement functionality for 'how-to-win!' cell type
+                console.log('Clicked on how-to-win! cell:', cell.textContent);
+            } else if (cellType === 'start') {
+                handleStartClick();
+                // Implement functionality for 'start' cell type
+                console.log('Clicked on start cell:', cell.textContent);
+            } else if (cellType === 'themes') {
+                handleThemesClick();
+                // Implement functionality for 'themes' cell type
+                console.log('Clicked on themes cell:', cell.textContent);
+            } else {
+                // Implement default functionality for other cell types
                 console.log(`Clicked on cell with attribute ${cellType}:`, cell.textContent);
-            });
+            }
         });
+    });
     }); 
+//GET ISHOST VALUE
+function isHost(){
+    var isHostStringVersion = localStorage.getItem('isHost');
+    var isHost;
+    if(isHostStringVersion === 'true'){
+        isHost = true;
+    }else isHost = false;
+    return isHost;
+}
+    //HANDLING BUTTON CLICKS
+function handleStartClick(){
+    var host= isHost();
+    if(host){
+        toggleScreen('Start-screen','show');
+        //once they click on a theme button it hides the themes screen
+        var startButton = document.getElementById("start-button");
+        var cancelButton = document.getElementById("cancel-button");
+
+        startButton.addEventListener('mouseover', function() {
+            startButton.classList.add('brighten');
+        });
+        
+        startButton.addEventListener('mouseout', function() {
+            startButton.classList.remove('brighten');
+        });
+        startButton.addEventListener("click", function() {
+            toggleScreen('Start-screen','hide');
+            requestStartGamePending = true;
+            startGame();
+        });
+        cancelButton.addEventListener('mouseover', function() {
+            cancelButton.classList.add('brighten');
+        });
+
+        cancelButton.addEventListener('mouseout', function() {
+            cancelButton.classList.remove('brighten');
+        });
+
+        cancelButton.addEventListener("click", function() {
+            toggleScreen('Start-screen','hide');
+        });
+    }else{
+        alert("Only host can start the game.")
+    }
+}
+function handleThemesClick(){
+    var host= isHost();
+    if(host){
+        toggleScreen('Themes-screen','show');
+        //once they click on a theme button it hides the themes screen
+    }else{
+        console.log("denied!");
+        alert("Only host can select themes.")
+    }
+}
+    function handleHTWClick(){
+        toggleScreen('HTW-screen', 'show');
+        console.log("new fun worked");
+        var closeButton = document.getElementById("close-button");
+
+        closeButton.addEventListener('mouseover', function() {
+            closeButton.classList.add('brighten');
+        });
+        
+        closeButton.addEventListener('mouseout', function() {
+            closeButton.classList.remove('brighten');
+        });
+        closeButton.addEventListener("click", function() {
+            toggleScreen('HTW-screen','hide');
+        });
+    
+    }
+
+
+
 
     //clipboard button icons
     function copyToClipboard(text) {

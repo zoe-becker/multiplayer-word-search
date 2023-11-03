@@ -69,6 +69,7 @@
         // interpret curl result and initialize board
         if ($curlStatus == 200) {
             $puzzle = json_decode($puzzle, true);
+            $puzzle["startTime"] = time();
             $puzzle["expireTime"] = time() + $GAME_LENGTH; // set match expiration date
             $puzzle["instanceExpiration"] = $puzzle["expireTime"] + $INSTANCE_EXPIRATION_DELAY;
             $puzzle["foundWords"] = new stdClass(); // empty map

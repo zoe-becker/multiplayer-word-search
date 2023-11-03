@@ -2,6 +2,9 @@ let selectedCells = []; // to store the TD elements being selected
 let mouseIsPressed = false; // global variable to check if mouse is pressed or not
 let foundWordsData = []; // stores the found words
 let gameEndTime = 0;
+let startTime = 0;
+let gameLength = 0;
+
 let timerIntervalObj;
 let themeAssets = '../../themes/themeAssets/'
 
@@ -23,6 +26,7 @@ function getCookie(key) {
 function ticktok() {
   let timer = document.getElementById("timer");
   let timeLeft = gameEndTime - Math.floor(Date.now() / 1000);
+  gameLength = gameEndTime - startTime;
   let minutesLeft = Math.floor(timeLeft / 60);
   let secondsLeft = timeLeft - minutesLeft * 60;
 
@@ -39,7 +43,15 @@ function ticktok() {
 
   timer.textContent = minutesLeft + ":" + secondsLeft;
 
-  //  SCRUM 85
+  if (timeLeft >= gameLength * 0.5) {
+    timer.style.color = "green";
+  }
+  else if(timeLeft >= gameLength * 0.1667) {
+    timer.style.color = "orange";
+  } else{
+    timer.style.color = "red";
+  }
+
 }
 
 // refresh warning
@@ -72,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
        
           // set up timer
           gameEndTime = data.expireTime;
+          startTime = data.startTime;
           ticktok();
           timerIntervalObj = setInterval(ticktok, 1000);
         });
@@ -89,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     windowPaths.at(-1) == "" ? windowPaths.at(-2) : windowPaths.at(-1);
   request.open("POST", "../getInitialBoard.php");
   request.setRequestHeader("game", instanceID);
-  request.setRequestHeader("token", getCookie("accessToken"));
+  request.setRequestHeader("token", localStorage.getItem("accessToken"));
   request.send();
 });
 

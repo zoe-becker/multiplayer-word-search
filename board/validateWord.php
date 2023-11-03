@@ -169,7 +169,15 @@
         $player = $puzzle["players"][$plrIndex];
         $wordValue = calculateScore($wordInfo["word"], $puzzle["expireTime"], $wordInfo["direction"]);
         $puzzle["players"][$plrIndex]["score"] += $wordValue;
-        $puzzle["foundWords"][$wordInfo["word"]] = $player["name"]; // map found word to player that found it
+
+        $foundWordObj = array(
+            "start_row" => $wordInfo["start_row"],
+            "start_col" => $wordInfo["start_col"],
+            "direction" => $wordInfo["direction"],
+            "name" => $player["name"]
+        );
+
+        $puzzle["foundWords"][$wordInfo["word"]] = $foundWordObj; // add found word to array
 
         rewind($gameStream);
         fwrite($gameStream, json_encode($puzzle));

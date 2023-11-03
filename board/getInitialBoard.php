@@ -65,6 +65,7 @@
         $response = array(
             "puzzle" => $puzzle["puzzle"],
             "words" => $puzzle["words"],
+            "startTime" => $puzzle["startTime"],
             "expireTime" => $puzzle["expireTime"],
             "foundWords" => $puzzle["foundWords"],
             "theme" => $puzzle["theme"],
