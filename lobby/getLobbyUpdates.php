@@ -25,7 +25,8 @@
 
         $response = array(
             "players" => util_sanitize_players($lobbyData["players"]),
-            "gameLink" => $lobbyData["gameLink"]
+            "gameLink" => $lobbyData["gameLink"],
+            "theme" => $lobbyData["theme"]
         );
     
         http_response_code(200);

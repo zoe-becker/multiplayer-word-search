@@ -7,7 +7,7 @@
 - foundWords, and players keys from puzzle.json above
     - NOTE: player objects are sanitized the same way as above
 ### LobbyData object
-- players and gameLink keys from lobbyData.json above
+- players,gameLink, and theme keys from lobbyData.json above
     - NOTE: player objects are sanitized the same way as in PuzzleStructure
 ### SetNameResponse object
 - accessToken: access token of the newly created player

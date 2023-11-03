@@ -1,7 +1,7 @@
 <?php
 // set of functions for getting various aspects of the available board themes
 
-$THEME_DIR = "../themes";
+$THEME_DIR = dirname(__FILE__) . "/../themes";
 
 // get an array of the names of all of the themes in a ready to be displayed
 // format (the first letter capitalized)
