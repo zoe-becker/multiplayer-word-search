@@ -6,14 +6,40 @@
     <link rel="stylesheet" href="lobby.css">
     <script src="lobby.js"></script>
     <body>
-    <div id="splash-screen" class="hidden">
-        <div id="splash-content">
-            <h2>Welcome!</h2>
-            <h2>Please create a username.</h2>
-            <input type="text" id="username" placeholder="Enter your username">
-            <button id="submit-button">Submit</button>
+        <div id="splash-screen" class="hidden">
+            <div id="splash-content">
+                <h2>Welcome!</h2>
+                <h2>Please create a username.</h2>
+                <input type="text" id="username" placeholder="Enter your username">
+                <button id="submit-button">Submit</button>
+            </div>
         </div>
-    </div>
+        <div id="Start-screen" class = "hidden">
+            <div id= "Start-content">
+            <p1>Are you sure you want to start the game? </p1>
+            <button id="start-button"> Yes, start game!</button>
+            <button id="cancel-button">NO! Dont start! </button>
+            </div>
+        </div>
+        <div id="HTW-screen" class="hidden">
+            <div id="HTW-content">
+                <p1>How to win!!!</p1>
+                <p>3 letter words are worth 300pts! Where every additional letter is +50 points! </p>
+                <p>Diagonal words give a 1.2x multiplier!</p>
+                <p>The color of the timer matters so pay attention!</p>
+                <p>If the timer color is: </p>
+                <p><span style="color: green">Green</span>: 1x score multiplier</p>
+                <p><span style="color: #91913d">Yellow</span>: 1.2x score multiplier</p>
+                <p><span style="color: red">Red</span>: 2x score multiplier!</p>
+                <button id="close-button">Close</button>
+            </div> 
+        </div>
+        <div id="Themes-screen" class="hidden">
+            <div id="Themes-content">
+                <p1>Select Theme</p1>
+                <div id="Themes-container"></div>
+            </div>
+        </div>
         <div id = "outer-lobby-container">
             <div id="lobby-container">
                 <div id="lobby-title">
@@ -237,7 +263,7 @@
                     <div id="selected-theme-container">
                         <!-- somehow put selected theme here lol -->
                         <div class="selected-theme-text">Current Theme:</div>
-                        <div class="selected-theme-text">Holidays</div>        
+                        <div class="selected-theme-text" id="current-theme"></div>        
                     </div>
             </div>
         </div>
