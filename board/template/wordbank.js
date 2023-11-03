@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     windowPaths.at(-1) == "" ? windowPaths.at(-2) : windowPaths.at(-1);
   request.open("POST", "../getInitialBoard.php");
   request.setRequestHeader("game", instanceID);
-  request.setRequestHeader("token", getCookie("accessToken"));
+  request.setRequestHeader("token", localStorage.getItem("accessToken"));
   request.send();
 });
 
