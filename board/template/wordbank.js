@@ -8,6 +8,9 @@ let gameLength = 0;
 
 let timerIntervalObj;
 let themeAssets = "../../themes/themeAssets/";
+document.addEventListener("DOMContentLoaded", function (event) {
+  setInterval(updateBoard, 2000);
+});
 
 // get the cookie labelled key
 function getCookie(key) {
