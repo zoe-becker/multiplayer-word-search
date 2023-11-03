@@ -1,24 +1,24 @@
 <?php
 require_once("../database/db_connect.php");
 
-function updateDataBase($playerName, $score, $gameTime, $scoreDate) {
+function updateDataBase($playerName, $score, $theme = NULL) {
     global $pdo;
 
     try {
         // Begin transaction
         $pdo->beginTransaction();
     
-        // Prepare the insert statement
-        $sql = "INSERT INTO all_time_lb (Player, Score, Date, game_time) 
-                VALUES (:player_name, :score, :score_date, :game_time)";
+        // Prepare the insert statement with the new table structure
+        $sql = "INSERT INTO all_time_lb (Player, Score, theme) 
+                VALUES (:player_name, :score, :theme)";
     
         $stmt = $pdo->prepare($sql);
     
         // Bind parameters to the statement
         $stmt->bindParam(':player_name', $playerName, PDO::PARAM_STR);
         $stmt->bindParam(':score', $score, PDO::PARAM_INT);
-        $stmt->bindParam(':game_time', $gameTime, PDO::PARAM_STR);
-        $stmt->bindParam(':score_date', $scoreDate, PDO::PARAM_STR);
+        // If theme is not provided, bind NULL.
+        $stmt->bindValue(':theme', $theme, $theme === NULL ? PDO::PARAM_NULL : PDO::PARAM_STR);
     
         // Execute the statement
         $stmt->execute();
@@ -33,10 +33,4 @@ function updateDataBase($playerName, $score, $gameTime, $scoreDate) {
         echo "Error: " . $e->getMessage();
     }
 }
-
-
-
-
-
-    
 ?>
