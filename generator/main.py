@@ -23,7 +23,8 @@ def get_theme_from_url(query_string):
     return theme_list[0]
 
 def random_words(environ):
-    THEME = THEME.lower(get_theme_from_url(environ['QUERY_STRING']))
+    THEME = get_theme_from_url(environ['QUERY_STRING'])
+    THEME = THEME.lower()
     if THEME is None:
         return "Theme not found"
 
