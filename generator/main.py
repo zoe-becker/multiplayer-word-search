@@ -24,12 +24,11 @@ def get_theme_from_url(query_string):
 
 def random_words(environ):
     THEME = get_theme_from_url(environ['QUERY_STRING'])
-    print(THEME)
+    THEME = THEME.lower()
     if THEME is None:
         return "Theme not found"
 
     file_path = os.path.join(os.path.dirname(__file__), f'../themes/{THEME}.json')
-    print(file_path)
     words = load_json(file_path)
     if words is None:
         return "Failed to load JSON data"
