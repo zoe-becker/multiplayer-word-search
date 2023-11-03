@@ -221,7 +221,6 @@ window.addEventListener('load', renderPlayersFromSet);
 
 function getLobbyURL() {
     const currentUrl = window.location.href;
-   // const currentUrl = "https://verygoodbadthing.com/word-search-generator/lobby/ws-700d3a3d17fd3/";
     return currentUrl;
 }
 
