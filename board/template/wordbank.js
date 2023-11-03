@@ -25,13 +25,9 @@ function getCookie(key) {
 function ticktok() {
   let timer = document.getElementById("timer");
   let timeLeft = gameEndTime - Math.floor(Date.now() / 1000);
-  //startTime = data.startTime;
   gameLength = gameEndTime - startTime;
   let minutesLeft = Math.floor(timeLeft / 60);
   let secondsLeft = timeLeft - minutesLeft * 60;
-  //let greenThreshold = gameLength * 0.5;
-  //let yellowThreshold = gameLength * 0.1667;
-
 
   // check if timer is finished
   if (timeLeft <= 0) {
@@ -45,8 +41,6 @@ function ticktok() {
   }
 
   timer.textContent = minutesLeft + ":" + secondsLeft;
-
-  // first 30 percent of time is green, next 30 is yellow, last 30 is red
 
   if (timeLeft >= gameLength * 0.5) {
     timer.style.color = "green";
