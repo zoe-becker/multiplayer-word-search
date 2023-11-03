@@ -388,27 +388,23 @@ function handleThemesClick(){
         alert("Only host can select themes.")
     }
 }
-    function handleHTWClick(){
-        toggleScreen('HTW-screen', 'show');
-        console.log("new fun worked");
-        var closeButton = document.getElementById("close-button");
+function handleHTWClick(){
+    toggleScreen('HTW-screen', 'show');
+    console.log("new fun worked");
+    var closeButton = document.getElementById("close-button");
 
-        closeButton.addEventListener('mouseover', function() {
-            closeButton.classList.add('brighten');
-        });
-        
-        closeButton.addEventListener('mouseout', function() {
-            closeButton.classList.remove('brighten');
-        });
-        closeButton.addEventListener("click", function() {
-            toggleScreen('HTW-screen','hide');
-        });
+    closeButton.addEventListener('mouseover', function() {
+        closeButton.classList.add('brighten');
+    });
     
-    }
+    closeButton.addEventListener('mouseout', function() {
+        closeButton.classList.remove('brighten');
+    });
+    closeButton.addEventListener("click", function() {
+        toggleScreen('HTW-screen','hide');
+    });
 
-
-
-
+}
     //clipboard button icons
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(function() {
