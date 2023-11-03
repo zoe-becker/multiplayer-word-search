@@ -14,6 +14,13 @@
                 <button id="submit-button">Submit</button>
             </div>
         </div>
+        <div id="Start-screen" class = "hidden">
+            <div id= "Start-content">
+            <p1>Are you sure you want to start the game? </p1>
+            <button id="start-button"> Yes, start game!</button>
+            <button id="cancel-button">NO! Dont start! </button>
+            </div>
+        </div>
         <div id="HTW-screen" class="hidden">
             <div id="HTW-content">
                 <p1>How to win!!!</p1>
@@ -25,7 +32,6 @@
                 <p><span style="color: #91913d">Yellow</span>: 1.2x score multiplier</p>
                 <p><span style="color: red">Red</span>: 2x score multiplier!</p>
                 <button id="close-button">Close</button>
-                </p>
             </div> 
         </div>
         <div id="Themes-screen" class="hidden">
@@ -257,7 +263,7 @@
                     <div id="selected-theme-container">
                         <!-- somehow put selected theme here lol -->
                         <div class="selected-theme-text">Current Theme:</div>
-                        <div class="selected-theme-text">Holidays</div>        
+                        <div class="selected-theme-text" id="current-theme"></div>        
                     </div>
             </div>
         </div>
