@@ -1,3 +1,10 @@
+* { 
+    background-size: cover;
+    /* background-position: center; */
+    margin: 0;
+    padding: 0;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -5,6 +12,7 @@
     /* flex-direction: column;  */
     height: 100vh;
     gap:10px;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
 }
 
 .game-board{
@@ -23,6 +31,7 @@
     color: black;
     border-radius: 5px;
     font-size: 35px; 
+    margin-bottom: 10px;
 }
 
 #timer {
@@ -36,6 +45,12 @@
     color: black;
     border: 1px solid black;
     margin-top: 0;
+    background-color: #e6e6e6;
+    border-radius: 10px;
+    margin-bottom: 10px;
+
+    border: 1px solid black;
+    border: solid black;
 }
 
 .puzzle-section {
@@ -53,11 +68,16 @@
     /* flex-grow: 1; */
     /* align-items: center; */
 }
+
 .word-bank {
     width: 200px; 
     border: 1px solid black;
     padding: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);   
+    background-color: #e6e6e6;
+    border-radius: 10px;
+    border: 1px solid black;
+    border: solid black;
 }
 
 .word-bank h2 {
@@ -76,9 +96,12 @@
 
 table {
     table-layout: fixed;
+    background-color: #e6e6e6;
+    border: 1px solid black;
+    border: solid black;
     width: 600px;
     height: 600px;
-    border: 1px solid;
+    border-radius: 10px;
     text-align: center;
     cursor: pointer;
     /*code to stop  browser's default text higlighting */
@@ -102,6 +125,8 @@ table th,td{
     margin-right: 10px;
     display: flex;
     margin-bottom: 100px;
+    background-color: #e6e6e6;
+    border-radius: 10px;
 
     flex-direction: column;
     overflow-y: auto;
@@ -110,7 +135,11 @@ table th,td{
     position: relative;
     align-items:flex;
     flex-basis: auto;
-    height: 400px;
+    height: 390px;
+
+
+    /* border-width: 2px; */
+    border: solid black;
 }
 
 .players h2 {
@@ -128,7 +157,7 @@ table th,td{
 }
 
 .players li:hover {
-    background-color: #e0e0e0;
+    background-color: #f1f1f1; 
     border-radius: 5px;
     padding: 2px 10px;
     transition: background-color 0.3s ease;

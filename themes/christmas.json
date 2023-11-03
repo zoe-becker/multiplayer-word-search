@@ -7,6 +7,10 @@
       "SilentNight", "Snowball", "Winter", "Festival", "Chestnuts", "PineTree", "Candle", "FairyLights", 
       "Holiday", "Season", "Celebration", "GiftWrap", "SleighBells", "SantaHat", "ChristmasEve", "Midnight", "HotChocolate"
     ],
-    "backgroundImage": "xmas_2.png"
+    "backgroundImage": "xmas_4.png",
+    "playerBoxColor": "#b82121",
+    "tableBox": "#b82121",
+    "wordBankBox": "#b82121",
+    "timerBox": "#b82121"
   }
   
