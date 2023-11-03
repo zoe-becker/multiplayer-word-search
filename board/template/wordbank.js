@@ -231,7 +231,7 @@ function updateBoard(){
     }
   };
   var boardCode = getBoardCode();
-  var url = "../getBoardUpdates.php?board=" + boardCode;
+  var url = "../getBoardUpdates.php?game=" + boardCode;
   request.open("GET", url);
   request.send();
 }
