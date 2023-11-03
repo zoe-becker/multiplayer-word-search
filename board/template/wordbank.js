@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         // draw the word search
         renderWordSearch(data.puzzle);
+        reRenderPlayerlist(data.players);
       } else {
         console.log("AJAX Error: " + request.responseText);
       }
@@ -174,7 +175,7 @@ function getBoardCode() {
   return code;
 }
 //re-render playerlist and scores
-function reRenderPlayerlist(){
+function reRenderPlayerlist(players){
   // get the HTML element with the class "players" and find the <ul> inside it
   const playersList = document.querySelector(".players ul");
 
@@ -182,7 +183,7 @@ function reRenderPlayerlist(){
   playersList.innerHTML = "";
 
    // will append the player names and scores dynamically
-   data.players.forEach((player) => {
+   players.forEach((player) => {
     let listItem = document.createElement("li");
     listItem.innerHTML = `${player.name}: <span class="score">${player.score}</span>`;
     playersList.appendChild(listItem); 
