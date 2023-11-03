@@ -10,7 +10,12 @@
         - secret: unused
 - expireTime: UTC timestamp (seconds) of when the game ends
 - instanceExpiration: UTC timestamp of when the instance is eligible to be deleted from the server
-- foundWords: dictionary of words found so far mapped to the name of the player that found it
+- foundWords: dictionary of words found so far mapped to foundWord objects
+    - foundWord object
+        - start_row: row of the first letter of the solution
+        - start_col: column of the first letter of the solution
+        - direction: direction of the word
+        - name: person that found this word
 - players: array of player objects representing the players in that lobby
     - player object:
         - name: name of the player
