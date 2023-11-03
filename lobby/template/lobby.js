@@ -181,6 +181,7 @@ function loadThemeBoxes(){
             requestSetThemePending = true;
             console.log(theme + 'changed');
             setTheme(theme);
+            updateLobby();
             toggleScreen('Themes-screen','hide');
         });
         themeBoxButton.addEventListener('mouseover', function() {
@@ -330,52 +331,61 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
     }); 
+//GET ISHOST VALUE
+function isHost(){
+    var isHostStringVersion = localStorage.getItem('isHost');
+    var isHost;
+    if(isHostStringVersion === 'true'){
+        isHost = true;
+    }else isHost = false;
+    return isHost;
+}
     //HANDLING BUTTON CLICKS
+function handleStartClick(){
+    var host= isHost();
+    if(host){
+        toggleScreen('Start-screen','show');
+        //once they click on a theme button it hides the themes screen
+        var startButton = document.getElementById("start-button");
+        var cancelButton = document.getElementById("cancel-button");
 
-    function handleStartClick(){
-        var isHost= localStorage.getItem('isHost');
-        if(isHost){
-            toggleScreen('Start-screen','show');
-            //once they click on a theme button it hides the themes screen
-            var startButton = document.getElementById("start-button");
-            var cancelButton = document.getElementById("cancel-button");
+        startButton.addEventListener('mouseover', function() {
+            startButton.classList.add('brighten');
+        });
+        
+        startButton.addEventListener('mouseout', function() {
+            startButton.classList.remove('brighten');
+        });
+        startButton.addEventListener("click", function() {
+            toggleScreen('Start-screen','hide');
+            requestStartGamePending = true;
+            startGame();
+        });
+        cancelButton.addEventListener('mouseover', function() {
+            cancelButton.classList.add('brighten');
+        });
 
-            startButton.addEventListener('mouseover', function() {
-                startButton.classList.add('brighten');
-            });
-            
-            startButton.addEventListener('mouseout', function() {
-                startButton.classList.remove('brighten');
-            });
-            startButton.addEventListener("click", function() {
-                toggleScreen('Start-screen','hide');
-                requestStartGamePending = true;
-                startGame();
-            });
-            cancelButton.addEventListener('mouseover', function() {
-                cancelButton.classList.add('brighten');
-            });
+        cancelButton.addEventListener('mouseout', function() {
+            cancelButton.classList.remove('brighten');
+        });
 
-            cancelButton.addEventListener('mouseout', function() {
-                cancelButton.classList.remove('brighten');
-            });
-
-            cancelButton.addEventListener("click", function() {
-                toggleScreen('Start-screen','hide');
-            });
-        }else{
-            alert("Only host can start the game.")
-        }
+        cancelButton.addEventListener("click", function() {
+            toggleScreen('Start-screen','hide');
+        });
+    }else{
+        alert("Only host can start the game.")
     }
-    function handleThemesClick(){
-        var isHost= localStorage.getItem('isHost');
-        if(isHost){
-            toggleScreen('Themes-screen','show');
-            //once they click on a theme button it hides the themes screen
-        }else{
-            alert("Only host can select themes.")
-        }
+}
+function handleThemesClick(){
+    var host= isHost();
+    if(host){
+        toggleScreen('Themes-screen','show');
+        //once they click on a theme button it hides the themes screen
+    }else{
+        console.log("denied!");
+        alert("Only host can select themes.")
     }
+}
     function handleHTWClick(){
         toggleScreen('HTW-screen', 'show');
         console.log("new fun worked");
