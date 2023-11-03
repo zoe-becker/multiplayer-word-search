@@ -38,7 +38,18 @@ function ticktok() {
 
   timer.textContent = minutesLeft + ":" + secondsLeft;
 
-  //  SCRUM 85
+  // $greenThreshold = $GAME_LENGTH * 0.5;
+  // $yellowThreshold = $GAME_LENGTH * 0.1667;
+
+  if (timer.textContent >= "1:00") {
+    timer.style.color = "green";
+  }
+  else if(timer.textContent >= "0:30") {
+    timer.style.color = "yellow";
+  } else{
+    timer.style.color = "red";
+  }
+
 }
 
 // refresh warning
