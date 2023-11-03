@@ -159,6 +159,9 @@ function fetchPlayersAndScores() {
     .then((data) => {
       // get the HTML element with the class "players" and find the <ul> inside it
       const playersList = document.querySelector(".players ul");
+    });
+}
+
 function getBoardURL() {
   const currentUrl = window.location.href;
   return currentUrl;
