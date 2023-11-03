@@ -159,6 +159,9 @@ function fetchPlayersAndScores() {
     .then((data) => {
       // get the HTML element with the class "players" and find the <ul> inside it
       const playersList = document.querySelector(".players ul");
+    });
+}
+
 function getBoardURL() {
   const currentUrl = window.location.href;
   return currentUrl;
@@ -228,7 +231,7 @@ function updateBoard(){
     }
   };
   var boardCode = getBoardCode();
-  var url = "../getBoardUpdates.php?board=" + boardCode;
+  var url = "../getBoardUpdates.php?game=" + boardCode;
   request.open("GET", url);
   request.send();
 }
