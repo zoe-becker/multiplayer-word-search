@@ -24,7 +24,7 @@
             $isExpired = true;
             if ($puzzle["dbUpdated"] == false) {
                 foreach ($puzzle["players"] as $player) {
-                    updateDataBase($player["name"], $player["score"], $puzzle["theme"]);
+                    updateDataBase($player["name"], $player["score"]);
                 }
             }
             $puzzle["dbUpdated"] = true;
