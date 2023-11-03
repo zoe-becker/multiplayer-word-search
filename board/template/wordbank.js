@@ -201,7 +201,7 @@ function updateWordsFoundWordbank(word){
   const wordBankItems = wordBankList.getElementsByTagName("li");
   //iterate through wordbankitems first
   //FIX
-  wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
+  //wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
 
 
 }
@@ -213,14 +213,14 @@ function updateBoard(){
       if (request.status == 200) {
         data = JSON.parse(request.responseText);
         //this checks to see if we have already found this word
-        data.forEach(wordObj=>{
-          if(!foundWords.includes(wordObj.key)){
-            drawWord(wordObj);
-            foundWords.push(wordObj.key)
-            updateWordsFoundWordbank(wordObj.key);
+        Object.keys(data).forEach(key => {
+          if(!foundWords.includes(data.key)){
+            drawWord(data.key);
+            foundWords.push(key)
+            updateWordsFoundWordbank(key);
             }
         });
-        reRenderPlayerlist();
+        reRenderPlayerlist(data.players);
 
         if(data.ended === 'true'){
           //handle game end
