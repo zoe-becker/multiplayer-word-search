@@ -7,7 +7,12 @@
       "GoodForm", "YourLove", "CheckItOut", "MassiveAttack", "DidItOnEm", "BarbieTingz", "Freedom", "RomanHoliday", 
       "RomanInMoscow", "MarilynMonroe", "BlackBarbies", "Shanghai", "FlawlessRemix", "BangBang"
     ],
-    "backgroundImage": "nicki_img.png",
-    "video": "nicki_vid.mov"
+    "backgroundImage": "nicki_2.png",
+    "video": "nicki_vid.mov",
+    "playerBoxColor": "#f5c4eb",
+    "tableBox": "#f5c4eb",
+    "wordBankBox": "#f5c4eb",
+    "timerBox": "#f5c4eb",
+    "playerHover": "#ed5fd1"
   }
   
