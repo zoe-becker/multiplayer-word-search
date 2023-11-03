@@ -221,7 +221,6 @@ window.addEventListener('load', renderPlayersFromSet);
 
 function getLobbyURL() {
     const currentUrl = window.location.href;
-   // const currentUrl = "https://verygoodbadthing.com/word-search-generator/lobby/ws-700d3a3d17fd3/";
     return currentUrl;
 }
 
@@ -388,27 +387,23 @@ function handleThemesClick(){
         alert("Only host can select themes.")
     }
 }
-    function handleHTWClick(){
-        toggleScreen('HTW-screen', 'show');
-        console.log("new fun worked");
-        var closeButton = document.getElementById("close-button");
+function handleHTWClick(){
+    toggleScreen('HTW-screen', 'show');
+    console.log("new fun worked");
+    var closeButton = document.getElementById("close-button");
 
-        closeButton.addEventListener('mouseover', function() {
-            closeButton.classList.add('brighten');
-        });
-        
-        closeButton.addEventListener('mouseout', function() {
-            closeButton.classList.remove('brighten');
-        });
-        closeButton.addEventListener("click", function() {
-            toggleScreen('HTW-screen','hide');
-        });
+    closeButton.addEventListener('mouseover', function() {
+        closeButton.classList.add('brighten');
+    });
     
-    }
+    closeButton.addEventListener('mouseout', function() {
+        closeButton.classList.remove('brighten');
+    });
+    closeButton.addEventListener("click", function() {
+        toggleScreen('HTW-screen','hide');
+    });
 
-
-
-
+}
     //clipboard button icons
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(function() {

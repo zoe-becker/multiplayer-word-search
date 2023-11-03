@@ -1,16 +1,17 @@
 let selectedCells = []; // to store the TD elements being selected
 let direction = null; // Variable to store the current direction
 let mouseIsPressed = false; // global variable to check if mouse is pressed or not
-let foundWordsData = []; // stores the found words
+let foundWords = []; // stores the found words
 let gameEndTime = 0;
 let startTime = 0;
 let gameLength = 0;
 
 let timerIntervalObj;
-let themeAssets = "../../themes/themeAssets/";
+let themeAssets = '../../themes/themeAssets/'
 document.addEventListener("DOMContentLoaded", function (event) {
   setInterval(updateBoard, 2000);
 });
+
 
 // get the cookie labelled key
 function getCookie(key) {
@@ -64,7 +65,7 @@ window.addEventListener("beforeunload", function (event) {
 // checks when page is loaded
 document.addEventListener("DOMContentLoaded", function (event) {
   // fetching player data & display with new function
-  fetchPlayersAndScores();
+  //fetchPlayersAndScores();
 
   // request board from server
   let request = new XMLHttpRequest();
@@ -154,21 +155,87 @@ function fetchPlayersAndScores() {
     .then((data) => {
       // get the HTML element with the class "players" and find the <ul> inside it
       const playersList = document.querySelector(".players ul");
-
-      // remove the hard coded player names & scores
-      playersList.innerHTML = "";
-
-      // will append the player names and scores dynamically
-      data.players.forEach((player) => {
-        let listItem = document.createElement("li");
-        listItem.innerHTML = `${player.name}: <span class="score">${player.score}</span>`;
-        playersList.appendChild(listItem);
-      });
-    })
-    .catch((error) => {
-      console.error("Error fetching player data: ", error);
     });
 }
+
+function getBoardURL() {
+  const currentUrl = window.location.href;
+  return currentUrl;
+}
+
+function getBoardCode() {
+  const currentUrl = getBoardURL();
+
+  let code = currentUrl;
+  if (code.endsWith('/')) {
+      code = code.slice(0, -1); // Remove the trailing '/'
+  }
+  code = code.substring(code.lastIndexOf('/') + 1);
+  return code;
+}
+//re-render playerlist and scores
+function reRenderPlayerlist(){
+  // get the HTML element with the class "players" and find the <ul> inside it
+  const playersList = document.querySelector(".players ul");
+
+  // remove the hard coded player names & scores
+  playersList.innerHTML = "";
+
+   // will append the player names and scores dynamically
+   data.players.forEach((player) => {
+    let listItem = document.createElement("li");
+    listItem.innerHTML = `${player.name}: <span class="score">${player.score}</span>`;
+    playersList.appendChild(listItem); 
+    //FIX THIS - handle append problem, currently infinitely adds children. by using name
+    //update score each poll
+});
+}
+//scratches out desired word in wordbank
+//local scratch may disappear for a second on first poll
+function updateWordsFoundWordbank(word){
+  const wordBankList = document.getElementById("wordBankList");
+  const wordBankItems = wordBankList.getElementsByTagName("li");
+  //iterate through wordbankitems first
+  //FIX
+  wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
+
+
+}
+function updateBoard(){
+  let request = new XMLHttpRequest();
+    
+  request.onreadystatechange = function () {
+    if (request.readyState == 4) {
+      if (request.status == 200) {
+        data = JSON.parse(request.responseText);
+        //this checks to see if we have already found this word
+        data.forEach(wordObj=>{
+          if(!foundWords.includes(wordObj.key)){
+            drawWord(wordObj);
+            foundWords.push(wordObj.key)
+            updateWordsFoundWordbank(wordObj.key);
+            }
+        });
+        reRenderPlayerlist();
+
+        if(data.ended === 'true'){
+          //handle game end
+        }
+      } else {
+        console.log("AJAX Error: " + request.responseText);
+      }
+    }
+  };
+  var boardCode = getBoardCode();
+  var url = "../getBoardUpdates.php?game=" + boardCode;
+  request.open("GET", url);
+  request.send();
+}
+function drawWord(){
+//draws word on board based on word data
+//will assgin random color
+}
+
 
 function renderWordSearch(puzzle) {
   let table = document.createElement("table");
