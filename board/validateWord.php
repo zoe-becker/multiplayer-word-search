@@ -177,7 +177,11 @@
         );
 
         $puzzle["foundWords"][$wordInfo["word"]] = $foundWordObj; // add found word to array
-
+        
+        // end game early if all words found
+        if (count($puzzle["foundWords"]) == count($puzzle["words"])) {
+            $puzzle["ended"] = true;
+        }
         rewind($gameStream);
         fwrite($gameStream, json_encode($puzzle));
         flock_release($gameStream);
