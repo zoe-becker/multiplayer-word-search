@@ -293,7 +293,7 @@ function renderWordSearch(puzzle) {
       let td = tr.insertCell();
 
       matrixRow.push(td); // add cell to internal matrix
-      td.innerText = column; // Take string from placeholder variable and append it to <tr> node
+      td.setAttribute("data-content", column);
       td.setAttribute("cellIndex", JSON.stringify({"row": rIdx, "col": cIdx}));
       // cell hover is set to a random color
       td.addEventListener("mouseenter", (event) => {
@@ -328,7 +328,7 @@ function renderWordSearch(puzzle) {
 
       document.addEventListener("mouseup", function () {
         mouseIsPressed = false;
-        let selectedWord = selectedCells.map((cell) => cell.innerText).join(""); // concatenates the letters in the selected cells
+        let selectedWord = selectedCells.map((cell) => cell.getAttribute("data-content")).join(""); // concatenates the letters in the selected cells
         checkWordInWordBank(selectedWord);
       });
 

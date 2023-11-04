@@ -119,6 +119,10 @@ table th,td{
     border-radius: 20px;
 }
 
+table td::before {
+    content: attr(data-content);
+}
+
 .players {
     /* position: flex; */
     width: 200px;
