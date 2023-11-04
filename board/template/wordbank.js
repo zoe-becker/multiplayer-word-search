@@ -2,17 +2,17 @@ let selectedCells = []; // to store the TD elements being selected
 let direction = null; // Variable to store the current direction
 let mouseIsPressed = false; // global variable to check if mouse is pressed or not
 let foundWords = []; // stores the found words
+let highlightColors = [];
 let gameEndTime = 0;
 let startTime = 0;
 let gameLength = 0;
 let cellMatrix = [];
 
 let timerIntervalObj;
-let themeAssets = '../../themes/themeAssets/'
+let themeAssets = "../../themes/themeAssets/";
 document.addEventListener("DOMContentLoaded", function (event) {
   setInterval(updateBoard, 2000);
 });
-
 
 // get the cookie labelled key
 function getCookie(key) {
@@ -147,6 +147,11 @@ function renderTheme(dataTheme) {
       timerBox.style.backgroundColor = dataTheme.timerBox;
     }
   }
+
+  if (dataTheme.highlightColors) {
+    console.log(dataTheme.highlightColors);
+    highlightColors = dataTheme.highlightColors;
+  }
 }
 
 // testing fetch player and scores function
@@ -169,32 +174,32 @@ function getBoardCode() {
   const currentUrl = getBoardURL();
 
   let code = currentUrl;
-  if (code.endsWith('/')) {
-      code = code.slice(0, -1); // Remove the trailing '/'
+  if (code.endsWith("/")) {
+    code = code.slice(0, -1); // Remove the trailing '/'
   }
-  code = code.substring(code.lastIndexOf('/') + 1);
+  code = code.substring(code.lastIndexOf("/") + 1);
   return code;
 }
 //re-render playerlist and scores
-function reRenderPlayerlist(players){
+function reRenderPlayerlist(players) {
   // get the HTML element with the class "players" and find the <ul> inside it
   const playersList = document.querySelector(".players ul");
 
   // remove the hard coded player names & scores
   playersList.innerHTML = "";
 
-   // will append the player names and scores dynamically
-   players.forEach((player) => {
+  // will append the player names and scores dynamically
+  players.forEach((player) => {
     let listItem = document.createElement("li");
     listItem.innerHTML = `${player.name}: <span class="score">${player.score}</span>`;
-    playersList.appendChild(listItem); 
+    playersList.appendChild(listItem);
     //FIX THIS - handle append problem, currently infinitely adds children. by using name
     //update score each poll
-});
+  });
 }
 //scratches out desired word in wordbank
 //local scratch may disappear for a second on first poll
-function updateWordsFoundWordbank(word){
+function updateWordsFoundWordbank(word) {
   const wordBankList = document.getElementById("wordBankList");
   const wordBankItems = Array.from(wordBankList.getElementsByTagName("li"));
 
@@ -207,7 +212,7 @@ function updateWordsFoundWordbank(word){
 
 function updateBoard(){
   let request = new XMLHttpRequest();
-    
+
   request.onreadystatechange = function () {
     if (request.readyState == 4) {
       if (request.status == 200) {
@@ -218,11 +223,11 @@ function updateBoard(){
             drawWord(key, data.foundWords[key]);
             foundWords.push(key)
             updateWordsFoundWordbank(key);
-            }
+          }
         });
         reRenderPlayerlist(data.players);
 
-        if(data.ended === 'true'){
+        if (data.ended === "true") {
           //handle game end
         }
       } else {
@@ -284,7 +289,6 @@ function drawWord(word, foundWordinfo){
   }
 }
 
-
 function renderWordSearch(puzzle) {
   let table = document.createElement("table");
   const container = document.getElementById("wordsearch");
@@ -332,6 +336,7 @@ function renderWordSearch(puzzle) {
 
       document.addEventListener("mouseup", function () {
         mouseIsPressed = false;
+        let wordFound = false;
         let selectedWord = selectedCells.map((cell) => cell.innerText).join(""); // concatenates the letters in the selected cells
         let wordFound = checkWordInWordBank(selectedWord);
       });
@@ -475,16 +480,20 @@ function triggerConfetti(x, y) {
 }
 
 function randomColor() {
-  let color = [];
+  if (highlightColors) {
+    const randomIndex = Math.floor(Math.random() * highlightColors.length);
+    return highlightColors[randomIndex];
+  } else {
+    let color = [];
+    let minValue = 150; // Minimum RGB value to avoid being too close to black (adjust as needed)
+    let maxValue = 255; // Maximum RGB value to avoid being too close to white (adjust as needed)
+    for (let i = 0; i < 3; i++) {
+      // color.push(Math.floor(Math.random() * 225) + 50);
+      color.push(
+        Math.floor(Math.random() * (maxValue - minValue + 1) + minValue)
+      );
+    }
 
-  let minValue = 150; // Minimum RGB value to avoid being too close to black (adjust as needed)
-  let maxValue = 255; // Maximum RGB value to avoid being too close to white (adjust as needed)
-  for (let i = 0; i < 3; i++) {
-    // color.push(Math.floor(Math.random() * 225) + 50);
-    color.push(
-      Math.floor(Math.random() * (maxValue - minValue + 1) + minValue)
-    );
+    return "rgb(" + color.join(", ") + ")";
   }
-
-  return "rgb(" + color.join(", ") + ")";
 }
