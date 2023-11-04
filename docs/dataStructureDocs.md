@@ -73,7 +73,6 @@
 - accessToken: access token of the newly created player
 - isHost: true if the player is the host, false otherwise
 - themes (only present if isHost is true): array of available themes
-### 
 # Frontend data structures that backend may expect:
 ### WordInfo object
 - startRow: row number (from 0) of the beginning of the word
