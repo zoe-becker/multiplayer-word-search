@@ -16,18 +16,32 @@
 
     // check whether game is expired
     // returns true if the game has expired
-    function checkGameExpiration(&$puzzle) {
+    // needs gamefilepath to lock file if game is expired so DB can be updated
+    function checkGameExpiration(&$puzzle, $gamefilePath) {
         $isExpired = false;
 
         // check if game is expired
         if ($puzzle["expireTime"] <= time()) {
             $isExpired = true;
+            
+            // initial check to prevent unnecessary file locks
             if ($puzzle["dbUpdated"] == false) {
-                foreach ($puzzle["players"] as $player) {
-                    updateDataBase($player["name"], $player["score"]);
+                $gameStream = flock_acquireEX($gamefilePath); // lock file while DB updating
+                $puzzle = json_decode(fread($gameStream, filesize($gamefilePath)), true);
+
+                // final check that DB wasn't already updated since file could have been written between
+                // initial read lock in main and lock here
+                if ($puzzle["dbUpdated"] == false) {
+                    foreach ($puzzle["players"] as $player) {
+                        updateDataBase($player["name"], $player["score"]);
+                    }
                 }
+
+                $puzzle["dbUpdated"] = true; 
+                rewind($gameStream);
+                ftruncate($gameStream, 0);
+                fwrite($gameStream, json_encode($puzzle));
             }
-            $puzzle["dbUpdated"] = true;
         }
 
         return $isExpired;
@@ -44,7 +58,7 @@
 
         $puzzle = json_decode(flock_read_and_release($gamefilePath), true); // read data
     
-        $expired = checkGameExpiration($puzzle); // see if game has expired
+        $expired = checkGameExpiration($puzzle, $gamefilePath); // see if game has expired
         
         $responseObject = array(
             "expired" => $expired,
