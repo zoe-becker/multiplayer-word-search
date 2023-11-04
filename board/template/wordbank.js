@@ -210,6 +210,8 @@ function updateBoard(){
           clearInterval(timerIntervalObj);
           //sort playerlist
           data.players.sort((a, b) => b.score - a.score);
+          //add event listeners to home button
+          homeButtonFunctionality();
           //load final results page
           populateFinalResults(data.players);
           //winners get confetti, losers cry
@@ -561,4 +563,18 @@ function winnerConfetti(){
       requestAnimationFrame(frame);
     }
   }());
+}
+function homeButtonFunctionality(){
+  var homeButton = document.getElementById("home-button");
+
+  homeButton.addEventListener('mouseover', function() {
+    homeButton.classList.add('brighten');
+  });
+  
+  homeButton.addEventListener('mouseout', function() {
+    homeButton.classList.remove('brighten');
+  });
+  homeButton.addEventListener("click", function() {
+    window.location.href = "../../home/";
+  });
 }
