@@ -24,7 +24,7 @@
         <div id="HTW-screen" class="hidden">
             <div id="HTW-content">
                 <p1>How to win!!!</p1>
-                <p>3 letter words are worth 300pts! Where every additional letter is +50 points! </p>
+                <p>4 letter words are worth 300pts! Where every additional letter is +50 points! </p>
                 <p>Diagonal words give a 1.2x multiplier!</p>
                 <p>The color of the timer matters so pay attention!</p>
                 <p>If the timer color is: </p>
