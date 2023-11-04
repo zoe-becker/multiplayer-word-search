@@ -124,7 +124,7 @@
 
     function main() {
         global $GAMEFILE_NAME;
-    
+        sleep(5);
         validatePOST(["game", "token", "wordinfo"], true); // validate request
 
         $gameID = $_SERVER["HTTP_GAME"];
@@ -171,8 +171,8 @@
         $puzzle["players"][$plrIndex]["score"] += $wordValue;
 
         $foundWordObj = array(
-            "start_row" => $wordInfo["start_row"],
-            "start_col" => $wordInfo["start_col"],
+            "start_row" => $wordInfo["startRow"],
+            "start_col" => $wordInfo["startCol"],
             "direction" => $wordInfo["direction"],
             "name" => $player["name"]
         );
