@@ -336,9 +336,8 @@ function renderWordSearch(puzzle) {
 
       document.addEventListener("mouseup", function () {
         mouseIsPressed = false;
-        let wordFound = false;
         let selectedWord = selectedCells.map((cell) => cell.innerText).join(""); // concatenates the letters in the selected cells
-        let wordFound = checkWordInWordBank(selectedWord);
+        checkWordInWordBank(selectedWord);
       });
 
       // reset the background to white once the cursor leaves the cell
