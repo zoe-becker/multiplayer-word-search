@@ -230,6 +230,19 @@ table td::before {
     color: #000000;
     font-size: 15px;
 }
+#final-results-contents button{
+    margin: 10px;
+    font-family: cursive; /* Set the same font as the h2 */
+    color: #000000; /* Set the same color as the h2 */
+    border: solid #000000;
+    border-radius: 10px;
+    border-width: 2px;
+    padding: 5px;
+    cursor: pointer;
+}
+.brighten {
+    filter: brightness(1.2); /* Lightens the background color */
+}
 
 #final-results-screen.hidden{
     display: none;
