@@ -60,7 +60,7 @@
 - players: array of player objects (see backendDataStructures for details) representing the players in that lobby
     - NOTE: player objects in the players list only contain name, score, and isHost keys
 ### PuzzleState object
-- ended: whether the game timer is up (true/false)
+- expired: whether the game timer is up (true/false)
 - foundWords: dictionary of words found so far mapped to foundWord objects
 - players: array of player objects (see puzzle.json for details) representing the players in that lobby
     - NOTE: player objects in the players list only contain name, score, and isHost keys

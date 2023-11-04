@@ -9,9 +9,10 @@ let gameLength = 0;
 let cellMatrix = [];
 
 let timerIntervalObj;
+let pollingIntervalObj;
 let themeAssets = "../../themes/themeAssets/";
 document.addEventListener("DOMContentLoaded", function (event) {
-  setInterval(updateBoard, 2000);
+  pollingIntervalObj = setInterval(updateBoard, 2000);
 });
 
 // get the cookie labelled key
@@ -225,10 +226,24 @@ function updateBoard(){
             updateWordsFoundWordbank(key);
           }
         });
+        console.log('test');
         reRenderPlayerlist(data.players);
-
-        if (data.ended === "true") {
+        if (data.expired == true) {
           //handle game end
+          clearInterval(pollingIntervalObj);
+          //sort playerlist
+          data.players.sort((a, b) => b.score - a.score);
+          //load final results page
+          populateFinalResults(data.players);
+          //winners get confetti, losers cry
+          setTimeout(() => {
+            toggleScreen('final-results-screen','show')
+            if(data.players[0].name === localStorage.getItem('playerName')){
+              winnerConfetti();
+            }
+          }, 3000);
+          //use 'hide' on same call to hide the screen
+          //but since its the end of game i have no call for it.
         }
       } else {
         console.log("AJAX Error: " + request.responseText);
@@ -495,4 +510,78 @@ function randomColor() {
 
     return "rgb(" + color.join(", ") + ")";
   }
+}
+//HIDING OR SHOWING SCREENS
+function toggleScreen(screenId, action) {
+  var screen = document.getElementById(screenId);
+  if (screen) {
+      if (action === 'show') {
+          screen.classList.remove('hidden');
+      } else if (action === 'hide') {
+          screen.classList.add('hidden');
+      }
+  }
+}
+function populateFinalResults(players){
+  var rank = 1;
+  var finalResultsPlayerList = document.getElementById('final-results-player-list');
+  players.forEach((player) => {
+    //create a new final-player-box element
+    var finalPlayerBox = document.createElement("div");
+    finalPlayerBox.classList.add("final-player-box");
+
+    //create a final-player-rank element with the player's rank
+    var finalPlayerRank = document.createElement("div");
+    finalPlayerRank.classList.add("final-player-rank");
+    var rankParagraph = document.createElement("p1");
+    rankParagraph.textContent = rank +".";
+    finalPlayerRank.appendChild(rankParagraph);
+
+    //create a final-player-info element with the player's name and score
+    var finalPlayerInfo = document.createElement("div");
+    finalPlayerInfo.classList.add("final-player-info");
+    var nameParagraph = document.createElement("p1");
+    nameParagraph.textContent = "Name: " + player.name;
+    var scoreParagraph = document.createElement("p1");
+    scoreParagraph.textContent = "Score: " + player.score;
+    finalPlayerInfo.appendChild(nameParagraph);
+    finalPlayerInfo.appendChild(scoreParagraph);
+
+    //append finalPlayerRank and finalPlayerInfo to finalPlayerBox
+    finalPlayerBox.appendChild(finalPlayerRank);
+    finalPlayerBox.appendChild(finalPlayerInfo);
+
+    //append finalPlayerBox to the finalResultsPlayerList
+    finalResultsPlayerList.appendChild(finalPlayerBox);
+
+    //increment the rank for the next player
+    rank++;
+  });
+}
+function winnerConfetti(){
+  var end = Date.now() + (15 * 1000);
+
+  // go Buckeyes!
+  var colors = ['#bb0000', '#ffffff'];
+
+  (function frame() {
+    confetti({
+      particleCount: 2,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+      colors: colors
+    });
+    confetti({
+      particleCount: 2,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+      colors: colors
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  }());
 }
