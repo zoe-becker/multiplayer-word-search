@@ -195,13 +195,15 @@ function reRenderPlayerlist(players){
 //local scratch may disappear for a second on first poll
 function updateWordsFoundWordbank(word){
   const wordBankList = document.getElementById("wordBankList");
-  const wordBankItems = wordBankList.getElementsByTagName("li");
-  //iterate through wordbankitems first
-  //FIX
-  //wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
+  const wordBankItems = Array.from(wordBankList.getElementsByTagName("li"));
 
-
+  wordBankItems.forEach(element => {
+    if (element.textContent == word) {
+      element.style.textDecoration = "line-through";
+    }
+  });
 }
+
 function updateBoard(){
   let request = new XMLHttpRequest();
     
@@ -243,13 +245,13 @@ function renderWordSearch(puzzle) {
   const container = document.getElementById("wordsearch");
   container.appendChild(table); // Drew the main table node on the document
 
-  puzzle.forEach(function (row) {
+  puzzle.forEach(function (row, rIdx) {
     let tr = table.insertRow(); //Create a new row
 
-    row.forEach(function (column) {
+    row.forEach(function (column, cIdx) {
       let td = tr.insertCell();
       td.innerText = column; // Take string from placeholder variable and append it to <tr> node
-
+      td.setAttribute("cellIndex", JSON.stringify({"row": rIdx, "col": cIdx}));
       // cell hover is set to a random color
       td.addEventListener("mouseenter", (event) => {
         if (!td.classList.contains("found") && !mouseIsPressed) {
@@ -285,10 +287,6 @@ function renderWordSearch(puzzle) {
         mouseIsPressed = false;
         let selectedWord = selectedCells.map((cell) => cell.innerText).join(""); // concatenates the letters in the selected cells
         let wordFound = checkWordInWordBank(selectedWord);
-        if (!wordFound) {
-          unhighlightSelectedCells();
-        }
-        selectedCells = []; // clears selected cell
       });
 
       // reset the background to white once the cursor leaves the cell
@@ -336,8 +334,8 @@ function highlightSelectedCells() {
   });
 }
 
-function unhighlightSelectedCells() {
-  selectedCells.forEach((cell) => {
+function unhighlightCells(cells) {
+  cells.forEach((cell) => {
     if (!cell.classList.contains("found")) {
       cell.style.backgroundColor = "transparent";
       cell.style.fill = "transparent";
@@ -348,39 +346,67 @@ function unhighlightSelectedCells() {
 function checkWordInWordBank(word) {
   const wordBankList = document.getElementById("wordBankList");
   const wordBankItems = wordBankList.getElementsByTagName("li");
-  let wordFound = false;
   let wordColor = randomColor();
-
+  let wordFound = false;
+  let queryCells = Array.from(selectedCells);
+  
   for (let i = 0; i < wordBankItems.length; i++) {
     if (wordBankItems[i].textContent === word) {
-      // alert for debugging purposes
-      //alert(`Found the word: ${word}`);
-
-      wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
-      wordFound = true;
-
-      if (wordFound) {
-        let lastCell = selectedCells[selectedCells.length - 1];
-        let rect = lastCell.getBoundingClientRect();
-        let x = (rect.left + rect.right) / 2 / window.innerWidth;
-        let y = (rect.top + rect.bottom) / 2 / window.innerHeight;
-
-        // Set the same color for all cells in the found word
-        selectedCells.forEach((cell) => {
-          cell.style.backgroundColor = wordColor;
-          cell.style.fill = wordColor;
-        });
-
-        triggerConfetti(x, y);
+      let validateRequest = new XMLHttpRequest();
+      let wordIdx = JSON.parse(queryCells[0].getAttribute("cellIndex"));
+      let wordinfo = { // required header
+        "direction": direction,
+        "startRow": wordIdx.row,
+        "startCol": wordIdx.col,
+        "word": word
       }
 
-      selectedCells.forEach((cell) => {
-        cell.classList.add("found");
-      });
-
+      wordFound = true; // hold the selected cells as highlighted pending validation
+      validateRequest.onreadystatechange = function() {
+        if (validateRequest.readyState == 4) {
+          if (validateRequest.status == 200) {
+            // word found, make confetti and set cell to found and solid color
+            let lastCell = queryCells[queryCells.length - 1];
+            let rect = lastCell.getBoundingClientRect();
+            let x = (rect.left + rect.right) / 2 / window.innerWidth;
+            let y = (rect.top + rect.bottom) / 2 / window.innerHeight;
+    
+            // Set the same color for all cells in the found word
+            queryCells.forEach((cell) => {
+              cell.style.backgroundColor = wordColor;
+              cell.style.fill = wordColor;
+            });
+    
+            wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
+            triggerConfetti(x, y);
+          
+    
+            queryCells.forEach((cell) => {
+              cell.classList.add("found");
+            });
+          } else {
+            console.log("AJAX Error: " + validateRequest.responseText);
+            unhighlightCells(queryCells);
+          }
+        }
+      }
+      
+      // create request to server for word validation
+      validateRequest.open("POST", "../validateWord.php");
+      validateRequest.setRequestHeader("token", localStorage.getItem("accessToken"));
+      validateRequest.setRequestHeader("game", getBoardCode());
+      validateRequest.setRequestHeader("wordinfo", JSON.stringify(wordinfo));
+      validateRequest.send();
       break;
     }
   }
+
+  if (!wordFound) { // unhighlight immediately if not a word by local computation
+    unhighlightCells(queryCells);
+  }
+
+  selectedCells = []; // clears selected cells in all cases
+
   return wordFound;
 }
 
