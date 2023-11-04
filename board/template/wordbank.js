@@ -5,6 +5,7 @@ let foundWords = []; // stores the found words
 let gameEndTime = 0;
 let startTime = 0;
 let gameLength = 0;
+let cellMatrix = [];
 
 let timerIntervalObj;
 let themeAssets = '../../themes/themeAssets/'
@@ -212,9 +213,9 @@ function updateBoard(){
       if (request.status == 200) {
         data = JSON.parse(request.responseText);
         //this checks to see if we have already found this word
-        Object.keys(data).forEach(key => {
-          if(!foundWords.includes(data.key)){
-            drawWord(data.key);
+        Object.keys(data.foundWords).forEach(key => {
+          if(!foundWords.includes(key)){
+            drawWord(key, data.foundWords[key]);
             foundWords.push(key)
             updateWordsFoundWordbank(key);
             }
@@ -234,9 +235,53 @@ function updateBoard(){
   request.open("GET", url);
   request.send();
 }
-function drawWord(){
+
 //draws word on board based on word data
 //will assgin random color
+function drawWord(word, foundWordinfo){
+  let startRow = foundWordinfo.start_row;
+  let startCol = foundWordinfo.start_col;
+  let rowIdxIncrement = 0;
+  let colIdxIncrement = 0;
+  let wordColor = randomColor();
+
+  switch(foundWordinfo.direction) {
+    case "N":
+      rowIdxIncrement--;
+      break;
+    case "E":
+      colIdxIncrement++;
+      break;
+    case "S":
+      rowIdxIncrement++;
+      break;
+    case "W":
+      colIdxIncrement--;
+      break;
+    case "NE":
+      colIdxIncrement++;
+      rowIdxIncrement--;
+      break;
+    case "SE":
+      colIdxIncrement++;
+      rowIdxIncrement++;
+      break;
+    case "NW":
+      colIdxIncrement--;
+      rowIdxIncrement--;
+      break;
+    case "SW":
+      colIdxIncrement--;
+      rowIdxIncrement++;
+      break;
+  }
+
+  console.log(rowIdxIncrement, colIdxIncrement);
+  for (let i = 0; i < word.length; i++) {
+    cell = cellMatrix[startRow + i * rowIdxIncrement][startCol + i * colIdxIncrement];
+    cell.style.backgroundColor = wordColor;
+    cell.classList.add("found");
+  }
 }
 
 
@@ -247,9 +292,11 @@ function renderWordSearch(puzzle) {
 
   puzzle.forEach(function (row, rIdx) {
     let tr = table.insertRow(); //Create a new row
-
+    let matrixRow = [];
     row.forEach(function (column, cIdx) {
       let td = tr.insertCell();
+
+      matrixRow.push(td); // add cell to internal matrix
       td.innerText = column; // Take string from placeholder variable and append it to <tr> node
       td.setAttribute("cellIndex", JSON.stringify({"row": rIdx, "col": cIdx}));
       // cell hover is set to a random color
@@ -297,6 +344,8 @@ function renderWordSearch(puzzle) {
         }
       });
     });
+
+    cellMatrix.push(matrixRow);
   });
 }
 
@@ -351,7 +400,7 @@ function checkWordInWordBank(word) {
   let queryCells = Array.from(selectedCells);
   
   for (let i = 0; i < wordBankItems.length; i++) {
-    if (wordBankItems[i].textContent === word) {
+    if (wordBankItems[i].textContent === word && !queryCells[0].classList.contains("found")) {
       let validateRequest = new XMLHttpRequest();
       let wordIdx = JSON.parse(queryCells[0].getAttribute("cellIndex"));
       let wordinfo = { // required header
@@ -384,6 +433,8 @@ function checkWordInWordBank(word) {
             queryCells.forEach((cell) => {
               cell.classList.add("found");
             });
+
+            foundWords.push(word);
           } else {
             console.log("AJAX Error: " + validateRequest.responseText);
             unhighlightCells(queryCells);
