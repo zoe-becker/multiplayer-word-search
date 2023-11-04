@@ -11,23 +11,10 @@ let cellMatrix = [];
 let timerIntervalObj;
 let pollingIntervalObj;
 let themeAssets = "../../themes/themeAssets/";
+
 document.addEventListener("DOMContentLoaded", function (event) {
   pollingIntervalObj = setInterval(updateBoard, 2000);
 });
-
-// get the cookie labelled key
-function getCookie(key) {
-  let cookies = document.cookie.split("; ");
-  let cookieValue = false;
-
-  cookies.forEach(function (cookie) {
-    if (cookie.startsWith(key)) {
-      cookieValue = cookie.split("=")[1]; // get value from key-value pair
-    }
-  });
-
-  return cookieValue;
-}
 
 // ticks the timer down
 function ticktok() {
@@ -86,14 +73,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
           // rendering theme
           renderTheme(data.theme);
-
-          // set up timer
-          gameEndTime = data.expireTime;
-          startTime = data.startTime;
-          ticktok();
-          timerIntervalObj = setInterval(ticktok, 1000);
         });
 
+        // set up timer
+        gameEndTime = data.expireTime;
+        startTime = data.startTime;
+        ticktok();
+        timerIntervalObj = setInterval(ticktok, 1000);
         // draw the word search
         renderWordSearch(data.puzzle);
         reRenderPlayerlist(data.players);
@@ -153,17 +139,6 @@ function renderTheme(dataTheme) {
     console.log(dataTheme.highlightColors);
     highlightColors = dataTheme.highlightColors;
   }
-}
-
-// testing fetch player and scores function
-function fetchPlayersAndScores() {
-  // fetch player data from json file
-  fetch("players.json")
-    .then((response) => response.json())
-    .then((data) => {
-      // get the HTML element with the class "players" and find the <ul> inside it
-      const playersList = document.querySelector(".players ul");
-    });
 }
 
 function getBoardURL() {
@@ -231,6 +206,8 @@ function updateBoard(){
         if (data.expired == true) {
           //handle game end
           clearInterval(pollingIntervalObj);
+          ticktok(); // final timer update
+          clearInterval(timerIntervalObj);
           //sort playerlist
           data.players.sort((a, b) => b.score - a.score);
           //load final results page
