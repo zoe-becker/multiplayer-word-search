@@ -124,7 +124,6 @@
 
     function main() {
         global $GAMEFILE_NAME;
-        sleep(5);
         validatePOST(["game", "token", "wordinfo"], true); // validate request
 
         $gameID = $_SERVER["HTTP_GAME"];
