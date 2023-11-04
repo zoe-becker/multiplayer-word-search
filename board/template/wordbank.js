@@ -2,16 +2,17 @@ let selectedCells = []; // to store the TD elements being selected
 let direction = null; // Variable to store the current direction
 let mouseIsPressed = false; // global variable to check if mouse is pressed or not
 let foundWords = []; // stores the found words
+let highlightColors = [];
 let gameEndTime = 0;
 let startTime = 0;
 let gameLength = 0;
+let cellMatrix = [];
 
 let timerIntervalObj;
-let themeAssets = '../../themes/themeAssets/'
+let themeAssets = "../../themes/themeAssets/";
 document.addEventListener("DOMContentLoaded", function (event) {
   setInterval(updateBoard, 2000);
 });
-
 
 // get the cookie labelled key
 function getCookie(key) {
@@ -146,6 +147,11 @@ function renderTheme(dataTheme) {
       timerBox.style.backgroundColor = dataTheme.timerBox;
     }
   }
+
+  if (dataTheme.highlightColors) {
+    console.log(dataTheme.highlightColors);
+    highlightColors = dataTheme.highlightColors;
+  }
 }
 
 // testing fetch player and scores function
@@ -168,58 +174,60 @@ function getBoardCode() {
   const currentUrl = getBoardURL();
 
   let code = currentUrl;
-  if (code.endsWith('/')) {
-      code = code.slice(0, -1); // Remove the trailing '/'
+  if (code.endsWith("/")) {
+    code = code.slice(0, -1); // Remove the trailing '/'
   }
-  code = code.substring(code.lastIndexOf('/') + 1);
+  code = code.substring(code.lastIndexOf("/") + 1);
   return code;
 }
 //re-render playerlist and scores
-function reRenderPlayerlist(players){
+function reRenderPlayerlist(players) {
   // get the HTML element with the class "players" and find the <ul> inside it
   const playersList = document.querySelector(".players ul");
 
   // remove the hard coded player names & scores
   playersList.innerHTML = "";
 
-   // will append the player names and scores dynamically
-   players.forEach((player) => {
+  // will append the player names and scores dynamically
+  players.forEach((player) => {
     let listItem = document.createElement("li");
     listItem.innerHTML = `${player.name}: <span class="score">${player.score}</span>`;
-    playersList.appendChild(listItem); 
+    playersList.appendChild(listItem);
     //FIX THIS - handle append problem, currently infinitely adds children. by using name
     //update score each poll
-});
+  });
 }
 //scratches out desired word in wordbank
 //local scratch may disappear for a second on first poll
-function updateWordsFoundWordbank(word){
+function updateWordsFoundWordbank(word) {
   const wordBankList = document.getElementById("wordBankList");
-  const wordBankItems = wordBankList.getElementsByTagName("li");
-  //iterate through wordbankitems first
-  //FIX
-  //wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
+  const wordBankItems = Array.from(wordBankList.getElementsByTagName("li"));
 
-
+  wordBankItems.forEach(element => {
+    if (element.textContent == word) {
+      element.style.textDecoration = "line-through";
+    }
+  });
 }
+
 function updateBoard(){
   let request = new XMLHttpRequest();
-    
+
   request.onreadystatechange = function () {
     if (request.readyState == 4) {
       if (request.status == 200) {
         data = JSON.parse(request.responseText);
         //this checks to see if we have already found this word
-        Object.keys(data).forEach(key => {
-          if(!foundWords.includes(data.key)){
-            drawWord(data.key);
+        Object.keys(data.foundWords).forEach(key => {
+          if(!foundWords.includes(key)){
+            drawWord(key, data.foundWords[key]);
             foundWords.push(key)
             updateWordsFoundWordbank(key);
-            }
+          }
         });
         reRenderPlayerlist(data.players);
 
-        if(data.ended === 'true'){
+        if (data.ended === "true") {
           //handle game end
         }
       } else {
@@ -232,24 +240,69 @@ function updateBoard(){
   request.open("GET", url);
   request.send();
 }
-function drawWord(){
+
 //draws word on board based on word data
 //will assgin random color
-}
+function drawWord(word, foundWordinfo){
+  let startRow = foundWordinfo.start_row;
+  let startCol = foundWordinfo.start_col;
+  let rowIdxIncrement = 0;
+  let colIdxIncrement = 0;
+  let wordColor = randomColor();
 
+  switch(foundWordinfo.direction) {
+    case "N":
+      rowIdxIncrement--;
+      break;
+    case "E":
+      colIdxIncrement++;
+      break;
+    case "S":
+      rowIdxIncrement++;
+      break;
+    case "W":
+      colIdxIncrement--;
+      break;
+    case "NE":
+      colIdxIncrement++;
+      rowIdxIncrement--;
+      break;
+    case "SE":
+      colIdxIncrement++;
+      rowIdxIncrement++;
+      break;
+    case "NW":
+      colIdxIncrement--;
+      rowIdxIncrement--;
+      break;
+    case "SW":
+      colIdxIncrement--;
+      rowIdxIncrement++;
+      break;
+  }
+
+  console.log(rowIdxIncrement, colIdxIncrement);
+  for (let i = 0; i < word.length; i++) {
+    cell = cellMatrix[startRow + i * rowIdxIncrement][startCol + i * colIdxIncrement];
+    cell.style.backgroundColor = wordColor;
+    cell.classList.add("found");
+  }
+}
 
 function renderWordSearch(puzzle) {
   let table = document.createElement("table");
   const container = document.getElementById("wordsearch");
   container.appendChild(table); // Drew the main table node on the document
 
-  puzzle.forEach(function (row) {
+  puzzle.forEach(function (row, rIdx) {
     let tr = table.insertRow(); //Create a new row
-
-    row.forEach(function (column) {
+    let matrixRow = [];
+    row.forEach(function (column, cIdx) {
       let td = tr.insertCell();
-      td.innerText = column; // Take string from placeholder variable and append it to <tr> node
 
+      matrixRow.push(td); // add cell to internal matrix
+      td.innerText = column; // Take string from placeholder variable and append it to <tr> node
+      td.setAttribute("cellIndex", JSON.stringify({"row": rIdx, "col": cIdx}));
       // cell hover is set to a random color
       td.addEventListener("mouseenter", (event) => {
         if (!td.classList.contains("found") && !mouseIsPressed) {
@@ -284,11 +337,7 @@ function renderWordSearch(puzzle) {
       document.addEventListener("mouseup", function () {
         mouseIsPressed = false;
         let selectedWord = selectedCells.map((cell) => cell.innerText).join(""); // concatenates the letters in the selected cells
-        let wordFound = checkWordInWordBank(selectedWord);
-        if (!wordFound) {
-          unhighlightSelectedCells();
-        }
-        selectedCells = []; // clears selected cell
+        checkWordInWordBank(selectedWord);
       });
 
       // reset the background to white once the cursor leaves the cell
@@ -299,6 +348,8 @@ function renderWordSearch(puzzle) {
         }
       });
     });
+
+    cellMatrix.push(matrixRow);
   });
 }
 
@@ -336,8 +387,8 @@ function highlightSelectedCells() {
   });
 }
 
-function unhighlightSelectedCells() {
-  selectedCells.forEach((cell) => {
+function unhighlightCells(cells) {
+  cells.forEach((cell) => {
     if (!cell.classList.contains("found")) {
       cell.style.backgroundColor = "transparent";
       cell.style.fill = "transparent";
@@ -348,39 +399,70 @@ function unhighlightSelectedCells() {
 function checkWordInWordBank(word) {
   const wordBankList = document.getElementById("wordBankList");
   const wordBankItems = wordBankList.getElementsByTagName("li");
-  let wordFound = false;
   let wordColor = randomColor();
-
+  let wordFound = false;
+  let queryCells = Array.from(selectedCells);
+  
   for (let i = 0; i < wordBankItems.length; i++) {
-    if (wordBankItems[i].textContent === word) {
-      // alert for debugging purposes
-      //alert(`Found the word: ${word}`);
-
-      wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
-      wordFound = true;
-
-      if (wordFound) {
-        let lastCell = selectedCells[selectedCells.length - 1];
-        let rect = lastCell.getBoundingClientRect();
-        let x = (rect.left + rect.right) / 2 / window.innerWidth;
-        let y = (rect.top + rect.bottom) / 2 / window.innerHeight;
-
-        // Set the same color for all cells in the found word
-        selectedCells.forEach((cell) => {
-          cell.style.backgroundColor = wordColor;
-          cell.style.fill = wordColor;
-        });
-
-        triggerConfetti(x, y);
+    if (wordBankItems[i].textContent === word && !queryCells[0].classList.contains("found")) {
+      let validateRequest = new XMLHttpRequest();
+      let wordIdx = JSON.parse(queryCells[0].getAttribute("cellIndex"));
+      let wordinfo = { // required header
+        "direction": direction,
+        "startRow": wordIdx.row,
+        "startCol": wordIdx.col,
+        "word": word
       }
 
-      selectedCells.forEach((cell) => {
-        cell.classList.add("found");
-      });
+      wordFound = true; // hold the selected cells as highlighted pending validation
+      validateRequest.onreadystatechange = function() {
+        if (validateRequest.readyState == 4) {
+          if (validateRequest.status == 200) {
+            // word found, make confetti and set cell to found and solid color
+            let lastCell = queryCells[queryCells.length - 1];
+            let rect = lastCell.getBoundingClientRect();
+            let x = (rect.left + rect.right) / 2 / window.innerWidth;
+            let y = (rect.top + rect.bottom) / 2 / window.innerHeight;
+    
+            // Set the same color for all cells in the found word
+            queryCells.forEach((cell) => {
+              cell.style.backgroundColor = wordColor;
+              cell.style.fill = wordColor;
+            });
+    
+            wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
+            triggerConfetti(x, y);
+          
+    
+            queryCells.forEach((cell) => {
+              cell.classList.add("found");
+            });
 
+            foundWords.push(word);
+            reRenderPlayerlist(JSON.parse(validateRequest.responseText)); // instantly update score
+          } else {
+            console.log("AJAX Error: " + validateRequest.responseText);
+            unhighlightCells(queryCells);
+          }
+        }
+      }
+      
+      // create request to server for word validation
+      validateRequest.open("POST", "../validateWord.php");
+      validateRequest.setRequestHeader("token", localStorage.getItem("accessToken"));
+      validateRequest.setRequestHeader("game", getBoardCode());
+      validateRequest.setRequestHeader("wordinfo", JSON.stringify(wordinfo));
+      validateRequest.send();
       break;
     }
   }
+
+  if (!wordFound) { // unhighlight immediately if not a word by local computation
+    unhighlightCells(queryCells);
+  }
+
+  selectedCells = []; // clears selected cells in all cases
+
   return wordFound;
 }
 
@@ -397,16 +479,20 @@ function triggerConfetti(x, y) {
 }
 
 function randomColor() {
-  let color = [];
+  if (highlightColors) {
+    const randomIndex = Math.floor(Math.random() * highlightColors.length);
+    return highlightColors[randomIndex];
+  } else {
+    let color = [];
+    let minValue = 150; // Minimum RGB value to avoid being too close to black (adjust as needed)
+    let maxValue = 255; // Maximum RGB value to avoid being too close to white (adjust as needed)
+    for (let i = 0; i < 3; i++) {
+      // color.push(Math.floor(Math.random() * 225) + 50);
+      color.push(
+        Math.floor(Math.random() * (maxValue - minValue + 1) + minValue)
+      );
+    }
 
-  let minValue = 150; // Minimum RGB value to avoid being too close to black (adjust as needed)
-  let maxValue = 255; // Maximum RGB value to avoid being too close to white (adjust as needed)
-  for (let i = 0; i < 3; i++) {
-    // color.push(Math.floor(Math.random() * 225) + 50);
-    color.push(
-      Math.floor(Math.random() * (maxValue - minValue + 1) + minValue)
-    );
+    return "rgb(" + color.join(", ") + ")";
   }
-
-  return "rgb(" + color.join(", ") + ")";
 }

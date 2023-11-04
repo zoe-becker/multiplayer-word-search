@@ -7,7 +7,7 @@
             2. token: access token of the requesting player
             3. wordinfo: json encoded WordInfo object
 
-        return: new score for that player (if successful)
+        return: players key of PuzzleState object
     */
     $GAMEFILE_NAME = "puzzle.json";
     $GAME_LENGTH = 180; 
@@ -124,7 +124,6 @@
 
     function main() {
         global $GAMEFILE_NAME;
-    
         validatePOST(["game", "token", "wordinfo"], true); // validate request
 
         $gameID = $_SERVER["HTTP_GAME"];
@@ -171,8 +170,8 @@
         $puzzle["players"][$plrIndex]["score"] += $wordValue;
 
         $foundWordObj = array(
-            "start_row" => $wordInfo["start_row"],
-            "start_col" => $wordInfo["start_col"],
+            "start_row" => $wordInfo["startRow"],
+            "start_col" => $wordInfo["startCol"],
             "direction" => $wordInfo["direction"],
             "name" => $player["name"]
         );
@@ -184,7 +183,7 @@
         flock_release($gameStream);
 
         http_response_code(200);
-        echo $puzzle["players"][$plrIndex]["score"];
+        echo json_encode($puzzle["players"]);
     }
 
     main();
