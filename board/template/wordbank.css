@@ -174,3 +174,59 @@ table th,td{
     /* display: flex; */
     flex-direction: column;
 }
+#final-results-screen{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+#final-results-contents{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    border: solid #000000; /* Add border style as well */
+    border-width: 5px;
+    background-color: #e6e6e6;
+    margin: 10px;
+}
+#final-results-contents p{
+    margin: 5px;
+    font-family: cursive;
+    color: #000000;
+    font-size: 30px;
+}
+#final-player-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.final-player-box{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+
+}
+.final-player-info{
+    justify-content: space-between;
+}
+.final-player-rank p1,.final-player-info p1 {
+    margin: 15px;
+    font-family: cursive;
+    color: #000000;
+    font-size: 15px;
+}
+
+#final-results-screen.hidden{
+    display: none;
+}
