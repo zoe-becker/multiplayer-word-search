@@ -33,8 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
   joinButton.addEventListener("click", function () {
     const input = gameCode.value.trim();
     if (isValidGameCode(input)) {
-      const fullURL = `http://localhost/word-search-generator/lobby/${input}`;
-      window.open(fullURL, "_blank");
+      window.location.href = `../lobby/${input}`;
     } else {
       alert("Invalid game code.");
     }
