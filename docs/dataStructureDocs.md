@@ -62,10 +62,10 @@
 ### PuzzleState object
 - ended: whether the game timer is up (true/false)
 - foundWords: dictionary of words found so far mapped to foundWord objects
-- players: array of player objects (see backendDataStructures for details) representing the players in that lobby
+- players: array of player objects (see puzzle.json for details) representing the players in that lobby
     - NOTE: player objects in the players list only contain name, score, and isHost keys
 ### LobbyData object
-- players: array of player objects (see backendDataStructures for details) representing the players in that lobby
+- players: array of player objects (see puzzle.json for details) representing the players in that lobby
     - NOTE: player objects in the players list only contain name, score, and isHost keys
 - gameLink: false if game not started, otherwise the relative path from the lobby instance to the game instance
 - theme: currently selected theme (in string form)
@@ -73,7 +73,7 @@
 - accessToken: access token of the newly created player
 - isHost: true if the player is the host, false otherwise
 - themes (only present if isHost is true): array of available themes
-
+### 
 # Frontend data structures that backend may expect:
 ### WordInfo object
 - startRow: row number (from 0) of the beginning of the word
