@@ -435,6 +435,7 @@ function checkWordInWordBank(word) {
             });
 
             foundWords.push(word);
+            reRenderPlayerlist(JSON.parse(validateRequest.responseText)); // instantly update score
           } else {
             console.log("AJAX Error: " + validateRequest.responseText);
             unhighlightCells(queryCells);
