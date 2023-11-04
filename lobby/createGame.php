@@ -73,6 +73,7 @@
             $puzzle["expireTime"] = time() + $GAME_LENGTH; // set match expiration date
             $puzzle["instanceExpiration"] = $puzzle["expireTime"] + $INSTANCE_EXPIRATION_DELAY;
             $puzzle["foundWords"] = new stdClass(); // empty map
+            $puzzle["ended"] = false;
             $puzzle["players"] = $lobbyData["players"];
             $puzzle["dbUpdated"] = false;
 
