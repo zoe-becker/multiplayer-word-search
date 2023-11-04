@@ -285,10 +285,11 @@ function renderWordSearch(puzzle) {
 
       document.addEventListener("mouseup", function () {
         mouseIsPressed = false;
+        let wordFound = false;
         let selectedWord = selectedCells.map((cell) => cell.innerText).join(""); // concatenates the letters in the selected cells
         selectedCells.forEach((cell) => {
           if (!cell.classList.contains("found")) {
-            let wordFound = checkWordInWordBank(selectedWord);
+            wordFound = checkWordInWordBank(selectedWord);
           }
         });
 
