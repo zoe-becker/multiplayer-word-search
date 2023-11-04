@@ -11,6 +11,15 @@
     "playerBoxColor": "#b82121",
     "tableBox": "#b82121",
     "wordBankBox": "#b82121",
-    "timerBox": "#b82121"
+    "timerBox": "#b82121",
+    "highlightColors": [
+      "#FF0000",
+      "#00FF00",
+      "#FFD700",
+      "#006400",
+      "#E41B17",
+      "#006400",
+      "#228B22"
+    ]
   }
   

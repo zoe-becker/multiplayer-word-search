@@ -10,6 +10,7 @@
         - secret: unused
 - startTime: UTC timestamp (seconds) of when the game starts
 - expireTime: UTC timestamp (seconds) of when the game ends
+- ended: whether the game has ended (either by timer expiration or all words found)
 - instanceExpiration: UTC timestamp of when the instance is eligible to be deleted from the server
 - foundWords: dictionary of words found so far mapped to foundWord objects
     - foundWord object

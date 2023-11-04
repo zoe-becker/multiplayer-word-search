@@ -48,6 +48,12 @@
             exit(-1);
         }
 
+        if ($puzzle["ended"] == true) {
+            http_response_code(403);
+            echo "game has already ended";
+            exit(-1);
+        }
+
         $playerData = $puzzle["players"][$player_index];
         validateEligibility($playerData); // validate player can retrieve board
 

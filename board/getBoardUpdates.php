@@ -21,7 +21,7 @@
         $isExpired = false;
 
         // check if game is expired
-        if ($puzzle["expireTime"] <= time()) {
+        if ($puzzle["expireTime"] <= time() || $puzzle["ended"]) {
             $isExpired = true;
             
             // initial check to prevent unnecessary file locks
@@ -38,6 +38,7 @@
                 }
 
                 $puzzle["dbUpdated"] = true; 
+                $puzzle["ended"] = true;
                 rewind($gameStream);
                 ftruncate($gameStream, 0);
                 fwrite($gameStream, json_encode($puzzle));
