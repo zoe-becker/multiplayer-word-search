@@ -165,6 +165,9 @@ List the ready features here:
 	- `Jira Task-72: Theme buttons (front and back-end)`
         - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-72
 		- reference: Not completed before sprint completion.
+
+## Sprint 2 🏃🏃  (October 23rd - November 3rd)
+
 <br />
 ## Next Steps
 - **Ethan**:
