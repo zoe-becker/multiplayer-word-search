@@ -168,7 +168,30 @@ List the ready features here:
 
 ## Sprint 2 🏃🏃  (October 23rd - November 3rd)
 - **Ethan**:
-    - comment 1
+	- `Jira Task SCRUM-113: ask server to validate words the client finds`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-113
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/c042d056740f2e4293eab6cc270aee2a58556236
+	- `Jira Task SCRUM-107: Restructure backend to reduce repeat code`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-107
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/89aaa8ef9ed98ecb4ac5e7e620c32a1e1aba1460
+	- `Jira Task SCRUM-106: Create testing instances for faster testing`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-106
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/94928652e3978f2f0608b72e28405b9b544f8695
+	- `Jira Task SCRUM-104: Set name (backend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-104
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/54fcca3d992072e556215406783a16d204d67b69
+	- `Jira Task SCRUM-96: Create validateword.php`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-96
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/465da796d5129fb3ae5f2baefd7742a4caf2a492
+	- `Jira Task SCRUM-84: Game logic: Create a game timer (frontend mostly)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-84
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/6495ba7025d03480ec7cf626ea3ff8de4f507ce5
+	- `Jira Task SCRUM-82: Multiplayer: Create unique lobby instances (backend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-82
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/0214ff54cf1415d60376d13d506b711f44c0b14f
+	- `Jira Task SCRUM-83: Multiplayer board: Create game access token`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-83
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/83f32a4f300f206f9b2ae4ac023c1789f8d9be43
 - **Mel**:
 - **Cruz**:
 Helloworld!!
