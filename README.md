@@ -253,7 +253,7 @@ List the ready features here:
 <br />
 ## Next Steps
 - **Ethan**:
-    - multiplayer lobbies
+    - scaling up game to accomodate larger lobbies
 - **Mel**:
     - gamelobby, about, and credits pages
 - **Cruz**:
