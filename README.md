@@ -168,10 +168,12 @@ List the ready features here:
 
 ## Sprint 2 🏃🏃  (October 23rd - November 3rd)
 - **Ethan**:
+    - comment 1
 - **Mel**:
 - **Cruz**:
 Helloworld!!
 - **Zoe**:
+HEY!
 - **Cameron**:
 <br />
 ## Next Steps
