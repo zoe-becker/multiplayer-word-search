@@ -248,7 +248,7 @@ List the ready features here:
         - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-91 
          - reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/7e3360a86aff1a31d9cc7d763d4398be58171054
 <br />
-- **Zoe**:
+
 - **Cameron**:
 <br />
 ## Next Steps
@@ -257,7 +257,7 @@ List the ready features here:
 - **Mel**:
     - gamelobby, about, and credits pages
 - **Cruz**:
-    - database implementation
+    - Finish Leaderboards for themes, improve UI, play testing  
 - **Zoe**:
     - server-side word validation
 - **Cameron**:
