@@ -255,10 +255,10 @@ List the ready features here:
 - **Ethan**:
     - scaling up game to accomodate larger lobbies
 - **Mel**:
-    - gamelobby, about, and credits pages
+    - About, and credits pages and add music for the different themes
 - **Cruz**:
     - Finish Leaderboards for themes, improve UI, play testing  
 - **Zoe**:
-    - server-side word validation
+    - Add shapes to the grid!
 - **Cameron**:
     - setting up theme-adaptive game board code
