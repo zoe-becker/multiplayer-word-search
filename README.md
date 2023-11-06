@@ -172,8 +172,23 @@ List the ready features here:
 - **Mel**:
 - **Cruz**:
 Helloworld!!
-- **Zoe**:
-HEY!
+- **Zoe**: "Fixed the highlighting function for the wordsearch grid (removed all bugs) and updated the highlighting to match the themes. Added a join game form on homepage."
+	- `Jira Task SCRUM-110: Fix background bug in word grid.`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-110
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/7420483995c11a09535ade0e2b6545f8fc84fbd6
+	- `Jira Task SCRUM-109: After highlighting two letters in one direction lock the direction of highlighting.`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-109
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/a9c17271b097beede801072974ad265564daa2d1
+	- `Jira Task-103: Home page - create or join gamev`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-103
+		- reference:https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/1c00fc1d188de6e4352a29d2b04e9952861714c2
+	- `Jira Task-92: User-X: Have found words be the same color(frontend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-92
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/98d43c478563371611cf9cfac93b4261fad990ff
+    - `Jira Task-91: Set random color range based on theme`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-91 
+         - reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/7e3360a86aff1a31d9cc7d763d4398be58171054
+<br />
 - **Cameron**:
 <br />
 ## Next Steps
