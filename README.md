@@ -167,7 +167,11 @@ List the ready features here:
 		- reference: Not completed before sprint completion.
 
 ## Sprint 2 🏃🏃  (October 23rd - November 3rd)
-
+- **Ethan**:
+- **Mel**:
+- **Cruz**:
+- **Zoe**:
+- **Cameron**:
 <br />
 ## Next Steps
 - **Ethan**:
