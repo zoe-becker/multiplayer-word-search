@@ -166,6 +166,10 @@ List the ready features here:
         - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-72
 		- reference: Not completed before sprint completion.
 
+
+************************************************************************************************************************************************************
+
+
 ## Sprint 2 🏃🏃  (October 23rd - November 3rd)
 - **Ethan**:
 	- `Jira Task SCRUM-113: ask server to validate words the client finds`
@@ -192,7 +196,31 @@ List the ready features here:
 	- `Jira Task SCRUM-83: Multiplayer board: Create game access token`
         - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-83
 		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/83f32a4f300f206f9b2ae4ac023c1789f8d9be43
+<br />
+
+
 - **Mel**:
+    - `Jira Task SCRUM-101: Gather background color/images for themes`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-101
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/69106b76b194109de1d0eb756bafa426ee0e4f3a
+	- `Jira Task SCRUM-100: Create playerlist near board (frontend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-100
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/10d1ca66d9339759e5acb86285c9a1b536fee57e
+	- `Jira Task SCRUM-99: Implement scoreboard in playerlist (backend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-99
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/466f49f2b03435381f844bffe590ae1ee545d52e
+	- `Jira Task SCRUM-97: Create setTheme.php (server backend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-97
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/c1514a2d6fc5bc2197f66abc7b1bc4eaaedd21c5
+	- `Jira Task SCRUM-87: Update page with themes (frontend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-87
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/eadbefeb28652cb87dce67e31729a2808dae6379
+	- `Jira Task SCRUM-86: Theme dictionaries of words`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-86
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/ae33d0ebb6a5ae95f312d806f9a3a6aa7fae0931
+<br />	
+
+
 - **Cruz**:
 
 - SCRUM-18 - Integrate the scoring algorithm. (backend)
@@ -230,6 +258,8 @@ List the ready features here:
     - [SCRUM-112 Jira Link](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-112)
 
     - [SCRUM-12 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/e981d66f5357eabaefda1fdb39a8370962301393)
+<br />
+
 
 - **Zoe**: "Fixed the highlighting function for the wordsearch grid (removed all bugs) and updated the highlighting to match the themes. Added a join game form on homepage."
 	- `Jira Task SCRUM-110: Fix background bug in word grid.`
@@ -249,7 +279,10 @@ List the ready features here:
          - reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/7e3360a86aff1a31d9cc7d763d4398be58171054
 <br />
 
+
 - **Cameron**:
+
+
 <br />
 ## Next Steps
 - **Ethan**:
