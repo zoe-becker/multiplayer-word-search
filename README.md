@@ -168,7 +168,30 @@ List the ready features here:
 
 ## Sprint 2 🏃🏃  (October 23rd - November 3rd)
 - **Ethan**:
-    - comment 1
+	- `Jira Task SCRUM-113: ask server to validate words the client finds`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-113
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/c042d056740f2e4293eab6cc270aee2a58556236
+	- `Jira Task SCRUM-107: Restructure backend to reduce repeat code`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-107
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/89aaa8ef9ed98ecb4ac5e7e620c32a1e1aba1460
+	- `Jira Task SCRUM-106: Create testing instances for faster testing`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-106
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/94928652e3978f2f0608b72e28405b9b544f8695
+	- `Jira Task SCRUM-104: Set name (backend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-104
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/54fcca3d992072e556215406783a16d204d67b69
+	- `Jira Task SCRUM-96: Create validateword.php`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-96
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/465da796d5129fb3ae5f2baefd7742a4caf2a492
+	- `Jira Task SCRUM-84: Game logic: Create a game timer (frontend mostly)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-84
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/6495ba7025d03480ec7cf626ea3ff8de4f507ce5
+	- `Jira Task SCRUM-82: Multiplayer: Create unique lobby instances (backend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-82
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/0214ff54cf1415d60376d13d506b711f44c0b14f
+	- `Jira Task SCRUM-83: Multiplayer board: Create game access token`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-83
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/83f32a4f300f206f9b2ae4ac023c1789f8d9be43
 - **Mel**:
 - **Cruz**:
 
@@ -207,8 +230,24 @@ List the ready features here:
 
         - [SCRUM-12 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/e981d66f5357eabaefda1fdb39a8370962301393)
 
+- **Zoe**: "Fixed the highlighting function for the wordsearch grid (removed all bugs) and updated the highlighting to match the themes. Added a join game form on homepage."
+	- `Jira Task SCRUM-110: Fix background bug in word grid.`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-110
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/7420483995c11a09535ade0e2b6545f8fc84fbd6
+	- `Jira Task SCRUM-109: After highlighting two letters in one direction lock the direction of highlighting.`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-109
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/a9c17271b097beede801072974ad265564daa2d1
+	- `Jira Task-103: Home page - create or join gamev`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-103
+		- reference:https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/1c00fc1d188de6e4352a29d2b04e9952861714c2
+	- `Jira Task-92: User-X: Have found words be the same color(frontend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-92
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/98d43c478563371611cf9cfac93b4261fad990ff
+    - `Jira Task-91: Set random color range based on theme`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-91 
+         - reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/7e3360a86aff1a31d9cc7d763d4398be58171054
+<br />
 - **Zoe**:
-HEY!
 - **Cameron**:
 <br />
 ## Next Steps
