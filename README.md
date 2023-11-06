@@ -171,7 +171,42 @@ List the ready features here:
     - comment 1
 - **Mel**:
 - **Cruz**:
-Helloworld!!
+
+        SCRUM-18 - Integrate the scoring algorithm. (backend)
+        - [SCRUM-18 Jira Link](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-18)
+
+        - [SCRUM-18 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/ab15f270f93be6774d5cff5f657ad7e81f0267bf)
+
+        - SCRUM-85 Game logic: Game timer animation
+
+        - [SCRUM-85 Jira Link](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-85)
+
+        - [SCRUM-85 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/9b33e6232896b1b0bd62e840dce146983cca4af7)
+
+        - SCRUM-89 Leaderboard: Call database for leaderboard
+
+        - [SCRUM-89 Jira Link](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-89)
+
+        - [SCRUM-89 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/0ea6db2111b52f3368e519a2c435c01ba7fb63bf)
+
+        - SCRUM-90 - Leaderboard: Update database for leaderboard
+
+        - [SCRUM-90 Jira Link](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-90)
+
+        - [SCRUM-90 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/40c451f4d81c3c73dfbfe5e651e3c3f04a430ba3)
+
+        - SCRUM-93- UX:  create visual cue
+
+        - [SCRUM-93 Jira Link](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-93)
+
+        - [SCRUM-93 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/b8a4ed0730bd8624b72e00864666ff9297558340)
+
+        - SCRUM-112 - BUG: words clipping out the box when they're too long
+
+        - [SCRUM-112 Jira Link](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-112)
+
+        - [SCRUM-12 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/e981d66f5357eabaefda1fdb39a8370962301393)
+
 - **Zoe**:
 HEY!
 - **Cameron**:
