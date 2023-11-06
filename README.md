@@ -277,6 +277,9 @@ List the ready features here:
     - `Jira Task-91: Set random color range based on theme`
         - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-91 
          - reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/7e3360a86aff1a31d9cc7d763d4398be58171054
+    - `Jira Task-80: User-X: Fix the highlight feature `
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-80
+         - reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/f99542187799b1f06911e93f45b26a8f9c3a57b5
 <br />
 
 
@@ -288,7 +291,7 @@ List the ready features here:
 - **Ethan**:
     - scaling up game to accomodate larger lobbies
 - **Mel**:
-    - About, and credits pages and add music for the different themes
+    - Add about and credits pages. Add music for the different themes
 - **Cruz**:
     - Finish Leaderboards for themes, improve UI, play testing  
 - **Zoe**:
