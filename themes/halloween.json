@@ -1,0 +1,27 @@
+{
+    "words": [
+      "Fangs", "Ghost", "Witch", "Zombie", "Vampire", "Costume", "Candy", "Spooky", "Pumpkin", "Skeleton",
+      "Ghoul", "Creepy", "Bat", "Cauldron", "Spider", "Broomstick", "Cemetery", "Mummy", "Werewolf",
+      "Scarecrow", "Monster", "BlackCat", "Boo", "HocusPocus", "Skull", "Fog", "Cobweb", "Tombstone", "Magic", "Moon",
+      "Candle", "Mask", "Voodoo", "Candelabra", "Scream", "Horror", "Ghostly", "Fright", "Phantom", "Curse",
+      "Dread", "Eerie", "Ghastly", "Horrify", "Macabre", "Midnight", "Nightmare", "Terrify", "Poltergeist", "Undead"
+    ],
+    "backgroundImage": "hw_3.png",
+    "playerBoxColor": "#d1813f",
+    "tableBox": "#d1813f",
+    "wordBankBox": "#d1813f",
+    "timerBox": "#d1813f",
+    "highlightColors": [
+      "#FF6F61",
+      "#FFB03B",
+      "#FF634D",
+      "#FFD700",
+      "#E34234",
+      "#FF5733",
+      "#FF8C00",
+      "#D35400",
+      "#B22222",
+      "#FFA07A"
+    ]
+  }
+  

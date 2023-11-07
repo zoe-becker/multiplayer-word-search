@@ -1,0 +1,24 @@
+{
+    "words": [
+      "Love", "Heart", "Flowers", "Cupid", "Chocolate", "Romance", "Kisses", "Roses", "Candlelight",
+      "Valentine", "Sweetheart", "Hugs", "Adoration", "Affection", "Amour", "Arrow", "Admire", "Bouquet", 
+      "Cherish", "Crush", "Cuddle", "Devotion", "Date", "Flirt", "Red", "Gift", "Joy", "Letters", 
+      "Lovebird", "Poetry", "Red", "Romantic", "Sweetie", "Tenderness", "XOXO", "Adoration", 
+      "Reservations", "Emotion", "Heartthrob", "Jewelry", "Kiss", "Lover", "Romantic", "Sweets", "TeddyBear", "Cards", 
+      "Pink"
+    ],
+    "backgroundImage": "vday_2.png",
+    "playerBoxColor": "#de95aa",
+    "tableBox": "#de95aa",
+    "wordBankBox": "#de95aa",
+    "timerBox": "#de95aa",
+    "highlightColors": [
+      "#FF0000",
+      " #FFC0CB",
+      "#FFB6C1",
+      " #f2b1f0 ",
+      " #e69aad",
+      "#FF69B4"
+    ]
+  }
+  

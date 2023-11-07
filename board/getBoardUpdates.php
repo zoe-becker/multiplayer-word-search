@@ -1,36 +1,75 @@
 <?php
-/* This script is responsible for returning updates to polling clients about the board, game expiration, etc.
-    Additionally, contains logic for when game gets marked as expired.
+/* This function is responsible for the ititial data needed by the client to setup their board
+    Accepted methods: GET only
+    Required query parameters:
+        1. game: game id (including the prefix)
+
+    Return: PuzzleState object (see docs)
 */
-    // check request method
-    if ($_SERVER["REQUEST_METHOD"] != "GET") {
-        http_response_code(405);
-        exit(-1);
-    }
+    require "../utilities/sanitizePlayers.php";
+    require "../utilities/fileSyncronization.php";
+    require "../utilities/requestValidation.php";
+    require "validateGame.php";
+    require "updateDB.php";
 
-    date_default_timezone_set("UTC"); // keep timezone consistent
+    $GAMEFILE_NAME = "puzzle.json";
+
+    // check whether game is expired
+    // returns true if the game has expired
+    // needs gamefilepath to lock file if game is expired so DB can be updated
+    function checkGameExpiration(&$puzzle, $gamefilePath) {
+        $isExpired = false;
+
+        // check if game is expired
+        if ($puzzle["expireTime"] <= time() || $puzzle["ended"]) {
+            $isExpired = true;
+            
+            // initial check to prevent unnecessary file locks
+            if ($puzzle["dbUpdated"] == false) {
+                $gameStream = flock_acquireEX($gamefilePath); // lock file while DB updating
+                $puzzle = json_decode(fread($gameStream, filesize($gamefilePath)), true);
+
+                // final check that DB wasn't already updated since file could have been written between
+                // initial read lock in main and lock here
+                if ($puzzle["dbUpdated"] == false) {
+                    foreach ($puzzle["players"] as $player) {
+                        updateDataBase($player["name"], $player["score"]);
+                    }
+                }
+
+                $puzzle["dbUpdated"] = true; 
+                $puzzle["ended"] = true;
+                rewind($gameStream);
+                ftruncate($gameStream, 0);
+                fwrite($gameStream, json_encode($puzzle));
+            }
+        }
+
+        return $isExpired;
+    }
+    function main() {
+        global $GAMEFILE_NAME;
+        validateGET(array("game"), true); // validate request
+
+        date_default_timezone_set("UTC"); // keep timezone consistent
+        $gameID = $_GET["game"];
+        $gamefilePath = "$gameID/$GAMEFILE_NAME";
+
+        validateGame($gameID, true); // validate game exists
+
+        $puzzle = json_decode(flock_read_and_release($gamefilePath), true); // read data
     
-    $puzzle = file_get_contents($puzzle);
-    $responseObject = array(
-        "expired" => false,
-        "foundWords" => array()
-    );
+        $expired = checkGameExpiration($puzzle, $gamefilePath); // see if game has expired
+        
+        $responseObject = array(
+            "expired" => $expired,
+            "foundWords" => $puzzle["foundWords"],
+            "players" => util_sanitize_players($puzzle["players"])
+        );
 
-    if (!$puzzle) {
-        http_response_code(500);
-        echo "could not get board updates";
-        exit(-2);
+        http_response_code(200);
+        echo json_encode($responseObject);
     }
 
-    $puzzle = json_decode($puzzle,true);
-
-    // check if game is expired
-    if ($puzzle["expiration"] <= time()) {
-        $responseObject["expired"] = true;
-    }
-
-    /* TODO: logic for returning found words */
-    http_response_code(200);
-    return json_encode($responseObject);
-
+    main();
 ?>

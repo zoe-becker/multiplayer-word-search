@@ -1,0 +1,25 @@
+{
+    "words": [
+      "Santa", "Reindeer", "Snowflake", "KrisKringle", "Stocking", "Ornament", "Gifts", "TinyTim",
+      "Holly", "Snow", "Snowman", "Sleigh", "Elf", "Gingerbread", "Fir", "Yule", "Scarf", "Sweater",
+      "Caroling", "Mistletoe", "Presents", "Cookies", "Frosty", "Rudolph", "MrsClause", "Noel", "Sugarplum",
+      "Wreath", "Chimney", "Grinch", "Tinsel", "Eggnog", "Gold", "Frankincense", "Myrrh", 
+      "Polar", "Snowball", "Winter", "Festival", "Chestnuts", "Twinkle", "Workshop", "Snoopy", 
+      "Scrooge", "Blizzard", "Ebenezer", "Wrap", "Nutcracker", "Milk", "Solstice", "Eve", "HotCoco"
+    ],
+    "backgroundImage": "xmas_4.png",
+    "playerBoxColor": "#b82121",
+    "tableBox": "#b82121",
+    "wordBankBox": "#b82121",
+    "timerBox": "#b82121",
+    "highlightColors": [
+      "#FF0000",
+      "#00FF00",
+      "#FFD700",
+      "#006400",
+      "#E41B17",
+      "#006400",
+      "#228B22"
+    ]
+  }
+  
