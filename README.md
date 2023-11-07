@@ -165,15 +165,164 @@ List the ready features here:
 	- `Jira Task-72: Theme buttons (front and back-end)`
         - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-72
 		- reference: Not completed before sprint completion.
-<br />
-## Next Steps
+
+## Next Steps (for Sprint 2)
 - **Ethan**:
-    - multiplayer lobbies
+    - Creating backend support for multiplayer lobbies
 - **Mel**:
-    - gamelobby, about, and credits pages
+    - Implementing dynamic theme adaptation on game board
 - **Cruz**:
-    - database implementation
+    - Create a backend for leaderboards and visual flair on game board 
 - **Zoe**:
-    - server-side word validation
+    - Bug fixes on game board
 - **Cameron**:
-    - setting up theme-adaptive game board code
+    - Create pre-game lobby
+
+************************************************************************************************************************************************************
+
+
+## Sprint 2 🏃🏃  (October 23rd - November 3rd)
+- **Ethan**:
+	- `Jira Task SCRUM-113: ask server to validate words the client finds`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-113
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/c042d056740f2e4293eab6cc270aee2a58556236
+	- `Jira Task SCRUM-107: Restructure backend to reduce repeat code`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-107
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/89aaa8ef9ed98ecb4ac5e7e620c32a1e1aba1460
+	- `Jira Task SCRUM-106: Create testing instances for faster testing`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-106
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/94928652e3978f2f0608b72e28405b9b544f8695
+	- `Jira Task SCRUM-104: Set name (backend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-104
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/54fcca3d992072e556215406783a16d204d67b69
+	- `Jira Task SCRUM-96: Create validateword.php`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-96
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/465da796d5129fb3ae5f2baefd7742a4caf2a492
+	- `Jira Task SCRUM-84: Game logic: Create a game timer (frontend mostly)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-84
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/6495ba7025d03480ec7cf626ea3ff8de4f507ce5
+	- `Jira Task SCRUM-82: Multiplayer: Create unique lobby instances (backend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-82
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/0214ff54cf1415d60376d13d506b711f44c0b14f
+	- `Jira Task SCRUM-83: Multiplayer board: Create game access token`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-83
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/83f32a4f300f206f9b2ae4ac023c1789f8d9be43
+<br />
+
+
+- **Mel**:
+    - `Jira Task SCRUM-101: Gather background color/images for themes`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-101
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/69106b76b194109de1d0eb756bafa426ee0e4f3a
+	- `Jira Task SCRUM-100: Create playerlist near board (frontend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-100
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/10d1ca66d9339759e5acb86285c9a1b536fee57e
+	- `Jira Task SCRUM-99: Implement scoreboard in playerlist (backend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-99
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/466f49f2b03435381f844bffe590ae1ee545d52e
+	- `Jira Task SCRUM-97: Create setTheme.php (server backend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-97
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/c1514a2d6fc5bc2197f66abc7b1bc4eaaedd21c5
+	- `Jira Task SCRUM-87: Update page with themes (frontend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-87
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/eadbefeb28652cb87dce67e31729a2808dae6379
+	- `Jira Task SCRUM-86: Theme dictionaries of words`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-86
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/ae33d0ebb6a5ae95f312d806f9a3a6aa7fae0931
+<br />	
+
+
+- **Cruz**:
+
+- SCRUM-18 - Integrate the scoring algorithm. (backend)
+
+    - [SCRUM-18 Jira Link](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-18)
+
+    - [SCRUM-18 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/ab15f270f93be6774d5cff5f657ad7e81f0267bf)
+
+- SCRUM-85 Game logic: Game timer animation
+
+    - [SCRUM-85 Jira Link](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-85)
+
+    - [SCRUM-85 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/9b33e6232896b1b0bd62e840dce146983cca4af7)
+
+- SCRUM-89 Leaderboard: Call database for leaderboard
+
+    - [SCRUM-89 Jira Link](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-89)
+
+    - [SCRUM-89 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/0ea6db2111b52f3368e519a2c435c01ba7fb63bf)
+
+- SCRUM-90 - Leaderboard: Update database for leaderboard
+
+    - [SCRUM-90 Jira Link](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-90)
+
+    - [SCRUM-90 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/40c451f4d81c3c73dfbfe5e651e3c3f04a430ba3)
+
+- SCRUM-93- UX:  create visual cue
+
+    - [SCRUM-93 Jira Link](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-93)
+
+    - [SCRUM-93 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/b8a4ed0730bd8624b72e00864666ff9297558340)
+
+- SCRUM-112 - BUG: words clipping out the box when they're too long
+
+    - [SCRUM-112 Jira Link](https://cs3398f23gorns1.atlassian.net/browse/SCRUM-112)
+
+    - [SCRUM-12 Bitbucket Link](https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/e981d66f5357eabaefda1fdb39a8370962301393)
+<br />
+
+
+- **Zoe**: "Fixed the highlighting function for the wordsearch grid (removed all bugs) and updated the highlighting to match the themes. Added a join game form on homepage."
+	- `Jira Task SCRUM-110: Fix background bug in word grid.`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-110
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/7420483995c11a09535ade0e2b6545f8fc84fbd6
+	- `Jira Task SCRUM-109: After highlighting two letters in one direction lock the direction of highlighting.`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-109
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/a9c17271b097beede801072974ad265564daa2d1
+	- `Jira Task-103: Home page - create or join gamev`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-103
+		- reference:https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/1c00fc1d188de6e4352a29d2b04e9952861714c2
+	- `Jira Task-92: User-X: Have found words be the same color(frontend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-92
+		- reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/98d43c478563371611cf9cfac93b4261fad990ff
+    - `Jira Task-91: Set random color range based on theme`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-91 
+         - reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/7e3360a86aff1a31d9cc7d763d4398be58171054
+    - `Jira Task-80: User-X: Fix the highlight feature `
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-80
+         - reference: https://bitbucket.org/cs3398f23gorns/%7B75862101-8368-4c3e-bcf6-7f917ad74bfb%7D/commits/f99542187799b1f06911e93f45b26a8f9c3a57b5
+<br />
+
+
+- **Cameron**:
+	- `Jira Task SCRUM-108: Connecting lobby with server`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-108
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/8b0c9d66f53619860e95280ab76718b6529bdb7e
+    - `Jira Task SCRUM-105: Slow(polling)(frontend)(skeleton) on board`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-105
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/ce1c3c326e2fd712e3e64d124397692d9f8fc550
+    - `Jira Task SCRUM-98: Add functionality to buttons on lobby page`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-98
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/3d185b5d8cc4df85cd10f6360734b38d715b56c6
+    - `Jira Task SCRUM-95: Lobby - set name (frontend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-95
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/a3115ca295cef6529d33bbc91342186ad900fdfd
+    - `Jira Task SCRUM-94: Make lobby page / host options`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-94
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/77bf0e2f2c3d117b02a9b91baa4c08c0059f39ff
+	
+<br />
+
+
+<br />
+## Next Steps (for Sprint 3)
+- **Ethan**:
+    - scaling up game to accomodate larger lobbies
+- **Mel**:
+    - Add about and credits pages. Add music for the different themes
+- **Cruz**:
+    - Finish Leaderboards for themes, improve UI, play testing  
+- **Zoe**:
+    - Add shapes to the grid!
+- **Cameron**:
+    - add more host options in lobby (player removal and board difficulty)
