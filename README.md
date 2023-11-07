@@ -166,6 +166,17 @@ List the ready features here:
         - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-72
 		- reference: Not completed before sprint completion.
 
+## Next Steps (for Sprint 2)
+- **Ethan**:
+    - Creating backend support for multiplayer lobbies
+- **Mel**:
+    - Implementing dynamic theme adaptation on game board
+- **Cruz**:
+    - Create a backend for leaderboards and visual flair on game board 
+- **Zoe**:
+    - Bug fixes on game board
+- **Cameron**:
+    - Create pre-game lobby
 
 ************************************************************************************************************************************************************
 
@@ -284,10 +295,27 @@ List the ready features here:
 
 
 - **Cameron**:
+	- `Jira Task SCRUM-108: Connecting lobby with server`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-108
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/8b0c9d66f53619860e95280ab76718b6529bdb7e
+    - `Jira Task SCRUM-105: Slow(polling)(frontend)(skeleton) on board`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-105
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/ce1c3c326e2fd712e3e64d124397692d9f8fc550
+    - `Jira Task SCRUM-98: Add functionality to buttons on lobby page`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-98
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/3d185b5d8cc4df85cd10f6360734b38d715b56c6
+    - `Jira Task SCRUM-95: Lobby - set name (frontend)`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-95
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/a3115ca295cef6529d33bbc91342186ad900fdfd
+    - `Jira Task SCRUM-94: Make lobby page / host options`
+        - Jira link: https://cs3398f23gorns1.atlassian.net/browse/SCRUM-94
+		- reference: https://bitbucket.org/cs3398f23gorns/word-search-generator/commits/77bf0e2f2c3d117b02a9b91baa4c08c0059f39ff
+	
+<br />
 
 
 <br />
-## Next Steps
+## Next Steps (for Sprint 3)
 - **Ethan**:
     - scaling up game to accomodate larger lobbies
 - **Mel**:
@@ -297,4 +325,4 @@ List the ready features here:
 - **Zoe**:
     - Add shapes to the grid!
 - **Cameron**:
-    - setting up theme-adaptive game board code
+    - add more host options in lobby (player removal and board difficulty)
