@@ -15,6 +15,7 @@
     require "../utilities/requestValidation.php";
     require "../utilities/fileSyncronization.php";
     require "../utilities/getPlayer.php";
+    require "../utilities/sanitizePlayers.php";
     require "validateGame.php";
 
     /* 
@@ -187,7 +188,7 @@
         flock_release($gameStream);
 
         http_response_code(200);
-        echo json_encode($puzzle["players"]);
+        echo json_encode(util_sanitize_players($puzzle["players"]));
     }
 
     main();
