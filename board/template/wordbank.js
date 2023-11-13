@@ -398,7 +398,7 @@ function checkWordInWordBank(word) {
   let queryCells = Array.from(selectedCells);
   
   for (let i = 0; i < wordBankItems.length; i++) {
-    if (wordBankItems[i].textContent === word && !queryCells[0].classList.contains("found")) {
+    if (wordBankItems[i].textContent === word && !foundWords.includes(word)) {
       let validateRequest = new XMLHttpRequest();
       let wordIdx = JSON.parse(queryCells[0].getAttribute("cellIndex"));
       let wordinfo = { // required header
