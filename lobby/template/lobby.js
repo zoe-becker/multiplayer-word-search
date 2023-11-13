@@ -245,6 +245,7 @@ function setTheme(theme){
     request.onreadystatechange = function () {
       if (request.readyState == 4) {
         if (request.status == 200) {
+            updateLobby();
         } else {
           console.log("AJAX Error: " + request.responseText);
         }
