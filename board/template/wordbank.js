@@ -7,7 +7,7 @@ let gameEndTime = 0;
 let startTime = 0;
 let gameLength = 0;
 let cellMatrix = [];
-
+let isHomeButtonClicked = false;
 let timerIntervalObj;
 let pollingIntervalObj;
 let themeAssets = "../../themes/themeAssets/";
@@ -48,7 +48,10 @@ function ticktok() {
 
 // refresh warning
 window.addEventListener("beforeunload", function (event) {
-  event.preventDefault();
+  // if homebutton flag isn't clicked, prevent refresh
+  if (!isHomeButtonClicked) {
+    event.preventDefault();
+  }
 });
 
 // checks when page is loaded
@@ -575,6 +578,7 @@ function homeButtonFunctionality(){
     homeButton.classList.remove('brighten');
   });
   homeButton.addEventListener("click", function() {
+    isHomeButtonClicked = true;// set flag to true
     window.location.href = "../../home/";
   });
 }
