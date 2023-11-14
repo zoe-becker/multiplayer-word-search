@@ -1,0 +1,10 @@
+* { 
+    margin: 0;
+    padding: 0;
+}
+
+.welcome{
+    background-image: url('other.png');
+    background-size: cover;
+    
+}
