@@ -18,7 +18,11 @@
         </nav>
         <h1> WordSearch! </h1>
         <div class="buttons">
-            <button onclick="createLobby()" type="button"> <span> </span>Create New Game</button>
+            <div class="timeAttack"> 
+            <button onclick="timeAttack()" type="button"> <span> </span>Time Attack</button>
+            <button class="info"> ? </button>
+            </div>
+                       <button onclick="createLobby()" type="button"> <span> </span>Create Multiplayer Lobby</button>
             <form id="gameForm"> 
                 <input type="text" id="gameCode" placeholder="Game Code" required>
                 <button type="button" id="joinButton"><span> </span>Join</button>
