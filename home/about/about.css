@@ -35,18 +35,18 @@ body {
 }
 
 #ov {
-    background: rgb(148,179,210);
-    background: linear-gradient(90deg, rgba(148,179,210,1) 0%, rgba(58,95,138,1) 100%);
+    background: rgb(58,95,138);
+    background: linear-gradient(90deg, rgba(58,95,138,1) 0%, rgba(148,140,195,1) 100%);
 }
 
 #yaw {
-    background: rgb(148,179,210);
-    background: linear-gradient(90deg, rgba(148,179,210,1) 0%, rgba(58,95,138,1) 100%);
+    background: rgb(148,140,195);
+    background: linear-gradient(90deg, rgba(148,140,195,1) 0%, rgba(114,95,145,1) 100%);
 }
 
 #jtf {
-    background: rgb(148,179,210);
-    background: linear-gradient(90deg, rgba(148,179,210,1) 0%, rgba(58,95,138,1) 100%);
+    background: rgb(114,95,145);
+    background: linear-gradient(90deg, rgba(114,95,145,1) 0%, rgba(215,175,208,1) 100%);
 }
 
 
@@ -72,6 +72,7 @@ body {
     color: black;
     font-family: cursive;
     text-align: justify;
+    font-size: 17px;
 }
 
 #header nav a::after{
@@ -80,14 +81,99 @@ body {
     content: "";
 }
 
-#mu p{
-    width: 450px;
-    height: 100px;
+#mu h1{
+    margin-left: 50px;
+    font-family: cursive;
+    font-size: 35px;
+    line-height: 2.0;
 }
 
-img{
-    width: 300px;
-    height: 300px;
+#mu p{
+    text-align: justify;
+    height: 50px;
+    font-family: cursive;
+    margin-left: 50px;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-right: 500px;
+}
+
+#mu img{
+    width: 500px;
+    height: 500px;
     /* margin-left: 80px; */
+    float: right;
+    margin-top: -10px;
+}
+
+
+#ov h1{
+    margin-left: 50px;
+    font-family: cursive;
+    font-size: 35px;
+    line-height: 2.0;
+}
+
+#ov p{
+    text-align: justify;
+    height: 50px;
+    font-family: cursive;
+    margin-left: 50px;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-right: 90px;
+}
+
+#yaw h1{
+    margin-left: 50px;
+    font-family: cursive;
+    font-size: 35px;
+    line-height: 2.0;
+}
+
+#yaw p{
+    text-align: justify;
+    height: 50px;
+    font-family: cursive;
+    margin-left: 50px;
+    font-size: 25px;
+    line-height: 1.5;
+    margin-right: 90px;
+    margin-top: 30px;
+}
+
+#yaw img {
+    width: 550px;
+    height: 350px;
+    margin-left: 170px;
+    margin-top: 100px;
+    /* float: left; */
+    margin-top: 50px;
+}
+
+#jtf h1{
+    margin-left: 50px;
+    font-family: cursive;
+    font-size: 35px;
+    line-height: 2.0;
+}
+
+#jtf p{
+    text-align: justify;
+    text-align: left;
+    height: 50px;
+    font-family: cursive;
+    margin-left: 50px;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-top: 60px;
+}
+
+#jtf img {
+    width: 750px;
+    height: 400px;
+    /* margin-left: 170px; */
+    margin-top: 50px;
+    margin-right: 70px;
     float: right;
 }
