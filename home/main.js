@@ -45,3 +45,5 @@ document.addEventListener("DOMContentLoaded", function () {
     return regex.test(code);
   }
 });
+
+// Handling Time Attack Splash Screen

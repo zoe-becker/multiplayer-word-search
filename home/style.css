@@ -83,13 +83,11 @@ nav ul li a{
 .gif button{
     cursor: pointer;
     position: absolute;
-    /* top: 7%; */
-    transform: translateY(0%);
+    /* transform: translateY(0%); */
     text-align: center;
 
     font-size: 25px;
     font-family: cursive;
-    /* font-weight: bold; */
     color: black;
 
     padding: 6px 15px;
@@ -105,15 +103,6 @@ nav ul li a{
     overflow:hidden;
 }
 
-.timeAttack{
-    display:flex;
-    align-items: center;
-}
-
-.info{
-    font-size: 15px;
-}
-
 span{
     background: #5a8668;
     height: 100%;
@@ -126,7 +115,6 @@ span{
     transition: 0.5s;
 }
 
-
 .gif button:hover span{
     width: 100%;
 }
@@ -135,10 +123,17 @@ span{
     border: none;
 }
 
-form{
+.timeAttack, form{
     display:flex;
     align-items: center;
+    font-family: cursive;
 }
+
+/* .info-button{
+    padding: 6px 10px;
+    margin: 15px 10px;
+} */
+
 
 input[type=text]{
     width: 100%;
@@ -146,5 +141,43 @@ input[type=text]{
     border: 1px solid #ccc;
     border-radius: 15px;
     resize: vertical;
-  }
+}
+
+#time-attack-screen, #time-attack-user-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+#time-attack-content, #time-attack-user-content{
+    text-align: center;
+    border-radius: 10px;
+    border: solid #bc8942; /* Add border style as well */
+    border-width: 5px;
+    background-color: #e6e6e6;
+    margin: 10px;
+}
+
+#time-attack-content button, #time-attack-user-content button{
+    margin: 10px;
+    font-family: cursive; /* Set the same font as the h2 */
+    color: #bc8942; /* Set the same color as the h2 */
+    border: solid #bc8942;
+    border-radius: 10px;
+    border-width: 2px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+#time-attack-screen.hidden, #time-attack-user-screen.hidden{
+    display: none;
+}
+
   
