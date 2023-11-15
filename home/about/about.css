@@ -1,10 +1,82 @@
-* { 
+* {
     margin: 0;
     padding: 0;
 }
 
-.welcome{
-    background-image: url('other.png');
-    background-size: cover;
-    
+html{
+    scroll-behavior: smooth;
+}
+
+body {
+    color: black;
+}
+
+#header{
+    height: 250px;
+    background: rgb(148,179,210);
+    background: linear-gradient(90deg, rgba(148,179,210,1) 0%, rgba(58,95,138,1) 100%);
+}
+
+#header h1{
+    font-size: 30px;
+    font-family: cursive;
+    color: black;
+}
+
+#mu, #ov, #yaw, #jtf{
+    height: 700px;
+}
+
+#mu {
+    background: rgb(148,179,210);
+    background: linear-gradient(90deg, rgba(148,179,210,1) 0%, rgba(58,95,138,1) 100%);
+
+}
+
+#ov {
+    background: rgb(148,179,210);
+    background: linear-gradient(90deg, rgba(148,179,210,1) 0%, rgba(58,95,138,1) 100%);
+}
+
+#yaw {
+    background: rgb(148,179,210);
+    background: linear-gradient(90deg, rgba(148,179,210,1) 0%, rgba(58,95,138,1) 100%);
+}
+
+#jtf {
+    background: rgb(148,179,210);
+    background: linear-gradient(90deg, rgba(148,179,210,1) 0%, rgba(58,95,138,1) 100%);
+}
+
+
+#header nav{
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px 0px;
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+#header nav li{
+   list-style: none;
+   display: inline-block;
+   margin: 0 20px;
+}
+
+#header nav a{
+    text-decoration: none;
+    color: black;
+    font-family: cursive;
+}
+
+#mu p{
+    width: 450px;
+}
+
+img{
+    width: 100px;
+    height: 100px;
 }
