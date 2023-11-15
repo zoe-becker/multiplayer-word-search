@@ -75,12 +75,6 @@ body {
     font-size: 17px;
 }
 
-#header nav a::after{
-    display: inline-block;
-    width: 100%;
-    content: "";
-}
-
 #mu h1{
     margin-left: 50px;
     font-family: cursive;
@@ -119,9 +113,11 @@ body {
     height: 50px;
     font-family: cursive;
     margin-left: 50px;
-    font-size: 20px;
+    font-size: 27px;
     line-height: 1.5;
     margin-right: 90px;
+    margin-top: 40px;
+    text-align: center;
 }
 
 #yaw h1{
@@ -133,6 +129,7 @@ body {
 
 #yaw p{
     text-align: justify;
+    text-align: center;
     height: 50px;
     font-family: cursive;
     margin-left: 50px;
@@ -173,7 +170,7 @@ body {
     width: 750px;
     height: 400px;
     /* margin-left: 170px; */
-    margin-top: 50px;
+    margin-top: 70px;
     margin-right: 70px;
     float: right;
 }
