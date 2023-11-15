@@ -11,9 +11,7 @@
         <nav> 
             <img src="magnifying-glass.png" class="logo">
             <ul> 
-                <li><a href="">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Credits</a></li>
+                <li><a href="">About Us</a></li>
             </ul>
         </nav>
         <h1> WordSearch! </h1>
