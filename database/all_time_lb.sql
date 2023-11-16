@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2023 at 07:35 PM
+-- Generation Time: Nov 16, 2023 at 03:55 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,19 +32,20 @@ USE `ws_leaderboard`;
 CREATE TABLE `all_time_lb` (
   `time_stamp` timestamp NOT NULL DEFAULT current_timestamp(),
   `Player` varchar(15) NOT NULL,
-  `Score` int(11) NOT NULL
+  `Score` int(11) NOT NULL,
+  `theme` char(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `all_time_lb`
 --
 
-INSERT INTO `all_time_lb` (`time_stamp`, `Player`, `Score`) VALUES
-('2023-11-03 17:38:47', 'Cameron', 1000),
-('2023-11-03 17:38:47', 'Zoe', 800),
-('2023-11-03 17:38:47', 'Mel', 600),
-('2023-11-03 17:38:47', 'Cruz', 400),
-('2023-11-03 17:38:47', 'Ethan', 200);
+INSERT INTO `all_time_lb` (`time_stamp`, `Player`, `Score`, `theme`) VALUES
+('2023-11-03 17:38:47', 'Cameron', 1000, 'animals'),
+('2023-11-03 17:38:47', 'Zoe', 800, 'animals'),
+('2023-11-03 17:38:47', 'Mel', 600, 'animals'),
+('2023-11-03 17:38:47', 'Cruz', 400, 'animals'),
+('2023-11-03 17:38:47', 'Ethan', 200, 'animals');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
