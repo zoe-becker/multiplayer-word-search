@@ -211,6 +211,8 @@ function renderPlayersFromSet() {
 
 // Call renderPlayersFromSet on page load or refresh
 window.addEventListener('load', renderPlayersFromSet);
+// Call loadThemeBoxes on page load or refresh for host
+window.addEventListener('load', loadThemeBoxes);
 
 function getLobbyURL() {
     const currentUrl = window.location.href;
