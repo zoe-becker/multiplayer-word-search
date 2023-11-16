@@ -9,11 +9,11 @@ function createLobby() {
     // handle response
     request.onreadystatechange = function () {
       if (request.readyState == 4) {
+        requestingLobbyLock = false; // free lock here due to back/forward caches
         if (request.status == 200) {
-          location.href = request.responseText;
+          window.location.href = request.responseText;
         } else {
           console.log("AJAX Error:" + request.responseText);
-          requestingLobbyLock = false; // allow user to try again
         }
       }
     };
