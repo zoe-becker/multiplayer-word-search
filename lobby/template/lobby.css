@@ -79,6 +79,52 @@ body {
     display: none;
   }
  
+/* CSS for redirect to home page link */
+/* need to fix flex box stuff:( */
+#page-container{ 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-width: 100%;
+  align-items: center;
+}
+nav{
+  display:flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* padding: 5px; */
+  /* background-color: #526b58; */
+}
+
+nav ul li{
+  display: inline-block;
+  list-style: none;
+  /* margin: 10px 40px; */
+  position: relative;
+}
+
+nav ul li::after{
+  content: '';
+  height: 3px;
+  width: 0;
+  background: #5a8668;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  transition: 0.5s;
+}
+
+nav ul li:hover::after{
+  width: 100%;
+}
+
+nav ul li a{
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: cursive;
+  font-size: 30px;
+}
 
 #outer-lobby-container {  /* Holds everything that you see */
     display: flex;
@@ -89,7 +135,6 @@ body {
     height: 700px;
     gap: 15px
 }
-
 
 #lobby-container {  /* Holds everything that you see */
     flex-grow: 1; /* Make the flexbox take up the remaining space */
@@ -343,4 +388,4 @@ body {
     color: white;
     white-space: nowrap;
   }
-  
+

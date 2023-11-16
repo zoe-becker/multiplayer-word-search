@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <title>Lobby</title>
     <link rel="stylesheet" href="lobby.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="lobby.js"></script>
     <body>
-        <div id="splash-screen" class="hidden">
+        <!-- <div id="splash-screen" class="hidden">
             <div id="splash-content">
                 <h2>Welcome!</h2>
                 <h2>Please create a username.</h2>
                 <input type="text" id="username" placeholder="Enter your username">
                 <button id="submit-button">Submit</button>
             </div>
-        </div>
+        </div> -->
+        
         <div id="Start-screen" class = "hidden">
             <div id= "Start-content">
             <p1>Are you sure you want to start the game? </p1>
@@ -21,6 +23,7 @@
             <button id="cancel-button">NO! Dont start! </button>
             </div>
         </div>
+        
         <div id="HTW-screen" class="hidden">
             <div id="HTW-content">
                 <p1>How to win!!!</p1>
@@ -34,14 +37,26 @@
                 <button id="close-button">Close</button>
             </div> 
         </div>
+        
         <div id="Themes-screen" class="hidden">
             <div id="Themes-content">
                 <p1>Select Theme</p1>
                 <div id="Themes-container"></div>
             </div>
         </div>
+        
+        <div id="page-container">
+            <nav> 
+                <ul> 
+                    <li>
+                        <a href="../../home"><i class="fa fa-home"></i>Home</a>
+                    </li>
+                </ul>
+            </nav>
+        
         <div id = "outer-lobby-container">
             <div id="lobby-container">
+           
                 <div id="lobby-title">
                     <div id="lobby-title-info">Pre-Game Lobby</div>
                 </div>
@@ -266,6 +281,7 @@
                         <div class="selected-theme-text" id="current-theme"></div>        
                     </div>
             </div>
+        </div>
         </div>
     </body>
 </html>
