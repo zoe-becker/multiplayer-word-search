@@ -179,19 +179,13 @@ function loadThemeBoxes(){
         var themeBox = document.createElement('div');
         themeBox.classList.add('theme-box');
         var themeBoxButton = document.createElement('button');
-        themeBoxButton.addEventListener('click', function() {
+        // Use the addBrightenFunctionality function
+        addBrightenFunctionality(themeBoxButton, function() {
             requestSetThemePending = true;
             console.log(theme + 'changed');
             setTheme(theme);
             updateLobby();
-            toggleScreen('Themes-screen','hide');
-        });
-        themeBoxButton.addEventListener('mouseover', function() {
-            themeBoxButton.classList.add('brighten');
-        });
-
-        themeBoxButton.addEventListener('mouseout', function() {
-            themeBoxButton.classList.remove('brighten');
+            toggleScreen('Themes-screen', 'hide');
         });
         themeBoxButton.textContent = theme; //assuming each theme is a string
         themeBox.appendChild(themeBoxButton);
@@ -287,52 +281,52 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 
-    //BUTTONS ON WORDGRID
-    document.addEventListener('DOMContentLoaded', (event) => {
-    // Get all elements with the data-special-cell attribute
-    const specialCells = document.querySelectorAll('[data-special-cell]');
+//BUTTONS ON WORDGRID
+document.addEventListener('DOMContentLoaded', (event) => {
+// Get all elements with the data-special-cell attribute
+const specialCells = document.querySelectorAll('[data-special-cell]');
 
-    // Add event listeners for click
-    specialCells.forEach(cell => {
-        cell.addEventListener('mouseover', function() {
-            const cellType = cell.getAttribute('data-special-cell');
-            specialCells.forEach(specialCell => {
-                if (specialCell.getAttribute('data-special-cell') === cellType) {
-                    specialCell.classList.add('brighten');
-                }
-            });
-        });
-
-        cell.addEventListener('mouseout', function() {
-            specialCells.forEach(specialCell => {
-                specialCell.classList.remove('brighten');
-            });
-        });
-         cell.addEventListener('click', function() {
-            // Handle click event based on the type of data-special-cell
-            const cellType = cell.getAttribute('data-special-cell');
-            if (cellType === 'settings') {
-                // Implement functionality for 'settings' cell type
-                console.log('Clicked on settings cell:', cell.textContent);
-            } else if (cellType === 'how-to-win!') {
-                handleHTWClick();
-                // Implement functionality for 'how-to-win!' cell type
-                console.log('Clicked on how-to-win! cell:', cell.textContent);
-            } else if (cellType === 'start') {
-                handleStartClick();
-                // Implement functionality for 'start' cell type
-                console.log('Clicked on start cell:', cell.textContent);
-            } else if (cellType === 'themes') {
-                handleThemesClick();
-                // Implement functionality for 'themes' cell type
-                console.log('Clicked on themes cell:', cell.textContent);
-            } else {
-                // Implement default functionality for other cell types
-                console.log(`Clicked on cell with attribute ${cellType}:`, cell.textContent);
+// Add event listeners for click
+specialCells.forEach(cell => {
+    cell.addEventListener('mouseover', function() {
+        const cellType = cell.getAttribute('data-special-cell');
+        specialCells.forEach(specialCell => {
+            if (specialCell.getAttribute('data-special-cell') === cellType) {
+                specialCell.classList.add('brighten');
             }
         });
     });
-    }); 
+
+    cell.addEventListener('mouseout', function() {
+        specialCells.forEach(specialCell => {
+            specialCell.classList.remove('brighten');
+        });
+    });
+    cell.addEventListener('click', function() {
+        // Handle click event based on the type of data-special-cell
+        const cellType = cell.getAttribute('data-special-cell');
+        if (cellType === 'settings') {
+            // Implement functionality for 'settings' cell type
+            console.log('Clicked on settings cell:', cell.textContent);
+        } else if (cellType === 'how-to-win!') {
+            handleHTWClick();
+            // Implement functionality for 'how-to-win!' cell type
+            console.log('Clicked on how-to-win! cell:', cell.textContent);
+        } else if (cellType === 'start') {
+            handleStartClick();
+            // Implement functionality for 'start' cell type
+            console.log('Clicked on start cell:', cell.textContent);
+        } else if (cellType === 'themes') {
+            handleThemesClick();
+            // Implement functionality for 'themes' cell type
+            console.log('Clicked on themes cell:', cell.textContent);
+        } else {
+            // Implement default functionality for other cell types
+            console.log(`Clicked on cell with attribute ${cellType}:`, cell.textContent);
+        }
+    });
+});
+}); 
 //GET ISHOST VALUE
 function isHost(){
     var isHostStringVersion = localStorage.getItem('isHost');
@@ -342,42 +336,39 @@ function isHost(){
     }else isHost = false;
     return isHost;
 }
-    //HANDLING BUTTON CLICKS
+function addBrightenFunctionality(element, clickCallback) {
+    element.addEventListener('mouseover', function () {
+        element.classList.add('brighten');
+    });
+
+    element.addEventListener('mouseout', function () {
+        element.classList.remove('brighten');
+    });
+
+    element.addEventListener('click', clickCallback);
+}
+//START SCREEN BUTTONS
 function handleStartClick(){
     var host= isHost();
     if(host){
         toggleScreen('Start-screen','show');
-        //once they click on a theme button it hides the themes screen
         var startButton = document.getElementById("start-button");
         var cancelButton = document.getElementById("cancel-button");
 
-        startButton.addEventListener('mouseover', function() {
-            startButton.classList.add('brighten');
-        });
-        
-        startButton.addEventListener('mouseout', function() {
-            startButton.classList.remove('brighten');
-        });
-        startButton.addEventListener("click", function() {
-            toggleScreen('Start-screen','hide');
+        addBrightenFunctionality(startButton, function () {
+            toggleScreen('Start-screen', 'hide');
             requestStartGamePending = true;
             startGame();
         });
-        cancelButton.addEventListener('mouseover', function() {
-            cancelButton.classList.add('brighten');
-        });
-
-        cancelButton.addEventListener('mouseout', function() {
-            cancelButton.classList.remove('brighten');
-        });
-
-        cancelButton.addEventListener("click", function() {
-            toggleScreen('Start-screen','hide');
+        
+        addBrightenFunctionality(cancelButton, function () {
+            toggleScreen('Start-screen', 'hide');
         });
     }else{
         alert("Only host can start the game.")
     }
 }
+
 function handleThemesClick(){
     var host= isHost();
     if(host){
@@ -393,48 +384,42 @@ function handleHTWClick(){
     console.log("new fun worked");
     var closeButton = document.getElementById("close-button");
 
-    closeButton.addEventListener('mouseover', function() {
-        closeButton.classList.add('brighten');
-    });
-    
-    closeButton.addEventListener('mouseout', function() {
-        closeButton.classList.remove('brighten');
-    });
-    closeButton.addEventListener("click", function() {
-        toggleScreen('HTW-screen','hide');
+    // Use the addBrightenFunctionality function
+    addBrightenFunctionality(closeButton, function() {
+        toggleScreen('HTW-screen', 'hide');
     });
 
 }
-    //clipboard button icons
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(function() {
-            console.log('Async: Copying to clipboard was successful!');
-        }, function(err) {
-            console.error('Async: Could not copy text: ', err);
-        });
-    }
-    // BUTTON CLICK CALLS COPYTOCLIPBOARD
-    document.addEventListener('DOMContentLoaded', (event) => {
-        // Accessing the share-link div
-        const shareLinkDiv = document.getElementById('share-link');
-        const gameCodeParagraph = document.getElementById('game-code');
-
-        const shareLinkCopyIcon = document.getElementById('share-link-copy-button');
-        const gameCodeCopyIcon = document.getElementById('game-code-copy-button');
-
-        // Check if the elements with the specified IDs exist
-        if (shareLinkDiv && gameCodeParagraph && shareLinkCopyIcon && gameCodeCopyIcon) {
-            // Setting up click events for the copy icons
-            shareLinkCopyIcon.addEventListener('click', () => {
-                copyToClipboard(getLobbyURL());
-                console.log('link copied');
-            });
-
-            gameCodeCopyIcon.addEventListener('click', () => {
-                copyToClipboard(getLobbyCode());
-                console.log('code copied');
-            });
-        } else {
-            console.error("Element with provided IDs not found.");
-        }
+//clipboard button icons
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        console.log('Async: Copying to clipboard was successful!');
+    }, function(err) {
+        console.error('Async: Could not copy text: ', err);
     });
+}
+// BUTTON CLICK CALLS COPYTOCLIPBOARD
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Accessing the share-link div
+    const shareLinkDiv = document.getElementById('share-link');
+    const gameCodeParagraph = document.getElementById('game-code');
+
+    const shareLinkCopyIcon = document.getElementById('share-link-copy-button');
+    const gameCodeCopyIcon = document.getElementById('game-code-copy-button');
+
+    // Check if the elements with the specified IDs exist
+    if (shareLinkDiv && gameCodeParagraph && shareLinkCopyIcon && gameCodeCopyIcon) {
+        // Setting up click events for the copy icons
+        shareLinkCopyIcon.addEventListener('click', () => {
+            copyToClipboard(getLobbyURL());
+            console.log('link copied');
+        });
+
+        gameCodeCopyIcon.addEventListener('click', () => {
+            copyToClipboard(getLobbyCode());
+            console.log('code copied');
+        });
+    } else {
+        console.error("Element with provided IDs not found.");
+    }
+});
