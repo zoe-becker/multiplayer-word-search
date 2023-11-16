@@ -18,7 +18,6 @@
     $LOBBY_DATAFILE_NAME = "lobbyData.json";
     $GAME_LENGTH = 180;
     $INSTANCE_EXPIRATION_DELAY = 300; // amount of time after game ends before it is eligible to be deleted
-    $THEME_DIR = "../themes";
 
 
     // validate that game has not started and that the player is the host
@@ -79,7 +78,7 @@
             $puzzle["players"] = $lobbyData["players"];
             $puzzle["dbUpdated"] = false;
             $puzzle["gameMode"] = "multiplayer";
-            $puzzle["theme"]["name"] = $lobbyData["theme"];
+            
 
             // extract theme data and add it to board data
             $themeData = getThemeData($lobbyData["theme"]);
@@ -87,6 +86,7 @@
             $puzzle["theme"] = $themeData;
 
             $puzzle = json_encode($puzzle);
+            $puzzle["theme"]["name"] = $lobbyData["theme"];
         } else {
             http_response_code(500);
             echo "could not fetch word search board from generator. Curl error: " . curl_error($request);
