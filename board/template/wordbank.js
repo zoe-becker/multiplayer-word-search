@@ -56,9 +56,10 @@ window.addEventListener("beforeunload", function (event) {
 
 // checks when page is loaded
 document.addEventListener("DOMContentLoaded", function (event) {
-  // fetching player data & display with new function
-  //fetchPlayersAndScores();
+  getInitialBoard();
+});
 
+function getInitialBoard() {
   // request board from server
   let request = new XMLHttpRequest();
 
@@ -99,8 +100,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   request.setRequestHeader("game", instanceID);
   request.setRequestHeader("token", localStorage.getItem("accessToken"));
   request.send();
-});
-
+}
 // function to get themes and its features
 function renderTheme(dataTheme) {
   if (dataTheme.backgroundImage) {
