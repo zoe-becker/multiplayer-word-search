@@ -16,9 +16,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
         localStorage.setItem('playerSet', JSON.stringify(Array.from(new Set())));
         //give user option to create username
         toggleScreen('splash-screen','show');
+        var usernameInput = document.getElementById("username");
         var submitButton = document.getElementById("submit-button");
+
+        // Add an event listener for the Enter key on the input field
+        usernameInput.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                // Prevent the default behavior of the Enter key (e.g., form submission)
+                event.preventDefault();
+                
+                // Simulate a click on the submit button
+                submitButton.click();
+            }
+        });
         submitButton.addEventListener("click", function() {
-            var username = document.getElementById("username").value;
+            var username = usernameInput.value;
             //valid client username and no setname request pending
             if (clientCheckUsername(username)) {
                 if (!requestSetNamePending) {
