@@ -6,58 +6,25 @@
     <title>Leaderboard</title>
     <link rel="stylesheet" type="text/css" href="leaderboard-styles.css">
     <script src="leaderboard.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.8" integrity="sha384-rgjA7mptc2ETQqXoYC3/zJvkU7K/aP44Y+z7xQuJiVnB/422P/Ak+F/AqFR7E4Wr" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <div class="container">
         <div class="leaderboard">
             <h1>All-Time Leaderboard</h1>
         </div>
-        <!-- Leaderboard container to display top scores from top_scores.json -->
-        <div class="leaderboard">
-            <ol>
-                <?php
-                require_once '../database/db_connect.php';
-                // Read and parse top_scores.json
-                
-                $query = "SELECT player AS name, score, time_stamp FROM all_time_lb ORDER BY score DESC LIMIT 5";
-                $stmt = $pdo->query($query);
-                $top_scores = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-                $data = new stdClass();
-                $data->topPlayers = $top_scores;
-                $pdo = null;
-    
-                // Check if data is not empty and is an array
-                if (!empty($data) && is_array($data->topPlayers)) {
-                    // Display the top 5 players
-                    foreach (array_slice($data->topPlayers, 0, 5) as $index => $player) {
-                        $rank = $index + 1;
-                        $playerName = htmlspecialchars($player->name);
-                        // Open a flex container for each player
-                        echo "<li>";
-                        echo "<div class='player-container highlight-hover'>";
-
-                        // Flexbox for Rank and Name
-                        echo "<div class='flex-box rank-name'>";
-                        echo "<span class='rank'>Rank {$rank}: </span>";
-                        echo "<span class='player'>{$playerName}</span>";
-                        echo "</div>";
-
-                        // Flexbox for Score
-                        echo "<div class='flex-box score'>";
-                        echo "<span class='score'>Score: {$player->score}</span>";
-                        echo "</div>";
-
-                        // Close the flex container for each player
-                        echo "</div>";
-                        echo "</li>";
-    }
-                } else {
-                    echo "<li>No data available.</li>";
-                }
-                ?>
-            </ol>
+        <!-- HTMX Tabs for Leaderboards -->
+        <div id="leaderboard-tabs" hx-target="#leaderboard-content" role="tablist">
+            <button role="tab" aria-controls="leaderboard-content" aria-selected="true" hx-get="leaderboard.php?theme=all-time" class="selected">All-Time</button>
+            <button role="tab" aria-controls="leaderboard-content" aria-selected="false" hx-get="leaderboard.php?theme=animals">Animals</button>
+            <button role="tab" aria-controls="leaderboard-content" aria-selected="false" hx-get="leaderboard.php?theme=christmas">Christmas</button>
+            <button role="tab" aria-controls="leaderboard-content" aria-selected="false" hx-get="leaderboard.php?theme=halloween">Halloween</button>
+            <!-- Add more tabs as needed -->
         </div>
+
+        <div id="leaderboard-content" role="tabpanel" hx-get="leaderboard.php?theme=all-time" hx-trigger="load">
+            <!-- Leaderboard content will be loaded here -->
     </div>
 </body>
 </html>
