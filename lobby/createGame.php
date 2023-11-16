@@ -18,6 +18,8 @@
     $LOBBY_DATAFILE_NAME = "lobbyData.json";
     $GAME_LENGTH = 180;
     $INSTANCE_EXPIRATION_DELAY = 300; // amount of time after game ends before it is eligible to be deleted
+    $THEME_DIR = "../themes";
+
 
     // validate that game has not started and that the player is the host
     // exits if invalid
@@ -53,7 +55,7 @@
 
     // create game instance and return instance link, will exit if creation fails
     function createGame(&$lobbyData) {
-        global $GAME_LENGTH, $INSTANCE_EXPIRATION_DELAY, $GAME_DIR, $INSTANCE_TEMPLATE_DIR;
+        global $GAME_LENGTH, $INSTANCE_EXPIRATION_DELAY, $GAME_DIR, $INSTANCE_TEMPLATE_DIR, $THEME_DIR;
 
         // curl to generator for new grid
         $requestURI = "http://" . $_SERVER["SERVER_NAME"] . 
@@ -76,6 +78,8 @@
             $puzzle["ended"] = false;
             $puzzle["players"] = $lobbyData["players"];
             $puzzle["dbUpdated"] = false;
+            $puzzle["gameMode"] = "multiplayer";
+            $puzzle["theme"]["name"] = $lobbyData["theme"];
 
             // extract theme data and add it to board data
             $themeData = getThemeData($lobbyData["theme"]);
@@ -88,7 +92,7 @@
             echo "could not fetch word search board from generator. Curl error: " . curl_error($request);
             exit(-2);
         }
-
+        
         // close request
         curl_close($request);
 

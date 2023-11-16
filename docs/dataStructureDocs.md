@@ -60,6 +60,8 @@
     - NOTE: does not contain the words key
 - players: array of player objects (see backendDataStructures for details) representing the players in that lobby
     - NOTE: player objects in the players list only contain name, score, and isHost keys
+- gameMode: game mode will either be timeAttack or multiplayer
+- themeName: name of theme is taken LobbyData object
 ### PuzzleState object
 - expired: whether the game timer is up (true/false)
 - foundWords: dictionary of words found so far mapped to foundWord objects
