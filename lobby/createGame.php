@@ -19,6 +19,7 @@
     $GAME_LENGTH = 180;
     $INSTANCE_EXPIRATION_DELAY = 300; // amount of time after game ends before it is eligible to be deleted
 
+
     // validate that game has not started and that the player is the host
     // exits if invalid
     // $lobbyData: associative array of lobby data
@@ -68,6 +69,7 @@
 
         // interpret curl result and initialize board
         if ($curlStatus == 200) {
+            
             $puzzle = json_decode($puzzle, true);
             $puzzle["startTime"] = time();
             $puzzle["expireTime"] = time() + $GAME_LENGTH; // set match expiration date
@@ -76,19 +78,22 @@
             $puzzle["ended"] = false;
             $puzzle["players"] = $lobbyData["players"];
             $puzzle["dbUpdated"] = false;
+            $puzzle["gameMode"] = "multiplayer";
+            
 
             // extract theme data and add it to board data
             $themeData = getThemeData($lobbyData["theme"]);
             unset($themeData["words"]);
             $puzzle["theme"] = $themeData;
-
+            $puzzle["theme"]["name"] = $lobbyData["theme"];
             $puzzle = json_encode($puzzle);
+            
         } else {
             http_response_code(500);
             echo "could not fetch word search board from generator. Curl error: " . curl_error($request);
             exit(-2);
         }
-
+        
         // close request
         curl_close($request);
 
