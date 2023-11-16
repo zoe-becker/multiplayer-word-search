@@ -1,6 +1,6 @@
 * {
     margin: 0;
-    padding: 0;
+    /* padding: 0; */
 }
 
 html{
@@ -49,8 +49,45 @@ body {
     background: linear-gradient(90deg, rgba(114,95,145,1) 0%, rgba(215,175,208,1) 100%);
 }
 
+/* CSS for redirect to home page link */
+.homenav {
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* padding: 10px; */
+}
 
-#header nav{
+.homenav ul li{
+    display: inline-block;
+    list-style: none;
+    position: relative;
+    margin: 10px
+}
+
+.homenav ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #5a8668;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+.homenav ul li:hover::after{
+    width: 100%;
+}
+
+.homenav ul li a{
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: cursive;
+    font-size: 25px;
+}
+
+#header .navlinks{
     width: 40%;
     margin-left: auto;
     margin-right: auto;
@@ -61,19 +98,18 @@ body {
 }
 
 
-#header nav li{
+#header .navlinks li{
    list-style: none;
    display: inline-block;
    margin: 0 20px;
 }
 
-#header nav a{
+#header .navlinks a{
     text-decoration: none;
     color: black;
     font-family: cursive;
     text-align: justify;
     font-size: 17px;
-    text-decoration: underline;
 }
 
 #mu h1{
