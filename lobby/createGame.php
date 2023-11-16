@@ -54,7 +54,7 @@
 
     // create game instance and return instance link, will exit if creation fails
     function createGame(&$lobbyData) {
-        global $GAME_LENGTH, $INSTANCE_EXPIRATION_DELAY, $GAME_DIR, $INSTANCE_TEMPLATE_DIR, $THEME_DIR;
+        global $GAME_LENGTH, $INSTANCE_EXPIRATION_DELAY, $GAME_DIR, $INSTANCE_TEMPLATE_DIR;
 
         // curl to generator for new grid
         $requestURI = "http://" . $_SERVER["SERVER_NAME"] . 
@@ -69,6 +69,7 @@
 
         // interpret curl result and initialize board
         if ($curlStatus == 200) {
+            
             $puzzle = json_decode($puzzle, true);
             $puzzle["startTime"] = time();
             $puzzle["expireTime"] = time() + $GAME_LENGTH; // set match expiration date
@@ -84,9 +85,9 @@
             $themeData = getThemeData($lobbyData["theme"]);
             unset($themeData["words"]);
             $puzzle["theme"] = $themeData;
-
-            $puzzle = json_encode($puzzle);
             $puzzle["theme"]["name"] = $lobbyData["theme"];
+            $puzzle = json_encode($puzzle);
+            
         } else {
             http_response_code(500);
             echo "could not fetch word search board from generator. Curl error: " . curl_error($request);
