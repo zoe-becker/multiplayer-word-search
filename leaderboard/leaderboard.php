@@ -6,22 +6,22 @@
                         case 'all-time':
                             leaderboardTheme('none');
                             break;
-                        case 'animals':
+                        case 'Animals':
                             leaderboardTheme('animals');
                             break;
-                        case 'christmas':
+                        case 'Christmas':
                             leaderboardTheme('christmas');
                             break;
-                        case 'halloween':
+                        case 'Halloween':
                             leaderboardTheme('halloween');
                             break;
-                        case 'nicki':
+                        case 'Nicki':
                             leaderboardTheme('nicki');
                             break;
-                        case 'valentine':
+                        case 'Valentine':
                             leaderboardTheme('valentine');
                             break;
-                        case 'thanksgiving':
+                        case 'Thanksgiving':
                             leaderboardTheme('thanksgiving');
                             break;
                     }
