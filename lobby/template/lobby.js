@@ -212,12 +212,10 @@ function renderPlayersFromSet() {
 // Call renderPlayersFromSet on page load or refresh
 window.addEventListener('load', renderPlayersFromSet);
 
-
 function getLobbyURL() {
     const currentUrl = window.location.href;
     return currentUrl;
 }
-
 function getLobbyCode() {
     const currentUrl = getLobbyURL();
 
@@ -259,8 +257,6 @@ function setTheme(theme){
     currentTheme.textContent = getCurrentTheme();
 }
 
-
-
 //LOAD LOBBY LINK AND CODE INTO BOTTOM BOXES
 document.addEventListener('DOMContentLoaded', (event) => {
     // Accessing the share-link div
@@ -288,44 +284,44 @@ const specialCells = document.querySelectorAll('[data-special-cell]');
 
 // Add event listeners for click
 specialCells.forEach(cell => {
-    cell.addEventListener('mouseover', function() {
-        const cellType = cell.getAttribute('data-special-cell');
-        specialCells.forEach(specialCell => {
-            if (specialCell.getAttribute('data-special-cell') === cellType) {
-                specialCell.classList.add('brighten');
+        cell.addEventListener('mouseover', function() {
+            const cellType = cell.getAttribute('data-special-cell');
+            specialCells.forEach(specialCell => {
+                if (specialCell.getAttribute('data-special-cell') === cellType) {
+                    specialCell.classList.add('brighten');
+                }
+            });
+        });
+
+        cell.addEventListener('mouseout', function() {
+            specialCells.forEach(specialCell => {
+                specialCell.classList.remove('brighten');
+            });
+        });
+        cell.addEventListener('click', function() {
+            // Handle click event based on the type of data-special-cell
+            const cellType = cell.getAttribute('data-special-cell');
+            if (cellType === 'settings') {
+                // Implement functionality for 'settings' cell type
+                console.log('Clicked on settings cell:', cell.textContent);
+            } else if (cellType === 'how-to-win!') {
+                handleHTWClick();
+                // Implement functionality for 'how-to-win!' cell type
+                console.log('Clicked on how-to-win! cell:', cell.textContent);
+            } else if (cellType === 'start') {
+                handleStartClick();
+                // Implement functionality for 'start' cell type
+                console.log('Clicked on start cell:', cell.textContent);
+            } else if (cellType === 'themes') {
+                handleThemesClick();
+                // Implement functionality for 'themes' cell type
+                console.log('Clicked on themes cell:', cell.textContent);
+            } else {
+                // Implement default functionality for other cell types
+                console.log(`Clicked on cell with attribute ${cellType}:`, cell.textContent);
             }
         });
     });
-
-    cell.addEventListener('mouseout', function() {
-        specialCells.forEach(specialCell => {
-            specialCell.classList.remove('brighten');
-        });
-    });
-    cell.addEventListener('click', function() {
-        // Handle click event based on the type of data-special-cell
-        const cellType = cell.getAttribute('data-special-cell');
-        if (cellType === 'settings') {
-            // Implement functionality for 'settings' cell type
-            console.log('Clicked on settings cell:', cell.textContent);
-        } else if (cellType === 'how-to-win!') {
-            handleHTWClick();
-            // Implement functionality for 'how-to-win!' cell type
-            console.log('Clicked on how-to-win! cell:', cell.textContent);
-        } else if (cellType === 'start') {
-            handleStartClick();
-            // Implement functionality for 'start' cell type
-            console.log('Clicked on start cell:', cell.textContent);
-        } else if (cellType === 'themes') {
-            handleThemesClick();
-            // Implement functionality for 'themes' cell type
-            console.log('Clicked on themes cell:', cell.textContent);
-        } else {
-            // Implement default functionality for other cell types
-            console.log(`Clicked on cell with attribute ${cellType}:`, cell.textContent);
-        }
-    });
-});
 }); 
 //GET ISHOST VALUE
 function isHost(){
@@ -336,6 +332,7 @@ function isHost(){
     }else isHost = false;
     return isHost;
 }
+//BRIGHTENS BUTTONS AND ALLOWS FUNCTION ON CLICK <-- specified at each location
 function addBrightenFunctionality(element, clickCallback) {
     element.addEventListener('mouseover', function () {
         element.classList.add('brighten');
