@@ -10,11 +10,24 @@
     require "../utilities/requestValidation.php";
     require "../utilities/gameGenerator.php";
     
+    $MAX_NAME_LENGTH = 13;
+
     function main() {
+        global $MAX_NAME_LENGTH;
+
         validatePOST(array("name"), true); // va.idate request
 
+        $name = $_SERVER["HTTP_NAME"];
+
+        // validate name
+        if (strlen($name) < 1 || strlen($name) >= $MAX_NAME_LENGTH) {
+            echo "name does not fit size constraints";
+            http_response_code(400);
+            exit(-4);
+        }
+
         $newPlayer = array(
-            "name" => $_SERVER["HTTP_NAME"],
+            "name" => $name,
             "accessToken" => uniqid("", true), // create unique id, more entropy to reduce chance of collision
             "boardRetrieved" => false,
             "isHost" => false,
