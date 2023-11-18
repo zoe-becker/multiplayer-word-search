@@ -10,7 +10,6 @@
 
     require "../utilities/requestValidation.php";
     require "../utilities/fileSyncronization.php";
-    require "../utilities/themeFetcher.php";
     require "../utilities/gameGenerator.php";
     require "validateLobby.php";
 
