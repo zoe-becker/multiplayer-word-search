@@ -67,6 +67,8 @@
 - foundWords: dictionary of words found so far mapped to foundWord objects
 - players: array of player objects (see GamePuzzle for details) representing the players in that lobby
     - NOTE: player objects in the players list only contain name, score, and isHost keys
+- key: same as key defined in GamePuzzle object
+    - NOTE: only present if expired key is true
 ### LobbyData object
 - players: array of player objects (see GamePuzzle for details) representing the players in that lobby
     - NOTE: player objects in the players list only contain name, score, and isHost keys
