@@ -67,6 +67,10 @@
             "players" => util_sanitize_players($puzzle["players"])
         );
 
+        if ($expired) {
+            $responseObject["key"] = $puzzle["key"];
+        }
+
         http_response_code(200);
         echo json_encode($responseObject);
     }

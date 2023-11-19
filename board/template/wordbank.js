@@ -204,7 +204,7 @@ function updateBoard(){
             updateWordsFoundWordbank(key);
           }
         });
-        console.log('test');
+        
         reRenderPlayerlist(data.players);
         if (data.expired == true) {
           //handle game end
@@ -217,8 +217,18 @@ function updateBoard(){
           homeButtonFunctionality();
           //load final results page
           populateFinalResults(data.players);
-          //winners get confetti, losers cry
+
+          // add slight delay from game end to answers / leaderboard shown
           setTimeout(() => {
+            // show unfound words
+            Object.keys(data.key).forEach(key => {
+              if (!foundWords.includes(key)) {
+                drawWord(key, data.key[key]);
+                foundWords.push(key);
+              }
+            })
+
+            //winners get confetti, losers cry
             toggleScreen('final-results-screen','show')
             if(data.players[0].name === localStorage.getItem('playerName')){
               winnerConfetti();

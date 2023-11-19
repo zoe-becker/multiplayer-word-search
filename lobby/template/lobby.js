@@ -16,9 +16,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
         localStorage.setItem('playerSet', JSON.stringify(Array.from(new Set())));
         //give user option to create username
         toggleScreen('splash-screen','show');
+        var usernameInput = document.getElementById("username");
         var submitButton = document.getElementById("submit-button");
+
+        // Add an event listener for the Enter key on the input field
+        usernameInput.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                // Prevent the default behavior of the Enter key (e.g., form submission)
+                event.preventDefault();
+                
+                // Simulate a click on the submit button
+                submitButton.click();
+            }
+        });
         submitButton.addEventListener("click", function() {
-            var username = document.getElementById("username").value;
+            var username = usernameInput.value;
             //valid client username and no setname request pending
             if (clientCheckUsername(username)) {
                 if (!requestSetNamePending) {
@@ -179,19 +191,13 @@ function loadThemeBoxes(){
         var themeBox = document.createElement('div');
         themeBox.classList.add('theme-box');
         var themeBoxButton = document.createElement('button');
-        themeBoxButton.addEventListener('click', function() {
+        // Use the addBrightenFunctionality function
+        addBrightenFunctionality(themeBoxButton, function() {
             requestSetThemePending = true;
             console.log(theme + 'changed');
             setTheme(theme);
             updateLobby();
-            toggleScreen('Themes-screen','hide');
-        });
-        themeBoxButton.addEventListener('mouseover', function() {
-            themeBoxButton.classList.add('brighten');
-        });
-
-        themeBoxButton.addEventListener('mouseout', function() {
-            themeBoxButton.classList.remove('brighten');
+            toggleScreen('Themes-screen', 'hide');
         });
         themeBoxButton.textContent = theme; //assuming each theme is a string
         themeBox.appendChild(themeBoxButton);
@@ -217,13 +223,13 @@ function renderPlayersFromSet() {
 
 // Call renderPlayersFromSet on page load or refresh
 window.addEventListener('load', renderPlayersFromSet);
-
+// Call loadThemeBoxes on page load or refresh for host
+window.addEventListener('load', loadThemeBoxes);
 
 function getLobbyURL() {
     const currentUrl = window.location.href;
     return currentUrl;
 }
-
 function getLobbyCode() {
     const currentUrl = getLobbyURL();
 
@@ -265,8 +271,6 @@ function setTheme(theme){
     currentTheme.textContent = getCurrentTheme();
 }
 
-
-
 //LOAD LOBBY LINK AND CODE INTO BOTTOM BOXES
 document.addEventListener('DOMContentLoaded', (event) => {
     // Accessing the share-link div
@@ -287,13 +291,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 
-    //BUTTONS ON WORDGRID
-    document.addEventListener('DOMContentLoaded', (event) => {
-    // Get all elements with the data-special-cell attribute
-    const specialCells = document.querySelectorAll('[data-special-cell]');
+//BUTTONS ON WORDGRID
+document.addEventListener('DOMContentLoaded', (event) => {
+// Get all elements with the data-special-cell attribute
+const specialCells = document.querySelectorAll('[data-special-cell]');
 
-    // Add event listeners for click
-    specialCells.forEach(cell => {
+// Add event listeners for click
+specialCells.forEach(cell => {
         cell.addEventListener('mouseover', function() {
             const cellType = cell.getAttribute('data-special-cell');
             specialCells.forEach(specialCell => {
@@ -308,7 +312,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 specialCell.classList.remove('brighten');
             });
         });
-         cell.addEventListener('click', function() {
+        cell.addEventListener('click', function() {
             // Handle click event based on the type of data-special-cell
             const cellType = cell.getAttribute('data-special-cell');
             if (cellType === 'settings') {
@@ -332,7 +336,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         });
     });
-    }); 
+}); 
 //GET ISHOST VALUE
 function isHost(){
     var isHostStringVersion = localStorage.getItem('isHost');
@@ -342,42 +346,40 @@ function isHost(){
     }else isHost = false;
     return isHost;
 }
-    //HANDLING BUTTON CLICKS
+//BRIGHTENS BUTTONS AND ALLOWS FUNCTION ON CLICK <-- specified at each location
+function addBrightenFunctionality(element, clickCallback) {
+    element.addEventListener('mouseover', function () {
+        element.classList.add('brighten');
+    });
+
+    element.addEventListener('mouseout', function () {
+        element.classList.remove('brighten');
+    });
+
+    element.addEventListener('click', clickCallback);
+}
+//START SCREEN BUTTONS
 function handleStartClick(){
     var host= isHost();
     if(host){
         toggleScreen('Start-screen','show');
-        //once they click on a theme button it hides the themes screen
         var startButton = document.getElementById("start-button");
         var cancelButton = document.getElementById("cancel-button");
 
-        startButton.addEventListener('mouseover', function() {
-            startButton.classList.add('brighten');
-        });
-        
-        startButton.addEventListener('mouseout', function() {
-            startButton.classList.remove('brighten');
-        });
-        startButton.addEventListener("click", function() {
-            toggleScreen('Start-screen','hide');
+        addBrightenFunctionality(startButton, function () {
+            toggleScreen('Start-screen', 'hide');
             requestStartGamePending = true;
             startGame();
         });
-        cancelButton.addEventListener('mouseover', function() {
-            cancelButton.classList.add('brighten');
-        });
-
-        cancelButton.addEventListener('mouseout', function() {
-            cancelButton.classList.remove('brighten');
-        });
-
-        cancelButton.addEventListener("click", function() {
-            toggleScreen('Start-screen','hide');
+        
+        addBrightenFunctionality(cancelButton, function () {
+            toggleScreen('Start-screen', 'hide');
         });
     }else{
         alert("Only host can start the game.")
     }
 }
+
 function handleThemesClick(){
     var host= isHost();
     if(host){
@@ -393,48 +395,42 @@ function handleHTWClick(){
     console.log("new fun worked");
     var closeButton = document.getElementById("close-button");
 
-    closeButton.addEventListener('mouseover', function() {
-        closeButton.classList.add('brighten');
-    });
-    
-    closeButton.addEventListener('mouseout', function() {
-        closeButton.classList.remove('brighten');
-    });
-    closeButton.addEventListener("click", function() {
-        toggleScreen('HTW-screen','hide');
+    // Use the addBrightenFunctionality function
+    addBrightenFunctionality(closeButton, function() {
+        toggleScreen('HTW-screen', 'hide');
     });
 
 }
-    //clipboard button icons
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(function() {
-            console.log('Async: Copying to clipboard was successful!');
-        }, function(err) {
-            console.error('Async: Could not copy text: ', err);
-        });
-    }
-    // BUTTON CLICK CALLS COPYTOCLIPBOARD
-    document.addEventListener('DOMContentLoaded', (event) => {
-        // Accessing the share-link div
-        const shareLinkDiv = document.getElementById('share-link');
-        const gameCodeParagraph = document.getElementById('game-code');
-
-        const shareLinkCopyIcon = document.getElementById('share-link-copy-button');
-        const gameCodeCopyIcon = document.getElementById('game-code-copy-button');
-
-        // Check if the elements with the specified IDs exist
-        if (shareLinkDiv && gameCodeParagraph && shareLinkCopyIcon && gameCodeCopyIcon) {
-            // Setting up click events for the copy icons
-            shareLinkCopyIcon.addEventListener('click', () => {
-                copyToClipboard(getLobbyURL());
-                console.log('link copied');
-            });
-
-            gameCodeCopyIcon.addEventListener('click', () => {
-                copyToClipboard(getLobbyCode());
-                console.log('code copied');
-            });
-        } else {
-            console.error("Element with provided IDs not found.");
-        }
+//clipboard button icons
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        console.log('Async: Copying to clipboard was successful!');
+    }, function(err) {
+        console.error('Async: Could not copy text: ', err);
     });
+}
+// BUTTON CLICK CALLS COPYTOCLIPBOARD
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Accessing the share-link div
+    const shareLinkDiv = document.getElementById('share-link');
+    const gameCodeParagraph = document.getElementById('game-code');
+
+    const shareLinkCopyIcon = document.getElementById('share-link-copy-button');
+    const gameCodeCopyIcon = document.getElementById('game-code-copy-button');
+
+    // Check if the elements with the specified IDs exist
+    if (shareLinkDiv && gameCodeParagraph && shareLinkCopyIcon && gameCodeCopyIcon) {
+        // Setting up click events for the copy icons
+        shareLinkCopyIcon.addEventListener('click', () => {
+            copyToClipboard(getLobbyURL());
+            console.log('link copied');
+        });
+
+        gameCodeCopyIcon.addEventListener('click', () => {
+            copyToClipboard(getLobbyCode());
+            console.log('code copied');
+        });
+    } else {
+        console.error("Element with provided IDs not found.");
+    }
+});
