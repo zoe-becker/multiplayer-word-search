@@ -84,6 +84,25 @@ body, html {
     margin: 10px 0;
 
 }
+
+.scores-container {
+    display: flex;
+    justify-content: space-around; /* This will space out the boxes evenly */
+    align-items: flex-start; /* Aligns items to the start of the flex container */
+    gap: 20px; /* Adds space between the two score boxes */
+}
+
+.Multiplayer, .Time-Attack div{
+    flex: 2; /* Each box will take up an equal amount of space */
+    padding: 10px;
+    border-radius: 5px; /* Optional: rounds the corners of the boxes */
+}
+
+@media (max-width: 600px) {
+    .scores-container {
+        flex-direction: column;
+    }
+}
 /* CSS for the flex container */
 .player-container {
     display: flex;

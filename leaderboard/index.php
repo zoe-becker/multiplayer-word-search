@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
     <link rel="stylesheet" type="text/css" href="leaderboard-styles.css">
-    <script src="leaderboard.js"></script>
     <script src="https://unpkg.com/htmx.org@1.9.8" integrity="sha384-rgjA7mptc2ETQqXoYC3/zJvkU7K/aP44Y+z7xQuJiVnB/422P/Ak+F/AqFR7E4Wr" crossorigin="anonymous"></script>
 
 </head>
@@ -26,9 +25,13 @@
             <!-- Add more tabs as needed -->
         </div>
         
-
-        <div id="leaderboard-content" role="tabpanel" hx-get="leaderboard.php?theme=all-time" hx-trigger="load">
-            <!-- Leaderboard content will be loaded here -->
+        <div class="scores-container">
+            <div id="leaderboard-content" role="tabpanel" hx-get="leaderboard.php?theme=all-time" hx-trigger="load">
+        <!-- Leaderboard content will be loaded here -->
+        
+        </div>
     </div>
+
+        
 </body>
 </html>
