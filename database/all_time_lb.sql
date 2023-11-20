@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2023 at 04:59 AM
+-- Generation Time: Nov 20, 2023 at 06:39 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -72,6 +72,7 @@ INSERT INTO `all_time_lb` (`time_stamp`, `Player`, `Score`, `theme`, `mode`) VAL
 ('2023-11-03 17:38:47', 'Cameron', 1005, 'valentine', 'multiplayer'),
 ('2023-11-03 17:38:47', 'Cameron', 1337, 'valentine', 'multiplayer'),
 ('2023-11-03 17:38:47', 'Cameron', 260, 'valentine', 'multiplayer'),
+('2023-11-19 23:47:56', 'cruz', 2534, NULL, 'multiplayer'),
 ('2023-11-19 23:47:56', 'Alice', 8973, 'valentine', 'timeattack'),
 ('2023-11-19 23:47:56', 'Bob', 6543, 'valentine', 'timeattack'),
 ('2023-11-19 23:47:56', 'Charlie', 7254, 'valentine', 'timeattack'),
@@ -102,7 +103,12 @@ INSERT INTO `all_time_lb` (`time_stamp`, `Player`, `Score`, `theme`, `mode`) VAL
 ('2023-11-19 23:47:56', 'Brad', 7645, 'animals', 'timeattack'),
 ('2023-11-19 23:47:56', 'Cindy', 6874, 'animals', 'timeattack'),
 ('2023-11-19 23:47:56', 'David', 8531, 'animals', 'timeattack'),
-('2023-11-20 03:56:50', 'cruz', 5738, 'animals', 'multiplayer');
+('2023-11-20 03:56:50', 'cruz', 5738, NULL, NULL),
+('2023-11-12 23:47:56', 'WRONG', 15000, 'animals', 'timeattack'), /* These values should never show up.*/
+('2023-11-12 23:47:56', 'WRONG', 16000, 'animals', 'timeattack'),
+('2023-11-12 23:47:56', 'WRONG', 17000, 'animals', 'timeattack'),
+('2023-11-12 23:47:56', 'WRONG', 18000, 'animals', 'timeattack'),
+('2023-11-12 23:47:56', 'WRONG', 19000, 'animals', 'timeattack');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
