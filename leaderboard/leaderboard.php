@@ -1,29 +1,26 @@
 <?php
                 require_once '../database/db_connect.php';
+                
 
                 if (isset($_GET['theme'])) {
-                    switch ($_GET['theme']) {
-                        case 'all-time':
-                            leaderboardTheme('none');
-                            break;
-                        case 'Animals':
-                            leaderboardTheme('animals');
-                            break;
-                        case 'Christmas':
-                            leaderboardTheme('christmas');
-                            break;
-                        case 'Halloween':
-                            leaderboardTheme('halloween');
-                            break;
-                        case 'Nicki':
-                            leaderboardTheme('nicki');
-                            break;
-                        case 'Valentine':
-                            leaderboardTheme('valentine');
-                            break;
-                        case 'Thanksgiving':
-                            leaderboardTheme('thanksgiving');
-                            break;
+                    $theme = $_GET['theme'];
+                    $themeFiles = glob('../themes/*.json'); // Adjust the path to your themes directory
+                
+                    $availableThemes = [];
+                    foreach ($themeFiles as $file) {
+                        $themeName = basename($file, '.json');
+                        // Exclude unwanted themes
+                        if (!in_array($themeName, ['timeattack'])) {
+                            $availableThemes[] = $themeName;
+                        }
+                        
+                    }
+                    
+                    if (in_array($theme, $availableThemes)) {
+                        leaderboardTheme($theme);
+                        
+                    } else if ($theme == 'all-time') {
+                        leaderboardTheme('none');
                     }
                 }
 
@@ -69,7 +66,7 @@
                                     // Close the flex container for each player
                                     echo "</div>";
                                     echo "</li>";
-                }
+                                }
                             } else {
                                 echo "<li>No data available.</li>";
                             }
