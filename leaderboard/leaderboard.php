@@ -51,7 +51,7 @@
                 
                     // Display results
                     displayScores($data->multiplayerScores, "Multiplayer");
-                    displayScores($data->timeAttackScores, "Time-Attack");
+                    displayScores($data->timeAttackScores, "Weekly Time-Attack");
                 }
                 
                 function displayScores($scores, $modeTitle) {
