@@ -29,12 +29,11 @@
                     global $pdo;
                     $stmt= "";
                     if ($theme == "none") {
-                        $query = "SELECT player AS name, score, time_stamp FROM all_time_lb ORDER BY score DESC LIMIT 5";
+                        $query = "SELECT player AS name, score, time_stamp FROM all_time_lb WHERE mode = 'multiplayer' ORDER BY score DESC LIMIT 5";
                         $stmt = $pdo->query($query);
                     } else {
-                        $stmt = $pdo->prepare("SELECT player AS name, score, time_stamp FROM all_time_lb WHERE theme= ? ORDER BY score DESC LIMIT 5");
+                        $stmt = $pdo->prepare("SELECT player AS name, score, time_stamp FROM all_time_lb WHERE theme= ? AND mode = 'multiplayer' ORDER BY score DESC LIMIT 5");
                         $stmt->execute([$theme]);
-
                     }
                     
                     $top_scores = $stmt->fetchAll(PDO::FETCH_OBJ);
