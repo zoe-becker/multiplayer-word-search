@@ -13,11 +13,8 @@
                         if (!in_array($themeName, ['timeattack'])) {
                             $availableThemes[] = $themeName;
                         }
+                        
                     }
-                    
-                    // debug code to check array contents
-                    //$availableThemesString = implode(", ", $availableThemes);
-                    //echo $availableThemesString;
                     
                     if (in_array($theme, $availableThemes)) {
                         leaderboardTheme($theme);
@@ -69,7 +66,7 @@
                                     // Close the flex container for each player
                                     echo "</div>";
                                     echo "</li>";
-                }
+                                }
                             } else {
                                 echo "<li>No data available.</li>";
                             }
