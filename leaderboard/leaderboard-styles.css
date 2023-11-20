@@ -36,12 +36,19 @@ body, html {
     font-weight: bold;
 }
 
-/* Responsive Layout */
 @media (max-width: 600px) {
     #leaderboard-tabs {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
     }
+}
+
+#leaderboard-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
 }
 
 /* Style the leaderboard container */
@@ -84,6 +91,22 @@ body, html {
     margin: 10px 0;
 
 }
+
+.scores-container {
+    display: flex;
+    flex-direction: row; /* Arrange items vertically */
+    justify-content: space-around; /* This will space out the boxes evenly */
+    align-items: flex-start; /* Aligns items to the start of the flex container */
+    gap: 20px; /* Adds space between the two score boxes */
+}
+
+.Multiplayer-contatiner, .Time-Attack-container{
+    flex: 1; /* Each box will take up an equal amount of space */
+    padding: 10px;
+    border-radius: 5px; /* Optional: rounds the corners of the boxes */
+}
+
+
 /* CSS for the flex container */
 .player-container {
     display: flex;
