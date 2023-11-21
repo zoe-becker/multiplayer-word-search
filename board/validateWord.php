@@ -32,24 +32,32 @@
         $yellowThreshold = MULTIPLAYER_GAME_LEN * 0.1667;
         $currentTime = time();
         $timeElapsed = $endTime - $currentTime;
-
         $orientation = "";
 
         $wordScore = MULTIPLAYER_WORD_BASE_SCORE;
 
+        // Set multipliers based on game mode
+        if ($mode == "multiplayer") {
+            $greenMultiplier = 1;
+            $yellowMultiplier = 1.2;
+            $redMultiplier = 2;
+        } else if ($mode == "timeAttack") {
+            $greenMultiplier = 2;
+            $yellowMultiplier = 1.2;
+            $redMultiplier = 1;
+        }
+
         if (strlen($word) > 4) {
             $wordScore += (strlen($word) - 4) * 50;
         }
-
         
         if ($timeElapsed >= $greenThreshold) {
-            $wordScore *= 1; // Green logic
+            $wordScore *= $greenMultiplier; // Green logic
         } else if ($timeElapsed >= $yellowThreshold) {
-            $wordScore *= 1.2; // Yellow logic
+            $wordScore *= $yellowMultiplier; // Yellow logic
         } else {
-            $wordScore *= 2; // Red logic
+            $wordScore *= $redMultiplier; // Red logic
         }
-
 
         if ($direction == "N" || $direction == "S") {
             $orientation = "vertical";
@@ -164,7 +172,7 @@
 
         // if above checks pass, calculate score, increment player score, and add word to found words array
         $player = $puzzle["players"][$plrIndex];
-        $wordValue = calculateScore($wordInfo["word"], $puzzle["expireTime"], $wordInfo["direction"]);
+        $wordValue = calculateScore($wordInfo["word"], $puzzle["expireTime"], $wordInfo["direction"], $puzzle["gameMode"]);
         $puzzle["players"][$plrIndex]["score"] += $wordValue;
 
         $foundWordObj = array(

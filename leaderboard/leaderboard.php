@@ -14,9 +14,8 @@
                         if (!in_array($themeName, ['timeattack'])) {
                             $availableThemes[] = $themeName;
                         }
-                        
                     }
-                    
+
                     if (in_array($theme, $availableThemes)) {
                         leaderboardTheme($theme);
                         
@@ -25,54 +24,68 @@
                     }
                 }
 
-                function leaderboardTheme($theme){
-
+                function leaderboardTheme($theme) {
                     global $pdo;
-                    $stmt= "";
-                    if ($theme == "none") {
-                        $query = "SELECT player AS name, score, time_stamp FROM all_time_lb WHERE mode = 'multiplayer' ORDER BY score DESC LIMIT 5";
-                        $stmt = $pdo->query($query);
-                    } else {
-                        $stmt = $pdo->prepare("SELECT player AS name, score, time_stamp FROM all_time_lb WHERE theme= ? AND mode = 'multiplayer' ORDER BY score DESC LIMIT 5");
+                    $data = new stdClass();
+                
+                    // Fetch for multiplayer mode
+                    $multiplayerQuery = $theme == "none" ? 
+                        "SELECT player AS name, score, time_stamp FROM all_time_lb WHERE mode = 'multiplayer' ORDER BY score DESC LIMIT 10" :
+                        "SELECT player AS name, score, time_stamp FROM all_time_lb WHERE theme= ? AND mode = 'multiplayer' ORDER BY score DESC LIMIT 10";
+                
+                    $stmt = $theme == "none" ? $pdo->query($multiplayerQuery) : $pdo->prepare($multiplayerQuery);
+                    if ($theme != "none") {
                         $stmt->execute([$theme]);
                     }
-                    
-                    $top_scores = $stmt->fetchAll(PDO::FETCH_OBJ);
-                            $data = new stdClass();
-                            $data->topPlayers = $top_scores;
-                            $pdo = null;
+                    $data->multiplayerScores = $stmt->fetchAll(PDO::FETCH_OBJ);
                 
-                            // Check if data is not empty and is an array
-                            if (!empty($data) && is_array($data->topPlayers)) {
-                                // Display the top 5 players
-                                foreach (array_slice($data->topPlayers, 0, 5) as $index => $player) {
-                                    $rank = $index + 1;
-                                    $playerName = htmlspecialchars($player->name);
-                                    // Open a flex container for each player
-                                    echo "<li>";
-                                    echo "<div class='player-container highlight-hover'>";
-
-                                    // Flexbox for Rank and Name
-                                    echo "<div class='flex-box rank-name'>";
-                                    echo "<span class='rank'>Rank {$rank}: </span>";
-                                    echo "<span class='player'>{$playerName}</span>";
-                                    echo "</div>";
-
-                                    // Flexbox for Score
-                                    echo "<div class='flex-box score'>";
-                                    echo "<span class='score'>Score: {$player->score}</span>";
-                                    echo "</div>";
-
-                                    // Close the flex container for each player
-                                    echo "</div>";
-                                    echo "</li>";
-                                }
-                            } else {
-                                echo "<li>No data available.</li>";
-                            }
-                            $pdo = null;
-
+                    // Fetch for time attack mode
+                    $timeAttackQuery = $theme == "none" ? 
+                    "SELECT player AS name, score, time_stamp FROM all_time_lb WHERE mode = 'timeattack' AND time_stamp >= DATE_SUB(NOW(), INTERVAL 1 WEEK) ORDER BY score DESC LIMIT 10" :
+                    "SELECT player AS name, score, time_stamp FROM all_time_lb WHERE theme= ? AND mode = 'timeattack' AND time_stamp >= DATE_SUB(NOW(), INTERVAL 1 WEEK) ORDER BY score DESC LIMIT 10";
+                
+                    $stmt = $theme == "none" ? $pdo->query($timeAttackQuery) : $pdo->prepare($timeAttackQuery);
+                    if ($theme != "none") {
+                        $stmt->execute([$theme]);
+                    }
+                    $data->timeAttackScores = $stmt->fetchAll(PDO::FETCH_OBJ);
+                
+                    // Display results
+                    displayScores($data->multiplayerScores, "All-Time Multiplayer");
+                    displayScores($data->timeAttackScores, "Weekly Time-Attack");
                 }
                 
+                function displayScores($scores, $modeTitle) {
+                    echo "<div class='{$modeTitle}-container' id=box>";
+                    echo "<h3>{$modeTitle}</h3>";
+                    echo "<div class='table-header'>";
+                    echo "<span class='rank-header'>Rank</span>";
+                    echo "<span class='score-header'>Score</span>";
+                    echo "</div>";
+                    echo "<hr>";
+                    if (!empty($scores) && is_array($scores)) {
+                        echo "<ul>";
+                        foreach ($scores as $index => $player) {
+                            $rank = $index + 1;
+                            $playerName = htmlspecialchars($player->name);
+                            
+                            echo "<li>";
+                            echo "<div class='player-container'>";
+                            echo "<div class='flex-box rank-name'>";
+                            echo "<span class='rank'> {$rank}. </span>";
+                            echo "<span class='player'> {$playerName}</span>";
+                            echo "</div>";
+                            echo "<div class='flex-box score'>";
+                            echo "<span class='score'> {$player->score}</span>";
+                            echo "</div>";
+                            echo "</div>";
+                            echo "</li>";
+                        }
+                        echo "</ul>";
+                    } else {
+                        echo "<p>No data available.</p>";
+                    }
+                    echo "</div>";
+                }
                 ?>
 
