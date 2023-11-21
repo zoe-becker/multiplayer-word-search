@@ -33,7 +33,7 @@
                 // initial read lock in main and lock here
                 if ($puzzle["dbUpdated"] == false) {
                     foreach ($puzzle["players"] as $player) {
-                        updateDataBase($player["name"], $player["score"]);
+                        updateDataBase($player["name"], $player["score"], $puzzle["theme"]["name"], $puzzle["gameMode"]);
                     }
                 }
 
