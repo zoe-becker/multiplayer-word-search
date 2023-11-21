@@ -1,11 +1,11 @@
 <?php
     // contains the function for generating game instances
+    require_once "../gameConfig.php";
+    require_once "../envConfig.php";
     require "themeFetcher.php";
 
     $GAME_DIR = "../board";
     $INSTANCE_TEMPLATE_DIR = $GAME_DIR . "/template";
-    $GAME_LENGTH = 180;
-    $INSTANCE_EXPIRATION_DELAY = 300; // amount of time after game ends before it is eligible to be deleted
 
     // calls the generator and returns a GamePuzzle object
     // parameters:
@@ -15,26 +15,20 @@
     // 
     // returns: the game link to the newly created instance on success, false otherwise
     function generateGameInstance($theme, $players, $mode) {
-        global $GAME_LENGTH, $INSTANCE_EXPIRATION_DELAY, $GAME_DIR, $INSTANCE_TEMPLATE_DIR;
+        global $GAME_DIR, $INSTANCE_TEMPLATE_DIR;
 
-        // curl to generator for new grid
-        $requestURI = "http://" . $_SERVER["SERVER_NAME"] . 
-            "/word-search-generator/generator?theme=" . $theme;
-        $request = curl_init($requestURI);
+        $themePath = getThemeFilePath($theme);
+        $command = PYTHON_INTERPRETER_PATH . " " . GENERATOR_PATH . "/generate.py" . " $themePath " . GENERATOR_WORD_COUNT;
 
-        curl_setopt($request, CURLOPT_RETURNTRANSFER, true); // to get response back
-        curl_setopt($request, CURLOPT_FOLLOWLOCATION, true); // deployment server redirects http to https
-
-        $puzzle = curl_exec($request);
-        $curlStatus = curl_getinfo($request, CURLINFO_HTTP_CODE);
-
+        // ask generator make a grid
+        $result = exec($command);
+        echo $result;
         // interpret curl result and initialize board
-        if ($curlStatus == 200) {
-            
-            $puzzle = json_decode($puzzle, true);
+        if ($result) {
+            $puzzle = json_decode($result, true);
             $puzzle["startTime"] = time();
-            $puzzle["expireTime"] = time() + $GAME_LENGTH; // set match expiration date
-            $puzzle["instanceExpiration"] = $puzzle["expireTime"] + $INSTANCE_EXPIRATION_DELAY;
+            $puzzle["expireTime"] = time() + ($mode == "multiplayer" ? MULTIPLAYER_GAME_LEN : TIMEATTACK_GAME_LEN);
+            $puzzle["instanceExpiration"] = $puzzle["expireTime"] + GAME_INSTANCE_EXPIRATION_DELAY;
             $puzzle["foundWords"] = new stdClass(); // empty map
             $puzzle["ended"] = false;
             $puzzle["players"] = $players;
@@ -44,19 +38,16 @@
 
             // extract theme data and add it to board data
             $themeData = getThemeData($theme);
-            unset($themeData["words"]);
+            unset($themeData["words"]); // unnecessary
             $puzzle["theme"] = $themeData;
             $puzzle["theme"]["name"] = $theme;
             $puzzle = json_encode($puzzle);
             
         } else {
             http_response_code(500);
-            echo "could not fetch word search board from generator. Curl error: " . curl_error($request);
+            echo "could not fetch word search board from generator.";
             return false;
         }
-        
-        // close request
-        curl_close($request);
 
         /* create new game instance */
         $instanceID = "ws-" . uniqid();
@@ -84,8 +75,8 @@
         }
 
         // store puzzle json in text file, change permissions so users cannot access answers
-        file_put_contents($instanceDir . "/puzzle.json", $puzzle);
-        chmod($instanceDir . "/puzzle.json", 0660);
+        file_put_contents($instanceDir . "/" . GAME_DATAFILE_NAME, $puzzle);
+        chmod($instanceDir . "/" . GAME_DATAFILE_NAME, 0660);
 
         // update lobby to indicate game has started
         $gameLink = "../" . $instanceDir . "/"; // add extra ../ since clients are in an instance directory
