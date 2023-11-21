@@ -31,11 +31,13 @@ foreach ($testFilesScan as $file) {
 
     if ($file == "puzzle.json") {
         $puzzle = json_decode(file_get_contents("$TEST_FILES_DIR/$file"), true);
-        $puzzle["theme"] = getThemeData($puzzle["theme"]);
+        $themeName = $puzzle["theme"];
+        $puzzle["theme"] = getThemeData($themeName);;
+        $puzzle["theme"]["name"] = $themeName;
         $puzzle["startTime"] = time();
         $puzzle["expireTime"] = time() + $GAME_LEN;
-        
         unset($puzzle["theme"]["words"]);
+        
         file_put_contents("$file", json_encode($puzzle));
     } else {
         copy("$TEST_FILES_DIR/$file", $file);
