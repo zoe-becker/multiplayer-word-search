@@ -1,7 +1,8 @@
 <?php
 // set of functions for getting various aspects of the available board themes
 
-$THEME_DIR = dirname(__FILE__) . "/../themes";
+require_once "../envConfig.php";
+$THEME_DIR = PUBLIC_HTML_PATH . "/themes";
 
 // get an array of the names of all of the themes in a ready to be displayed
 // format (the first letter capitalized)
@@ -34,4 +35,15 @@ function getThemeData($theme) {
 
     return json_decode($themeData, true);
 }
+
+// get the path to the theme file for the given theme name
+// $theme: theme name
+// return: absolute path to the theme file
+function getThemeFilePath($theme) {
+    global $THEME_DIR;
+    
+    $theme = strtolower($theme);
+    return realpath("$THEME_DIR/$theme.json");
+}
+
 ?>

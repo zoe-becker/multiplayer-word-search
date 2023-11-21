@@ -9,27 +9,24 @@
         Return: SetNameResponse object
     */
 
-    require "../utilities/fileSyncronization.php";
-    require "../utilities/requestValidation.php";
-    require "../utilities/themeFetcher.php";
-    require "validateLobby.php";
-
-    $LOBBY_DATAFILE_NAME = "lobbyData.json";
-    $MAX_NAME_LENGTH = 13;
+    $INCLUDE_PATH = require "../includePath.php";
+    require_once "$INCLUDE_PATH/gameConfig.php";
+    require "$INCLUDE_PATH/utilities/fileSyncronization.php";
+    require "$INCLUDE_PATH/utilities/requestValidation.php";
+    require "$INCLUDE_PATH/utilities/themeFetcher.php";
+    require "$INCLUDE_PATH/utilities/validateLobby.php";
 
     // validates that game hasn't already started and name is valid
     // exits if something is invalid
     // NOTE: name is always valid right now
     function validateRequest(&$lobbyData, $name) {
-        global $MAX_NAME_LENGTH;
-
         if ($lobbyData["gameLink"]) {
             echo "game already started";
             http_response_code(400);
             exit(-4);
         }
 
-        if (strlen($name) < 1 || strlen($name) >= $MAX_NAME_LENGTH) {
+        if (strlen($name) < 1 || strlen($name) >= USER_MAX_NAME_LEN) {
             echo "name does not fit size constraints";
             http_response_code(400);
             exit(-4);
@@ -67,7 +64,6 @@
     }
 
     function main() {
-        global $LOBBY_DATAFILE_NAME;
         validatePOST(array("lobby", "name"), true); // validate request
         
         $requestedName = $_SERVER["HTTP_NAME"];
@@ -75,7 +71,7 @@
 
         validateLobby($lobbyID, true); // validate lobby exists
 
-        $lobbyDataPath = "$lobbyID/$LOBBY_DATAFILE_NAME";
+        $lobbyDataPath = "$lobbyID/" . LOBBY_DATAFILE_NAME;
         $lobbyStream = flock_acquireEX($lobbyDataPath); // acquire lock on file since we may write to it
         $lobbyData = json_decode(fread($lobbyStream, filesize($lobbyDataPath)), true);
 

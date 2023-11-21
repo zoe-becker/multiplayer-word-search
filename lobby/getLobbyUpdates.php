@@ -6,19 +6,18 @@
 
         Return: LobbyData object (see docs)
     */
-    require "../utilities/requestValidation.php";
-    require "../utilities/sanitizePlayers.php";
-    require "../utilities/fileSyncronization.php";
-    require "validateLobby.php";
-
-    $LOBBY_DATAFILE_NAME = "lobbyData.json";
+    $INCLUDE_PATH = require "../includePath.php";
+    require_once "$INCLUDE_PATH/gameConfig.php";
+    require "$INCLUDE_PATH/utilities/requestValidation.php";
+    require "$INCLUDE_PATH/utilities/sanitizePlayers.php";
+    require "$INCLUDE_PATH/utilities/fileSyncronization.php";
+    require "$INCLUDE_PATH/utilities/validateLobby.php";
 
     function main() {
-        global $LOBBY_DATAFILE_NAME;
         validateGET(array("lobby"), true); // validate request
 
         $lobbyID = $_GET["lobby"];
-        $lobbyDataPath = "$lobbyID/$LOBBY_DATAFILE_NAME";
+        $lobbyDataPath = "$lobbyID/" . LOBBY_DATAFILE_NAME;
         validateLobby($lobbyID, true); // validate lobby exists
 
         $lobbyData = json_decode(flock_read_and_release($lobbyDataPath), true);

@@ -6,21 +6,18 @@
 
         Return: TimeAttackCreation object
     */
-
-    require "../utilities/requestValidation.php";
-    require "../utilities/gameGenerator.php";
-    
-    $MAX_NAME_LENGTH = 13;
+    $INCLUDE_PATH = require "../includePath.php";
+    require_once "$INCLUDE_PATH/gameConfig.php";
+    require "$INCLUDE_PATH/utilities/requestValidation.php";
+    require "$INCLUDE_PATH/utilities/gameGenerator.php";
 
     function main() {
-        global $MAX_NAME_LENGTH;
-
         validatePOST(array("name"), true); // va.idate request
 
         $name = $_SERVER["HTTP_NAME"];
 
         // validate name
-        if (strlen($name) < 1 || strlen($name) >= $MAX_NAME_LENGTH) {
+        if (strlen($name) < 1 || strlen($name) >= USER_MAX_NAME_LEN) {
             echo "name does not fit size constraints";
             http_response_code(400);
             exit(-4);
@@ -34,6 +31,7 @@
             "score" => 0
         );
 
+        // create game instance
         $gameLink = generateGameInstance("timeattack", array($newPlayer), "timeattack");
 
         if (!$gameLink) {
@@ -41,6 +39,7 @@
             exit(-1);
         }
 
+        // echo response
         $response = array(
             "link" => $gameLink,
             "accessToken" => $newPlayer["accessToken"]

@@ -9,14 +9,13 @@
 
         return: players key of PuzzleState object
     */
-    $GAMEFILE_NAME = "puzzle.json";
-    $GAME_LENGTH = 180; 
-
-    require "../utilities/requestValidation.php";
-    require "../utilities/fileSyncronization.php";
-    require "../utilities/getPlayer.php";
-    require "../utilities/sanitizePlayers.php";
-    require "validateGame.php";
+    $INCLUDE_PATH = require "../includePath.php";
+    require_once "$INCLUDE_PATH/gameConfig.php";
+    require "$INCLUDE_PATH/utilities/requestValidation.php";
+    require "$INCLUDE_PATH/utilities/fileSyncronization.php";
+    require "$INCLUDE_PATH/utilities/getPlayer.php";
+    require "$INCLUDE_PATH/utilities/sanitizePlayers.php";
+    require "$INCLUDE_PATH/utilities/validateGame.php";
 
     /* 
     Word score[base word 300 pts :: every letter more than 4 is an additional 50 pts]  
@@ -29,15 +28,14 @@
     0 - 1/6 time left is red
     */
     function calculateScore($word, $endTime, $direction) {
-        global $GAME_LENGTH;
-        $greenThreshold = $GAME_LENGTH * 0.5;
-        $yellowThreshold = $GAME_LENGTH * 0.1667;
+        $greenThreshold = MULTIPLAYER_GAME_LEN * 0.5;
+        $yellowThreshold = MULTIPLAYER_GAME_LEN * 0.1667;
         $currentTime = time();
         $timeElapsed = $endTime - $currentTime;
 
         $orientation = "";
 
-        $wordScore = 300;
+        $wordScore = MULTIPLAYER_WORD_BASE_SCORE;
 
         if (strlen($word) > 4) {
             $wordScore += (strlen($word) - 4) * 50;
@@ -124,13 +122,12 @@
     }
 
     function main() {
-        global $GAMEFILE_NAME;
         validatePOST(["game", "token", "wordinfo"], true); // validate request
 
         $gameID = $_SERVER["HTTP_GAME"];
         $token = $_SERVER["HTTP_TOKEN"];
         $wordInfoStr = $_SERVER["HTTP_WORDINFO"];
-        $gameDataPath = "$gameID/$GAMEFILE_NAME";
+        $gameDataPath = "$gameID/" . GAME_DATAFILE_NAME;
 
         // validate gameID and wordInfo headers
         validateGame($gameID, true);

@@ -1,5 +1,6 @@
 <?php
-                require_once '../database/db_connect.php';
+                $INCLUDE_PATH = require "../includePath.php";
+                require_once "$INCLUDE_PATH/utilities/db_connect.php";
                 
 
                 if (isset($_GET['theme'])) {

@@ -8,12 +8,12 @@
 
         return: none
     */
-    require "../utilities/fileSyncronization.php";
-    require "../utilities/requestValidation.php";
-    require "../utilities/themeFetcher.php";
-    require "validateLobby.php";
-
-    $LOBBY_DATAFILE_NAME = "lobbyData.json";
+    $INCLUDE_PATH = require "../includePath.php";
+    require_once "$INCLUDE_PATH/gameConfig.php";
+    require "$INCLUDE_PATH/utilities/fileSyncronization.php";
+    require "$INCLUDE_PATH/utilities/requestValidation.php";
+    require "$INCLUDE_PATH/utilities/themeFetcher.php";
+    require "$INCLUDE_PATH/utilities/validateLobby.php";
 
     // validates the request
     function validateRequest(&$accessToken, $theme) {
@@ -55,8 +55,6 @@
 
 
     function main() {
-        global $LOBBY_DATAFILE_NAME;
-
         // called validatePost function
         validatePOST(['token', 'theme', 'lobby'], true);
 
@@ -75,7 +73,7 @@
 
         $lobbyID = validateLobby($lobbyCode, true);
 
-        $lobbyDataPath = "$lobbyCode/$LOBBY_DATAFILE_NAME";
+        $lobbyDataPath = "$lobbyCode/" . LOBBY_DATAFILE_NAME;
         $lobbyStream = flock_acquireEX($lobbyDataPath); // acquire exclusive lock on lobbyData file
         $lobbyData = json_decode(fread($lobbyStream, filesize($lobbyDataPath)), true);
 

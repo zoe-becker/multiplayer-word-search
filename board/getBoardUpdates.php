@@ -6,13 +6,13 @@
 
     Return: PuzzleState object (see docs)
 */
-    require "../utilities/sanitizePlayers.php";
-    require "../utilities/fileSyncronization.php";
-    require "../utilities/requestValidation.php";
-    require "validateGame.php";
-    require "updateDB.php";
-
-    $GAMEFILE_NAME = "puzzle.json";
+    $INCLUDE_PATH = require "../includePath.php";
+    require_once "$INCLUDE_PATH/gameConfig.php";
+    require "$INCLUDE_PATH/utilities/sanitizePlayers.php";
+    require "$INCLUDE_PATH/utilities/fileSyncronization.php";
+    require "$INCLUDE_PATH/utilities/requestValidation.php";
+    require "$INCLUDE_PATH/utilities/validateGame.php";
+    require "$INCLUDE_PATH/utilities/updateDB.php";
 
     // check whether game is expired
     // returns true if the game has expired
@@ -48,12 +48,11 @@
         return $isExpired;
     }
     function main() {
-        global $GAMEFILE_NAME;
         validateGET(array("game"), true); // validate request
 
         date_default_timezone_set("UTC"); // keep timezone consistent
         $gameID = $_GET["game"];
-        $gamefilePath = "$gameID/$GAMEFILE_NAME";
+        $gamefilePath = "$gameID/" . GAME_DATAFILE_NAME;
 
         validateGame($gameID, true); // validate game exists
 
