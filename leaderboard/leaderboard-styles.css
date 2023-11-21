@@ -51,6 +51,13 @@ body, html {
     max-width: 600px;
 }
 
+#leaderboard-content h3 {
+    justify-content: center;
+    border: #d0d0d0 solid 1px;
+    padding: 15px;
+    font-size: 18px;
+}
+
 /* Style the leaderboard container */
 .leaderboard {
     background-color: #f0f0f0;

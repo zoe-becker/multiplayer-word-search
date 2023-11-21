@@ -50,13 +50,13 @@
                     $data->timeAttackScores = $stmt->fetchAll(PDO::FETCH_OBJ);
                 
                     // Display results
-                    displayScores($data->multiplayerScores, "Multiplayer");
+                    displayScores($data->multiplayerScores, "All-Time Multiplayer");
                     displayScores($data->timeAttackScores, "Weekly Time-Attack");
                 }
                 
                 function displayScores($scores, $modeTitle) {
                     echo "<div class='{$modeTitle}-container'>";
-                    echo "<h3>{$modeTitle} Scores</h3>";
+                    echo "<h3>{$modeTitle}</h3>";
                     if (!empty($scores) && is_array($scores)) {
                         echo "<ul>";
                         foreach ($scores as $index => $player) {
@@ -80,7 +80,5 @@
                     }
                     echo "</div>";
                 }
-                
-                
                 ?>
 
