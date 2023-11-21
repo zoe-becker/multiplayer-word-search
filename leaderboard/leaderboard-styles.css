@@ -5,7 +5,7 @@
 
 }
 body, html {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(63, 73, 73);
     margin: 10px; /* Remove default body margin */
     padding: 0; /* Remove default body padding */
 }
@@ -49,6 +49,9 @@ body, html {
     align-items: center;
     width: 100%;
     max-width: 600px;
+    background-color: rgb(102, 102, 102);
+    
+
 }
 
 #leaderboard-content h3 {
@@ -107,12 +110,19 @@ body, html {
     gap: 20px; /* Adds space between the two score boxes */
 }
 
-.Multiplayer-contatiner, .Time-Attack-container{
+ .Time-Attack-container{
     flex: 1; /* Each box will take up an equal amount of space */
-    padding: 10px;
+
     border-radius: 5px; /* Optional: rounds the corners of the boxes */
+    background-color: rgb(102, 102, 102);
 }
 
+.All-Time.Multiplayer-contatiner{
+    flex: 1; /* Each box will take up an equal amount of space */
+
+    border-radius: 5px; /* Optional: rounds the corners of the boxes */
+    background-color: rgb(102, 102, 102);
+}
 
 /* CSS for the flex container */
 .player-container {
