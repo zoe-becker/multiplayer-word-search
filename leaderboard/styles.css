@@ -1,3 +1,6 @@
+/* Basic */
+@import url("https://use.typekit.net/ovt6ynt.css");
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Oswald:wght@200;300;400;500;600;700&family=Roboto+Condensed:wght@300;400;700&family=Roboto:wght@100;300;400;500;700;900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Spectral:wght@200;300;400;500;600;700;800&display=swap");
 /*--------------------
 Body
 --------------------*/
@@ -9,12 +12,14 @@ Body
 }
 body, html {
     min-height: 450px;
-  height: 100vh;
-  margin: 0;  
-  background: radial-gradient(ellipse farthest-corner at center top, #f39264 0%, #f2606f 100%);
-  color: #fff;
-  font-family: 'Open Sans', sans-serif;
+    height: 100vh;
+    margin: 0;  
+    background: radial-gradient(ellipse farthest-corner at center top, #EDAFB8 0%, #9F405C 100%);
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
 }
+
+
 
 div#leaderboard-content {
     display: flex;
@@ -23,7 +28,7 @@ div#leaderboard-content {
     align-items: center;
     width: 100%;
     max-width: 600px;
-    background-color: rgb(102, 102, 102);
+    
     justify-content: center;
     justify-content: space-evenly;
     align-items: center;
@@ -63,6 +68,19 @@ h1 {
     padding-right: 5px;
 }
 
+/* Style for unselected tabs */
+button[role="tab"] {
+    background-color: #f0f0f0; /* Example color */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Style for the selected tab */
+button[role="tab"][aria-selected="true"] {
+    background-color: #007bff; /* Example highlight color */
+    color: white;
+}
 
 
 div #leaderboard-tabs {
@@ -86,7 +104,7 @@ div.scores-container {
     align-items: center;
     width: 100%;
     max-width: 600px;
-    background-color: rgb(102, 102, 102);
+    
     justify-content: center;
     align-items: center;
 }

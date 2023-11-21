@@ -14,8 +14,8 @@
             <h1>Leaderboards</h1>
         </div>
         <!-- HTMX Tabs for Leaderboards -->
-        <div id="leaderboard-tabs" hx-target="#leaderboard-content" role="tablist"  >
-            <button role="tab" aria-controls="leaderboard-content" aria-selected="true" hx-get="leaderboard.php?theme=all-time"  >All-Time</button>
+        <div id="leaderboard-tabs" hx-target="#leaderboard-content" role="tablist" _="on htmx:afterOnLoad set @aria-selected of <[aria-selected=true]/> to false tell the target take .selected set @aria-selected to true">
+            <button role="tab" aria-controls="leaderboard-content" aria-selected="true" hx-get="leaderboard.php?theme=all-time" class="selected">All-Time</button>
             <button role="tab" aria-controls="leaderboard-content" aria-selected="false" hx-get="leaderboard.php?theme=animals">Animals</button>
             <button role="tab" aria-controls="leaderboard-content" aria-selected="false" hx-get="leaderboard.php?theme=christmas">Christmas</button>
             <button role="tab" aria-controls="leaderboard-content" aria-selected="false" hx-get="leaderboard.php?theme=halloween">Halloween</button>
