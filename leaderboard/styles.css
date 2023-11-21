@@ -55,6 +55,14 @@ h1 {
     font-weight: bold;
 }
 
+.rank-header{
+    padding-left: 5px;
+}
+
+.score-header{
+    padding-right: 5px;
+}
+
 
 
 div #leaderboard-tabs {
@@ -100,10 +108,18 @@ ul{
     display: flex;
     align-items: left;
     flex: 2;
+    justify-content: left;
     max-width: 500px;
     max-height: 100px;
     padding: 10px;
     border-radius: 5px;
+    .rank {
+        margin-right: 5px;
+    }
+    
+    .player {
+        padding-left: 5px;
+    }
 }
 
 .flex-box.score {

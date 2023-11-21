@@ -71,8 +71,8 @@
                             echo "<li>";
                             echo "<div class='player-container'>";
                             echo "<div class='flex-box rank-name'>";
-                            echo "<span class='rank'> {$rank}: </span>";
-                            echo "<span class='player'>{$playerName}</span>";
+                            echo "<span class='rank'> {$rank}. </span>";
+                            echo "<span class='player'> {$playerName}</span>";
                             echo "</div>";
                             echo "<div class='flex-box score'>";
                             echo "<span class='score'> {$player->score}</span>";
