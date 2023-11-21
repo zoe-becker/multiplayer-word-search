@@ -6,5 +6,6 @@
 .venv
 /.venv/
 /.vscode/
-/database/login.php
 /.env
+envConfig.php
+includePath.php
