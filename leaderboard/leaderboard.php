@@ -57,19 +57,25 @@
                 function displayScores($scores, $modeTitle) {
                     echo "<div class='{$modeTitle}-container'>";
                     echo "<h3>{$modeTitle}</h3>";
+                    echo "<div class='table-header'>";
+                    echo "<span class='rank-header'>Rank</span>";
+                    echo "<span class='score-header'>Score</span>";
+                    echo "</div>";
+                    echo "<hr>";
                     if (!empty($scores) && is_array($scores)) {
                         echo "<ul>";
                         foreach ($scores as $index => $player) {
                             $rank = $index + 1;
                             $playerName = htmlspecialchars($player->name);
+                            
                             echo "<li>";
-                            echo "<div class='player-container highlight-hover'>";
+                            echo "<div class='player-container'>";
                             echo "<div class='flex-box rank-name'>";
-                            echo "<span class='rank'>Rank {$rank}: </span>";
+                            echo "<span class='rank'> {$rank}: </span>";
                             echo "<span class='player'>{$playerName}</span>";
                             echo "</div>";
                             echo "<div class='flex-box score'>";
-                            echo "<span class='score'>Score: {$player->score}</span>";
+                            echo "<span class='score'> {$player->score}</span>";
                             echo "</div>";
                             echo "</div>";
                             echo "</li>";
