@@ -28,30 +28,40 @@
     1/6 - 50% time left is yellow
     0 - 1/6 time left is red
     */
-    function calculateScore($word, $endTime, $direction) {
+    function calculateScore($word, $endTime, $direction, $mode) {
         global $GAME_LENGTH;
         $greenThreshold = $GAME_LENGTH * 0.5;
         $yellowThreshold = $GAME_LENGTH * 0.1667;
         $currentTime = time();
         $timeElapsed = $endTime - $currentTime;
-
         $orientation = "";
-
         $wordScore = 300;
+        $greenMultiplier = 1;
+        $yellowMultiplier = 1;
+        $redMultiplier = 1;
+
+        // Set multipliers based on game mode
+        if ($mode == "multiplayer") {
+            $greenMultiplier = 1;
+            $yellowMultiplier = 1.2;
+            $redMultiplier = 2;
+        } else if ($mode == "timeAttack") {
+            $greenMultiplier = 2;
+            $yellowMultiplier = 1.2;
+            $redMultiplier = 1;
+        }
 
         if (strlen($word) > 4) {
             $wordScore += (strlen($word) - 4) * 50;
         }
-
         
         if ($timeElapsed >= $greenThreshold) {
-            $wordScore *= 1; // Green logic
+            $wordScore *= $greenMultiplier; // Green logic
         } else if ($timeElapsed >= $yellowThreshold) {
-            $wordScore *= 1.2; // Yellow logic
+            $wordScore *= $yellowMultiplier; // Yellow logic
         } else {
-            $wordScore *= 2; // Red logic
+            $wordScore *= $redMultiplier; // Red logic
         }
-
 
         if ($direction == "N" || $direction == "S") {
             $orientation = "vertical";
