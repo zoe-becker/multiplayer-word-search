@@ -177,7 +177,7 @@
 
         // if above checks pass, calculate score, increment player score, and add word to found words array
         $player = $puzzle["players"][$plrIndex];
-        $wordValue = calculateScore($wordInfo["word"], $puzzle["expireTime"], $wordInfo["direction"]);
+        $wordValue = calculateScore($wordInfo["word"], $puzzle["expireTime"], $wordInfo["direction"], $puzzle["gameMode"]);
         $puzzle["players"][$plrIndex]["score"] += $wordValue;
 
         $foundWordObj = array(
