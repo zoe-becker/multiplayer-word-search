@@ -7,13 +7,13 @@
 
     Return: PuzzleStructure object (see docs)
 */
-    require "../utilities/getPlayer.php";
-    require "../utilities/sanitizePlayers.php";
-    require "../utilities/fileSyncronization.php";
-    require "../utilities/requestValidation.php";
-    require "validateGame.php";
-
-    $GAMEFILE_NAME = "puzzle.json";
+    $INCLUDE_PATH = require "../includePath.php";
+    require_once "$INCLUDE_PATH/gameConfig.php";
+    require "$INCLUDE_PATH/utilities/getPlayer.php";
+    require "$INCLUDE_PATH/utilities/sanitizePlayers.php";
+    require "$INCLUDE_PATH/utilities/fileSyncronization.php";
+    require "$INCLUDE_PATH/utilities/requestValidation.php";
+    require "$INCLUDE_PATH/utilities/validateGame.php";
 
     // checks that a given player is eligible to retrieve the game board
     // exits if ineligible
@@ -29,12 +29,11 @@
     }
 
     function main() {
-        global $GAMEFILE_NAME;
         validatePOST(array("game", "token"), true); // validate request
 
         $token = $_SERVER["HTTP_TOKEN"];
         $gameID = $_SERVER["HTTP_GAME"];
-        $gamefilePath = "$gameID/$GAMEFILE_NAME";
+        $gamefilePath = "$gameID/" . GAME_DATAFILE_NAME;
         validateGame($gameID, true); // validate game exists
 
         // if request is valid fetch puzzle file

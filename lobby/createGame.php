@@ -7,13 +7,12 @@
 
         Return: Relative path to the newly created game instance
     */
-
-    require "../utilities/requestValidation.php";
-    require "../utilities/fileSyncronization.php";
-    require "../utilities/gameGenerator.php";
-    require "validateLobby.php";
-
-    $LOBBY_DATAFILE_NAME = "lobbyData.json";
+    $INCLUDE_PATH = require "../includePath.php";
+    require_once "$INCLUDE_PATH/gameConfig.php";
+    require "$INCLUDE_PATH/utilities/requestValidation.php";
+    require "$INCLUDE_PATH/utilities/fileSyncronization.php";
+    require "$INCLUDE_PATH/utilities/gameGenerator.php";
+    require "$INCLUDE_PATH/utilities/validateLobby.php";
 
     // validate that game has not started and that the player is the host
     // exits if invalid
@@ -48,13 +47,12 @@
     }
     
     function main() {
-        global $LOBBY_DATAFILE_NAME;
         validatePOST(array("lobby", "token"), true); // validate request
 
         // extract headers and generate lobby path
         $token = $_SERVER["HTTP_TOKEN"];
         $lobbyID = $_SERVER["HTTP_LOBBY"];
-        $lobbyDataPath = "$lobbyID/$LOBBY_DATAFILE_NAME";
+        $lobbyDataPath = "$lobbyID/" . LOBBY_DATAFILE_NAME;
         
         validateLobby($lobbyID, true); // validate lobby exists
 

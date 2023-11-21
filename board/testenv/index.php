@@ -1,10 +1,11 @@
 <?php
-// Sets up the test environment
+// sets up the test environment
+$INCLUDE_PATH = require "../includePath.php";
+require "$INCLUDE_PATH/gameConfig.php";
+require "$INCLUDE_PATH/utilities/themeFetcher.php";
+
 $TEMPLATE_DIR = "../template";
 $TEST_FILES_DIR = "../testenvFiles";
-$GAME_LEN = 180;
-
-require "../../utilities/themeFetcher.php";
 
 $templateScan = scandir($TEMPLATE_DIR);
 $testFilesScan = scandir($TEST_FILES_DIR);
@@ -35,8 +36,7 @@ foreach ($testFilesScan as $file) {
         $puzzle["theme"] = getThemeData($themeName);;
         $puzzle["theme"]["name"] = $themeName;
         $puzzle["startTime"] = time();
-        $puzzle["expireTime"] = time() + $GAME_LEN;
-        unset($puzzle["theme"]["words"]);
+        $puzzle["expireTime"] = time() + TESTENV_GAME_LEN;
         
         file_put_contents("$file", json_encode($puzzle));
     } else {

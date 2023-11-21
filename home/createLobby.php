@@ -5,27 +5,26 @@
 
        Return: Relative path to the newly created lobby instance
     */
-    require "../utilities/requestValidation.php";
+    $INCLUDE_PATH = require "../includePath.php";
+    require_once "$INCLUDE_PATH/gameConfig.php";
+    require "$INCLUDE_PATH/utilities/requestValidation.php";
     
     $LOBBY_DIR = "../lobby";
     $INSTANCE_TEMPLATE_DIR = $LOBBY_DIR . "/template";
-    $LOBBY_DATAFILE_NAME = "lobbyData.json";
-    $LOBBY_LIFETIME = 28800; // 8 hours
-    $DEFAULT_THEME = "Animals";
 
     // handles creation of the lobby
     // will exit with appropriate messages sent to client if creation fails
     function createLobby() {
         // load in globals
-        global $LOBBY_DIR, $INSTANCE_TEMPLATE_DIR, $LOBBY_DATAFILE_NAME, $LOBBY_LIFETIME, $DEFAULT_THEME;
+        global $LOBBY_DIR, $INSTANCE_TEMPLATE_DIR;
 
         $lobby = array();
 
         // set initial lobby state
-        $lobby["instanceExpiration"] = time() + $LOBBY_LIFETIME;
+        $lobby["instanceExpiration"] = time() + LOBBY_INSTANCE_LIFETIME;
         $lobby["players"] = array(); // first player added will become host
         $lobby["gameLink"] = false;
-        $lobby["theme"] = $DEFAULT_THEME;
+        $lobby["theme"] = MULTIPLAYER_DEFAULT_THEME;
 
         /* create new game instance */
         $instanceID = uniqid("lb-");
@@ -53,8 +52,8 @@
         }
 
         // store lobby data in json file, change permissions so users cannot access user tokens of others
-        file_put_contents($instanceDir . "/" . $LOBBY_DATAFILE_NAME, json_encode($lobby));
-        chmod($instanceDir . "/" . $LOBBY_DATAFILE_NAME, 0660);
+        file_put_contents($instanceDir . "/" . LOBBY_DATAFILE_NAME, json_encode($lobby));
+        chmod($instanceDir . "/" . LOBBY_DATAFILE_NAME, 0660);
 
         return $instanceDir . "/"; // echo path to new instance
     }
