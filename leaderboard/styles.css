@@ -1,6 +1,6 @@
 /* Basic */
-@import url("https://use.typekit.net/ovt6ynt.css");
-@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Oswald:wght@200;300;400;500;600;700&family=Roboto+Condensed:wght@300;400;700&family=Roboto:wght@100;300;400;500;700;900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Spectral:wght@200;300;400;500;600;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Raleway:400');
+
 /*--------------------
 Body
 --------------------*/
@@ -9,19 +9,20 @@ Body
 *::after {
   box-sizing: border-box;
   list-style: none;
+  font-family: 'Raleway', sans-serif;
+  
+  
 }
 body, html {
     min-height: 450px;
     height: 100vh;
     margin: 0;  
-    background: radial-gradient(ellipse farthest-corner at center top, #EDAFB8 0%, #9F405C 100%);
+    background: radial-gradient(ellipse farthest-corner at center top, #2B4162 0%, #12100E 100%);
     color: #fff;
-    font-family: 'Open Sans', sans-serif;
 }
 
-
-
 div#leaderboard-content {
+    
     display: flex;
     flex:1;
     flex-direction: row;
@@ -36,15 +37,23 @@ div#leaderboard-content {
     
 }
 
+@media (max-width: 600px) {
+    #leaderboard-tabs {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
 h3 {
     font-size: 18px;
-    color: #e1e1e1;
+    color: #f0f0f0;
     padding: 12px 13px 18px;
   }
 
 h1 {
     text-align: center;
     color: #f0f0f0;
+    font-size: 42px;
 }
 
 .table-header {
@@ -69,19 +78,23 @@ h1 {
 }
 
 /* Style for unselected tabs */
-button[role="tab"] {
+#leaderboard-tabs button[role="tab"] {
     background-color: #f0f0f0; /* Example color */
     border: none;
     padding: 10px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 /* Style for the selected tab */
-button[role="tab"][aria-selected="true"] {
-    background-color: #007bff; /* Example highlight color */
-    color: white;
+#leaderboard-tabs button[role="tab"][aria-selected="true"] {
+    background: linear-gradient(90deg, #B4EDD2 0%, #A0CFD3 100%);
+  box-shadow: 0px 0px 8px 0px rgba(47, 187, 12, 0.62);
 }
 
+#leaderboard-tabs button:hover{
+    background-color: #e0e0e0;
+}
 
 div #leaderboard-tabs {
     justify-content: center;
@@ -90,11 +103,13 @@ div #leaderboard-tabs {
  
 }
 
+
 div.container{
     display: flex;
     flex-direction: column; /* Arrange items vertically */
     justify-content: center;
     align-items: center;
+    font-size: 16px;
 }
 
 div.scores-container {
@@ -104,7 +119,7 @@ div.scores-container {
     align-items: center;
     width: 100%;
     max-width: 600px;
-    
+    font-size: 16px;
     justify-content: center;
     align-items: center;
 }
@@ -115,6 +130,7 @@ ul{
 } 
 /* CSS for the flex container */
 .player-container {
+    font-size: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
