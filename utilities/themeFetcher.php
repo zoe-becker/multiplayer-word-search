@@ -1,7 +1,7 @@
 <?php
 // set of functions for getting various aspects of the available board themes
 
-require_once "../envConfig.php";
+require_once __DIR__ . "/../config/envConfig.php";
 $THEME_DIR = PUBLIC_HTML_PATH . "/themes";
 
 // get an array of the names of all of the themes in a ready to be displayed

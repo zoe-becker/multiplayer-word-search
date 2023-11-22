@@ -7,7 +7,7 @@
         Return: TimeAttackCreation object
     */
     $INCLUDE_PATH = require "../includePath.php";
-    require_once "$INCLUDE_PATH/gameConfig.php";
+    require_once "$INCLUDE_PATH/config/gameConfig.php";
     require "$INCLUDE_PATH/utilities/requestValidation.php";
     require "$INCLUDE_PATH/utilities/gameGenerator.php";
 

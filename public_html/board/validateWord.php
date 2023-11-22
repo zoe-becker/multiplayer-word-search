@@ -10,7 +10,7 @@
         return: players key of PuzzleState object
     */
     $INCLUDE_PATH = require "../includePath.php";
-    require_once "$INCLUDE_PATH/gameConfig.php";
+    require_once "$INCLUDE_PATH/config/gameConfig.php";
     require "$INCLUDE_PATH/utilities/requestValidation.php";
     require "$INCLUDE_PATH/utilities/fileSyncronization.php";
     require "$INCLUDE_PATH/utilities/getPlayer.php";
@@ -27,14 +27,31 @@
     1/6 - 50% time left is yellow
     0 - 1/6 time left is red
     */
-    function calculateScore($word, $endTime, $direction) {
-        $greenThreshold = MULTIPLAYER_GAME_LEN * 0.5;
-        $yellowThreshold = MULTIPLAYER_GAME_LEN * 0.1667;
+    function calculateScore($word, $endTime, $direction, $mode) {
+        $greenThreshold = 0.5;
+        $yellowThreshold = 0.1667;
         $currentTime = time();
         $timeElapsed = $endTime - $currentTime;
         $orientation = "";
+        $wordScore = 300;
+        $greenMultiplier = 1;
+        $yellowMultiplier = 1;
+        $redMultiplier = 1;
 
-        $wordScore = MULTIPLAYER_WORD_BASE_SCORE;
+        // Set multipliers based on game mode
+        if ($mode == "multiplayer") {
+            $greenThreshold = MULTIPLAYER_GAME_LEN * $greenThreshold;
+            $yellowThreshold = MULTIPLAYER_GAME_LEN * $yellowThreshold;
+            $greenMultiplier = 1;
+            $yellowMultiplier = 1.2;
+            $redMultiplier = 2;
+        } else if ($mode == "timeAttack") {
+            $greenThreshold = TIMEATTACK_GAME_LEN * $greenThreshold;
+            $yellowThreshold = TIMEATTACK_GAME_LEN * $yellowThreshold;
+            $greenMultiplier = 2;
+            $yellowMultiplier = 1.2;
+            $redMultiplier = 1;
+        }
 
         // Set multipliers based on game mode
         if ($mode == "multiplayer") {

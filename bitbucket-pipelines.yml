@@ -9,32 +9,41 @@ pipelines:
   custom:
     deploy-to-webserver:
       - step:
+          deployment: production
           name: 'Tear down previous deployment'
           script:
+            - envsubst < ./deployment_teardown_old.sh > deploy_teardown.sh
             - pipe: atlassian/ssh-run:0.6.1
               variables:
-                SSH_USER: 'j1jjujqhggs6'
-                SERVER: 'verygoodbadthing.com'
+                SSH_USER: $REMOTE_USER
+                SERVER: $REMOTE_DOMAIN
                 MODE: 'script'
-                COMMAND: 'deployment_teardown_old.sh'
+                COMMAND: 'deploy_teardown.sh'
       - step:
-          name: 'Deploy files'
-          deployment: production
+          name: 'Deploy public_html'
           script:
-            - mkdir ../word-search-generator
-            - mv * ../word-search-generator
-            - mv ../word-search-generator .
+            - bash ./prepare_public_html.sh
             - pipe: atlassian/sftp-deploy:0.7.0
               variables:
-                USER: 'j1jjujqhggs6'
-                SERVER: 'verygoodbadthing.com'
-                REMOTE_PATH: '/home/j1jjujqhggs6/public_html'
+                USER: $REMOTE_USER
+                SERVER: $REMOTE_DOMAIN
+                REMOTE_PATH: $REMOTE_PUBLIC_HTML_PATH
+      - step:
+          name: 'Deploy backend'
+          script:
+            - bash ./prepare_backend.sh
+            - pipe: atlassian/sftp-deploy:0.7.0
+              variables:
+                USER: $REMOTE_USER
+                SERVER: $REMOTE_DOMAIN
+                REMOTE_PATH: $REMOTE_PATH
       - step:
           name: 'Install word_search_generator'
           script:
+            - envsubst < ./deployment_install.sh > deploy_install.sh
             - pipe: atlassian/ssh-run:0.6.1
               variables:
-                SSH_USER: 'j1jjujqhggs6'
-                SERVER: 'verygoodbadthing.com'
+                SSH_USER: $REMOTE_USER
+                SERVER: $REMOTE_DOMAIN
                 MODE: 'script'
-                COMMAND: 'deployment_install.sh'
+                COMMAND: 'deploy_install.sh'

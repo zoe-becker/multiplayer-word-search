@@ -10,7 +10,7 @@
     */
 
     $INCLUDE_PATH = require "../includePath.php";
-    require_once "$INCLUDE_PATH/gameConfig.php";
+    require_once "$INCLUDE_PATH/config/gameConfig.php";
     require "$INCLUDE_PATH/utilities/fileSyncronization.php";
     require "$INCLUDE_PATH/utilities/requestValidation.php";
     require "$INCLUDE_PATH/utilities/themeFetcher.php";
