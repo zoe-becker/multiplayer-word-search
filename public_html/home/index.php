@@ -21,7 +21,7 @@
                 <input type="text" id="gameCode" placeholder="Game Code" required>
                 <button type="button" id="joinButton"><span> </span>Join</button>
             </form>
-            <button onclick="location.href='/word-search-generator/leaderboard'" type="button"><span> </span> Leaderboard</button>
+            <button onclick="location.href='../leaderboard'" type="button"><span> </span> Leaderboard</button>
             <!-- <button onclick="requestBoard()">Play</button> -->
             
         </div>

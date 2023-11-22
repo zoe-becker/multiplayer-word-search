@@ -11,9 +11,8 @@
 
 // THIS FILE MUST BE RENAMED TO "envConfig.php" AFTER FILLING OUT REQUIRED FIELDS
 
-// Public_html config
+// Path config
 define("PUBLIC_HTML_PATH", "");
-define("GENERATOR_PATH", "");
 
 // Database config
 define("DB_USER", "");

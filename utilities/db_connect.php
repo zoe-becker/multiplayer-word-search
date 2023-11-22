@@ -1,7 +1,6 @@
 <?php
 
-$INCLUDE_PATH = require "../includePath.php";
-require_once "$INCLUDE_PATH/envConfig.php";
+require_once __DIR__ . "/../config/envConfig.php";
 
 try {
     $host = DB_HOST;

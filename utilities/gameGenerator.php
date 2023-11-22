@@ -1,9 +1,10 @@
 <?php
     // contains the function for generating game instances
-    require_once "../gameConfig.php";
-    require_once "../envConfig.php";
-    require "themeFetcher.php";
+    require_once __DIR__ . "/../config/gameConfig.php";
+    require_once __DIR__ . "/../config/envConfig.php";
+    require __DIR__ . "/themeFetcher.php";
 
+    $GENERATOR_PATH = __DIR__ . "/../generator";
     $GAME_DIR = "../board";
     $INSTANCE_TEMPLATE_DIR = $GAME_DIR . "/template";
 
@@ -15,11 +16,11 @@
     // 
     // returns: the game link to the newly created instance on success, false otherwise
     function generateGameInstance($theme, $players, $mode) {
-        global $GAME_DIR, $INSTANCE_TEMPLATE_DIR;
+        global $GAME_DIR, $INSTANCE_TEMPLATE_DIR, $GENERATOR_PATH;
 
         $themePath = getThemeFilePath($theme);
-        $command = PYTHON_INTERPRETER_PATH . " " . GENERATOR_PATH . "/generate.py" . " $themePath " . GENERATOR_WORD_COUNT;
-
+        $command = PYTHON_INTERPRETER_PATH . " " . $GENERATOR_PATH . "/generate.py" . " $themePath " . GENERATOR_WORD_COUNT;
+        echo $command;
         // ask generator make a grid
         $result = exec($command);
         echo $result;

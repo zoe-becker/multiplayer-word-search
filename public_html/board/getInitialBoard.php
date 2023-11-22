@@ -8,7 +8,7 @@
     Return: PuzzleStructure object (see docs)
 */
     $INCLUDE_PATH = require "../includePath.php";
-    require_once "$INCLUDE_PATH/gameConfig.php";
+    require_once "$INCLUDE_PATH/config/gameConfig.php";
     require "$INCLUDE_PATH/utilities/getPlayer.php";
     require "$INCLUDE_PATH/utilities/sanitizePlayers.php";
     require "$INCLUDE_PATH/utilities/fileSyncronization.php";

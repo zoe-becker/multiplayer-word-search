@@ -6,7 +6,7 @@
        Return: Relative path to the newly created lobby instance
     */
     $INCLUDE_PATH = require "../includePath.php";
-    require_once "$INCLUDE_PATH/gameConfig.php";
+    require_once "$INCLUDE_PATH/config/gameConfig.php";
     require "$INCLUDE_PATH/utilities/requestValidation.php";
     
     $LOBBY_DIR = "../lobby";
