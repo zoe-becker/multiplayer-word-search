@@ -111,6 +111,16 @@ function startSplashScreenCountdown() {
   const splashScreen = document.getElementById("splash-screen");
   const countdownElement = document.getElementById("countdown");
 
+  // Fetch the start time from local storage
+  let startTime = parseInt(localStorage.getItem('gameStartTime'), 10);
+
+  // If startTime is not a number, fallback to a 5 seconds countdown
+  if (isNaN(startTime)) {
+    console.error('Invalid startTime from local storage, falling back to a 5 second countdown');
+    startTime = Math.floor(Date.now() / 1000) + 5;
+  }
+
+  const currentTime = Math.floor(Date.now() / 1000);
 
 }
 
