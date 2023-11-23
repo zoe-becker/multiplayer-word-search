@@ -102,6 +102,7 @@ function getInitialBoard() {
   request.send();
 }
 
+// calls for startSplashScreenCountdown function
 document.addEventListener("DOMContentLoaded", function (event) {
   startSplashScreenCountdown();
 });
