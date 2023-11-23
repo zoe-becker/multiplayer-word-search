@@ -54,10 +54,10 @@ window.addEventListener("beforeunload", function (event) {
   }
 });
 
-// checks when page is loaded
-document.addEventListener("DOMContentLoaded", function (event) {
-  getInitialBoard();
-});
+// // checks when page is loaded
+// document.addEventListener("DOMContentLoaded", function (event) {
+//   getInitialBoard();
+// });
 
 function getInitialBoard() {
   // request board from server
@@ -139,12 +139,6 @@ function startSplashScreenCountdown() {
     splashScreen.style.display = 'none';
     getInitialBoard(); // start the game immediately
     return; // exit the function
-  }
-
-  // limit the countdown to a maximum of 5 seconds
-  if (timeLeft > 5) {
-    console.log('Time left is more than 5 seconds, limiting countdown to 5 seconds');
-    timeLeft = 5;
   }
 
   // update the countdown every second
