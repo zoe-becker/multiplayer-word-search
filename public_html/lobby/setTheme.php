@@ -53,8 +53,6 @@
         $theme = $_SERVER["HTTP_THEME"];
         $lobbyCode = $_SERVER["HTTP_LOBBY"];
 
-        validateRequest($accessToken, $theme);
-
         $lobbyID = validateLobby($lobbyCode, true);
 
         $lobbyDataPath = "$lobbyCode/" . LOBBY_DATAFILE_NAME;
