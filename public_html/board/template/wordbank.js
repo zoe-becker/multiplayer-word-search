@@ -54,11 +54,6 @@ window.addEventListener("beforeunload", function (event) {
   }
 });
 
-// // checks when page is loaded
-// document.addEventListener("DOMContentLoaded", function (event) {
-//   getInitialBoard();
-// });
-
 function getInitialBoard() {
   // request board from server
   let request = new XMLHttpRequest();
@@ -82,13 +77,8 @@ function getInitialBoard() {
         // set up timer
         gameEndTime = data.expireTime;
         startTime = data.startTime;
-
-        // for testing purposes, commenting out this
-
-        // ticktok();
-        // timerIntervalObj = setInterval(ticktok, 1000);
-
-        //***********************************************
+        ticktok();
+        timerIntervalObj = setInterval(ticktok, 1000);
         // draw the word search
         renderWordSearch(data.puzzle);
         reRenderPlayerlist(data.players);
@@ -106,8 +96,6 @@ function getInitialBoard() {
   request.setRequestHeader("token", localStorage.getItem("accessToken"));
   request.send();
 }
-
-
 
 // calls for startSplashScreenCountdown function
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -149,17 +137,12 @@ function startSplashScreenCountdown() {
       clearInterval(interval);
       splashScreen.style.display = 'none';
 
-      // start the main game timer here
-      ticktok(); // initialize the timer display
-      timerIntervalObj = setInterval(ticktok, 1000); // start the timer interval
-
       getInitialBoard(); // start the game
     }
 
     timeLeft--;
   }, 1000);
 }
-
 
 
 // function to get themes and its features
