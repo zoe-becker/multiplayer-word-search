@@ -70,8 +70,8 @@
             exit(-1);
         }
 
-        unset($lobbyData["players"][$kickPlrIndex]); // kick player
-        array_values($lobbyData["players"]); // reindex player array so indicies stay sequential
+        // remove player by replacing index with nothing, array_splice reindexes so indicies remain sequential
+        array_splice($lobbyData["players"], $kickPlrIndex, 1);
 
         // rewinds the file pointer, write the updated lobby data, and release the lock
         rewind($lobbyStream);
