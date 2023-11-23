@@ -323,6 +323,7 @@ specialCells.forEach(cell => {
             const cellType = cell.getAttribute('data-special-cell');
             if (cellType === 'settings') {
                 // Implement functionality for 'settings' cell type
+                handleSettingsClick();
                 console.log('Clicked on settings cell:', cell.textContent);
             } else if (cellType === 'how-to-win!') {
                 handleHTWClick();
@@ -407,6 +408,14 @@ function handleHTWClick(){
     });
 
 }
+function handleSettingsClick(){
+    toggleScreen('settings-screen', 'show');
+    var closeButton = document.getElementById("settings-close-button");
+    addBrightenFunctionality(closeButton, function() {
+        toggleScreen('settings-screen', 'hide');
+    });
+}
+
 //clipboard button icons
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(function() {

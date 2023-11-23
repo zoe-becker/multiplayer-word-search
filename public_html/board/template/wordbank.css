@@ -247,3 +247,29 @@ table td::before {
 #final-results-screen.hidden{
     display: none;
 }
+
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* font-family: Arial, sans-serif; */
+    font-family: cursive;
+}
+
+.splash-screen h1 {
+    font-size: 5em;
+}
+
+.splash-screen p {
+    font-size: 3em;
+}

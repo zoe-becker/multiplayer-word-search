@@ -54,11 +54,6 @@ window.addEventListener("beforeunload", function (event) {
   }
 });
 
-// checks when page is loaded
-document.addEventListener("DOMContentLoaded", function (event) {
-  getInitialBoard();
-});
-
 function getInitialBoard() {
   // request board from server
   let request = new XMLHttpRequest();
@@ -101,6 +96,55 @@ function getInitialBoard() {
   request.setRequestHeader("token", localStorage.getItem("accessToken"));
   request.send();
 }
+
+// calls for startSplashScreenCountdown function
+document.addEventListener("DOMContentLoaded", function (event) {
+  startSplashScreenCountdown();
+});
+
+// function for splash screen countdown
+function startSplashScreenCountdown() {
+  const splashScreen = document.getElementById("splash-screen");
+  const countdownElement = document.getElementById("countdown");
+
+  // fetch the start time from local storage
+  let startTime = parseInt(localStorage.getItem('gameStartTime'), 10);
+
+  // if startTime is not a number, fallback to a 5 seconds countdown
+  if (isNaN(startTime)) {
+    console.error('Invalid startTime from local storage, falling back to a 5 second countdown');
+    startTime = Math.floor(Date.now() / 1000) + 5;
+  }
+
+  const currentTime = Math.floor(Date.now() / 1000);
+
+  // calculate the time left until the start time
+  let timeLeft = startTime - currentTime;
+
+  // this should never happen, but just in case, set a fallback
+  if (timeLeft < 0) {
+    console.error('Time left is less than zero, starting the game immediately');
+    splashScreen.style.display = 'none';
+    getInitialBoard(); // start the game immediately
+    return; // exit the function
+  }
+
+  // update the countdown every second
+  const interval = setInterval(() => {
+    countdownElement.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(interval);
+      splashScreen.style.display = 'none';
+
+      getInitialBoard(); // start the game
+    }
+
+    timeLeft--;
+  }, 1000);
+}
+
+
 // function to get themes and its features
 function renderTheme(dataTheme) {
   if (dataTheme.backgroundImage) {
