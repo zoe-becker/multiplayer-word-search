@@ -101,6 +101,20 @@ function getInitialBoard() {
   request.setRequestHeader("token", localStorage.getItem("accessToken"));
   request.send();
 }
+
+document.addEventListener("DOMContentLoaded", function (event) {
+  startSplashScreenCountdown();
+});
+
+// function for splash screen countdown
+function startSplashScreenCountdown() {
+  
+}
+
+
+
+
+
 // function to get themes and its features
 function renderTheme(dataTheme) {
   if (dataTheme.backgroundImage) {
