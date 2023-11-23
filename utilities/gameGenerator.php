@@ -27,6 +27,7 @@
         // interpret curl result and initialize board
         if ($result) {
             $puzzle = json_decode($result, true);
+            $puzzle["startTime"] = time() + 5; // Set start time with a 5-second delay
             $puzzle["startTime"] = time();
             $puzzle["expireTime"] = time() + ($mode == "multiplayer" ? MULTIPLAYER_GAME_LEN : TIMEATTACK_GAME_LEN);
             $puzzle["instanceExpiration"] = $puzzle["expireTime"] + GAME_INSTANCE_EXPIRATION_DELAY;
