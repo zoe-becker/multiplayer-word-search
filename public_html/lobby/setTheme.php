@@ -58,12 +58,6 @@
         // called validatePost function
         validatePOST(['token', 'theme', 'lobby'], true);
 
-        // makes sure request method is POST
-        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
-            http_response_code(405);
-            exit("POST method required");
-        }
-
         // get the access token, theme & lobby code from HTTP headers 
         $accessToken = $_SERVER["HTTP_TOKEN"];
         $theme = $_SERVER["HTTP_THEME"];
