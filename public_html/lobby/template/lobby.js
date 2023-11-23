@@ -203,6 +203,12 @@ function loadThemeBoxes(){
         themeBox.appendChild(themeBoxButton);
         themesContainer.appendChild(themeBox);
     });
+    var closeButton = document.createElement('button');
+    addBrightenFunctionality(closeButton, function() {
+        toggleScreen('Themes-screen', 'hide');
+    });
+    closeButton.textContent = "Close";
+    themesContainer.appendChild(closeButton);
 }
 //RERENDER PLAYERLIST ON PAGE REFRESH
 function renderPlayersFromSet() {
