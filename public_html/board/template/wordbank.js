@@ -108,7 +108,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 // function for splash screen countdown
 function startSplashScreenCountdown() {
-  
+  const splashScreen = document.getElementById("splash-screen");
+  const countdownElement = document.getElementById("countdown");
+
+
 }
 
 
