@@ -82,8 +82,13 @@ function getInitialBoard() {
         // set up timer
         gameEndTime = data.expireTime;
         startTime = data.startTime;
-        ticktok();
-        timerIntervalObj = setInterval(ticktok, 1000);
+
+        // for testing purposes, commenting out this
+
+        // ticktok();
+        // timerIntervalObj = setInterval(ticktok, 1000);
+
+        //***********************************************
         // draw the word search
         renderWordSearch(data.puzzle);
         reRenderPlayerlist(data.players);
@@ -101,6 +106,8 @@ function getInitialBoard() {
   request.setRequestHeader("token", localStorage.getItem("accessToken"));
   request.send();
 }
+
+
 
 // calls for startSplashScreenCountdown function
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -147,6 +154,11 @@ function startSplashScreenCountdown() {
     if (timeLeft <= 0) {
       clearInterval(interval);
       splashScreen.style.display = 'none';
+
+      // start the main game timer here
+      ticktok(); // initialize the timer display
+      timerIntervalObj = setInterval(ticktok, 1000); // start the timer interval
+
       getInitialBoard(); // start the game
     }
 
