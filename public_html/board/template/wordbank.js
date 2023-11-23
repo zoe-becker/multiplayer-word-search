@@ -156,8 +156,6 @@ function startSplashScreenCountdown() {
 
 
 
-
-
 // function to get themes and its features
 function renderTheme(dataTheme) {
   if (dataTheme.backgroundImage) {
