@@ -40,6 +40,52 @@
                 <div id="Themes-container"></div>
             </div>
         </div>
+        <div id="settings-screen" class="hidden">
+            <div id="settings-content">
+                <h2>Host Settings</h2>
+                <!-- value will be used for local storage updates -->
+
+                <!-- Grid Difficulty -->
+                <div class= "radio-box">
+                    <label for="grid-difficulty">Grid Difficulty:</label>
+                    <input type="radio" id="easy" name="grid-difficulty" value="1">
+                    <label for="easy">Easy</label>
+
+                    <input type="radio" id="medium" name="grid-difficulty" value="2">
+                    <label for="medium">Medium</label>
+
+                    <input type="radio" id="hard" name="grid-difficulty" value="3">
+                    <label for="hard">Hard</label>
+                </div>
+
+                <!-- Grid Size -->
+                <div class= "radio-box">
+                    <label for="grid-size">Grid Size:</label>
+                    <input type="radio" id="small" name="grid-size" value="small">
+                    <label for="small">Small</label>
+
+                    <input type="radio" id="medium-size" name="grid-size" value="medium">
+                    <label for="medium-size">Medium</label>
+
+                    <input type="radio" id="large" name="grid-size" value="large">
+                    <label for="large">Large</label>
+                </div>
+
+                <!-- Grid Shape -->
+                <div class= "radio-box">
+                    <label for="grid-shape">Grid Shape:</label>
+                    <input type="radio" id="square" name="grid-shape" value="square">
+                    <label for="square">Square</label>
+
+                    <input type="radio" id="circle" name="grid-shape" value="circle">
+                    <label for="circle">Circle</label>
+
+                    <input type="radio" id="triangle" name="grid-shape" value="triangle">
+                    <label for="triangle">Triangle</label>
+                </div>
+                <button id="settings-close-button">Close</button>
+            </div>
+        </div>
         <div id = "outer-lobby-container">
             <div id="lobby-container">
                 <div id="lobby-title">
