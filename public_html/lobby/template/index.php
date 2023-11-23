@@ -51,7 +51,7 @@
                     <input type="radio" id="easy" name="grid-difficulty" value="1">
                     <label for="easy">Easy</label>
 
-                    <input type="radio" id="medium" name="grid-difficulty" value="2">
+                    <input type="radio" id="medium" name="grid-difficulty" value="2"checked>
                     <label for="medium">Medium</label>
 
                     <input type="radio" id="hard" name="grid-difficulty" value="3">
@@ -61,7 +61,7 @@
                 <!-- Grid Size -->
                 <div class= "radio-box">
                     <label for="grid-size">Grid Size:</label>
-                    <input type="radio" id="small" name="grid-size" value="small">
+                    <input type="radio" id="small" name="grid-size" value="small"checked>
                     <label for="small">Small</label>
 
                     <input type="radio" id="medium-size" name="grid-size" value="medium">
@@ -74,7 +74,7 @@
                 <!-- Grid Shape -->
                 <div class= "radio-box">
                     <label for="grid-shape">Grid Shape:</label>
-                    <input type="radio" id="square" name="grid-shape" value="Square">
+                    <input type="radio" id="square" name="grid-shape" value="Square"checked>
                     <label for="square">Square</label>
 
                     <input type="radio" id="heart" name="grid-shape" value="Heart">
