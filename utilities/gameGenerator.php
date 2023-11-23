@@ -15,15 +15,49 @@
     // $mode: the game mode to use ("multiplayer", "timeattack")
     // 
     // returns: the game link to the newly created instance on success, false otherwise
-    function generateGameInstance($theme, $players, $mode) {
+    function generateGameInstance($theme, $players, $mode, $settings) {
         global $GAME_DIR, $INSTANCE_TEMPLATE_DIR, $GENERATOR_PATH;
 
         $themePath = getThemeFilePath($theme);
-        $command = PYTHON_INTERPRETER_PATH . " " . $GENERATOR_PATH . "/generate.py" . " $themePath " . GENERATOR_WORD_COUNT;
-        echo $command;
+        $difficulty = $settings["difficulty"];
+        $size = $settings["size"];
+        $shape = $settings["shape"];
+        $wordCount = 0;
+
+        // resolve difficulty into format generator uses
+        if ($difficulty == "easy") {
+            $difficulty = 1;
+            $wordCount = GAME_EASY_WORDCOUNT;
+        } elseif ($difficulty == "medium") {
+            $difficulty = 2;
+            $wordCount = GAME_MEDIUM_WORDCOUNT;
+        } else {
+            $difficulty = 3;
+            $wordCount = GAME_HARD_WORDCOUNT;
+        }
+
+        // resolve size into format generator uses
+        if ($size == "small") {
+            $size = GAME_SMALL_GRID_SIZE;
+        } else if ($size == "medium") {
+            $size = GAME_MEDIUM_GRID_SIZE;
+        } else {   
+            $size = GAME_LARGE_GRID_SIZE;
+        }
+
+        // generate command line command
+        // format = [python path] [generate.py path] [theme file path] [word count] [difficulty] [grid size] [shape]
+        $command = PYTHON_INTERPRETER_PATH . " " . 
+            $GENERATOR_PATH . "/generate.py" . 
+            " $themePath " .
+            " $wordCount " .
+            " $difficulty " .
+            " $size" . 
+            " $shape";
+
         // ask generator make a grid
         $result = exec($command);
-        echo $result;
+
         // interpret curl result and initialize board
         if ($result) {
             $puzzle = json_decode($result, true);
