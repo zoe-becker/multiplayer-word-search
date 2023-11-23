@@ -82,6 +82,10 @@ body {
     padding: 5px;
 
   }
+  #settings-content label{
+    font-family: cursive; /* Set the same font as the h2 */
+    color: #bc8942;
+  }
  
 
 #outer-lobby-container {  /* Holds everything that you see */

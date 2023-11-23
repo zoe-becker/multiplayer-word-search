@@ -74,14 +74,14 @@
                 <!-- Grid Shape -->
                 <div class= "radio-box">
                     <label for="grid-shape">Grid Shape:</label>
-                    <input type="radio" id="square" name="grid-shape" value="square">
+                    <input type="radio" id="square" name="grid-shape" value="Square">
                     <label for="square">Square</label>
 
-                    <input type="radio" id="circle" name="grid-shape" value="circle">
-                    <label for="circle">Circle</label>
+                    <input type="radio" id="heart" name="grid-shape" value="Heart">
+                    <label for="heart">Heart</label>
 
-                    <input type="radio" id="triangle" name="grid-shape" value="triangle">
-                    <label for="triangle">Triangle</label>
+                    <input type="radio" id="star" name="grid-shape" value="Star6">
+                    <label for="star">Star</label>
                 </div>
                 <button id="settings-close-button">Close</button>
             </div>
