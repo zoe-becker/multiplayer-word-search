@@ -3,10 +3,10 @@ var requestSetNamePending = false;
 var requestSetThemePending = false;
 var requestStartGamePending = false;
 
-//default grid settings
-var localGridDifficulty = "medium";
-var localGridSize = "small";
-var localGridShape = "square";
+// Read values from localStorage
+var localDifficulty = localStorage.getItem('localDifficulty') || 'medium';
+var localSize = localStorage.getItem('localSize') || 'small';
+var localShape = localStorage.getItem('localShape') || 'square';
 
 // Create GameSettings object
 let gameSettings = {
@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 // Get all elements with the data-special-cell attribute
 const specialCells = document.querySelectorAll('[data-special-cell]');
 
-// Add event listeners for click
+// Add event listeners for click for special cells
 specialCells.forEach(cell => {
         cell.addEventListener('mouseover', function() {
             const cellType = cell.getAttribute('data-special-cell');
@@ -430,7 +430,31 @@ function handleSettingsClick(){
         toggleScreen('settings-screen', 'hide');
     });
 }
+//event listeners for settings radios
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('settings-content').addEventListener('change', function (event) {
+        const target = event.target;
 
+        // Check if the changed element is a radio button
+        if (target.type === 'radio') {
+        const groupName = target.getAttribute('name');
+        const selectedValue = target.value;
+    
+        // Update the localStorage variable based on the radio button group
+        switch (groupName) {
+            case 'grid-difficulty':
+            localStorage.setItem('localDifficulty', selectedValue);
+            break;
+            case 'grid-size':
+            localStorage.setItem('localSize', selectedValue);
+            break;
+            case 'grid-shape':
+            localStorage.setItem('localShape', selectedValue);
+            break;
+        }
+        }
+    });
+});
 //clipboard button icons
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(function() {
