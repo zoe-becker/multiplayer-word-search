@@ -36,10 +36,15 @@ We're creating a competitive word search web app.
 ## Technologies Used 🧑‍💻
 - [PHP](https://www.php.net/) 
 - [Python](https://www.python.org/) 
+- [MySQL](https://www.mysql.com/)
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) 
 - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) 
 - [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) 
-- Forked from: https://github.com/joshbduncan/word-search-generator 
+- Word search generation algorithm from https://github.com/joshbduncan/word-search-generator 
+- Confetti from https://github.com/catdad/canvas-confetti
+- Certain page layouts powered with HTMX https://htmx.org/
+- Certain page layouts powered with HyperScript https://hyperscript.org/
+
 
 ## Who Are We Doing This For? 🫵
 We're doing this for casual fans of word searches who want a competitive experience.
