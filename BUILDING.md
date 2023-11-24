@@ -8,21 +8,22 @@
 5. [Setting up and modifying configuration files](#setting-up-and-modifying-configuration-files)
 
 ## General Requirements 
-- Python interpreter >= 3.7 \(https://www.python.org/\)
-- Apache installation \(https://www.apache.org/\)
-- MySQL installation \(https://www.mysql.com/\)
-- PHP >= 8.0.0 \(https://www.php.net/\)
-- Phpmyadmin - recommended \(https://www.phpmyadmin.net/\)
+- Python interpreter >= 3.7 (https://www.python.org/)
+- Apache installation (https://www.apache.org/)
+- MySQL installation (https://www.mysql.com/)
+- PHP >= 8.0.0 (https://www.php.net/)
+- Phpmyadmin - recommended (https://www.phpmyadmin.net/)
 - Xampp - For development environments only (https://www.apachefriends.org/)
 ## Deploying with Bitbucket Pipelines
-Included in the repository is a bitbucket pipelines YAML file that can be used to automatically deploy the repository to a properly configured remote server. Here are the steps for configuring the remote server and bitbucket for automatic deployment.
+Included in the repository is a bitbucket pipelines YAML file that can be used to automatically deploy the repository to a properly configured remote server. Below are the steps for configuring the remote server and bitbucket for automatic deployment.
 
 Configuring the remote server:
 
-1. Create a directory on the remote server that we will use for the configuration scripts.
+1. Create a directory on the remote server that will be used for the configuration files.
 2. Follow the steps outlined in the section setting up and modifying configuration files in order to create proper configuration files. *
 
     **NOTE**: Future updates may require updates to the game configuration. you should only include gameConfig.php in the folder if you are prepared to update your custom configuration with new constants.
+
 3. Place the new configuration files in the new directory.
 
 Deploying with bitbucket pipelines:
@@ -36,7 +37,7 @@ Deploying with bitbucket pipelines:
     - REMOTE_PYTHON_PATH: The complete path to the python installation where you want to install the generator. This should be the same python environment as the one in envConfig.php. It is recommended that you create a new virtual environment for this purpose*
     - REMOTE_USER: The username of the remote user that will be used to install the word search
     - REMOTE_HOST: The web address/host name of the remote server
-4. Our bitbucket pipelines file uses SSH keys for securely logging into the remote server. You should add your SSH key pair to under repository settings -> SSH keys. Bitbucket will automatically use this key pair for SSH/SFTP when running the deployment script. For help on SSH keys in Bitbucket Pipelines, see this article: https://support.atlassian.com/bitbucket-cloud/docs/using-ssh-keys-in-bitbucket-pipelines/
+4. Our bitbucket pipelines file uses SSH keys for securely logging into the remote server. You should add your SSH key pair under repository settings -> SSH keys. Bitbucket will automatically use this key pair for SSH/SFTP when running the deployment script. For help on SSH keys in Bitbucket Pipelines, see this article: https://support.atlassian.com/bitbucket-cloud/docs/using-ssh-keys-in-bitbucket-pipelines/
 5. You're now ready to deploy! From the main repository page, under pipelines, click "Run Pipeline", click on the main branch, and run the deploy-to-remote-host pipeline.
 
 **\*NOTE**: As part of the automatic deployment scripts, the REMOTE_PUBLIC_HTML_PATH and REMOTE_PATH are both cleared to prepare for the new installation. Because of this, you should not place the python virtual environment in either of these folders.
@@ -59,6 +60,7 @@ You can also manually deploy the repository to either a remote host or your loca
     ```pip install .``` 
     
     This will install the generator on the selected python environment, which is required to generate word searches.
+
 8. Import the database in the database folder into your mySQL installation. For information on how to import an SQL database using phpmyadmin you can refer to this article: https://docs.phpmyadmin.net/en/latest/import_export.html
 9. You can safely delete the remaining files from the repository. They are not needed in a production environment.
 
@@ -75,9 +77,8 @@ NOTE: Xampp is intended for development purposes only. You should not use Xampp 
 5. Follow the steps outlined in the section setting up and modifying configuration files in order to create proper configuration files. 
 6. Move the includePath.php file to the public_html directory
 7. Go to http://localhost/phpmyadmin and import the database from the database folder into mySQL. For information on how to import an SQL database using phpmyadmin you can refer to this article: https://docs.phpmyadmin.net/en/latest/import_export.html
-8. Follow the steps outlined in the section setting up and modifying configuration files in order to create proper configuration files.
-9. Activate the python environment that you declared in the envConfig.php file
-10. cd into the generator directory and run 
+8. Activate the python environment that you declared in the envConfig.php file
+9. cd into the generator directory and run 
 
     ```pip install .``` 
     
@@ -107,3 +108,6 @@ The word search application makes use of three important configuration files whi
     - In testing environments this will be the same as the path to the repository
     - In bitbucket pipeline deployment this is the same as REMOTE_PATH
     - In manual deployment this is the path to the directory containing config, generator, and utiliies
+
+### gameConfig.php
+No modification is necessary to this file, but it contains many constants which you can modify to change the behavior of the application.
