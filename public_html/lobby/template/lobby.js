@@ -8,7 +8,7 @@ var localDifficulty = localStorage.getItem('localDifficulty') || 'medium';
 var localSize = localStorage.getItem('localSize') || 'small';
 var localShape = localStorage.getItem('localShape') || 'square';
 
-// Create GameSettings object
+// Create GameSettings object for createGame()
 let gameSettings = {
     difficulty: localDifficulty,
     size: localSize,
@@ -337,24 +337,14 @@ specialCells.forEach(cell => {
             // Handle click event based on the type of data-special-cell
             const cellType = cell.getAttribute('data-special-cell');
             if (cellType === 'settings') {
-                // Implement functionality for 'settings' cell type
                 handleSettingsClick();
-                console.log('Clicked on settings cell:', cell.textContent);
             } else if (cellType === 'how-to-win!') {
                 handleHTWClick();
-                // Implement functionality for 'how-to-win!' cell type
-                console.log('Clicked on how-to-win! cell:', cell.textContent);
             } else if (cellType === 'start') {
                 handleStartClick();
-                // Implement functionality for 'start' cell type
-                console.log('Clicked on start cell:', cell.textContent);
             } else if (cellType === 'themes') {
                 handleThemesClick();
-                // Implement functionality for 'themes' cell type
-                console.log('Clicked on themes cell:', cell.textContent);
             } else {
-                // Implement default functionality for other cell types
-                console.log(`Clicked on cell with attribute ${cellType}:`, cell.textContent);
             }
         });
     });
@@ -398,7 +388,7 @@ function handleStartClick(){
             toggleScreen('Start-screen', 'hide');
         });
     }else{
-        alert("Only host can start the game.")
+        alert("Only the host can start the game.")
     }
 }
 
@@ -409,7 +399,7 @@ function handleThemesClick(){
         //once they click on a theme button it hides the themes screen
     }else{
         console.log("denied!");
-        alert("Only host can select themes.")
+        alert("Only the host can select the current theme.")
     }
 }
 function handleHTWClick(){
@@ -424,11 +414,16 @@ function handleHTWClick(){
 
 }
 function handleSettingsClick(){
-    toggleScreen('settings-screen', 'show');
-    var closeButton = document.getElementById("settings-close-button");
-    addBrightenFunctionality(closeButton, function() {
-        toggleScreen('settings-screen', 'hide');
-    });
+    var host= isHost();
+    if(host){
+        toggleScreen('settings-screen', 'show');
+        var closeButton = document.getElementById("settings-close-button");
+        addBrightenFunctionality(closeButton, function() {
+            toggleScreen('settings-screen', 'hide');
+        });
+    }else{
+        alert("Only the host can edit the game settings.")
+    }
 }
 //event listeners for settings radios
 document.addEventListener('DOMContentLoaded', function () {
