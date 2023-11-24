@@ -6,13 +6,13 @@ Anticipated finish date November 30th, 2023.
 Demo running latest version of main branch can be found here: https://verygoodbadthing.com/word-search-generator
 
 ## Table of Contents
-* [The Team 🤝](#TheTem) 
-* [What We're Creating 🧰](#WhatWe'reCreating) 
-* [Technologies Used 🧑‍💻](#TechnologiesUsed) 
-* [Who Are We Doing This For? 🫵](#WhoAreWeDoingThisFor?) 
-* [Why Are We Doing This? 🤷](#WhyAreWeDoingThis?) 
-* [Features 🎁](#Features) 
-* [Screenshots 🖼](#Screenshots) 
+* [The Team 🤝](#the-team-🤝) 
+* [What We're Creating 🧰](#what-were-creating-🧰) 
+* [Technologies Used 🧑‍💻](#technologies-used-🧑‍💻) 
+* [Who Are We Doing This For? 🫵](#who-are-we-doing-this-for-🫵)
+* [Why Are We Doing This? 🤷](#why-are-we-doing-this-🤷)
+* [Features 🎁](#features-🎁)
+* [Screenshots 🖼]()
 * [Installation 🛠](#Installation) 
 * [Usage 🧩](#Usage) 
 * [Sprint 1 🏃](#Sprint1) 

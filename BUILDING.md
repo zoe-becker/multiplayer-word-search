@@ -1,18 +1,18 @@
 # Building and Deploying
 
 #### Table of contents
-1. General requirements
-2. Deploying with Bitbucket Pipelines
-3. Manual deployment
-4. Creating a development environment
-5. Setting up and modifying configuration files
+1. [General requirements](#general-requirements)
+2. [Deploying with Bitbucket Pipelines](#deploying-with-bitbucket-pipelines)
+3. [Manual deployment](#manual-deployment)
+4. [Creating a development environment](#creating-a-development-environment)
+5. [Setting up and modifying configuration files](#setting-up-and-modifying-configuration-files)
 
-## General Requirements
-- Python interpreter >= 3.7 (https://www.python.org/)
-- Apache installation (https://www.apache.org/)
-- MySQL installation (https://www.mysql.com/)
-- PHP >= 8.0.0 (https://www.php.net/)
-- Phpmyadmin - recommended (https://www.phpmyadmin.net/)
+## General Requirements 
+- Python interpreter >= 3.7 \(https://www.python.org/\)
+- Apache installation \(https://www.apache.org/\)
+- MySQL installation \(https://www.mysql.com/\)
+- PHP >= 8.0.0 \(https://www.php.net/\)
+- Phpmyadmin - recommended \(https://www.phpmyadmin.net/\)
 - Xampp - For development environments only (https://www.apachefriends.org/)
 ## Deploying with Bitbucket Pipelines
 Included in the repository is a bitbucket pipelines YAML file that can be used to automatically deploy the repository to a properly configured remote server. Here are the steps for configuring the remote server and bitbucket for automatic deployment.
@@ -31,7 +31,7 @@ Deploying with bitbucket pipelines:
 2. In repository settings, under pipelines, go to repository variables
 3. The deployment scripts expect that the following 6 variables be defined
     - REMOTE_PUBLIC_HTML_PATH: The complete path to the folder where the word search will be deployed. You probably want to set this to a new empty directory inside the web root.
-    - REMOTE_PATH: The complete path to the folder where the backend of the word search will be deployed. You probably want to set this to a new empty directory **outside** the web root.
+    - REMOTE_PATH: The complete path to the folder where the backend of the word search will be deployed. For security reasons this should be set to a new empty directory **outside** the web root.
     - REMOTE_CONFIG_DIR_PATH: The complete path to the folder you created above containing the config files.
     - REMOTE_PYTHON_PATH: The complete path to the python installation where you want to install the generator. This should be the same python environment as the one in envConfig.php. It is recommended that you create a new virtual environment for this purpose*
     - REMOTE_USER: The username of the remote user that will be used to install the word search
