@@ -3,6 +3,18 @@ var requestSetNamePending = false;
 var requestSetThemePending = false;
 var requestStartGamePending = false;
 
+//default grid settings
+var localGridDifficulty = "medium";
+var localGridSize = "small";
+var localGridShape = "square";
+
+// Create GameSettings object
+let gameSettings = {
+    difficulty: localDifficulty,
+    size: localSize,
+    shape: localShape
+  };
+
 //Checks if splash screen needs to be called based on token and lobby id
 //if it hasnt been set then token, lobby id, and isHost are set.
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -91,6 +103,8 @@ function setName(username) {
 //START GAME
 function startGame(){
     let request = new XMLHttpRequest();
+    //make JSON with game settings
+    let gameSettingsJSON = JSON.stringify(gameSettings);
     
     request.onreadystatechange = function () {
       if (request.readyState == 4) {
@@ -103,6 +117,7 @@ function startGame(){
     request.open("POST", "../createGame.php");
     request.setRequestHeader("token", localStorage.getItem('accessToken'));
     request.setRequestHeader("lobby", getLobbyCode());
+    request.setRequestHeader("gamesettings", gameSettingsJSON);
     request.send(); 
 }
 
@@ -449,3 +464,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         console.error("Element with provided IDs not found.");
     }
 });
+
+//implement function that on button click in host settings changes local storage
+//have it so that when you create a game you pass the new updated headers
+//make a check to see if the person is host before clicking settings
