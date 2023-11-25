@@ -117,7 +117,7 @@ function startGame(){
     request.open("POST", "../createGame.php");
     request.setRequestHeader("token", localStorage.getItem('accessToken'));
     request.setRequestHeader("lobby", getLobbyCode());
-    request.setRequestHeader("gamesettings", gameSettingsJSON);
+    request.setRequestHeader("settings", gameSettingsJSON);
     request.send(); 
 }
 
