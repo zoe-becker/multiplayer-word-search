@@ -21,13 +21,11 @@ nav{
     align-items: center;
     justify-content: space-between;
     padding: 5px 10px;
-    /* background-color: #526b58; */
 }
 
 .logo{
     height: 50px;
     width: 50px;
-    /* opacity: 0.7; */
 }
 
 nav ul li{
@@ -83,15 +81,11 @@ nav ul li a{
 .gif button{
     cursor: pointer;
     position: absolute;
-    /* top: 7%; */
     transform: translateY(0%);
     text-align: center;
-
     font-size: 25px;
     font-family: cursive;
-    /* font-weight: bold; */
     color: black;
-
     padding: 6px 15px;
     margin: 20px 10px;
     border-radius: 25px;
@@ -100,12 +94,9 @@ nav ul li a{
     display: flex;
     justify-content: center;
     align-items: center;
-
     position: relative;
     overflow:hidden;
 }
-
-
 
 span{
     background: #5a8668;
@@ -118,7 +109,6 @@ span{
     z-index: -1;
     transition: 0.5s;
 }
-
 
 .gif button:hover span{
     width: 100%;
