@@ -4,7 +4,7 @@
        Required headers:
           1. token: access token of the requester (the requester must be the lobby host)
           2. lobby: lobby id (including the prefix)
-
+          3. settings: json encoding of GameSettings object
         Return: Relative path to the newly created game instance
     */
     $INCLUDE_PATH = require "../includePath.php";
@@ -46,25 +46,65 @@
         }
     }
     
+    // validate that the settings string sent by user is well formed
+    // exit if malformed
+    function validateSettings($str) {
+        $settings = json_decode($str, true);
+        $valid = true;
+
+        if ($settings) {
+            // check that keys exist
+            if (!array_key_exists("difficulty", $settings)) $valid = false;
+            if (!array_key_exists("size", $settings)) $valid = false;
+            if (!array_key_exists("shape", $settings)) $valid = false;
+            
+            // check that keys are in valid range
+            if ($valid) {
+                if (!($settings["difficulty"] === "easy" || 
+                      $settings["difficulty"] === "medium" || 
+                      $settings["difficulty"] === "hard")) {
+                    $valid = false;
+                }
+                if (!($settings["size"] === "small" || 
+                $settings["size"] === "medium" || 
+                $settings["size"] === "large")) {
+                    $valid = false;
+                }
+                if (!in_array($settings["shape"], GAME_SUPPORTED_SHAPES)) $valid = false;
+            }
+        } else {
+            $valid = false;
+        }
+
+        if (!$valid) {
+            http_response_code(400);
+            echo "malformed settings object";
+            exit(-1);
+        }
+    }
+
     function main() {
-        validatePOST(array("lobby", "token"), true); // validate request
+        validatePOST(array("lobby", "token", "settings"), true); // validate request
 
         // extract headers and generate lobby path
         $token = $_SERVER["HTTP_TOKEN"];
         $lobbyID = $_SERVER["HTTP_LOBBY"];
+        $settingsStr = $_SERVER["HTTP_SETTINGS"];
         $lobbyDataPath = "$lobbyID/" . LOBBY_DATAFILE_NAME;
         
         validateLobby($lobbyID, true); // validate lobby exists
+        validateSettings($settingsStr); // validate json is good
 
         $lobbyStream = flock_acquireEX($lobbyDataPath); // acquire lock on lobby file since we may modify it 
         $lobbyData = json_decode(fread($lobbyStream, filesize($lobbyDataPath)), true);
+        $settings = json_decode($settingsStr, true);
 
         // validate game hasn't started and that player is host
         validateRequest($lobbyData, $token);
 
         
         date_default_timezone_set("UTC"); // keep timezone consistent
-        $gameLink = generateGameInstance($lobbyData["theme"], $lobbyData["players"], "multiplayer"); 
+        $gameLink = generateGameInstance($lobbyData["theme"], $lobbyData["players"], "multiplayer", $settings); 
 
         // check that game creation was successful
         if (!$gameLink) {
