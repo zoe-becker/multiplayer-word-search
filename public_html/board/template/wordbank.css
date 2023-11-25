@@ -20,6 +20,7 @@
 }
 
 .timer-box {
+    /* Sits above puzzle-container */
     display: flex;
     justify-content: flex-start;
     align-items: center;
