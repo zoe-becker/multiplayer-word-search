@@ -160,14 +160,6 @@ function renderTheme(dataTheme) {
     }
   }
 
-  //not working
-  if (dataTheme.tableBox) {
-    const tableBox = document.querySelector("table");
-    if (tableBox) {
-      tableBox.style.backgroundColor = dataTheme.tableBox;
-    }
-  }
-
   if (dataTheme.wordBankBox) {
     const wordBankBox = document.querySelector(".word-bank");
     if (wordBankBox) {
