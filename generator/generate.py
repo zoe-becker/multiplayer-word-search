@@ -6,11 +6,20 @@ import sys
 import random
 import json
 from word_search_generator import WordSearch
+from word_search_generator.mask.shapes import Heart
+from word_search_generator.mask.shapes import Star
+from word_search_generator.mask.shapes import Square
 
 # words is the list of words to use when generating the word search
-def fetchWordSearch(themeData, count):
-    words = random_words(themeData["words"], count)
-    puzzle = WordSearch(words)
+def fetchWordSearch(themeData, count, difficulty, size, shape):
+    words = random_words(themeData["words"], count)        
+    puzzle = WordSearch(words, level=difficulty, size=size)
+    if shape == "square":
+        puzzle.apply_mask(Square())
+    elif shape == "star":
+        puzzle.apply_mask(Star())
+    elif shape == "heart":
+        puzzle.apply_mask(Heart())
     response = str(puzzle.to_json())
     return response
 
@@ -33,4 +42,4 @@ def load_json(file_path):
     return None
 
 # print result of generation
-print(fetchWordSearch(load_json(sys.argv[1]), int(sys.argv[2])))
+print(fetchWordSearch(load_json(sys.argv[1]), int(sys.argv[2])),int(sys.argv[3]),int(sys.argv[4]), str(sys.argv[5]))
