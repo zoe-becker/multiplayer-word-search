@@ -18,7 +18,7 @@
             <div id= "Start-content">
             <p1>Are you sure you want to start the game? </p1>
             <button id="start-button"> Yes, start game!</button>
-            <button id="cancel-button">NO! Dont start! </button>
+            <button id="cancel-button">NO! Don't start! </button>
             </div>
         </div>
         <div id="HTW-screen" class="hidden">
@@ -85,6 +85,13 @@
                 </div>
                 <button id="settings-close-button">Close</button>
             </div>
+        </div>
+        <div id="kick-screen" class="hidden">
+            <div id="kick-content">
+                <p1>Would you like to kick this player from the lobby? </p1>
+                <button id="kick-button">Yes, kick them!</button>
+                <button id="cancel-kick-button">NO! Don't kick them!</button>
+            </div> 
         </div>
         <div id = "outer-lobby-container">
             <div id="lobby-container">
