@@ -15,16 +15,6 @@
     require "$INCLUDE_PATH/utilities/themeFetcher.php";
     require "$INCLUDE_PATH/utilities/validateLobby.php";
 
-    // validates the request
-    function validateRequest(&$accessToken, $theme) {
-        // will check if both required headers are present
-        if(empty($accessToken) || empty($theme)){
-            echo "Missing required headers";
-            http_response_code(400);
-            exit;
-        }
-    }
-
     // will verify if access token is valid and if player is the host
     function verifyAccessToken($lobbyData, $accessToken){
         foreach ($lobbyData['players'] as $player){
@@ -58,18 +48,10 @@
         // called validatePost function
         validatePOST(['token', 'theme', 'lobby'], true);
 
-        // makes sure request method is POST
-        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
-            http_response_code(405);
-            exit("POST method required");
-        }
-
         // get the access token, theme & lobby code from HTTP headers 
         $accessToken = $_SERVER["HTTP_TOKEN"];
         $theme = $_SERVER["HTTP_THEME"];
         $lobbyCode = $_SERVER["HTTP_LOBBY"];
-
-        validateRequest($accessToken, $theme);
 
         $lobbyID = validateLobby($lobbyCode, true);
 
