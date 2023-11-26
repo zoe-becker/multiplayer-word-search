@@ -185,6 +185,7 @@ function updateLobby(){
           }
           //game has started, redirect user to gamelink
           if(data.gameLink != false){
+            localStorage.setItem("startTime", data.startTime);
             window.location.href = data.gameLink;
           }
           updateLobbyTheme();

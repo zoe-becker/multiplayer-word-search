@@ -57,19 +57,20 @@
 
         // ask generator make a grid
         $result = exec($command);
+        $startTime = NULL;
 
         // interpret curl result and initialize board
         if ($result) {
             $puzzle = json_decode($result, true);
-            $puzzle["startTime"] = time();
-            $puzzle["expireTime"] = time() + ($mode == "multiplayer" ? MULTIPLAYER_GAME_LEN : TIMEATTACK_GAME_LEN);
+            $puzzle["startTime"] = time() + 5; // Added 5 sec delay
+            $puzzle["expireTime"] = time() + ($mode == "multiplayer" ? MULTIPLAYER_GAME_LEN : TIMEATTACK_GAME_LEN) + 5;
             $puzzle["instanceExpiration"] = $puzzle["expireTime"] + GAME_INSTANCE_EXPIRATION_DELAY;
             $puzzle["foundWords"] = new stdClass(); // empty map
             $puzzle["ended"] = false;
             $puzzle["players"] = $players;
             $puzzle["dbUpdated"] = false;
             $puzzle["gameMode"] = $mode;
-            
+            $startTime = $puzzle["startTime"];
 
             // extract theme data and add it to board data
             $themeData = getThemeData($theme);
@@ -116,7 +117,7 @@
         // update lobby to indicate game has started
         $gameLink = "../" . $instanceDir . "/"; // add extra ../ since clients are in an instance directory
 
-        return $gameLink;
+        return array($gameLink, $startTime);
     }
 
 ?>
