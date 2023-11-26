@@ -150,12 +150,10 @@ function clientCheckUsername(passedUsername) {
 
   //ADD PLAYERBOX TO PLAYERLIST
 function addOrRemovePlayer(name, serverPlayerSet) {
-    logSetContents(serverPlayerSet, 'serverinaddorrem');
     let key = "playerSet";
     let storedPlayerSet = JSON.parse(localStorage.getItem(key)) || [];
     let playerSet = new Set(storedPlayerSet);
     if(!playerSet.has(name) && serverPlayerSet.has(name)){
-        console.log("1");
         playerSet.add(name);
         var playerList = document.getElementById('player-list-container');
         var playerBox = document.createElement('div');
@@ -170,7 +168,6 @@ function addOrRemovePlayer(name, serverPlayerSet) {
         }
     } 
     if(playerSet.has(name) && !serverPlayerSet.has(name)){
-        
         //local list has name, but server doesnt, so he was kicked
         playerSet.delete(name);
         localStorage.setItem('beenKicked', 'true');
@@ -180,12 +177,9 @@ function addOrRemovePlayer(name, serverPlayerSet) {
             window.location.href = "http://localhost/home/";
         }
     }
-    console.log("3");
     localStorage.setItem(key, JSON.stringify(Array.from(playerSet)));
 }
-function logSetContents(set, type) {
-    console.log(type +" " + Array.from(set).join(' '));
-  }
+
 //LOBBY POLLING
 function updateLobby(){
     let request = new XMLHttpRequest();
@@ -200,12 +194,9 @@ function updateLobby(){
           //theres more players in list than client has in set
           let storedPlayerSet = JSON.parse(localStorage.getItem("playerSet")) || [];
           let localPlayerSet = new Set(storedPlayerSet);
-          logSetContents(serverPlayerSet, 'server');
-          logSetContents(localPlayerSet, 'local');
           //more player in server than local
           if(num_players > localPlayerSet.size){
             //adds each new player to set
-            console.log("sizes uneven -make comparison!!");
             for(let i = 0; i < num_players; i++) addOrRemovePlayer(data.players[i].name, serverPlayerSet);
             renderPlayersFromSet();          
           }
@@ -266,7 +257,6 @@ function loadThemeBoxes(){
         // Use the addBrightenFunctionality function
         addBrightenFunctionality(themeBoxButton, function() {
             requestSetThemePending = true;
-            console.log(theme + 'changed');
             setTheme(theme);
             updateLobby();
             toggleScreen('Themes-screen', 'hide');
@@ -499,7 +489,6 @@ function handleThemesClick(){
         toggleScreen('Themes-screen','show');
         //once they click on a theme button it hides the themes screen
     }else{
-        console.log("denied!");
         alert("Only the host can select the current theme.")
     }
 }
@@ -534,7 +523,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         addBrightenFunctionality(startButton, function () {
             toggleScreen('kick-screen', 'hide');
-            console.log(localStorage.getItem('lastKickedPlayer')+ " was attempted to kick");
             kickPlayer(localStorage.getItem('lastKickedPlayer'));
             //addBrightenFunctionality(localStorage.getItem('lastKickedPlayer'));
         });
@@ -591,12 +579,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Setting up click events for the copy icons
         shareLinkCopyIcon.addEventListener('click', () => {
             copyToClipboard(getLobbyURL());
-            console.log('link copied');
         });
 
         gameCodeCopyIcon.addEventListener('click', () => {
             copyToClipboard(getLobbyCode());
-            console.log('code copied');
         });
     } else {
         console.error("Element with provided IDs not found.");
