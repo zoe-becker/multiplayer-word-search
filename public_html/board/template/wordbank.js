@@ -82,7 +82,9 @@ function getInitialBoard() {
         // draw the word search
         renderWordSearch(data.puzzle);
         reRenderPlayerlist(data.players);
-      } else {
+      } else if(request.status == 403){
+        window.location.href = "../../home";
+      }else {
         console.log("AJAX Error: " + request.responseText);
       }
     }
@@ -350,12 +352,16 @@ function renderWordSearch(puzzle) {
       td.setAttribute("cellIndex", JSON.stringify({"row": rIdx, "col": cIdx}));
       // cell hover is set to a random color
       td.addEventListener("mouseenter", (event) => {
+        
         if (!td.classList.contains("found") && !mouseIsPressed) {
-          td.style.backgroundColor = randomColor();
-          td.style.fill = randomColor();
+          // if cell is not empty
+          if (td.getAttribute("data-content") !== "") {
+            td.style.backgroundColor = randomColor();
+            td.style.fill = randomColor();
+        }
         }
         if (mouseIsPressed) {
-          if (selectedCells.length < 2) {
+          if (selectedCells.length < 2 && td.getAttribute("data-content") !== "") {
             selectedCells.push(td);
             if (selectedCells.length === 2) {
               direction = getDirection(selectedCells[0], selectedCells[1]);
@@ -375,8 +381,11 @@ function renderWordSearch(puzzle) {
       });
 
       td.addEventListener("mousedown", (event) => {
-        mouseIsPressed = true;
-        selectedCells = [td]; // Start new selection
+        if (td.getAttribute("data-content") !== ""){
+          mouseIsPressed = true;
+          selectedCells = [td]; // Start new selection
+        }
+        
       });
 
       document.addEventListener("mouseup", function () {
