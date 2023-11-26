@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Lobby</title>
     <link rel="stylesheet" href="lobby.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="lobby.js"></script>
+   
     <body>
         <div id="splash-screen" class="hidden">
             <div id="splash-content">
@@ -14,6 +16,7 @@
                 <button id="submit-button">Submit</button>
             </div>
         </div>
+       
         <div id="Start-screen" class = "hidden">
             <div id= "Start-content">
             <p1>Are you sure you want to start the game? </p1>
@@ -21,6 +24,7 @@
             <button id="cancel-button">NO! Don't start! </button>
             </div>
         </div>
+       
         <div id="HTW-screen" class="hidden">
             <div id="HTW-content">
                 <p1>How to win!!!</p1>
@@ -34,12 +38,14 @@
                 <button id="close-button">Close</button>
             </div> 
         </div>
+       
         <div id="Themes-screen" class="hidden">
             <div id="Themes-content">
                 <p1>Select Theme</p1>
                 <div id="Themes-container"></div>
             </div>
         </div>
+        
         <div id="settings-screen" class="hidden">
             <div id="settings-content">
                 <h2>Host Settings</h2>
@@ -86,6 +92,7 @@
                 <button id="settings-close-button">Close</button>
             </div>
         </div>
+        
         <div id="kick-screen" class="hidden">
             <div id="kick-content">
                 <p1>Would you like to kick this player from the lobby? </p1>
@@ -93,6 +100,16 @@
                 <button id="cancel-kick-button">NO! Don't kick them!</button>
             </div> 
         </div>
+
+        <div id="nav-container">
+            <nav> 
+                <ul> 
+                    <li>
+                        <a href="../../home"><i class="fa fa-home"></i>Home</a>
+                    </li>
+                </ul>
+            </nav>
+       
         <div id = "outer-lobby-container">
             <div id="lobby-container">
                 <div id="lobby-title">
@@ -293,6 +310,7 @@
                             </div>
                     </div>
                 </div>
+               
                 <div id="lobby-sharecode">
                     <div id="game-link-box"> 
                         <p id="share-link"></p>
@@ -303,11 +321,13 @@
                         <img src="../images/fixed-CopyPasteIcon.png" id="game-code-copy-button">
                     </div>
                 </div>
+               
                 <div id="lobby-invite-prompt">
                     <div id="lobby-invite-text">Invite your friends with the link or lobby code! </div>
                 </div>
                
             </div>
+           
             <div id ="player-list-box">
                     <div id ="player-list-title">
                          <div id= "player-list-title-text">Players</div>
@@ -320,5 +340,7 @@
                     </div>
             </div>
         </div>
+        </div>
+
     </body>
 </html>
