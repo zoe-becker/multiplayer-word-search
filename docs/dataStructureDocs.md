@@ -87,3 +87,7 @@
 - startCol: column number (from 0) of the beginning of the word
 - direction: direction of the word (N, E, S, W, NE, SE, NW, SW)
 - word: word that was found
+### GameSettings object
+- difficulty: difficulty of the board to create (accepted values: easy, medium, hard)
+- size: size of the board to create (accepted values: small, medium, large)
+- shape: shape of the board to create (supported shapes: heart, square, star)

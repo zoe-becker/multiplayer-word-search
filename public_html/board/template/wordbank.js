@@ -160,14 +160,6 @@ function renderTheme(dataTheme) {
     }
   }
 
-  //not working
-  if (dataTheme.tableBox) {
-    const tableBox = document.querySelector("table");
-    if (tableBox) {
-      tableBox.style.backgroundColor = dataTheme.tableBox;
-    }
-  }
-
   if (dataTheme.wordBankBox) {
     const wordBankBox = document.querySelector(".word-bank");
     if (wordBankBox) {
@@ -259,6 +251,7 @@ function updateBoard(){
           data.players.sort((a, b) => b.score - a.score);
           //add event listeners to home button
           homeButtonFunctionality();
+          closeModal();
           //load final results page
           populateFinalResults(data.players);
 
@@ -635,4 +628,22 @@ function homeButtonFunctionality(){
     isHomeButtonClicked = true;// set flag to true
     window.location.href = "../../home/";
   });
+}
+
+function closeModal() {
+  var closeButton = document.getElementById("close-button");
+
+  closeButton.addEventListener('mouseover', function() {
+    closeButton.classList.add('brighten');
+  });
+
+  closeButton.addEventListener('mouseout', function() {
+    closeButton.classList.remove('brighten');
+  });
+
+  closeButton.addEventListener("click", function() {
+    toggleScreen('final-results-screen','hide');
+  });
+  //toggleScreen('final-results-screen','hide');
+
 }

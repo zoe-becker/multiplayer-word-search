@@ -3,6 +3,18 @@ var requestSetNamePending = false;
 var requestSetThemePending = false;
 var requestStartGamePending = false;
 
+// Read values from localStorage
+var localDifficulty = localStorage.getItem('localDifficulty') || 'medium';
+var localSize = localStorage.getItem('localSize') || 'small';
+var localShape = localStorage.getItem('localShape') || 'square';
+
+// Create GameSettings object for createGame()
+let gameSettings = {
+    difficulty: localDifficulty,
+    size: localSize,
+    shape: localShape
+  };
+
 //Checks if splash screen needs to be called based on token and lobby id
 //if it hasnt been set then token, lobby id, and isHost are set.
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -91,6 +103,8 @@ function setName(username) {
 //START GAME
 function startGame(){
     let request = new XMLHttpRequest();
+    //make JSON with game settings
+    let gameSettingsJSON = JSON.stringify(gameSettings);
     
     request.onreadystatechange = function () {
       if (request.readyState == 4) {
@@ -103,6 +117,7 @@ function startGame(){
     request.open("POST", "../createGame.php");
     request.setRequestHeader("token", localStorage.getItem('accessToken'));
     request.setRequestHeader("lobby", getLobbyCode());
+    request.setRequestHeader("settings", gameSettingsJSON);
     request.send(); 
 }
 
@@ -143,6 +158,10 @@ function addPlayer(name) {
         playerBoxParagraph.textContent = name;
         playerBox.appendChild(playerBoxParagraph);
         playerList.appendChild(playerBox);
+        // Set up event listeners for the player box
+        if(localStorage.getItem('playerName') != name){
+        setupPlayerBox(playerBoxParagraph);
+        }
     }
     localStorage.setItem(key, JSON.stringify(Array.from(playerSet)));
 }
@@ -233,6 +252,47 @@ window.addEventListener('load', renderPlayersFromSet);
 // Call loadThemeBoxes on page load or refresh for host
 window.addEventListener('load', loadThemeBoxes);
 
+// Function to store the last kicked player in localStorage
+function storeLastKickedPlayer(playerName) {
+    localStorage.setItem('lastKickedPlayer', playerName);
+}
+// Function to update the kick screen text based on the last kicked player
+function updateKickScreenText() {
+    const lastKickedPlayer = localStorage.getItem('lastKickedPlayer');
+    const kickScreenText = document.getElementById('kick-content').querySelector('p1');
+
+    if (lastKickedPlayer) {
+        kickScreenText.textContent = `Would you like to kick ${lastKickedPlayer} from the lobby?`;
+    }
+}
+// Function to set up event listeners for a player box
+function setupPlayerBox(playerBoxParagraph) {
+    // Event listener for click on player paragraph
+    playerBoxParagraph.addEventListener('click', function (event) {
+        if (isHost()) {
+            //last clicked playerbox would be the one to kicked
+            const playerName = event.target.textContent;
+            storeLastKickedPlayer(playerName);
+            updateKickScreenText();
+            toggleScreen('kick-screen', 'show');
+        }
+    });
+
+    // Event listeners for mouseover/mouseout on player paragraph
+    playerBoxParagraph.addEventListener('mouseover', function (event) {
+        if (isHost()) {
+            playerBoxParagraph.style.fontWeight = 'bold';
+            event.target.style.cursor = 'pointer';
+        }
+    });
+
+    playerBoxParagraph.addEventListener('mouseout', function (event) {
+        if (isHost()) {
+            playerBoxParagraph.style.fontWeight = 'normal';
+            event.target.style.cursor = 'auto';
+        }
+    });
+}
 function getLobbyURL() {
     const currentUrl = window.location.href;
     return currentUrl;
@@ -303,7 +363,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 // Get all elements with the data-special-cell attribute
 const specialCells = document.querySelectorAll('[data-special-cell]');
 
-// Add event listeners for click
+// Add event listeners for click for special cells
 specialCells.forEach(cell => {
         cell.addEventListener('mouseover', function() {
             const cellType = cell.getAttribute('data-special-cell');
@@ -323,24 +383,14 @@ specialCells.forEach(cell => {
             // Handle click event based on the type of data-special-cell
             const cellType = cell.getAttribute('data-special-cell');
             if (cellType === 'settings') {
-                // Implement functionality for 'settings' cell type
                 handleSettingsClick();
-                console.log('Clicked on settings cell:', cell.textContent);
             } else if (cellType === 'how-to-win!') {
                 handleHTWClick();
-                // Implement functionality for 'how-to-win!' cell type
-                console.log('Clicked on how-to-win! cell:', cell.textContent);
             } else if (cellType === 'start') {
                 handleStartClick();
-                // Implement functionality for 'start' cell type
-                console.log('Clicked on start cell:', cell.textContent);
             } else if (cellType === 'themes') {
                 handleThemesClick();
-                // Implement functionality for 'themes' cell type
-                console.log('Clicked on themes cell:', cell.textContent);
             } else {
-                // Implement default functionality for other cell types
-                console.log(`Clicked on cell with attribute ${cellType}:`, cell.textContent);
             }
         });
     });
@@ -384,7 +434,7 @@ function handleStartClick(){
             toggleScreen('Start-screen', 'hide');
         });
     }else{
-        alert("Only host can start the game.")
+        alert("Only the host can start the game.")
     }
 }
 
@@ -395,7 +445,7 @@ function handleThemesClick(){
         //once they click on a theme button it hides the themes screen
     }else{
         console.log("denied!");
-        alert("Only host can select themes.")
+        alert("Only the host can select the current theme.")
     }
 }
 function handleHTWClick(){
@@ -410,13 +460,58 @@ function handleHTWClick(){
 
 }
 function handleSettingsClick(){
-    toggleScreen('settings-screen', 'show');
-    var closeButton = document.getElementById("settings-close-button");
-    addBrightenFunctionality(closeButton, function() {
-        toggleScreen('settings-screen', 'hide');
-    });
+    var host= isHost();
+    if(host){
+        toggleScreen('settings-screen', 'show');
+        var closeButton = document.getElementById("settings-close-button");
+        addBrightenFunctionality(closeButton, function() {
+            toggleScreen('settings-screen', 'hide');
+        });
+    }else{
+        alert("Only the host can edit the game settings.")
+    }
 }
+document.addEventListener('DOMContentLoaded', (event) => {
+    var host= isHost();
+    if(host){
+        var startButton = document.getElementById("kick-button");
+        var cancelButton = document.getElementById("cancel-kick-button");
 
+        addBrightenFunctionality(startButton, function () {
+            toggleScreen('kick-screen', 'hide');
+            //kickPlayer()
+        });
+        
+        addBrightenFunctionality(cancelButton, function () {
+            toggleScreen('kick-screen', 'hide');
+        });
+    }
+});
+//event listeners for settings radios
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('settings-content').addEventListener('change', function (event) {
+        const target = event.target;
+
+        // Check if the changed element is a radio button
+        if (target.type === 'radio') {
+        const groupName = target.getAttribute('name');
+        const selectedValue = target.value;
+    
+        // Update the localStorage variable based on the radio button group
+        switch (groupName) {
+            case 'grid-difficulty':
+            localStorage.setItem('localDifficulty', selectedValue);
+            break;
+            case 'grid-size':
+            localStorage.setItem('localSize', selectedValue);
+            break;
+            case 'grid-shape':
+            localStorage.setItem('localShape', selectedValue);
+            break;
+        }
+        }
+    });
+});
 //clipboard button icons
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(function() {
@@ -450,3 +545,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         console.error("Element with provided IDs not found.");
     }
 });
+
+//implement function that on button click in host settings changes local storage
+//have it so that when you create a game you pass the new updated headers
+//make a check to see if the person is host before clicking settings

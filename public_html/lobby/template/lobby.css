@@ -8,7 +8,7 @@ body {
     background-size: cover;
     background-blend-mode: multiply; /*Set blend mode to multiply for darkening effect*/
 }
-#splash-screen, #HTW-screen, #Themes-screen,#Start-screen, #settings-screen{
+#splash-screen, #HTW-screen, #Themes-screen,#Start-screen, #settings-screen, #kick-screen{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,7 +21,7 @@ body {
     z-index: 100;
   }
   
-  #splash-content, #HTW-content, #Themes-content, #Start-content, #settings-content{
+  #splash-content, #HTW-content, #Themes-content, #Start-content, #settings-content, #kick-content{
     text-align: center;
     border-radius: 10px;
     border: solid #bc8942; /* Add border style as well */
@@ -29,7 +29,7 @@ body {
     background-color: #e6e6e6;
     margin: 10px;
   }
-  #Start-content, #settings-content{
+  #Start-content, #settings-content, #kick-content{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -54,14 +54,14 @@ body {
     color: #bc8942;
     font-size: 30px;
   }
-  #HTW-content p,#Start-content p1{
+  #HTW-content p,#Start-content p1, #kick-content p1{
     margin: 5px;
     font-family: cursive;
     color: #bc8942;
     font-size: 15px;
   }
 
-  #splash-content button, #splash-content input[type="text"], #HTW-content button, #Themes-container button, #Start-content button, #settings-content button{
+  #splash-content button, #splash-content input[type="text"], #HTW-content button, #Themes-container button, #Start-content button, #settings-content button, #kick-content button{
     margin: 10px;
     font-family: cursive; /* Set the same font as the h2 */
     color: #bc8942; /* Set the same color as the h2 */
@@ -75,7 +75,7 @@ body {
     width: 50px;
   }
   
-  #splash-screen.hidden, #HTW-screen.hidden,#Themes-screen.hidden, #Start-screen.hidden, #settings-screen.hidden {
+  #splash-screen.hidden, #HTW-screen.hidden,#Themes-screen.hidden, #Start-screen.hidden, #settings-screen.hidden, #kick-screen.hidden {
     display: none;
   }
   .radio-box{

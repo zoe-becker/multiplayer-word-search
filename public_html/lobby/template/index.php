@@ -18,7 +18,7 @@
             <div id= "Start-content">
             <p1>Are you sure you want to start the game? </p1>
             <button id="start-button"> Yes, start game!</button>
-            <button id="cancel-button">NO! Dont start! </button>
+            <button id="cancel-button">NO! Don't start! </button>
             </div>
         </div>
         <div id="HTW-screen" class="hidden">
@@ -48,13 +48,13 @@
                 <!-- Grid Difficulty -->
                 <div class= "radio-box">
                     <label for="grid-difficulty">Grid Difficulty:</label>
-                    <input type="radio" id="easy" name="grid-difficulty" value="1">
+                    <input type="radio" id="easy" name="grid-difficulty" value="easy">
                     <label for="easy">Easy</label>
 
-                    <input type="radio" id="medium" name="grid-difficulty" value="2"checked>
+                    <input type="radio" id="medium" name="grid-difficulty" value="medium"checked>
                     <label for="medium">Medium</label>
 
-                    <input type="radio" id="hard" name="grid-difficulty" value="3">
+                    <input type="radio" id="hard" name="grid-difficulty" value="hard">
                     <label for="hard">Hard</label>
                 </div>
 
@@ -74,17 +74,24 @@
                 <!-- Grid Shape -->
                 <div class= "radio-box">
                     <label for="grid-shape">Grid Shape:</label>
-                    <input type="radio" id="square" name="grid-shape" value="Square"checked>
+                    <input type="radio" id="square" name="grid-shape" value="square"checked>
                     <label for="square">Square</label>
 
-                    <input type="radio" id="heart" name="grid-shape" value="Heart">
+                    <input type="radio" id="heart" name="grid-shape" value="heart">
                     <label for="heart">Heart</label>
 
-                    <input type="radio" id="star" name="grid-shape" value="Star6">
+                    <input type="radio" id="star" name="grid-shape" value="star">
                     <label for="star">Star</label>
                 </div>
                 <button id="settings-close-button">Close</button>
             </div>
+        </div>
+        <div id="kick-screen" class="hidden">
+            <div id="kick-content">
+                <p1>Would you like to kick this player from the lobby? </p1>
+                <button id="kick-button">Yes, kick them!</button>
+                <button id="cancel-kick-button">NO! Don't kick them!</button>
+            </div> 
         </div>
         <div id = "outer-lobby-container">
             <div id="lobby-container">
