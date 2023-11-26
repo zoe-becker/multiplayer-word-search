@@ -45,3 +45,15 @@ document.addEventListener("DOMContentLoaded", function () {
     return regex.test(code);
   }
 });
+
+//HIDING OR SHOWING SCREENS
+function toggleScreen(screenId, action) {
+  var screen = document.getElementById(screenId);
+  if (screen) {
+    if (action === "show") {
+      screen.classList.remove("hidden");
+    } else if (action === "hide") {
+      screen.classList.add("hidden");
+    }
+  }
+}
