@@ -146,10 +146,12 @@ function clientCheckUsername(passedUsername) {
 
   //ADD PLAYERBOX TO PLAYERLIST
 function addOrRemovePlayer(name, serverPlayerSet) {
+    logSetContents(serverPlayerSet, 'serverinaddorrem');
     let key = "playerSet";
     let storedPlayerSet = JSON.parse(localStorage.getItem(key)) || [];
     let playerSet = new Set(storedPlayerSet);
     if(!playerSet.has(name) && serverPlayerSet.has(name)){
+        console.log("1");
         playerSet.add(name);
         var playerList = document.getElementById('player-list-container');
         var playerBox = document.createElement('div');
@@ -162,15 +164,23 @@ function addOrRemovePlayer(name, serverPlayerSet) {
         if(localStorage.getItem('playerName') != name){
         setupPlayerBox(playerBoxParagraph);
         }
-    } else if(playerSet.has(name) && !serverPlayerSet.has(name)){
+    } 
+    if(playerSet.has(name) && !serverPlayerSet.has(name)){
+        console.log("2");
         //local list has name, but server doesnt, so he was kicked
-        playerSet.remove(name);
+        playerSet.delete(name);
+        console.log("a player was deleted from the local set!!!");
+        localStorage.setItem(key, JSON.stringify(Array.from(playerSet)));
         if(name == localStorage.getItem('playerName')){
             window.location.href = "http://localhost/home/";
         }
     }
+    console.log("3");
     localStorage.setItem(key, JSON.stringify(Array.from(playerSet)));
 }
+function logSetContents(set, type) {
+    console.log(type +" " + Array.from(set).join(' '));
+  }
 //LOBBY POLLING
 function updateLobby(){
     let request = new XMLHttpRequest();
@@ -185,11 +195,23 @@ function updateLobby(){
           //theres more players in list than client has in set
           let storedPlayerSet = JSON.parse(localStorage.getItem("playerSet")) || [];
           let localPlayerSet = new Set(storedPlayerSet);
-          if(num_players != localPlayerSet.size){
+          logSetContents(serverPlayerSet, 'server');
+          logSetContents(localPlayerSet, 'local');
+          //more player in server than local
+          if(num_players > localPlayerSet.size){
             //adds each new player to set
+            console.log("sizes uneven -make comparison!!");
             for(let i = 0; i < num_players; i++) addOrRemovePlayer(data.players[i].name, serverPlayerSet);
+            renderPlayersFromSet();          
           }
-          renderPlayersFromSet();
+          //more players local than server
+          if(num_players < localPlayerSet.size){
+            const localPlayerArray = Array.from(localPlayerSet);
+            for (let i = 0; i < localPlayerArray.length; i++) {
+                addOrRemovePlayer(localPlayerArray[i], serverPlayerSet);
+            }  
+            renderPlayersFromSet();          
+          }
           //game has started, redirect user to gamelink
           if(data.gameLink != false){
             localStorage.setItem("startTime", data.startTime);
@@ -207,6 +229,24 @@ function updateLobby(){
     request.open("GET", url);
     request.send();
 }
+function kickPlayer(name){
+    let request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+      if (request.readyState == 4) {
+        if (request.status == 200) {
+
+        } else console.log("AJAX Error: " + request.responseText);
+        requestSetNamePending = false;
+      }
+    };
+    request.open("POST", "../kickPlayer.php");
+    request.setRequestHeader("lobby", getLobbyCode());
+    request.setRequestHeader("token", localStorage.getItem('accessToken'));
+    request.setRequestHeader("name", name);
+    request.send(); 
+}
+
 //LOAD THEME BOXES FROM LOCAL STORAGE
 function loadThemeBoxes(){
     let key = "themes";
@@ -489,7 +529,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         addBrightenFunctionality(startButton, function () {
             toggleScreen('kick-screen', 'hide');
-            //kickPlayer()
+            console.log(localStorage.getItem('lastKickedPlayer')+ " was attempted to kick");
+            kickPlayer(localStorage.getItem('lastKickedPlayer'));
+            //addBrightenFunctionality(localStorage.getItem('lastKickedPlayer'));
         });
         
         addBrightenFunctionality(cancelButton, function () {
