@@ -145,11 +145,11 @@ function clientCheckUsername(passedUsername) {
 }
 
   //ADD PLAYERBOX TO PLAYERLIST
-function addPlayer(name) {
+function addOrRemovePlayer(name, serverPlayerSet) {
     let key = "playerSet";
     let storedPlayerSet = JSON.parse(localStorage.getItem(key)) || [];
     let playerSet = new Set(storedPlayerSet);
-    if(!playerSet.has(name)){
+    if(!playerSet.has(name) && serverPlayerSet.has(name)){
         playerSet.add(name);
         var playerList = document.getElementById('player-list-container');
         var playerBox = document.createElement('div');
@@ -161,6 +161,12 @@ function addPlayer(name) {
         // Set up event listeners for the player box
         if(localStorage.getItem('playerName') != name){
         setupPlayerBox(playerBoxParagraph);
+        }
+    } else if(playerSet.has(name) && !serverPlayerSet.has(name)){
+        //local list has name, but server doesnt, so he was kicked
+        playerSet.remove(name);
+        if(name == localStorage.getItem('playerName')){
+            window.location.href = "http://localhost/home/";
         }
     }
     localStorage.setItem(key, JSON.stringify(Array.from(playerSet)));
@@ -175,14 +181,15 @@ function updateLobby(){
           data = JSON.parse(request.responseText);
           localStorage.setItem('currentTheme',data.theme);
           num_players = data.players.length;
+          let serverPlayerSet = new Set(data.players.map(player => player.name));
           //theres more players in list than client has in set
-          let key = "playerSet";
-          let storedPlayerSet = JSON.parse(localStorage.getItem(key)) || [];
-          let playerSet = new Set(storedPlayerSet);
-          if(num_players != playerSet.size){
+          let storedPlayerSet = JSON.parse(localStorage.getItem("playerSet")) || [];
+          let localPlayerSet = new Set(storedPlayerSet);
+          if(num_players != localPlayerSet.size){
             //adds each new player to set
-            for(let i = 0; i < num_players; i++) addPlayer(data.players[i].name);
+            for(let i = 0; i < num_players; i++) addOrRemovePlayer(data.players[i].name, serverPlayerSet);
           }
+          renderPlayersFromSet();
           //game has started, redirect user to gamelink
           if(data.gameLink != false){
             localStorage.setItem("startTime", data.startTime);
@@ -244,6 +251,9 @@ function renderPlayersFromSet() {
         playerBoxParagraph.textContent = name;
         playerBox.appendChild(playerBoxParagraph);
         playerList.appendChild(playerBox);
+        if(localStorage.getItem('playerName') != name){
+            setupPlayerBox(playerBoxParagraph);
+            }
     });
 }
 
