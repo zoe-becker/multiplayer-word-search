@@ -357,13 +357,15 @@ function renderWordSearch(puzzle) {
       td.addEventListener("mouseenter", (event) => {
         // as long as the letter is not part of a found word
         if (!td.classList.contains("found") && !mouseIsPressed) {
-          td.style.backgroundColor = randomColor();
-          td.style.fill = randomColor();
+          // if cell is not empty
+          if (td.getAttribute("data-content") !== "") {
+            td.style.backgroundColor = randomColor();
+            td.style.fill = randomColor();
         }
         // when mouse is pressed start the selection of the word
+        }
         if (mouseIsPressed) {
-          // once two letters have been selected determine the direction
-          if (selectedCells.length < 2) {
+          if (selectedCells.length < 2 && td.getAttribute("data-content") !== "") {
             selectedCells.push(td);
             if (selectedCells.length === 2) {
               direction = getDirection(selectedCells[0], selectedCells[1]);
@@ -383,8 +385,11 @@ function renderWordSearch(puzzle) {
       });
 
       td.addEventListener("mousedown", (event) => {
-        mouseIsPressed = true;
-        selectedCells = [td]; // Start new selection
+        if (td.getAttribute("data-content") !== ""){
+          mouseIsPressed = true;
+          selectedCells = [td]; // Start new selection
+        }
+        
       });
 
       document.addEventListener("mouseup", function () {

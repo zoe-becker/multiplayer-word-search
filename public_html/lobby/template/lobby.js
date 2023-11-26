@@ -10,10 +10,15 @@ var localShape = localStorage.getItem('localShape') || 'square';
 
 // Create GameSettings object for createGame()
 let gameSettings = {
-    difficulty: localDifficulty,
-    size: localSize,
-    shape: localShape
+    difficulty: localStorage.getItem('localDifficulty'),
+    size: localStorage.getItem('localSize'),
+    shape: localStorage.getItem('localShape')
   };
+  function updateGameSettingsFromLocalStorage() {
+    gameSettings.difficulty = localStorage.getItem('localDifficulty');
+    gameSettings.size = localStorage.getItem('localSize');
+    gameSettings.shape = localStorage.getItem('localShape');
+  }
 
 //Checks if splash screen needs to be called based on token and lobby id
 //if it hasnt been set then token, lobby id, and isHost are set.
@@ -24,6 +29,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var currentLobbyCode = getLobbyCode();
     //user should be prompted with splash screen if they pass these
     if(storedToken === null || storedLobbyCode === null || storedLobbyCode !== currentLobbyCode){
+        //new lobby reset localvalues
+        localStorage.setItem('localDifficulty','medium');
+        localStorage.setItem('localSize', 'small');
+        localStorage.setItem('localShape', 'square');
+        //new lobby no longer has been kicked
         localStorage.setItem('beenKicked', 'false');
         //user hasnt been to this lobby before, so reset any playerSet thats been in there.
         localStorage.setItem('playerSet', JSON.stringify(Array.from(new Set())));
@@ -106,6 +116,8 @@ function setName(username) {
   }
 //START GAME
 function startGame(){
+    updateGameSettingsFromLocalStorage();
+
     let request = new XMLHttpRequest();
     //make JSON with game settings
     let gameSettingsJSON = JSON.stringify(gameSettings);
@@ -189,6 +201,7 @@ function updateLobby(){
         if (request.status == 200) {
           data = JSON.parse(request.responseText);
           localStorage.setItem('currentTheme',data.theme);
+
           num_players = data.players.length;
           let serverPlayerSet = new Set(data.players.map(player => player.name));
           //theres more players in list than client has in set
@@ -541,17 +554,21 @@ document.addEventListener('DOMContentLoaded', function () {
         if (target.type === 'radio') {
         const groupName = target.getAttribute('name');
         const selectedValue = target.value;
+        
     
         // Update the localStorage variable based on the radio button group
         switch (groupName) {
             case 'grid-difficulty':
             localStorage.setItem('localDifficulty', selectedValue);
+            console.log("difficulty is now: " + localStorage.getItem('localDifficulty'));
             break;
             case 'grid-size':
             localStorage.setItem('localSize', selectedValue);
+            console.log("size is now: " + localStorage.getItem('localSize'));
             break;
             case 'grid-shape':
             localStorage.setItem('localShape', selectedValue);
+            console.log("shape is now: " + localStorage.getItem('localShape'));
             break;
         }
         }
