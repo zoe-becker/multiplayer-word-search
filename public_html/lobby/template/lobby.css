@@ -88,7 +88,6 @@ body {
   }
  
   /* CSS for redirect to home page link */
-/* need to fix flex box stuff:( */
 #nav-container{ 
   display: flex;
   flex-direction: column;
