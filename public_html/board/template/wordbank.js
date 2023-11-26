@@ -178,6 +178,7 @@ function renderTheme(dataTheme) {
     }
   }
 
+  // set the highlight colors to theme colors :)
   if (dataTheme.highlightColors) {
     highlightColors = dataTheme.highlightColors;
   }
@@ -341,7 +342,7 @@ function drawWord(word, foundWordinfo) {
 function renderWordSearch(puzzle) {
   let table = document.createElement("table");
   const container = document.getElementById("wordsearch");
-  container.appendChild(table); // Drew the main table node on the document
+  container.appendChild(table); // Draw the main table node on the document
 
   puzzle.forEach(function (row, rIdx) {
     let tr = table.insertRow(); //Create a new row
@@ -367,13 +368,13 @@ function renderWordSearch(puzzle) {
             if (selectedCells.length === 2) {
               direction = getDirection(selectedCells[0], selectedCells[1]);
             }
+            // check if the next cell selected is in the same direction
           } else {
             const newDirection = getDirection(
               selectedCells[selectedCells.length - 1],
               td
             );
             if (newDirection === direction) {
-              // highlightSelectedCells();
               selectedCells.push(td);
             }
           }
