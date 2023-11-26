@@ -56,6 +56,13 @@
         $playerData = $puzzle["players"][$player_index];
         validateEligibility($playerData); // validate player can retrieve board
 
+        // Check if the current time is greater than or equal to the start time
+        if (time() < $puzzle["startTime"]) {
+            http_response_code(403);
+            echo json_encode(array("error" => "The game has not started yet."));
+            exit(-1);
+        }
+
         // update puzzle data with player's board retrieval marked and write data back to file
         // ignore for test environment so board doesn't have to be reset every time
         if ($gameID != "testenv") {

@@ -158,6 +158,10 @@ function addPlayer(name) {
         playerBoxParagraph.textContent = name;
         playerBox.appendChild(playerBoxParagraph);
         playerList.appendChild(playerBox);
+        // Set up event listeners for the player box
+        if(localStorage.getItem('playerName') != name){
+        setupPlayerBox(playerBoxParagraph);
+        }
     }
     localStorage.setItem(key, JSON.stringify(Array.from(playerSet)));
 }
@@ -181,6 +185,7 @@ function updateLobby(){
           }
           //game has started, redirect user to gamelink
           if(data.gameLink != false){
+            localStorage.setItem("startTime", data.startTime);
             window.location.href = data.gameLink;
           }
           updateLobbyTheme();
@@ -247,6 +252,47 @@ window.addEventListener('load', renderPlayersFromSet);
 // Call loadThemeBoxes on page load or refresh for host
 window.addEventListener('load', loadThemeBoxes);
 
+// Function to store the last kicked player in localStorage
+function storeLastKickedPlayer(playerName) {
+    localStorage.setItem('lastKickedPlayer', playerName);
+}
+// Function to update the kick screen text based on the last kicked player
+function updateKickScreenText() {
+    const lastKickedPlayer = localStorage.getItem('lastKickedPlayer');
+    const kickScreenText = document.getElementById('kick-content').querySelector('p1');
+
+    if (lastKickedPlayer) {
+        kickScreenText.textContent = `Would you like to kick ${lastKickedPlayer} from the lobby?`;
+    }
+}
+// Function to set up event listeners for a player box
+function setupPlayerBox(playerBoxParagraph) {
+    // Event listener for click on player paragraph
+    playerBoxParagraph.addEventListener('click', function (event) {
+        if (isHost()) {
+            //last clicked playerbox would be the one to kicked
+            const playerName = event.target.textContent;
+            storeLastKickedPlayer(playerName);
+            updateKickScreenText();
+            toggleScreen('kick-screen', 'show');
+        }
+    });
+
+    // Event listeners for mouseover/mouseout on player paragraph
+    playerBoxParagraph.addEventListener('mouseover', function (event) {
+        if (isHost()) {
+            playerBoxParagraph.style.fontWeight = 'bold';
+            event.target.style.cursor = 'pointer';
+        }
+    });
+
+    playerBoxParagraph.addEventListener('mouseout', function (event) {
+        if (isHost()) {
+            playerBoxParagraph.style.fontWeight = 'normal';
+            event.target.style.cursor = 'auto';
+        }
+    });
+}
 function getLobbyURL() {
     const currentUrl = window.location.href;
     return currentUrl;
@@ -425,6 +471,22 @@ function handleSettingsClick(){
         alert("Only the host can edit the game settings.")
     }
 }
+document.addEventListener('DOMContentLoaded', (event) => {
+    var host= isHost();
+    if(host){
+        var startButton = document.getElementById("kick-button");
+        var cancelButton = document.getElementById("cancel-kick-button");
+
+        addBrightenFunctionality(startButton, function () {
+            toggleScreen('kick-screen', 'hide');
+            //kickPlayer()
+        });
+        
+        addBrightenFunctionality(cancelButton, function () {
+            toggleScreen('kick-screen', 'hide');
+        });
+    }
+});
 //event listeners for settings radios
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('settings-content').addEventListener('change', function (event) {

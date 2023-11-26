@@ -108,7 +108,7 @@ function startSplashScreenCountdown() {
   const countdownElement = document.getElementById("countdown");
 
   // fetch the start time from local storage
-  let startTime = parseInt(localStorage.getItem('gameStartTime'), 10);
+  let startTime = parseInt(localStorage.getItem('startTime'), 10);
 
   // if startTime is not a number, fallback to a 5 seconds countdown
   if (isNaN(startTime)) {
@@ -130,6 +130,7 @@ function startSplashScreenCountdown() {
   }
 
   // update the countdown every second
+  countdownElement.textContent = timeLeft;
   const interval = setInterval(() => {
     countdownElement.textContent = timeLeft;
 
@@ -251,6 +252,7 @@ function updateBoard(){
           data.players.sort((a, b) => b.score - a.score);
           //add event listeners to home button
           homeButtonFunctionality();
+          closeModal();
           //load final results page
           populateFinalResults(data.players);
 
@@ -627,4 +629,22 @@ function homeButtonFunctionality(){
     isHomeButtonClicked = true;// set flag to true
     window.location.href = "../../home/";
   });
+}
+
+function closeModal() {
+  var closeButton = document.getElementById("close-button");
+
+  closeButton.addEventListener('mouseover', function() {
+    closeButton.classList.add('brighten');
+  });
+
+  closeButton.addEventListener('mouseout', function() {
+    closeButton.classList.remove('brighten');
+  });
+
+  closeButton.addEventListener("click", function() {
+    toggleScreen('final-results-screen','hide');
+  });
+  //toggleScreen('final-results-screen','hide');
+
 }
