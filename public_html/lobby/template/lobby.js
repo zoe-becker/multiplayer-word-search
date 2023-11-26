@@ -10,10 +10,15 @@ var localShape = localStorage.getItem('localShape') || 'square';
 
 // Create GameSettings object for createGame()
 let gameSettings = {
-    difficulty: localDifficulty,
-    size: localSize,
-    shape: localShape
+    difficulty: localStorage.getItem('localDifficulty'),
+    size: localStorage.getItem('localSize'),
+    shape: localStorage.getItem('localShape')
   };
+  function updateGameSettingsFromLocalStorage() {
+    gameSettings.difficulty = localStorage.getItem('localDifficulty');
+    gameSettings.size = localStorage.getItem('localSize');
+    gameSettings.shape = localStorage.getItem('localShape');
+  }
 
 //Checks if splash screen needs to be called based on token and lobby id
 //if it hasnt been set then token, lobby id, and isHost are set.
@@ -111,6 +116,8 @@ function setName(username) {
   }
 //START GAME
 function startGame(){
+    updateGameSettingsFromLocalStorage();
+
     let request = new XMLHttpRequest();
     //make JSON with game settings
     let gameSettingsJSON = JSON.stringify(gameSettings);
@@ -194,6 +201,7 @@ function updateLobby(){
         if (request.status == 200) {
           data = JSON.parse(request.responseText);
           localStorage.setItem('currentTheme',data.theme);
+
           num_players = data.players.length;
           let serverPlayerSet = new Set(data.players.map(player => player.name));
           //theres more players in list than client has in set
@@ -546,6 +554,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (target.type === 'radio') {
         const groupName = target.getAttribute('name');
         const selectedValue = target.value;
+        
     
         // Update the localStorage variable based on the radio button group
         switch (groupName) {
