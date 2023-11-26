@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var currentLobbyCode = getLobbyCode();
     //user should be prompted with splash screen if they pass these
     if(storedToken === null || storedLobbyCode === null || storedLobbyCode !== currentLobbyCode){
+        localStorage.setItem('beenKicked', 'false');
         //user hasnt been to this lobby before, so reset any playerSet thats been in there.
         localStorage.setItem('playerSet', JSON.stringify(Array.from(new Set())));
         //give user option to create username
@@ -56,6 +57,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
         });
     }else{
+        if(localStorage.getItem('beenKicked') === 'true'){
+            window.location.href = "http://localhost/home/";
+        }
         setInterval(updateLobby, 3000);
     }
 });
@@ -145,11 +149,11 @@ function clientCheckUsername(passedUsername) {
 }
 
   //ADD PLAYERBOX TO PLAYERLIST
-function addPlayer(name) {
+function addOrRemovePlayer(name, serverPlayerSet) {
     let key = "playerSet";
     let storedPlayerSet = JSON.parse(localStorage.getItem(key)) || [];
     let playerSet = new Set(storedPlayerSet);
-    if(!playerSet.has(name)){
+    if(!playerSet.has(name) && serverPlayerSet.has(name)){
         playerSet.add(name);
         var playerList = document.getElementById('player-list-container');
         var playerBox = document.createElement('div');
@@ -162,9 +166,20 @@ function addPlayer(name) {
         if(localStorage.getItem('playerName') != name){
         setupPlayerBox(playerBoxParagraph);
         }
+    } 
+    if(playerSet.has(name) && !serverPlayerSet.has(name)){
+        //local list has name, but server doesnt, so he was kicked
+        playerSet.delete(name);
+        localStorage.setItem('beenKicked', 'true');
+      
+        localStorage.setItem(key, JSON.stringify(Array.from(playerSet)));
+        if(name == localStorage.getItem('playerName')){
+            window.location.href = "http://localhost/home/";
+        }
     }
     localStorage.setItem(key, JSON.stringify(Array.from(playerSet)));
 }
+
 //LOBBY POLLING
 function updateLobby(){
     let request = new XMLHttpRequest();
@@ -175,13 +190,23 @@ function updateLobby(){
           data = JSON.parse(request.responseText);
           localStorage.setItem('currentTheme',data.theme);
           num_players = data.players.length;
+          let serverPlayerSet = new Set(data.players.map(player => player.name));
           //theres more players in list than client has in set
-          let key = "playerSet";
-          let storedPlayerSet = JSON.parse(localStorage.getItem(key)) || [];
-          let playerSet = new Set(storedPlayerSet);
-          if(num_players != playerSet.size){
+          let storedPlayerSet = JSON.parse(localStorage.getItem("playerSet")) || [];
+          let localPlayerSet = new Set(storedPlayerSet);
+          //more player in server than local
+          if(num_players > localPlayerSet.size){
             //adds each new player to set
-            for(let i = 0; i < num_players; i++) addPlayer(data.players[i].name);
+            for(let i = 0; i < num_players; i++) addOrRemovePlayer(data.players[i].name, serverPlayerSet);
+            renderPlayersFromSet();          
+          }
+          //more players local than server
+          if(num_players < localPlayerSet.size){
+            const localPlayerArray = Array.from(localPlayerSet);
+            for (let i = 0; i < localPlayerArray.length; i++) {
+                addOrRemovePlayer(localPlayerArray[i], serverPlayerSet);
+            }  
+            renderPlayersFromSet();          
           }
           //game has started, redirect user to gamelink
           if(data.gameLink != false){
@@ -200,6 +225,24 @@ function updateLobby(){
     request.open("GET", url);
     request.send();
 }
+function kickPlayer(name){
+    let request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+      if (request.readyState == 4) {
+        if (request.status == 200) {
+
+        } else console.log("AJAX Error: " + request.responseText);
+        requestSetNamePending = false;
+      }
+    };
+    request.open("POST", "../kickPlayer.php");
+    request.setRequestHeader("lobby", getLobbyCode());
+    request.setRequestHeader("token", localStorage.getItem('accessToken'));
+    request.setRequestHeader("name", name);
+    request.send(); 
+}
+
 //LOAD THEME BOXES FROM LOCAL STORAGE
 function loadThemeBoxes(){
     let key = "themes";
@@ -214,7 +257,6 @@ function loadThemeBoxes(){
         // Use the addBrightenFunctionality function
         addBrightenFunctionality(themeBoxButton, function() {
             requestSetThemePending = true;
-            console.log(theme + 'changed');
             setTheme(theme);
             updateLobby();
             toggleScreen('Themes-screen', 'hide');
@@ -244,6 +286,9 @@ function renderPlayersFromSet() {
         playerBoxParagraph.textContent = name;
         playerBox.appendChild(playerBoxParagraph);
         playerList.appendChild(playerBox);
+        if(localStorage.getItem('playerName') != name){
+            setupPlayerBox(playerBoxParagraph);
+            }
     });
 }
 
@@ -444,7 +489,6 @@ function handleThemesClick(){
         toggleScreen('Themes-screen','show');
         //once they click on a theme button it hides the themes screen
     }else{
-        console.log("denied!");
         alert("Only the host can select the current theme.")
     }
 }
@@ -479,7 +523,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         addBrightenFunctionality(startButton, function () {
             toggleScreen('kick-screen', 'hide');
-            //kickPlayer()
+            kickPlayer(localStorage.getItem('lastKickedPlayer'));
+            //addBrightenFunctionality(localStorage.getItem('lastKickedPlayer'));
         });
         
         addBrightenFunctionality(cancelButton, function () {
@@ -534,12 +579,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Setting up click events for the copy icons
         shareLinkCopyIcon.addEventListener('click', () => {
             copyToClipboard(getLobbyURL());
-            console.log('link copied');
         });
 
         gameCodeCopyIcon.addEventListener('click', () => {
             copyToClipboard(getLobbyCode());
-            console.log('code copied');
         });
     } else {
         console.error("Element with provided IDs not found.");
