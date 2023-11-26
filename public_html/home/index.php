@@ -46,8 +46,8 @@
                         <h2>Welcome!</h2>
                         <h2>Please create a username.</h2>
                         <form id="time-attack-user"> 
-                        <input type="text" id="gameCode" placeholder="Enter your username" required>
-                        <button type="button" id="submitButton"><span> </span>Submit</button>
+                        <input type="text" id="username" placeholder="Enter your username" required>
+                        <button onClick="submitTimeAttack()" type="button" id="submitButton"><span> </span>Submit</button>
                         </form>
                         <div  class="close-button">
                             <button onClick="toggleScreen('time-attack-user-screen', 'hide')" id="close-button"><span> </span>Close</button>

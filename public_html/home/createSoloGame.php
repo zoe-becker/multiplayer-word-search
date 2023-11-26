@@ -31,8 +31,9 @@
             "score" => 0
         );
 
+        $settings = json_decode("{'difficulty': 'medium' , 'size': 'medium', 'shape': ''}", true);
         // create game instance
-        $gameLink = generateGameInstance("timeattack", array($newPlayer), "timeattack");
+        $gameLink = generateGameInstance("timeattack", array($newPlayer), "timeattack", $settings);
 
         if (!$gameLink) {
             echo "game creation failed";
