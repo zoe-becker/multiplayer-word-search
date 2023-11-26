@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var currentLobbyCode = getLobbyCode();
     //user should be prompted with splash screen if they pass these
     if(storedToken === null || storedLobbyCode === null || storedLobbyCode !== currentLobbyCode){
+        localStorage.setItem('beenKicked', 'false');
         //user hasnt been to this lobby before, so reset any playerSet thats been in there.
         localStorage.setItem('playerSet', JSON.stringify(Array.from(new Set())));
         //give user option to create username
@@ -56,6 +57,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
         });
     }else{
+        if(localStorage.getItem('beenKicked') === 'true'){
+            window.location.href = "http://localhost/home/";
+        }
         setInterval(updateLobby, 3000);
     }
 });
@@ -166,10 +170,11 @@ function addOrRemovePlayer(name, serverPlayerSet) {
         }
     } 
     if(playerSet.has(name) && !serverPlayerSet.has(name)){
-        console.log("2");
+        
         //local list has name, but server doesnt, so he was kicked
         playerSet.delete(name);
-        console.log("a player was deleted from the local set!!!");
+        localStorage.setItem('beenKicked', 'true');
+      
         localStorage.setItem(key, JSON.stringify(Array.from(playerSet)));
         if(name == localStorage.getItem('playerName')){
             window.location.href = "http://localhost/home/";
