@@ -35,8 +35,8 @@ foreach ($testFilesScan as $file) {
         $themeName = $puzzle["theme"];
         $puzzle["theme"] = getThemeData($themeName);;
         $puzzle["theme"]["name"] = $themeName;
-        $puzzle["startTime"] = time();
-        $puzzle["expireTime"] = time() + TESTENV_GAME_LEN;
+        $puzzle["startTime"] = time() + 5;
+        $puzzle["expireTime"] = time() + TESTENV_GAME_LEN + 5;
         unset($puzzle["theme"]["words"]);
 
         file_put_contents("$file", json_encode($puzzle));

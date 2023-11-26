@@ -28,7 +28,7 @@
         if ($result) {
             $puzzle = json_decode($result, true);
             $puzzle["startTime"] = time() + 5; // Added 5 sec delay
-            $puzzle["expireTime"] = time() + ($mode == "multiplayer" ? MULTIPLAYER_GAME_LEN : TIMEATTACK_GAME_LEN);
+            $puzzle["expireTime"] = time() + ($mode == "multiplayer" ? MULTIPLAYER_GAME_LEN : TIMEATTACK_GAME_LEN) + 5;
             $puzzle["instanceExpiration"] = $puzzle["expireTime"] + GAME_INSTANCE_EXPIRATION_DELAY;
             $puzzle["foundWords"] = new stdClass(); // empty map
             $puzzle["ended"] = false;
