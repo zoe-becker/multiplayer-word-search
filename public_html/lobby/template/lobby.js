@@ -255,7 +255,15 @@ window.addEventListener('load', loadThemeBoxes);
 function storeLastKickedPlayer(playerName) {
     localStorage.setItem('lastKickedPlayer', playerName);
 }
+// Function to update the kick screen text based on the last kicked player
+function updateKickScreenText() {
+    const lastKickedPlayer = localStorage.getItem('lastKickedPlayer');
+    const kickScreenText = document.getElementById('kick-content').querySelector('p1');
 
+    if (lastKickedPlayer) {
+        kickScreenText.textContent = `Would you like to kick ${lastKickedPlayer} from the lobby?`;
+    }
+}
 // Function to set up event listeners for a player box
 function setupPlayerBox(playerBoxParagraph) {
     // Event listener for click on player paragraph
@@ -264,6 +272,7 @@ function setupPlayerBox(playerBoxParagraph) {
             //last clicked playerbox would be the one to kicked
             const playerName = event.target.textContent;
             storeLastKickedPlayer(playerName);
+            updateKickScreenText();
             toggleScreen('kick-screen', 'show');
         }
     });
