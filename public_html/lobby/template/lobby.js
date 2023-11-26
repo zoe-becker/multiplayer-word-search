@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         });
     }else{
         if(localStorage.getItem('beenKicked') === 'true'){
-            window.location.href = "http://localhost/home/";
+            window.location.href = "../../home";
         }
         setInterval(updateLobby, 3000);
     }
@@ -174,7 +174,7 @@ function addOrRemovePlayer(name, serverPlayerSet) {
       
         localStorage.setItem(key, JSON.stringify(Array.from(playerSet)));
         if(name == localStorage.getItem('playerName')){
-            window.location.href = "http://localhost/home/";
+            window.location.href = "../../home";
         }
     }
     localStorage.setItem(key, JSON.stringify(Array.from(playerSet)));

@@ -82,7 +82,9 @@ function getInitialBoard() {
         // draw the word search
         renderWordSearch(data.puzzle);
         reRenderPlayerlist(data.players);
-      } else {
+      } else if(request.status == 403){
+        window.location.href = "../../home";
+      }else {
         console.log("AJAX Error: " + request.responseText);
       }
     }
