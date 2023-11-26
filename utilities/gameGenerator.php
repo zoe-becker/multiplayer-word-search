@@ -82,7 +82,7 @@
         // update lobby to indicate game has started
         $gameLink = "../" . $instanceDir . "/"; // add extra ../ since clients are in an instance directory
 
-        return $gameLink;
+        return array($gameLink, $puzzle["startTime"]);
     }
 
 ?>
