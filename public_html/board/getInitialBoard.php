@@ -62,7 +62,6 @@
             echo json_encode(array("error" => "The game has not started yet."));
             exit(-1);
         }
-        //************************************************** */
 
         // update puzzle data with player's board retrieval marked and write data back to file
         // ignore for test environment so board doesn't have to be reset every time

@@ -64,29 +64,22 @@
 
         
         date_default_timezone_set("UTC"); // keep timezone consistent
-        //************************************************** */
-        $result = generateGameInstance($lobbyData["theme"], $lobbyData["players"], "multiplayer"); //modified $gameLink to $result
+        $gameLink = generateGameInstance($lobbyData["theme"], $lobbyData["players"], "multiplayer", $settings); 
 
         // check that game creation was successful
-        if (!$result) { //changed from $gamelink to $result
+        if (!$gamelink) {
             echo "game creation failed";
             exit(-1);
         }
 
-        $gameLink = $result["gameLink"];
         $startTime = $result["startTime"];
-        $lobbyData["gameLink"] = $gameLink; // already there
-        $lobbyData["startTime"] = $startTime;
+        $lobbyData["gameLink"] = $gameLink;
 
         // Created the response array with game link and start time
         $response = array(
             "gameLink" => $gameLink,
             "startTime" => $startTime
         );
-
-        http_response_code(200);
-        echo json_encode($response);
-        //********************************************** */
 
          // reset stream to beginning for writing and write back that game has started
         rewind($lobbyStream);
@@ -95,7 +88,7 @@
         // release lock and respond to client
         flock_release($lobbyStream); 
         http_response_code(200);
-        echo $gameLink;
+        echo json_encode($response);
     }
 
     main();
