@@ -108,7 +108,7 @@ function startSplashScreenCountdown() {
   const countdownElement = document.getElementById("countdown");
 
   // fetch the start time from local storage
-  let startTime = parseInt(localStorage.getItem('gameStartTime'), 10);
+  let startTime = parseInt(localStorage.getItem('startTime'), 10);
 
   // if startTime is not a number, fallback to a 5 seconds countdown
   if (isNaN(startTime)) {
@@ -130,6 +130,7 @@ function startSplashScreenCountdown() {
   }
 
   // update the countdown every second
+  countdownElement.textContent = timeLeft;
   const interval = setInterval(() => {
     countdownElement.textContent = timeLeft;
 

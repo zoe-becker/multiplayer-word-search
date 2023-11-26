@@ -21,11 +21,16 @@
         validateLobby($lobbyID, true); // validate lobby exists
 
         $lobbyData = json_decode(flock_read_and_release($lobbyDataPath), true);
+        $startTime = NULL;
+            if(array_key_exists("startTime", $lobbyData)){
+                $startTime = $lobbyData["startTime"];
+            }
 
         $response = array(
             "players" => util_sanitize_players($lobbyData["players"]),
             "gameLink" => $lobbyData["gameLink"],
-            "theme" => $lobbyData["theme"]
+            "theme" => $lobbyData["theme"],
+            "startTime" => $startTime
         );
     
         http_response_code(200);

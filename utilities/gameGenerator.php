@@ -57,6 +57,7 @@
 
         // ask generator make a grid
         $result = exec($command);
+        $startTime = NULL;
 
         // interpret curl result and initialize board
         if ($result) {
@@ -69,7 +70,7 @@
             $puzzle["players"] = $players;
             $puzzle["dbUpdated"] = false;
             $puzzle["gameMode"] = $mode;
-            
+            $startTime = $puzzle["startTime"];
 
             // extract theme data and add it to board data
             $themeData = getThemeData($theme);
@@ -116,7 +117,7 @@
         // update lobby to indicate game has started
         $gameLink = "../" . $instanceDir . "/"; // add extra ../ since clients are in an instance directory
 
-        return array($gameLink, $puzzle["startTime"]);
+        return array($gameLink, $startTime);
     }
 
 ?>
