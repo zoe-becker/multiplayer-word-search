@@ -38,7 +38,7 @@
         );
         
         // create game instance
-        $result = generateGameInstance("timeattack", array($newPlayer), "timeattack", $settings);
+        $result = generateGameInstance("amalgamation", array($newPlayer), "timeattack", $settings);
 
         if (!$result[0]) {
             echo "game creation failed";
