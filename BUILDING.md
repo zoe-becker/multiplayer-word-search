@@ -6,7 +6,7 @@
 3. [Manual deployment](#manual-deployment)
 4. [Creating a development environment](#creating-a-development-environment)
 5. [Setting up and modifying configuration files](#setting-up-and-modifying-configuration-files)
-
+6. [Setting up automatic lobby cleanup](#setting-up-automatic-lobby-cleanup)
 ## General Requirements 
 - Python interpreter >= 3.7 (https://www.python.org/)
 - Apache installation (https://www.apache.org/)
@@ -34,10 +34,10 @@ Deploying with bitbucket pipelines:
     - REMOTE_PUBLIC_HTML_PATH: The complete path to the folder where the word search will be deployed. You probably want to set this to a new empty directory inside the web root.
     - REMOTE_PATH: The complete path to the folder where the backend of the word search will be deployed. For security reasons this should be set to a new empty directory **outside** the web root.
     - REMOTE_CONFIG_DIR_PATH: The complete path to the folder you created above containing the config files.
-    - REMOTE_PYTHON_PATH: The complete path to the python installation where you want to install the generator. This should be the same python environment as the one in envConfig.php. It is recommended that you create a new virtual environment for this purpose*
+    - REMOTE_PYTHON_ACTIVATION_PATH: The complete path to the python activation binary where you want to install the generator. This path is different than the python executable path, this one should end in /activate. It is recommended that you create a new virtual environment for this purpose*
     - REMOTE_USER: The username of the remote user that will be used to install the word search
     - REMOTE_HOST: The web address/host name of the remote server
-4. Our bitbucket pipelines file uses SSH keys for securely logging into the remote server. You should add your SSH key pair under repository settings -> SSH keys. Bitbucket will automatically use this key pair for SSH/SFTP when running the deployment script. For help on SSH keys in Bitbucket Pipelines, see this article: https://support.atlassian.com/bitbucket-cloud/docs/using-ssh-keys-in-bitbucket-pipelines/
+4. Our bitbucket pipelines file uses SSH keys for securely logging into the remote server. You should add your SSH key pair under repository settings -> SSH keys. You may also need to add the remote server to the known host list. Bitbucket will automatically use this key pair for SSH/SFTP when running the deployment script. For help on SSH keys in Bitbucket Pipelines, see this article: https://support.atlassian.com/bitbucket-cloud/docs/using-ssh-keys-in-bitbucket-pipelines/
 5. You're now ready to deploy! From the main repository page, under pipelines, click "Run Pipeline", click on the main branch, and run the deploy-to-remote-host pipeline.
 
 **\*NOTE**: As part of the automatic deployment scripts, the REMOTE_PUBLIC_HTML_PATH and REMOTE_PATH are both cleared to prepare for the new installation. Because of this, you should not place the python virtual environment in either of these folders.
@@ -91,7 +91,7 @@ The word search application makes use of three important configuration files whi
 
 **NOTE:** All paths must not contain any spaces.
 
-**NOTE:** Windows paths are typically written with the backward slash, which can form escape sequences in PHP. It is recommended that you replace all forward slashes in Windows paths with the forward slash (/).
+**NOTE:** Windows paths are typically written with the backward slash, which can form escape sequences in PHP. It is recommended that you replace all backward slashes in Windows paths with the forward slash (/).
 
 ### envConfig.php
 1. Make a copy of the default_envConfig.php and rename it to envConfig.php
@@ -111,3 +111,10 @@ The word search application makes use of three important configuration files whi
 
 ### gameConfig.php
 No modification is necessary to this file, but it contains many constants which you can modify to change the behavior of the application.
+
+## Setting up automatic lobby cleanup
+Included in the repository is a script (utilities/cleanupInstances.php) that will automatically delete old and expired game and lobby instances. This script can be called manually from the command line, or set up to run automatically.
+
+**Linux:** Using cron, the cleanup script can be scheduled to run at regular intervals. An example cron job is shown below. It runs the cleanup script every 30 minutes.
+
+```0,30 * * * * /usr/local/bin/php /home/user123/word-search/utilities/cleanupInstances.php```
