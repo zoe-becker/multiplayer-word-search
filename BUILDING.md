@@ -50,19 +50,21 @@ You will still have to manually import the database  from the database folder in
 You can also manually deploy the repository to either a remote host or your local machine. These steps outline this process.
 
 1. Clone the repository into an intermediary directory.
-2. Move the contents public_html directory into the desired place on the web root.
-3. Create a new directory (preferrably outside the web root) and place the generator, config, and utilities folders into it.
-4. Follow the steps outlined in the section setting up and modifying configuration files in order to create proper configuration files. 
-5. Move the includePath.php file to the directory where you moved the public_html folder contents to in step #2.
-6. Activate the python environment that you declared in the envConfig.php file
-7. cd into the generator directory and run 
+2. Delete the folders public_html/board/testenv and public_html/board/testenvFiles. These are for testing purposes only and should not be available in production environments.
+3. Move the contents public_html directory into the desired place on the web root.
+4. Create a new directory (preferrably outside the web root) and place the generator, config, and utilities folders into it.
+5. Using the config files in the config folder follow the steps outlined in the section setting up and modifying configuration files in order to create proper configuration files. 
+6. Move the includePath.php file to the directory where you moved the public_html folder contents to in step #2.
+7. Activate the python environment that you declared in the envConfig.php file
+8. cd into the generator directory and run 
 
     ```pip install .``` 
     
     This will install the generator on the selected python environment, which is required to generate word searches.
 
-8. Import the database in the database folder into your mySQL installation. For information on how to import an SQL database using phpmyadmin you can refer to this article: https://docs.phpmyadmin.net/en/latest/import_export.html
-9. You can safely delete the remaining files from the repository. They are not needed in a production environment.
+9. Import the database in the database folder into your mySQL installation. For information on how to import an SQL database using phpmyadmin you can refer to this article: https://docs.phpmyadmin.net/en/latest/import_export.html
+
+10. The remaining files from the repository can be safely deleted. They are not needed in a production environment.
 
 After following these steps, the word search should be accessible on your website from wherever it was placed in your webroot.
 ## Creating a development environment
@@ -99,12 +101,13 @@ The word search application makes use of three important configuration files whi
     - For testing environments this will point to the public_html folder in the repository.
     - For deploying this will point to the folder where the public_html contents are being deployed.
 3. Modify the DB_USER and DB_PASSWORD contants to the username and password of the mySQL user that will be accessing the database
+    - For testing environments using Xampp the default username is "root" and the default password is the empty string.
 4. Modify the PYTHON_INTERPRETER_PATH definition to point to the desired python executable to use.
     - It is highly recommended that you make a virtual environment for this purpose. 
 
 ### includePath.php
 1. Copy default_includePath.php and rename it to includePath.php
-2. Modify the "" of the return to point to the path containing the config, generator, and utilities folders.
+2. Modify the "" of the return to point to the directory containing the config, generator, and utilities folders.
     - In testing environments this will be the same as the path to the repository
     - In bitbucket pipeline deployment this is the same as REMOTE_PATH
     - In manual deployment this is the path to the directory containing config, generator, and utiliies
