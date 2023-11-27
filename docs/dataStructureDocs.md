@@ -81,6 +81,7 @@
 ### TimeAttackCreation object
 - link: link to the newly created game
 - accessToken: accessToken for the new player
+- startTime: time the game starts
 # Frontend data structures that backend may expect:
 ### WordInfo object
 - startRow: row number (from 0) of the beginning of the word

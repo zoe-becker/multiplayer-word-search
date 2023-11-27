@@ -14,6 +14,9 @@ define("MULTIPLAYER_DEFAULT_THEME", "Animals"); // any theme in theme folder, fi
 define("MULTIPLAYER_GAME_LEN", 180);
 define("TIMEATTACK_GAME_LEN", 180);
 define("MULTIPLAYER_WORD_BASE_SCORE", 300); // words worth this amount at a minimum in multiplayer
+define("TIMEATTACK_DIFFICULTY", "medium");
+define("TIMEATTACK_GRIDSIZE", "medium");
+define("TIMEATTACK_SHAPE", "square");
 
 // host settings values
 define("GAME_EASY_WORDCOUNT", 8);

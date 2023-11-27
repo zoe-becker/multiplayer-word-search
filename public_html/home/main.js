@@ -63,8 +63,9 @@ function submitTimeAttack() {
           last_line = resp[resp.length - 1];
           data = JSON.parse(last_line);
           localStorage.setItem("accessToken", data.accessToken);
+          localStorage.setItem("startTime", data.startTime);
           //redirect to link
-          window.location.href = data.link[0];
+          window.location.href = data.link;
         } else {
           console.log("AJAX Error: " + request.responseText);
         }
