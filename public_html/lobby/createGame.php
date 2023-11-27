@@ -112,15 +112,8 @@
             exit(-1);
         }
 
-        $startTime = $result[1];
         $lobbyData["gameLink"] = $result[0];
         $lobbyData["startTime"] = $result[1];
-
-        // Created the response array with game link and start time
-        $response = array(
-            "gameLink" => $gameLink,
-            "startTime" => $startTime
-        );
 
          // reset stream to beginning for writing and write back that game has started
         rewind($lobbyStream);
