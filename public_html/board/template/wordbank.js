@@ -82,9 +82,9 @@ function getInitialBoard() {
         // draw the word search
         renderWordSearch(data.puzzle);
         reRenderPlayerlist(data.players);
-      } else if(request.status == 403){
+      } else if (request.status == 403) {
         window.location.href = "../../home";
-      }else {
+      } else {
         console.log("AJAX Error: " + request.responseText);
       }
     }
@@ -110,11 +110,13 @@ function startSplashScreenCountdown() {
   const countdownElement = document.getElementById("countdown");
 
   // fetch the start time from local storage
-  let startTime = parseInt(localStorage.getItem('startTime'), 10);
+  let startTime = parseInt(localStorage.getItem("startTime"), 10);
 
   // if startTime is not a number, fallback to a 5 seconds countdown
   if (isNaN(startTime)) {
-    console.error('Invalid startTime from local storage, falling back to a 5 second countdown');
+    console.error(
+      "Invalid startTime from local storage, falling back to a 5 second countdown"
+    );
     startTime = Math.floor(Date.now() / 1000) + 5;
   }
 
@@ -125,8 +127,8 @@ function startSplashScreenCountdown() {
 
   // this should never happen, but just in case, set a fallback
   if (timeLeft < 0) {
-    console.error('Time left is less than zero, starting the game immediately');
-    splashScreen.style.display = 'none';
+    console.error("Time left is less than zero, starting the game immediately");
+    splashScreen.style.display = "none";
     getInitialBoard(); // start the game immediately
     return; // exit the function
   }
@@ -138,7 +140,7 @@ function startSplashScreenCountdown() {
 
     if (timeLeft <= 0) {
       clearInterval(interval);
-      splashScreen.style.display = 'none';
+      splashScreen.style.display = "none";
 
       getInitialBoard(); // start the game
     }
@@ -146,7 +148,6 @@ function startSplashScreenCountdown() {
     timeLeft--;
   }, 1000);
 }
-
 
 // function to get themes and its features
 function renderTheme(dataTheme) {
@@ -177,8 +178,8 @@ function renderTheme(dataTheme) {
     }
   }
 
+  // set the highlight colors to theme colors :)
   if (dataTheme.highlightColors) {
-    console.log(dataTheme.highlightColors);
     highlightColors = dataTheme.highlightColors;
   }
 }
@@ -221,14 +222,14 @@ function updateWordsFoundWordbank(word) {
   const wordBankList = document.getElementById("wordBankList");
   const wordBankItems = Array.from(wordBankList.getElementsByTagName("li"));
 
-  wordBankItems.forEach(element => {
+  wordBankItems.forEach((element) => {
     if (element.textContent == word) {
       element.style.textDecoration = "line-through";
     }
   });
 }
 
-function updateBoard(){
+function updateBoard() {
   let request = new XMLHttpRequest();
 
   request.onreadystatechange = function () {
@@ -236,14 +237,14 @@ function updateBoard(){
       if (request.status == 200) {
         data = JSON.parse(request.responseText);
         //this checks to see if we have already found this word
-        Object.keys(data.foundWords).forEach(key => {
-          if(!foundWords.includes(key)){
+        Object.keys(data.foundWords).forEach((key) => {
+          if (!foundWords.includes(key)) {
             drawWord(key, data.foundWords[key]);
-            foundWords.push(key)
+            foundWords.push(key);
             updateWordsFoundWordbank(key);
           }
         });
-        
+
         reRenderPlayerlist(data.players);
         if (data.expired == true) {
           //handle game end
@@ -261,16 +262,16 @@ function updateBoard(){
           // add slight delay from game end to answers / leaderboard shown
           setTimeout(() => {
             // show unfound words
-            Object.keys(data.key).forEach(key => {
+            Object.keys(data.key).forEach((key) => {
               if (!foundWords.includes(key)) {
                 drawWord(key, data.key[key]);
                 foundWords.push(key);
               }
-            })
+            });
 
             //winners get confetti, losers cry
-            toggleScreen('final-results-screen','show')
-            if(data.players[0].name === localStorage.getItem('playerName')){
+            toggleScreen("final-results-screen", "show");
+            if (data.players[0].name === localStorage.getItem("playerName")) {
               winnerConfetti();
             }
           }, 3000);
@@ -290,14 +291,14 @@ function updateBoard(){
 
 //draws word on board based on word data
 //will assgin random color
-function drawWord(word, foundWordinfo){
+function drawWord(word, foundWordinfo) {
   let startRow = foundWordinfo.start_row;
   let startCol = foundWordinfo.start_col;
   let rowIdxIncrement = 0;
   let colIdxIncrement = 0;
   let wordColor = randomColor();
 
-  switch(foundWordinfo.direction) {
+  switch (foundWordinfo.direction) {
     case "N":
       rowIdxIncrement--;
       break;
@@ -328,9 +329,11 @@ function drawWord(word, foundWordinfo){
       break;
   }
 
-  console.log(rowIdxIncrement, colIdxIncrement);
   for (let i = 0; i < word.length; i++) {
-    cell = cellMatrix[startRow + i * rowIdxIncrement][startCol + i * colIdxIncrement];
+    cell =
+      cellMatrix[startRow + i * rowIdxIncrement][
+        startCol + i * colIdxIncrement
+      ];
     cell.style.backgroundColor = wordColor;
     cell.classList.add("found");
   }
@@ -339,7 +342,7 @@ function drawWord(word, foundWordinfo){
 function renderWordSearch(puzzle) {
   let table = document.createElement("table");
   const container = document.getElementById("wordsearch");
-  container.appendChild(table); // Drew the main table node on the document
+  container.appendChild(table); // Draw the main table node on the document
 
   puzzle.forEach(function (row, rIdx) {
     let tr = table.insertRow(); //Create a new row
@@ -349,26 +352,31 @@ function renderWordSearch(puzzle) {
 
       matrixRow.push(td); // add cell to internal matrix
       td.setAttribute("data-content", column);
-      td.setAttribute("cellIndex", JSON.stringify({"row": rIdx, "col": cIdx}));
+      td.setAttribute("cellIndex", JSON.stringify({ row: rIdx, col: cIdx }));
       // cell hover is set to a random color
       td.addEventListener("mouseenter", (event) => {
+        // as long as the letter is not part of a found word
         if (!td.classList.contains("found") && !mouseIsPressed) {
-          td.style.backgroundColor = randomColor();
-          td.style.fill = randomColor();
+          // if cell is not empty
+          if (td.getAttribute("data-content") !== "") {
+            td.style.backgroundColor = randomColor();
+            td.style.fill = randomColor();
+        }
+        // when mouse is pressed start the selection of the word
         }
         if (mouseIsPressed) {
-          if (selectedCells.length < 2) {
+          if (selectedCells.length < 2 && td.getAttribute("data-content") !== "") {
             selectedCells.push(td);
             if (selectedCells.length === 2) {
               direction = getDirection(selectedCells[0], selectedCells[1]);
             }
+            // check if the next cell selected is in the same direction
           } else {
             const newDirection = getDirection(
               selectedCells[selectedCells.length - 1],
               td
             );
             if (newDirection === direction) {
-              // highlightSelectedCells();
               selectedCells.push(td);
             }
           }
@@ -377,17 +385,22 @@ function renderWordSearch(puzzle) {
       });
 
       td.addEventListener("mousedown", (event) => {
-        mouseIsPressed = true;
-        selectedCells = [td]; // Start new selection
+        if (td.getAttribute("data-content") !== ""){
+          mouseIsPressed = true;
+          selectedCells = [td]; // Start new selection
+        }
+        
       });
 
       document.addEventListener("mouseup", function () {
         mouseIsPressed = false;
-        let selectedWord = selectedCells.map((cell) => cell.getAttribute("data-content")).join(""); // concatenates the letters in the selected cells
+        let selectedWord = selectedCells
+          .map((cell) => cell.getAttribute("data-content"))
+          .join(""); // concatenates the letters in the selected cells
         checkWordInWordBank(selectedWord);
       });
 
-      // reset the background to white once the cursor leaves the cell
+      // reset the background to transparent once the cursor leaves the cell
       td.addEventListener("mouseleave", (event) => {
         if (!selectedCells.includes(td) && !td.classList.contains("found")) {
           td.style.backgroundColor = "transparent";
@@ -400,6 +413,7 @@ function renderWordSearch(puzzle) {
   });
 }
 
+// Determine the direction of the highlight(in order to "lock" direction)
 function getDirection(cell1, cell2) {
   // Calculate the direction based on the difference in row and column indexes
   const rowDiff = cell2.parentNode.rowIndex - cell1.parentNode.rowIndex;
@@ -427,6 +441,7 @@ function getDirection(cell1, cell2) {
 
 function highlightSelectedCells() {
   selectedCells.forEach((cell) => {
+    // if cell is not part of a found word, should be highlightable
     if (!cell.classList.contains("found")) {
       cell.style.backgroundColor = randomColor();
       cell.style.fill = randomColor();
@@ -436,6 +451,7 @@ function highlightSelectedCells() {
 
 function unhighlightCells(cells) {
   cells.forEach((cell) => {
+    // only unhighlight when the cell is not part of a found word
     if (!cell.classList.contains("found")) {
       cell.style.backgroundColor = "transparent";
       cell.style.fill = "transparent";
@@ -449,20 +465,21 @@ function checkWordInWordBank(word) {
   let wordColor = randomColor();
   let wordFound = false;
   let queryCells = Array.from(selectedCells);
-  
+
   for (let i = 0; i < wordBankItems.length; i++) {
     if (wordBankItems[i].textContent === word && !foundWords.includes(word)) {
       let validateRequest = new XMLHttpRequest();
       let wordIdx = JSON.parse(queryCells[0].getAttribute("cellIndex"));
-      let wordinfo = { // required header
-        "direction": direction,
-        "startRow": wordIdx.row,
-        "startCol": wordIdx.col,
-        "word": word
-      }
+      let wordinfo = {
+        // required header
+        direction: direction,
+        startRow: wordIdx.row,
+        startCol: wordIdx.col,
+        word: word,
+      };
 
       wordFound = true; // hold the selected cells as highlighted pending validation
-      validateRequest.onreadystatechange = function() {
+      validateRequest.onreadystatechange = function () {
         if (validateRequest.readyState == 4) {
           if (validateRequest.status == 200) {
             // word found, make confetti and set cell to found and solid color
@@ -470,17 +487,17 @@ function checkWordInWordBank(word) {
             let rect = lastCell.getBoundingClientRect();
             let x = (rect.left + rect.right) / 2 / window.innerWidth;
             let y = (rect.top + rect.bottom) / 2 / window.innerHeight;
-    
+
             // Set the same color for all cells in the found word
             queryCells.forEach((cell) => {
               cell.style.backgroundColor = wordColor;
               cell.style.fill = wordColor;
             });
-    
+
             wordBankItems[i].style.textDecoration = "line-through"; // crosses out words when found
             triggerConfetti(x, y);
-          
-    
+
+            // set each letter in the word to found
             queryCells.forEach((cell) => {
               cell.classList.add("found");
             });
@@ -492,11 +509,14 @@ function checkWordInWordBank(word) {
             unhighlightCells(queryCells);
           }
         }
-      }
-      
+      };
+
       // create request to server for word validation
       validateRequest.open("POST", "../validateWord.php");
-      validateRequest.setRequestHeader("token", localStorage.getItem("accessToken"));
+      validateRequest.setRequestHeader(
+        "token",
+        localStorage.getItem("accessToken")
+      );
       validateRequest.setRequestHeader("game", getBoardCode());
       validateRequest.setRequestHeader("wordinfo", JSON.stringify(wordinfo));
       validateRequest.send();
@@ -504,7 +524,8 @@ function checkWordInWordBank(word) {
     }
   }
 
-  if (!wordFound) { // unhighlight immediately if not a word by local computation
+  if (!wordFound) {
+    // unhighlight immediately if not a word by local computation
     unhighlightCells(queryCells);
   }
 
@@ -525,7 +546,9 @@ function triggerConfetti(x, y) {
   pop.play();
 }
 
+// Generate Random colors for letter/cell highlighting
 function randomColor() {
+  // if theme is selected, use preset colors
   if (highlightColors) {
     const randomIndex = Math.floor(Math.random() * highlightColors.length);
     return highlightColors[randomIndex];
@@ -534,29 +557,31 @@ function randomColor() {
     let minValue = 150; // Minimum RGB value to avoid being too close to black (adjust as needed)
     let maxValue = 255; // Maximum RGB value to avoid being too close to white (adjust as needed)
     for (let i = 0; i < 3; i++) {
-      // color.push(Math.floor(Math.random() * 225) + 50);
       color.push(
         Math.floor(Math.random() * (maxValue - minValue + 1) + minValue)
       );
     }
-
     return "rgb(" + color.join(", ") + ")";
   }
 }
+
 //HIDING OR SHOWING SCREENS
 function toggleScreen(screenId, action) {
   var screen = document.getElementById(screenId);
   if (screen) {
-      if (action === 'show') {
-          screen.classList.remove('hidden');
-      } else if (action === 'hide') {
-          screen.classList.add('hidden');
-      }
+    if (action === "show") {
+      screen.classList.remove("hidden");
+    } else if (action === "hide") {
+      screen.classList.add("hidden");
+    }
   }
 }
-function populateFinalResults(players){
+
+function populateFinalResults(players) {
   var rank = 1;
-  var finalResultsPlayerList = document.getElementById('final-results-player-list');
+  var finalResultsPlayerList = document.getElementById(
+    "final-results-player-list"
+  );
   players.forEach((player) => {
     //create a new final-player-box element
     var finalPlayerBox = document.createElement("div");
@@ -566,7 +591,7 @@ function populateFinalResults(players){
     var finalPlayerRank = document.createElement("div");
     finalPlayerRank.classList.add("final-player-rank");
     var rankParagraph = document.createElement("p1");
-    rankParagraph.textContent = rank +".";
+    rankParagraph.textContent = rank + ".";
     finalPlayerRank.appendChild(rankParagraph);
 
     //create a final-player-info element with the player's name and score
@@ -590,11 +615,12 @@ function populateFinalResults(players){
     rank++;
   });
 }
-function winnerConfetti(){
-  var end = Date.now() + (15 * 1000);
+
+function winnerConfetti() {
+  var end = Date.now() + 15 * 1000;
 
   // go Buckeyes!
-  var colors = ['#bb0000', '#ffffff'];
+  var colors = ["#bb0000", "#ffffff"];
 
   (function frame() {
     confetti({
@@ -602,33 +628,34 @@ function winnerConfetti(){
       angle: 60,
       spread: 55,
       origin: { x: 0 },
-      colors: colors
+      colors: colors,
     });
     confetti({
       particleCount: 2,
       angle: 120,
       spread: 55,
       origin: { x: 1 },
-      colors: colors
+      colors: colors,
     });
 
     if (Date.now() < end) {
       requestAnimationFrame(frame);
     }
-  }());
+  })();
 }
-function homeButtonFunctionality(){
+
+function homeButtonFunctionality() {
   var homeButton = document.getElementById("home-button");
 
-  homeButton.addEventListener('mouseover', function() {
-    homeButton.classList.add('brighten');
+  homeButton.addEventListener("mouseover", function () {
+    homeButton.classList.add("brighten");
   });
-  
-  homeButton.addEventListener('mouseout', function() {
-    homeButton.classList.remove('brighten');
+
+  homeButton.addEventListener("mouseout", function () {
+    homeButton.classList.remove("brighten");
   });
-  homeButton.addEventListener("click", function() {
-    isHomeButtonClicked = true;// set flag to true
+  homeButton.addEventListener("click", function () {
+    isHomeButtonClicked = true; // set flag to true
     window.location.href = "../../home/";
   });
 }
@@ -636,17 +663,16 @@ function homeButtonFunctionality(){
 function closeModal() {
   var closeButton = document.getElementById("close-button");
 
-  closeButton.addEventListener('mouseover', function() {
-    closeButton.classList.add('brighten');
+  closeButton.addEventListener("mouseover", function () {
+    closeButton.classList.add("brighten");
   });
 
-  closeButton.addEventListener('mouseout', function() {
-    closeButton.classList.remove('brighten');
+  closeButton.addEventListener("mouseout", function () {
+    closeButton.classList.remove("brighten");
   });
 
-  closeButton.addEventListener("click", function() {
-    toggleScreen('final-results-screen','hide');
+  closeButton.addEventListener("click", function () {
+    toggleScreen("final-results-screen", "hide");
   });
   //toggleScreen('final-results-screen','hide');
-
 }

@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="style.css">
     <script src="main.js"></script>
     </head>
-    <!-- <link rel="stylesheet" href="homepage.css"> -->
    
     <body>
         <div class="gif">
@@ -69,7 +68,6 @@
             <div class="leaderboard">
                 <button onclick="location.href='../leaderboard'" type="button"><span> </span> Leaderboard</button>
             </div>
-            <!-- <button onclick="requestBoard()">Play</button> -->
             
         </div>
           
