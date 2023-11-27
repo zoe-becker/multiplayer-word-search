@@ -23,9 +23,9 @@ define("GAME_EASY_WORDCOUNT", 8);
 define("GAME_MEDIUM_WORDCOUNT", 12);
 define("GAME_HARD_WORDCOUNT", 16);
 define("GAME_SUPPORTED_SHAPES", ["heart", "square", "star"]);
-define("GAME_SMALL_GRID_SIZE", 5);
-define("GAME_MEDIUM_GRID_SIZE", 25);
-define("GAME_LARGE_GRID_SIZE", 35);
+define("GAME_SMALL_GRID_SIZE", 12);
+define("GAME_MEDIUM_GRID_SIZE", 20);
+define("GAME_LARGE_GRID_SIZE", 28);
 
 
 // testenv specific constants
