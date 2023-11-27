@@ -31,18 +31,25 @@
             "score" => 0
         );
 
+        $settings = array(
+            "size" => TIMEATTACK_GRIDSIZE,
+            "difficulty" => TIMEATTACK_DIFFICULTY,
+            "shape" => TIMEATTACK_SHAPE
+        );
+        
         // create game instance
-        $gameLink = generateGameInstance("timeattack", array($newPlayer), "timeattack");
+        $result = generateGameInstance("timeattack", array($newPlayer), "timeattack", $settings);
 
-        if (!$gameLink) {
+        if (!$result[0]) {
             echo "game creation failed";
             exit(-1);
         }
 
         // echo response
         $response = array(
-            "link" => $gameLink,
-            "accessToken" => $newPlayer["accessToken"]
+            "link" => $result[0],
+            "accessToken" => $newPlayer["accessToken"],
+            "startTime" => $result[1]
         );
 
         echo json_encode($response);
