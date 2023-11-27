@@ -7,7 +7,6 @@
 // DB_PASSWORD - database password
 // PYTHON_INTERPRETER_PATH - must be >=3.7
 // PUBLIC_HTML_PATH - path to public_html directory of the word search
-// GENERATOR_PATH - path to the generator directory of the word search
 
 // THIS FILE MUST BE RENAMED TO "envConfig.php" AFTER FILLING OUT REQUIRED FIELDS
 

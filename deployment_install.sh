@@ -1,4 +1,4 @@
-source $REMOTE_PYTHON_PATH
+source $REMOTE_PYTHON_ACTIVATION_PATH
 cd "$REMOTE_PATH/generator"
 pip install . 
 
