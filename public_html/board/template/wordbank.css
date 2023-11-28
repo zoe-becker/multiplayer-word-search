@@ -202,6 +202,10 @@ table td::before {
     overflow-y: auto;
     overflow-x: hidden;
 }
+#final-results-player-list {
+    max-height: 50vh;
+    overflow-y: auto;
+}
 .final-player-box{
     display: flex;
     flex-direction: row;
@@ -267,7 +271,7 @@ nav{
     justify-content: flex-start;
     padding-top: 10px;
     padding-left: 10px;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+    position: fixed;
 }
 
 nav ul li{

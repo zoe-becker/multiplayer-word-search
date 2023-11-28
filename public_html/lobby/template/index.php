@@ -100,16 +100,14 @@
                 <button id="cancel-kick-button">NO! Don't kick them!</button>
             </div> 
         </div>
-
-        <div id="nav-container">
-            <nav> 
+        <nav id="homebutton"> 
                 <ul> 
                     <li>
                         <a href="../../home"><i class="fa fa-home"></i>Home</a>
                     </li>
                 </ul>
-            </nav>
-       
+        </nav>
+        <div id="nav-container">
         <div id = "outer-lobby-container">
             <div id="lobby-container">
                 <div id="lobby-title">

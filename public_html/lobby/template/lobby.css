@@ -1,7 +1,5 @@
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
     margin: 0;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/lobbybgoption1.png'); /* Add linear gradient for darkness */
@@ -398,3 +396,6 @@ nav ul li a{
     white-space: nowrap;
   }
   
+  #homebutton {
+    position: fixed;
+  }
