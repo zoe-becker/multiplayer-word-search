@@ -27,4 +27,7 @@ define ("DB_OPTS", [
 
 // Python config
 define("PYTHON_INTERPRETER_PATH", ""); // MUST SET THIS TO PYTHON >=3.7 EXECUTABLE PATH
+
+// path to word search public_html directory from web root
+define("PUBLIC_HTML_ROOT", explode(realpath(PUBLIC_HTML_PATH), realpath($_SERVER["DOCUMENT_ROOT"]))[1]);
 ?>

@@ -68,10 +68,10 @@ body {
     content: '';
     height: 3px;
     width: 0;
-    background: #5a8668;
+    background: #496793;
     position: absolute;
     left: 0;
-    bottom: -10px;
+    bottom: 0px;
     transition: 0.5s;
 }
 

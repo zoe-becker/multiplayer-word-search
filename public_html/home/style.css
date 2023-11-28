@@ -63,6 +63,13 @@ nav ul li a{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    display: flex;
+    justify-content: center; /* Centers the buttons horizontally */
+    gap: 20px; /* Adjust the space between the buttons */
+    flex-direction: row;
+    flex-wrap: wrap; /* Allows items to wrap as needed */
+    margin-top: 20px;
 }
 
 .gif h1{
@@ -70,20 +77,21 @@ nav ul li a{
     justify-content: center;
     align-items: center;
     margin: 50px auto;
-    width: 380px;
     margin-top: 30px;
     margin-bottom: 100px;
     font-family: cursive;
     color: white;
+    text-align: center;
 
 }
 
+
 .gif button{
     cursor: pointer;
-    position: absolute;
+    /* position: absolute; */
     transform: translateY(0%);
     text-align: center;
-    font-size: 25px;
+    font-size: 22px;
     font-family: cursive;
     color: black;
     padding: 6px 15px;
@@ -97,12 +105,54 @@ nav ul li a{
     position: relative;
     overflow:hidden;
     width: fit-content;
+
+    position: static; /* If buttons are absolutely positioned, change this to static */
 }
 
-.timeAttack, .create-game, .leaderboard{
-    display:flex;
+
+.timeAttack{
+    display: flex;
+    justify-content: space-around; /* Distributes space between the options */
+    align-items: start; /* Aligns items to the top */
+    gap: 10px;
+    /* flex-direction: column; */
+
+    flex:1;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+}
+
+.create-game{
+    display: flex;
+    flex-direction: column; /* Stack the h2 and button vertically */
+    align-items: center; /* Center the items horizontally */
+    gap: 10px;
+    flex:1;
+    align-items: center;
+}
+
+.timeAttack h2{
+    font-size: 45px;
+    font-family: cursive;
+    color: white;
+    display: flex;
+    justify-content: center; /* Centers the headers horizontally */
+    gap: 300px; /* Adjust the space between the headers */
+    /* margin-bottom: 50px; */
+}
+
+.create-game h2{
+    font-size: 45px;
+    font-family: cursive;
+    color: white;
+    display: flex;
+    justify-content: center; /* Centers the headers horizontally */
+    gap: 300px; /* Adjust the space between the headers */
+}
+
+.timeAttack button{
+    flex-direction: column;
+    align-items: center;
 }
 
 .buttons .info-button{
@@ -141,6 +191,7 @@ span{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: -10px;
 }
 
 input[type=text]{
@@ -180,9 +231,48 @@ input[type=text]{
     flex-direction: column;
 }
 
+
+#time-attack-content, #time-attack-user-content h3{
+    font-size: 35px;
+}
+
+
+#time-attack-content, #time-attack-user-content h2{
+    font-size: 20px;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+
+#time-attack-content, #time-attack-user-content p{
+    margin-top: 8px;
+    text-align: center;
+
+}
+
 #time-attack-screen.hidden, 
 #time-attack-user-screen.hidden
 {
     display: none;
 }
   
+#mode-div {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+}
+
+.time-attack-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#gameForm {
+    display: flex;
+    width: 350px;
+    align-items: center;
+}
+#formholder {
+    display: flex;
+    align-items: center;
+}

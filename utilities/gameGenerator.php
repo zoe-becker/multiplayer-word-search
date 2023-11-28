@@ -5,18 +5,21 @@
     require __DIR__ . "/themeFetcher.php";
 
     $GENERATOR_PATH = __DIR__ . "/../generator";
-    $GAME_DIR = "../board";
-    $INSTANCE_TEMPLATE_DIR = $GAME_DIR . "/template";
+    $GAME_REL_DIR = "/board"; // game directory relative to public_html
+    $GAME_ABS_DIR = PUBLIC_HTML_PATH . $GAME_REL_DIR;
+    $INSTANCE_TEMPLATE_DIR = $GAME_ABS_DIR . "/template";
 
     // calls the generator and returns a GamePuzzle object
     // parameters:
     // $theme: the word search theme to generate from
     // $players: the list of players to populate the GamePuzzle object with
     // $mode: the game mode to use ("multiplayer", "timeattack")
-    // 
-    // returns: the game link to the newly created instance on success, false otherwise
+    // $settings: associative array of settings, should contain the same key/values as a GameSettings
+    // object
+    // returns: an array of two elements, the first is the client useable link to the new game instance,
+    // and the second is the starting time of the game
     function generateGameInstance($theme, $players, $mode, $settings) {
-        global $GAME_DIR, $INSTANCE_TEMPLATE_DIR, $GENERATOR_PATH;
+        global $GAME_ABS_DIR, $GAME_REL_DIR, $INSTANCE_TEMPLATE_DIR, $GENERATOR_PATH;
 
         $themePath = getThemeFilePath($theme);
         $difficulty = $settings["difficulty"];
@@ -87,7 +90,7 @@
 
         /* create new game instance */
         $instanceID = "ws-" . uniqid();
-        $instanceDir = $GAME_DIR . "/" . $instanceID;
+        $instanceDir = $GAME_ABS_DIR . "/" . $instanceID;
 
         // create instance folder
         if (!mkdir($instanceDir)) {
@@ -114,8 +117,8 @@
         file_put_contents($instanceDir . "/" . GAME_DATAFILE_NAME, $puzzle);
         chmod($instanceDir . "/" . GAME_DATAFILE_NAME, 0660);
 
-        // update lobby to indicate game has started
-        $gameLink = "../" . $instanceDir . "/"; // add extra ../ since clients are in an instance directory
+        // create client useable link
+        $gameLink =  PUBLIC_HTML_ROOT . $GAME_REL_DIR . "/" . $instanceID . "/"; // add extra ../ since clients are in an instance directory
 
         return array($gameLink, $startTime);
     }
