@@ -366,9 +366,12 @@ function renderWordSearch(puzzle) {
         }
         if (mouseIsPressed) {
           if (selectedCells.length < 2 && td.getAttribute("data-content") !== "") {
-            selectedCells.push(td);
-            if (selectedCells.length === 2) {
+            if (selectedCells.length === 0) {
+              selectedCells.push(td);
+            } else if (selectedCells.length === 1 && getDirection(selectedCells[0], td) !== null) {
+              selectedCells.push(td);
               direction = getDirection(selectedCells[0], selectedCells[1]);
+              console.log(direction);
             }
             // check if the next cell selected is in the same direction
           } else {
@@ -442,7 +445,7 @@ function getDirection(cell1, cell2) {
 function highlightSelectedCells() {
   selectedCells.forEach((cell) => {
     // if cell is not part of a found word, should be highlightable
-    if (!cell.classList.contains("found")) {
+    if (!cell.classList.contains("found") && cell.getAttribute("data-content") !== "") {
       cell.style.backgroundColor = randomColor();
       cell.style.fill = randomColor();
     }
