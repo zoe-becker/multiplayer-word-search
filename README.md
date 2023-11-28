@@ -6,13 +6,13 @@ Anticipated finish date November 30th, 2023.
 Demo running latest version of main branch can be found here: https://verygoodbadthing.com/word-search-generator
 
 ## Table of Contents
-* [The Team 🤝](#TheTem) 
-* [What We're Creating 🧰](#WhatWe'reCreating) 
-* [Technologies Used 🧑‍💻](#TechnologiesUsed) 
-* [Who Are We Doing This For? 🫵](#WhoAreWeDoingThisFor?) 
-* [Why Are We Doing This? 🤷](#WhyAreWeDoingThis?) 
-* [Features 🎁](#Features) 
-* [Screenshots 🖼](#Screenshots) 
+* [The Team 🤝](#the-team-🤝) 
+* [What We're Creating 🧰](#what-were-creating-🧰) 
+* [Technologies Used 🧑‍💻](#technologies-used-🧑‍💻) 
+* [Who Are We Doing This For? 🫵](#who-are-we-doing-this-for-🫵)
+* [Why Are We Doing This? 🤷](#why-are-we-doing-this-🤷)
+* [Features 🎁](#features-🎁)
+* [Screenshots 🖼]()
 * [Installation 🛠](#Installation) 
 * [Usage 🧩](#Usage) 
 * [Sprint 1 🏃](#Sprint1) 
@@ -36,10 +36,15 @@ We're creating a competitive word search web app.
 ## Technologies Used 🧑‍💻
 - [PHP](https://www.php.net/) 
 - [Python](https://www.python.org/) 
+- [MySQL](https://www.mysql.com/)
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) 
 - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) 
 - [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) 
-- Forked from: https://github.com/joshbduncan/word-search-generator 
+- Word search generation algorithm from https://github.com/joshbduncan/word-search-generator 
+- Confetti from https://github.com/catdad/canvas-confetti
+- Certain page layouts powered with HTMX https://htmx.org/
+- Certain page layouts powered with HyperScript https://hyperscript.org/
+
 
 ## Who Are We Doing This For? 🫵
 We're doing this for casual fans of word searches who want a competitive experience.

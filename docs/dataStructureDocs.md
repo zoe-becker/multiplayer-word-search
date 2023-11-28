@@ -1,5 +1,5 @@
 # Format of the various backend data structures
-### Word search instance game file (puzzle.json)
+### GamePuzzle object
 - puzzle: NxN array of letters, organized by row, where N is the size of the grid
 - words: array of all the words in the puzzle
 - key: dictionary of all words mapped to solution objects
@@ -37,13 +37,13 @@
     - NOTE not full path, use a global variable for the themeAssets directory
 ### Lobby instance file (lobbyData.json)
 - instanceExpiration: UTC timestamp of when the instance is eligible to be deleted from the server
-- players: same as players in puzzle.json
+- players: same as players in GamePuzzle object
 - gameLink: false if game not started, otherwise the relative path from the lobby instance to the game instance
 - theme: currently selected theme (in string form)
 
 # Response objects that are returned by backend scripts:
 ### PuzzleStructure object
-- puzzle, words, startTime, expireTime, foundWords, theme, and players keys from puzzle.json above
+- puzzle, words, startTime, expireTime, foundWords, theme, and players keys from GamePuzzle above
     - NOTE: player objects in the players list only contain name, score, and isHost keys
 
 - puzzle: NxN array of letters, organized by row, where N is the size of the grid
@@ -60,13 +60,17 @@
     - NOTE: does not contain the words key
 - players: array of player objects (see backendDataStructures for details) representing the players in that lobby
     - NOTE: player objects in the players list only contain name, score, and isHost keys
+- gameMode: game mode will either be timeAttack or multiplayer
+- themeName: name of theme is taken LobbyData object
 ### PuzzleState object
 - expired: whether the game timer is up (true/false)
 - foundWords: dictionary of words found so far mapped to foundWord objects
-- players: array of player objects (see puzzle.json for details) representing the players in that lobby
+- players: array of player objects (see GamePuzzle for details) representing the players in that lobby
     - NOTE: player objects in the players list only contain name, score, and isHost keys
+- key: same as key defined in GamePuzzle object
+    - NOTE: only present if expired key is true
 ### LobbyData object
-- players: array of player objects (see puzzle.json for details) representing the players in that lobby
+- players: array of player objects (see GamePuzzle for details) representing the players in that lobby
     - NOTE: player objects in the players list only contain name, score, and isHost keys
 - gameLink: false if game not started, otherwise the relative path from the lobby instance to the game instance
 - theme: currently selected theme (in string form)
@@ -74,9 +78,17 @@
 - accessToken: access token of the newly created player
 - isHost: true if the player is the host, false otherwise
 - themes (only present if isHost is true): array of available themes
+### TimeAttackCreation object
+- link: link to the newly created game
+- accessToken: accessToken for the new player
+- startTime: time the game starts
 # Frontend data structures that backend may expect:
 ### WordInfo object
 - startRow: row number (from 0) of the beginning of the word
 - startCol: column number (from 0) of the beginning of the word
 - direction: direction of the word (N, E, S, W, NE, SE, NW, SW)
 - word: word that was found
+### GameSettings object
+- difficulty: difficulty of the board to create (accepted values: easy, medium, hard)
+- size: size of the board to create (accepted values: small, medium, large)
+- shape: shape of the board to create (supported shapes: heart, square, star)

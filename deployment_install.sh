@@ -1,7 +1,7 @@
-mv tempAppHolder/* /home/j1jjujqhggs6/public_html/word-search-generator/generator
-mv tempAppHolder/.htaccess /home/j1jjujqhggs6/public_html/word-search-generator/generator
-rm tempAppHolder -r
-source /home/j1jjujqhggs6/virtualenv/public_html/word-search-generator/generator/3.7/bin/activate
-cd /home/j1jjujqhggs6/public_html/word-search-generator/generator 
+source $REMOTE_PYTHON_ACTIVATION_PATH
+cd "$REMOTE_PATH/generator"
 pip install . 
-touch tmp/restart.txt
+
+cd ~
+cp $REMOTE_CONFIG_DIR_PATH/* $REMOTE_PATH/config
+mv $REMOTE_PATH/config/includePath.php $REMOTE_PUBLIC_HTML_PATH

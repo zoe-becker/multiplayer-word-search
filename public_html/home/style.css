@@ -1,0 +1,278 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.gif{
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('bgImage.jpeg');
+    background-size: cover;
+    background-color: #AEC6CF;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    padding:0;
+    margin:0;
+}
+
+nav{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+
+.logo{
+    height: 50px;
+    width: 50px;
+}
+
+nav ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 10px 40px;
+    position: relative;
+}
+
+nav ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #5a8668;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+nav ul li:hover::after{
+    width: 100%;
+}
+
+nav ul li a{
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: cursive;
+    font-size: 17;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    display: flex;
+    justify-content: center; /* Centers the buttons horizontally */
+    gap: 20px; /* Adjust the space between the buttons */
+    flex-direction: row;
+    flex-wrap: wrap; /* Allows items to wrap as needed */
+    margin-top: 20px;
+}
+
+.gif h1{
+    font-size: 75px;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    margin-top: 30px;
+    margin-bottom: 100px;
+    font-family: cursive;
+    color: white;
+    text-align: center;
+
+}
+
+
+.gif button{
+    cursor: pointer;
+    /* position: absolute; */
+    transform: translateY(0%);
+    text-align: center;
+    font-size: 22px;
+    font-family: cursive;
+    color: black;
+    padding: 6px 15px;
+    margin: 20px 10px;
+    border-radius: 25px;
+    border: 4px solid #5a8668;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow:hidden;
+    width: fit-content;
+
+    position: static; /* If buttons are absolutely positioned, change this to static */
+}
+
+
+.timeAttack{
+    display: flex;
+    justify-content: space-around; /* Distributes space between the options */
+    align-items: start; /* Aligns items to the top */
+    gap: 10px;
+    /* flex-direction: column; */
+
+    flex:1;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-game{
+    display: flex;
+    flex-direction: column; /* Stack the h2 and button vertically */
+    align-items: center; /* Center the items horizontally */
+    gap: 10px;
+    flex:1;
+    align-items: center;
+}
+
+.timeAttack h2{
+    font-size: 45px;
+    font-family: cursive;
+    color: white;
+    display: flex;
+    justify-content: center; /* Centers the headers horizontally */
+    gap: 300px; /* Adjust the space between the headers */
+    /* margin-bottom: 50px; */
+}
+
+.create-game h2{
+    font-size: 45px;
+    font-family: cursive;
+    color: white;
+    display: flex;
+    justify-content: center; /* Centers the headers horizontally */
+    gap: 300px; /* Adjust the space between the headers */
+}
+
+.timeAttack button{
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons .info-button{
+    padding: 6px 10px;
+    margin: 15px 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+span{
+    background: #5a8668;
+    height: 100%;
+    width: 0;
+    border-radius: 0px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5s;
+}
+
+.gif button:hover span{
+    width: 100%;
+}
+
+.gif button:hover{
+    border: none;
+}
+
+.timeAttack, form{
+    display:flex;
+    align-items: center;
+}
+
+.close-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -10px;
+}
+
+input[type=text]{
+    width: 100%;
+    padding: 15px;
+    border: 3px solid #5a8668;
+    border-radius: 15px;
+    resize: vertical;
+    font-family: cursive;
+  }
+  
+  #time-attack-screen, #time-attack-user-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    padding: 10px;
+}
+
+#time-attack-content, #time-attack-user-content{
+    text-align: center;
+    border-radius: 10px;
+    border: 3px solid #5a8668;
+    border-width: 5px;
+    background-color: #e6e6e6;
+    margin: 10px;
+    padding: 5px; 
+    font-family: cursive;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+#time-attack-content, #time-attack-user-content h3{
+    font-size: 35px;
+}
+
+
+#time-attack-content, #time-attack-user-content h2{
+    font-size: 20px;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+
+#time-attack-content, #time-attack-user-content p{
+    margin-top: 8px;
+    text-align: center;
+
+}
+
+#time-attack-screen.hidden, 
+#time-attack-user-screen.hidden
+{
+    display: none;
+}
+  
+#mode-div {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+}
+
+.time-attack-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#gameForm {
+    display: flex;
+    width: 350px;
+    align-items: center;
+}
+#formholder {
+    display: flex;
+    align-items: center;
+}

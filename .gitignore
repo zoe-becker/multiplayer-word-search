@@ -1,10 +1,11 @@
 *.wsgi
-/board/ws-*/*
-/board/testenv/*
-!/board/testenv/index.php
-/lobby/lb-*/*
+public_html/board/ws-*/*
+public_html/board/testenv/*
+!public_html/board/testenv/index.php
+public_html/lobby/lb-*/*
 .venv
 /.venv/
 /.vscode/
-/database/login.php
 /.env
+envConfig.php
+includePath.php

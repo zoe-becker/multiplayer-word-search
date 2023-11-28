@@ -14,7 +14,7 @@ function validateGET($queryParams, $quitIfBad = false) {
     $requestValid = true;
 
     // validate method
-    if ($_SERVER["REQUEST_METHOD"] != "GET") {
+    if ($_SERVER["REQUEST_METHOD"] !== "GET") {
         $requestValid = false;
         if ($quitIfBad) {
             http_response_code(405); // method not allowed
@@ -53,7 +53,7 @@ function validatePOST($requiredHeaders, $quitIfBad = false) {
     $requestValid = true;
 
     // validate method
-    if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    if ($_SERVER["REQUEST_METHOD"] !== "POST") {
         $requestValid = false;
         if ($quitIfBad) {
             http_response_code(405); // method not allowed

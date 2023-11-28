@@ -1,0 +1,26 @@
+{
+  "words": [
+    "frog", "toad", "scorpion", "dog", "cat", "unicorn", "horse", "pig", "donkey", "turtle", "sheep",
+    "goat", "bird", "flamingo", "eagle", "goose", "turkey", "goldfish", "deer", "camel", "beaver",
+    "dolphin", "bear", "lion", "llama", "elephant", "mouse", "panda", "wolf", "whale", "zebra",
+    "monkey", "racoon", "squirrel", "shark", "ostrich", "owl", "tarantula", "penguin", "vulture",
+    "armadillo", "bat", "fox", "giraffe", "hamster", "lynx", "puma", "seal", "skunk"
+  ],
+  "backgroundImage": "animals_2.png",
+  "playerBoxColor": "#7bb380",
+  "tableBox": "#7bb380",
+  "wordBankBox": "#7bb380",
+  "timerBox": "#7bb380",
+  "highlightColors": [
+    "#1D8348",
+    "#377D22",
+    "#35654D",
+    "#00796B",
+    "#5A7D7C",
+    "#87A96B",
+    "#8B4513",
+    "#4A5D23",
+    "#015440",
+    "#00755E"
+  ]
+}

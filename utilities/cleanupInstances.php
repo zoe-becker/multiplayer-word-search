@@ -2,11 +2,13 @@
 /* Automatically deletes expired game instances on the server via a cron job
     *** in the local environment you must manually call this script or cleanup the instance directory yourself ***
 */
+    require_once __DIR__ . "/../config/gameConfig.php";
+    require_once __DIR__ . "/../config/envConfig.php";
     date_default_timezone_set("UTC");
     
     // cleanup expired lobbies and boards
-    cleanup_instance_directory("../board", "ws-", "puzzle.json");
-    cleanup_instance_directory("../lobby", "lb-", "lobbyData.json");
+    cleanup_instance_directory(PUBLIC_HTML_PATH . "/board", "ws-", GAME_DATAFILE_NAME);
+    cleanup_instance_directory(PUBLIC_HTML_PATH . "/lobby", "lb-", LOBBY_DATAFILE_NAME);
 
     // deletes any expired instances in the given directory
     // $directory: path to the directory to cleanup
