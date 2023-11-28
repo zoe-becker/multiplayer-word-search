@@ -12,12 +12,15 @@
             <img src="magnifying-glass.png" class="logo">
             <ul> 
                 <li><a href="about">About Us</a></li>
+                <li><a href="../leaderboard">Leaderboard</a></li>
             </ul>
         </nav>
        
         <h1> WordSearch! </h1>
-
-       
+        <div class="midheaders">
+            <h2> Solo Play </h2> 
+            <h2> Multiplayer </h2>
+        </div>
        
         <div class="buttons">
             <div class="time-attack-buttons">
@@ -57,17 +60,13 @@
             <div> 
             
             <div class="create-game"> 
-                <button onclick="createLobby()" type="button"> <span> </span>Create New Game</button>
+                <button onclick="createLobby()" type="button"> <span> </span>Create Lobby</button>
             </div>
           
             <form id="gameForm"> 
                 <input type="text" id="gameCode" placeholder="Game Code" required>
                 <button type="button" id="joinButton"><span> </span>Join</button>
             </form>
-
-            <div class="leaderboard">
-                <button onclick="location.href='../leaderboard'" type="button"><span> </span> Leaderboard</button>
-            </div>
             
         </div>
           

@@ -78,12 +78,23 @@ nav ul li a{
 
 }
 
+.midheaders{
+    font-size: 30px;
+    font-family: cursive;
+    color: white;
+    display: flex;
+    justify-content: center; /* Centers the headers horizontally */
+    gap: 200px; /* Adjust the space between the headers */
+    margin-bottom: 50px;
+}
+
+
 .gif button{
     cursor: pointer;
     position: absolute;
     transform: translateY(0%);
     text-align: center;
-    font-size: 25px;
+    font-size: 22px;
     font-family: cursive;
     color: black;
     padding: 6px 15px;
