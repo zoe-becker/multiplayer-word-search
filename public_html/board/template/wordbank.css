@@ -285,7 +285,7 @@ nav ul li::after{
     content: '';
     height: 3px;
     width: 0;
-    background: #5a8668;
+    background: #f1f4f2;
     position: absolute;
     left: 0;
     bottom: -10px;

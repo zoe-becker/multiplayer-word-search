@@ -113,10 +113,10 @@ nav ul li::after{
   content: '';
   height: 3px;
   width: 0;
-  background: #5a8668;
+  background: #bc8942;
   position: absolute;
   left: 0;
-  bottom: -10px;
+  bottom: -5px;
   transition: 0.5s;
 }
 
