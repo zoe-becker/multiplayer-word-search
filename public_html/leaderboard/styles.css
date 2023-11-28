@@ -196,7 +196,7 @@ nav ul li::after{
     background: #DCC1C5;
     position: absolute;
     left: 0;
-    bottom: -10px;
+    bottom: -7px;
     transition: 0.5s;
 }
 
