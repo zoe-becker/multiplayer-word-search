@@ -41,8 +41,8 @@
                 
                     // Fetch for time attack mode
                     $timeAttackQuery = $theme == "none" ? 
-                    "SELECT player AS name, score, time_stamp FROM all_time_lb WHERE mode = 'timeattack' AND time_stamp >= DATE_SUB(NOW(), INTERVAL 1 WEEK) ORDER BY score DESC LIMIT 10" :
-                    "SELECT player AS name, score, time_stamp FROM all_time_lb WHERE theme= ? AND mode = 'timeattack' AND time_stamp >= DATE_SUB(NOW(), INTERVAL 1 WEEK) ORDER BY score DESC LIMIT 10";
+                    "SELECT player AS name, score, time_stamp FROM all_time_lb WHERE mode = 'multiplayer' AND time_stamp >= DATE_SUB(NOW(), INTERVAL 1 WEEK) ORDER BY score DESC LIMIT 10" :
+                    "SELECT player AS name, score, time_stamp FROM all_time_lb WHERE theme= ? AND mode = 'multiplayer' AND time_stamp >= DATE_SUB(NOW(), INTERVAL 1 WEEK) ORDER BY score DESC LIMIT 10";
                 
                     $stmt = $theme == "none" ? $pdo->query($timeAttackQuery) : $pdo->prepare($timeAttackQuery);
                     if ($theme != "none") {
@@ -52,7 +52,7 @@
                 
                     // Display results
                     displayScores($data->multiplayerScores, "All-Time Multiplayer");
-                    displayScores($data->timeAttackScores, "Weekly Time-Attack");
+                    displayScores($data->timeAttackScores, "Weekly Multiplayer");
                 }
                 
                 function displayScores($scores, $modeTitle) {
