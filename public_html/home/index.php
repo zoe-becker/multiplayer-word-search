@@ -26,10 +26,10 @@
             <div class="time-attack-buttons">
                 <div class="timeAttack"> 
                     <button onclick="toggleScreen('time-attack-user-screen','show')" type="button"> <span> </span>Time Attack</button>
-                    <button  onClick="toggleScreen('time-attack-screen','show')" class="info-button" type="button"> <span> </span> i </button>
+                    <!-- <button  onClick="toggleScreen('time-attack-screen','show')" class="info-button" type="button"> <span> </span> i </button> -->
                 </div>
 
-                <div id="time-attack-screen" class="hidden">
+                <!-- <div id="time-attack-screen" class="hidden">
                     <div id="time-attack-content">
                         <p1>WHAT IS TIME ATTACK?</p1>
                         <br></br>
@@ -41,11 +41,13 @@
                         </div>
                         
                     </div> 
-                </div>
+                </div> -->
 
                 <div id="time-attack-user-screen" class="hidden">
                     <div id="time-attack-user-content">
-                        <h2>Welcome!</h2>
+                        <h3>Welcome!</h2>
+                        <p> In Time Attack, swiftly uncover as many <br> words as you can within
+                            the set time! The <br> faster you find words, the higher score you get! </p> <br>
                         <h2>Please create a username.</h2>
                         <form id="time-attack-user"> 
                         <input type="text" id="username" placeholder="Enter your username" required>

@@ -152,6 +152,7 @@ span{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: -10px;
 }
 
 input[type=text]{
@@ -189,6 +190,25 @@ input[type=text]{
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+
+#time-attack-content, #time-attack-user-content h3{
+    font-size: 35px;
+}
+
+
+#time-attack-content, #time-attack-user-content h2{
+    font-size: 20px;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+
+#time-attack-content, #time-attack-user-content p{
+    margin-top: 8px;
+    text-align: center;
+
 }
 
 #time-attack-screen.hidden, 
