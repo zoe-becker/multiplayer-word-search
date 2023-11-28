@@ -17,8 +17,10 @@
         </nav>
        
         <h1> WordSearch! </h1>
-
-       
+        <div class="midheaders">
+            <h2> Solo Play </h2> 
+            <h2> Multiplayer </h2>
+        </div>
        
         <div class="buttons">
             <div class="time-attack-buttons">
