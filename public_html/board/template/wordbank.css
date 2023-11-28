@@ -267,7 +267,7 @@ nav{
     justify-content: flex-start;
     padding-top: 10px;
     padding-left: 10px;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+    position: fixed;
 }
 
 nav ul li{
