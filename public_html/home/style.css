@@ -77,11 +77,11 @@ nav ul li a{
     justify-content: center;
     align-items: center;
     margin: 50px auto;
-    width: 380px;
     margin-top: 30px;
     margin-bottom: 100px;
     font-family: cursive;
     color: white;
+    text-align: center;
 
 }
 
@@ -114,12 +114,11 @@ nav ul li a{
     display: flex;
     justify-content: space-around; /* Distributes space between the options */
     align-items: start; /* Aligns items to the top */
-    margin-top: 20px; /* Adjust as needed */
     gap: 10px;
     /* flex-direction: column; */
 
     flex:1;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -129,10 +128,8 @@ nav ul li a{
     align-items: center; /* Center the items horizontally */
     gap: 10px;
     flex:1;
-    flex-direction: row;
     align-items: center;
 }
-
 
 .timeAttack h2{
     font-size: 45px;
@@ -259,3 +256,23 @@ input[type=text]{
     display: none;
 }
   
+#mode-div {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+}
+
+.time-attack-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#gameForm {
+    display: flex;
+    width: 350px;
+    align-items: center;
+}
+#formholder {
+    display: flex;
+    align-items: center;
+}
