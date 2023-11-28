@@ -20,9 +20,16 @@
        
         <div class="buttons">
             <div class="time-attack-buttons">
-                <div class="timeAttack"> 
-                <h2> Solo Play </h2> 
-                    <button onclick="toggleScreen('time-attack-user-screen','show')" type="button"> <span> </span>Time Attack</button>
+                <div id="mode-div">
+                    <div class="create-game"> 
+                        <h2> Multiplayer </h2>
+                        <button onclick="createLobby()" type="button"> <span> </span>Create Lobby</button>
+                    </div>
+
+                    <div class="timeAttack"> 
+                        <h2> Solo Play </h2> 
+                        <button onclick="toggleScreen('time-attack-user-screen','show')" type="button"> <span> </span>Time Attack</button>
+                    </div>
                 </div>
 
                 <div id="time-attack-user-screen" class="hidden">
@@ -41,12 +48,7 @@
                         
                     </div> 
                 </div>
-            <div> 
-            
-            <div class="create-game"> 
-            <h2> Multiplayer </h2>
-                <button onclick="createLobby()" type="button"> <span> </span>Create Lobby</button>
-            </div>
+        <div id="formholder"> 
           
             <form id="gameForm"> 
                 <input type="text" id="gameCode" placeholder="Game Code" required>
