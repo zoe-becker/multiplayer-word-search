@@ -38,6 +38,13 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("Invalid game code.");
     }
   });
+  
+  const node = document.getElementById("time-attack-user");
+
+  node.addEventListener("submit", function(event) {
+  event.preventDefault();
+  submitTimeAttack();
+  });
 
   // Function to validate game code format
   function isValidGameCode(code) {
