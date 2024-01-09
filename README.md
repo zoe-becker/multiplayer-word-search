@@ -2,7 +2,7 @@
 
 Fall 2023 Software Engineering group project using the agile development lifecycle. We are building a multiplayer word search game where you can competitively play word search with other people.
 
-Demo running latest version of main branch can be found here: http://roguecircuit.com/word-search/
+Demo running latest version of main branch can be found here: https://roguecircuit.com/word-search/
 
 ## Table of Contents
 * [The Team 🤝](#the-team-🤝) 
